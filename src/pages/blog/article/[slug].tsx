@@ -1,3 +1,4 @@
+import { useRouter } from "next/router"
 import { GetStaticPaths, GetStaticProps } from "next"
 import { StrapiAPI } from "../../../lib/strapi"
 
@@ -7,7 +8,10 @@ interface ArticleProps {
   content: string
 }
 export default function Article({ title, description, content }: ArticleProps) {
-  console.log(title)
+  const router = useRouter()
+  if (router.isFallback) {
+    return <p>Carregando...</p>
+  }
 
   return (
     <>
@@ -29,7 +33,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   })
   return {
     paths,
-    fallback: false,
+    fallback: true,
   }
 }
 
