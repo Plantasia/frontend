@@ -19,6 +19,7 @@ interface IArticle {
 interface HomeProps {
   articles: IArticle[]
 }
+
 export default function Home({ articles }: HomeProps) {
   useEffect(() => {}, [])
   return (
@@ -44,6 +45,7 @@ export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
   // Este trecho n faz parte daqui
   // Tentar abstrair o máximo possivel da StrapiAPI
   const { data: articles } = await StrapiAPI.get("articles")
+
   return {
     props: { articles },
   }
