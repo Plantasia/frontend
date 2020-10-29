@@ -1,5 +1,3 @@
-import { NOTFOUND } from "dns"
-
 export default function PageNotFound() {
   return (
     <>
