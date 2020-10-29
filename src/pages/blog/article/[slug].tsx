@@ -1,6 +1,7 @@
 import { useRouter } from "next/router"
 import { GetStaticPaths, GetStaticProps } from "next"
-import { StrapiAPI } from "../../../lib/strapi"
+import StrapiAPI from "@/lib/strapi"
+import ReactMarkdown from "react-markdown"
 
 interface ArticleProps {
   title: string
@@ -17,13 +18,16 @@ export default function Article({ title, description, content }: ArticleProps) {
     <>
       <h1>{title}</h1>
       <h2>{description}</h2>
-      <p>{content}</p>
+      <ReactMarkdown source={content} />
     </>
   )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data: articles } = await StrapiAPI.get(`articles`)
+  const api = new StrapiAPI()
+
+  const articles = await api.getArticles()
+
   const paths = articles.map(article => {
     return {
       params: {
@@ -39,10 +43,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async context => {
   const { slug } = context.params
-  const { data: articles } = await StrapiAPI.get(`articles`, {
-    params: { slug },
-  })
-  const { title, description, content } = articles[0]
+  const api = new StrapiAPI()
+
+  const article = await api.getArticleBySlug(String(slug))
+
+  const { title, description, content } = article[0]
 
   return {
     props: { title, description, content },

@@ -1,22 +1,33 @@
 import axios from "axios"
+import { IArticle } from "./interfaces/index"
 
-export const StrapiAPI = axios.create({
-  baseURL: "http://172.23.0.3:1337",
-  headers: {
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjAzMDA2NjY0LCJleHAiOjE2MDU1OTg2NjR9.4gAErL-cHXJaOJo_4mjvEisx2fEU5QLGFnVNlON8j_8 ",
-  },
-})
+export default class StrapiAPI {
+  public api = axios.create({
+    baseURL: "http://backend:1337",
+  })
 
-// const getToken = () => {
-//   return new Promise(resolve => {
-//     const response = await StrapiAPI.post("/auth/local", {
-//       identifier: "frontend@frontend.com.br",
-//       password: "frontend123",
-//     })
+  async getToken() {
+    const response = await this.api.post("/auth/local", {
+      identifier: "frontend@frontend.com.br",
+      password: "frontend123",
+    })
 
-//     resolve(response.data.jwt)
-//   })
-// }
+    console.log(response.data.jwt)
+  }
 
-export const getArticles = () => {}
+  async getArticles(): Promise<IArticle[]> {
+    const response = await this.api.get("articles")
+
+    return response.data
+  }
+
+  async getArticleBySlug(slug: String): Promise<IArticle> {
+    const response = await this.api.get("articles", {
+      params: {
+        slug,
+      },
+    })
+
+    return response.data
+  }
+}
