@@ -1,49 +1,47 @@
-import { GetServerSideProps } from "next"
-import { useEffect } from "react"
-import StrapiAPI from "../lib/strapi/index"
-import { Title } from "../styles/pages/Home"
+import { Anchor, Box, Header, Heading, Nav, TextInput, Keyboard } from "grommet"
+import { Search } from "grommet-icons"
+import { useState } from "react"
+import { Col, Container, Row } from "reactstrap"
+import styled from "styled-components"
 
-interface IThumbnail {
-  name: string
-  width: number
-  height: number
-  url: string
-}
-interface IArticle {
-  id: number
-  title: string
-  content: string
-  description: string
-  thumbnail?: IThumbnail
-}
-interface HomeProps {
-  articles: IArticle[]
-}
+const Teste = styled.div`
+  width: 100%;
+  background-color: #f00;
+`
 
-export default function Home({ articles }: HomeProps) {
-  console.log(articles)
+export default function HomePage() {
+  const [inputSearch, setInputSearch] = useState("")
   return (
-    <div>
-      <Title>Hello World</Title>
-      <ul>
-        {articles.map(({ id, title, content, description, thumbnail }) => {
-          return (
-            <li key={id}>
-              {title}
-              <p>{description}</p>
-            </li>
-          )
-        })}
-      </ul>
-    </div>
+    <Container>
+      <Teste>Teste</Teste>
+      <Header background="white" gap="xlarge" border={{ side: "bottom" }}>
+        <Heading>Plantasia</Heading>
+        <Box width="medium" align="center" gap="small">
+          <Keyboard onEnter={() => console.log(inputSearch)}>
+            <TextInput
+              type="search"
+              icon={<Search />}
+              value={inputSearch}
+              onChange={({ target: { value } }) => setInputSearch(value)}
+            />
+          </Keyboard>
+        </Box>
+        <Nav direction="row" pad="medium" align="center">
+          <Anchor label="Entrar" />
+          <Anchor
+            label={
+              <Box border={{ side: "all" }} pad="xsmall">
+                <span>Registrar-se</span>
+              </Box>
+            }
+          />
+        </Nav>
+      </Header>
+      <Row>
+        <Col>Olá</Col>
+        <Col>Olá</Col>
+        <Col>Olá</Col>
+      </Row>
+    </Container>
   )
-}
-
-export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
-  const api = new StrapiAPI()
-  const articles = await api.getArticles()
-
-  return {
-    props: { articles },
-  }
 }
