@@ -28,9 +28,11 @@ export default function HomePage() {
         [] BODY, acredito que o body deve ficar aqui. Varia a cada pagina
         [] FOOTER
        */}
-      <Row className="my-5">
-        <Col xs="12" md="7">
-          <LoginSVG />
+      <Row className="my-5 ">
+        <Col xs="12" md="7" className="">
+          <Box justify="center" fill="vertical">
+            <LoginSVG />
+          </Box>
         </Col>
         <Col xs="12" md="5">
           <Card
@@ -46,12 +48,20 @@ export default function HomePage() {
               }}
             >
               <Box gap="small">
-                <Heading size="small">Login</Heading>
+                <Heading size="small">Registrar</Heading>
                 <FormField label="Email">
                   <TextInput placeholder="exemplo@gmail.com" />
                 </FormField>
 
+                <FormField label="Confirmação de email">
+                  <TextInput placeholder="exemplo@gmail.com" />
+                </FormField>
+
                 <FormField label="Senha">
+                  <TextInput placeholder="*******" type="password" />
+                </FormField>
+
+                <FormField label="Confirmação de senha">
                   <TextInput placeholder="*******" type="password" />
                 </FormField>
 
