@@ -1,8 +1,8 @@
-import { Anchor, Box, Header, Heading, Nav, TextInput, Keyboard } from "grommet"
-import { Search } from "grommet-icons"
 import { useState } from "react"
-import { Col, Container, Row } from "reactstrap"
+import { Row } from "reactstrap"
 import styled from "styled-components"
+import Header from "@/components/Header"
+import Footer from "@/components/Footer"
 
 const Teste = styled.div`
   width: 100%;
@@ -12,36 +12,17 @@ const Teste = styled.div`
 export default function HomePage() {
   const [inputSearch, setInputSearch] = useState("")
   return (
-    <Container>
-      <Teste>Teste</Teste>
-      <Header background="white" gap="xlarge" border={{ side: "bottom" }}>
-        <Heading>Plantasia</Heading>
-        <Box width="medium" align="center" gap="small">
-          <Keyboard onEnter={() => console.log(inputSearch)}>
-            <TextInput
-              type="search"
-              icon={<Search />}
-              value={inputSearch}
-              onChange={({ target: { value } }) => setInputSearch(value)}
-            />
-          </Keyboard>
-        </Box>
-        <Nav direction="row" pad="medium" align="center">
-          <Anchor label="Entrar" />
-          <Anchor
-            label={
-              <Box border={{ side: "all" }} pad="xsmall">
-                <span>Registrar-se</span>
-              </Box>
-            }
-          />
-        </Nav>
-      </Header>
-      <Row>
-        <Col>Olá</Col>
-        <Col>Olá</Col>
-        <Col>Olá</Col>
-      </Row>
-    </Container>
+    <>
+      <Header inputSearch={inputSearch} setInputSearch={setInputSearch} />
+      {/* 
+        COMPONENTS
+        [] BODY, acredito que o body deve ficar aqui. Varia a cada pagina
+                caso fique mt complicado, refatora o componente em outro arquivo
+        [] FOOTER
+       */}
+      <Row className="mt-5"></Row>
+
+      <Footer />
+    </>
   )
 }
