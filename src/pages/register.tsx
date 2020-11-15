@@ -49,11 +49,7 @@ export default function HomePage() {
             >
               <Box gap="small">
                 <Heading size="small">Registrar</Heading>
-                <FormField label="Email">
-                  <TextInput placeholder="exemplo@gmail.com" />
-                </FormField>
-
-                <FormField label="Confirmação de email">
+                <FormField label="Email" type="email">
                   <TextInput placeholder="exemplo@gmail.com" />
                 </FormField>
 
@@ -66,10 +62,21 @@ export default function HomePage() {
                 </FormField>
 
                 <CheckBox
+                  name="cboxTerms"
                   checked={keepLogged}
                   onChange={event => setKeepLogged(event.target.checked)}
-                  label="manter-se logado?"
-                ></CheckBox>
+                  label={
+                    <Box
+                      style={{ fontSize: "0.9em" }}
+                      fill="horizontal"
+                      flex
+                      direction="row"
+                    >
+                      Concordo com os&nbsp;
+                      <Anchor href="/terms">termos de usos</Anchor>
+                    </Box>
+                  }
+                />
 
                 <Button primary label="cadastrar" type="submit" size="large" />
                 <Anchor href="/forgot-password" color="neutral-1">
@@ -77,9 +84,9 @@ export default function HomePage() {
                 </Anchor>
               </Box>
             </Form>
-            <Paragraph alignSelf="center">Logar com</Paragraph>
+            <Paragraph alignSelf="center">Registra-se com</Paragraph>
             <Box direction="row" justify="center">
-              <Button icon={<Facebook />} />
+              <Button icon={<Facebook />} hoverIndicator={{ color: "red" }} />
               <Button icon={<Google />} />
             </Box>
           </Card>
