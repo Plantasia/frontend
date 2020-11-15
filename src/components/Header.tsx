@@ -1,37 +1,30 @@
 import { Heading, Keyboard, TextInput, Box, Anchor, Nav } from "grommet"
-import { Search } from "grommet-icons"
 import { useRouter } from "next/router"
-import { ILayoutHeader } from "@/components/types/Header"
-import { Container } from "@/components/layouts/Header"
+import { ILayoutHeader } from "@/components/types/HeaderTypes"
+import {
+  Container,
+  ContainerSearchInput,
+  Logo,
+  SearchInput,
+} from "@/components/layouts/HeaderLayout"
 
 export default function PlantasiaHeader({
   inputSearch = "",
   setInputSearch,
 }: ILayoutHeader) {
   const router = useRouter()
-
+  const handleInputSearchChange = ({ target: { value } }) => {
+    setInputSearch(value)
+  }
   return (
     <Container>
-      {/* LOGO */}
-      <Box
-        onClick={() => {
-          router.push("/")
-        }}
-      >
-        <Heading>Plantasia</Heading>
-      </Box>
+      <Logo onClick={() => router.push("/")} />
 
-      {/* SEARCH INPUT */}
-      <Box width="medium" align="center" gap="small">
+      <ContainerSearchInput>
         <Keyboard onEnter={() => console.log(inputSearch)}>
-          <TextInput
-            type="search"
-            icon={<Search />}
-            value={inputSearch}
-            onChange={({ target: { value } }) => setInputSearch(value)}
-          />
+          <SearchInput value={inputSearch} onChange={handleInputSearchChange} />
         </Keyboard>
-      </Box>
+      </ContainerSearchInput>
 
       {/* 
         REFATORAR PARA PASSAR ESTADO PARA ESTE COMPONENTE

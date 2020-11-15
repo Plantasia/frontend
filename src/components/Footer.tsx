@@ -1,13 +1,8 @@
 import React from "react"
-import { Footer } from "grommet"
-// import { Container } from './styles';
+import { Container } from "@/components/layouts/FooterLayout"
 
 const PlantasiaFooter: React.FC = () => {
-  return (
-    <Footer background="brand" height="100px">
-      Olá
-    </Footer>
-  )
+  return <Container>Olá</Container>
 }
 
 export default PlantasiaFooter
