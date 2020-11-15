@@ -1,19 +1,27 @@
-import { Header, Heading, Keyboard, TextInput, Box, Anchor, Nav } from "grommet"
+import { Heading, Keyboard, TextInput, Box, Anchor, Nav } from "grommet"
 import { Search } from "grommet-icons"
+import { useRouter } from "next/router"
+import { ILayoutHeader } from "@/components/types/Header"
+import { Container } from "@/components/layouts/Header"
 
-interface IHeader {
-  readonly inputSearch: string
-  setInputSearch(value: string): void
-}
-export default function ({ inputSearch = "", setInputSearch }: IHeader) {
+export default function PlantasiaHeader({
+  inputSearch = "",
+  setInputSearch,
+}: ILayoutHeader) {
+  const router = useRouter()
+
   return (
-    <Header
-      background="white"
-      border={{ side: "bottom" }}
-      gap="xsmall"
-      margin={{ bottom: "100px" }}
-    >
-      <Heading>Plantasia</Heading>
+    <Container>
+      {/* LOGO */}
+      <Box
+        onClick={() => {
+          router.push("/")
+        }}
+      >
+        <Heading>Plantasia</Heading>
+      </Box>
+
+      {/* SEARCH INPUT */}
       <Box width="medium" align="center" gap="small">
         <Keyboard onEnter={() => console.log(inputSearch)}>
           <TextInput
@@ -24,13 +32,14 @@ export default function ({ inputSearch = "", setInputSearch }: IHeader) {
           />
         </Keyboard>
       </Box>
+
       {/* 
         REFATORAR PARA PASSAR ESTADO PARA ESTE COMPONENTE
         [] LOGGED
         [] GUEST
       */}
       <Nav direction="row" pad="medium" gap="medium" align="center">
-        <Anchor label="Entrar" />
+        <Anchor label="Entrar" href="/login" />
         <Anchor
           label={
             <Box
@@ -40,8 +49,9 @@ export default function ({ inputSearch = "", setInputSearch }: IHeader) {
               <span>Registrar-se</span>
             </Box>
           }
+          href="/register"
         />
       </Nav>
-    </Header>
+    </Container>
   )
 }
