@@ -16,84 +16,77 @@ import {
   Paragraph,
 } from "grommet"
 import { Facebook, Google } from "grommet-icons"
+import { DesktopGrid } from "@/components/Grid"
 
 export default function HomePage() {
   const [inputSearch, setInputSearch] = useState("")
   const [keepLogged, setKeepLogged] = useState(false)
   return (
-    <>
+    <DesktopGrid>
       <Header inputSearch={inputSearch} setInputSearch={setInputSearch} />
       {/* 
         COMPONENTS
         [] BODY, acredito que o body deve ficar aqui. Varia a cada pagina
         [] FOOTER
        */}
-      <Row className="my-5 ">
-        <Col xs="12" md="7" className="">
-          <Box justify="center" fill="vertical">
-            <LoginSVG />
-          </Box>
-        </Col>
-        <Col xs="12" md="5">
-          <Card
-            fill="vertical"
-            justify="center"
-            pad="medium"
-            elevation="xsmall"
+
+      <Box justify="center" fill="vertical" gridArea="sidebar">
+        <LoginSVG />
+      </Box>
+      <Box gridArea="main">
+        <Card fill="vertical" justify="center" pad="medium" elevation="xsmall">
+          <Form
+            style={{
+              borderBottom: "1px solid black",
+              paddingBottom: "10px",
+            }}
           >
-            <Form
-              style={{
-                borderBottom: "1px solid black",
-                paddingBottom: "10px",
-              }}
-            >
-              <Box gap="small">
-                <Heading size="small">Registrar</Heading>
-                <FormField label="Email" type="email">
-                  <TextInput placeholder="exemplo@gmail.com" />
-                </FormField>
+            <Box gap="small">
+              <Heading size="small">Registrar</Heading>
+              <FormField label="Email" type="email">
+                <TextInput placeholder="exemplo@gmail.com" />
+              </FormField>
 
-                <FormField label="Senha">
-                  <TextInput placeholder="*******" type="password" />
-                </FormField>
+              <FormField label="Senha">
+                <TextInput placeholder="*******" type="password" />
+              </FormField>
 
-                <FormField label="Confirmação de senha">
-                  <TextInput placeholder="*******" type="password" />
-                </FormField>
+              <FormField label="Confirmação de senha">
+                <TextInput placeholder="*******" type="password" />
+              </FormField>
 
-                <CheckBox
-                  name="cboxTerms"
-                  checked={keepLogged}
-                  onChange={event => setKeepLogged(event.target.checked)}
-                  label={
-                    <Box
-                      style={{ fontSize: "0.9em" }}
-                      fill="horizontal"
-                      flex
-                      direction="row"
-                    >
-                      Concordo com os&nbsp;
-                      <Anchor href="/terms">termos de usos</Anchor>
-                    </Box>
-                  }
-                />
+              <CheckBox
+                name="cboxTerms"
+                checked={keepLogged}
+                onChange={event => setKeepLogged(event.target.checked)}
+                label={
+                  <Box
+                    style={{ fontSize: "0.9em" }}
+                    fill="horizontal"
+                    flex
+                    direction="row"
+                  >
+                    Concordo com os&nbsp;
+                    <Anchor href="/terms">termos de usos</Anchor>
+                  </Box>
+                }
+              />
 
-                <Button primary label="cadastrar" type="submit" size="large" />
-                <Anchor href="/forgot-password" color="neutral-1">
-                  Esqueceu sua senha?
-                </Anchor>
-              </Box>
-            </Form>
-            <Paragraph alignSelf="center">Registra-se com</Paragraph>
-            <Box direction="row" justify="center">
-              <Button icon={<Facebook />} hoverIndicator={{ color: "red" }} />
-              <Button icon={<Google />} />
+              <Button primary label="cadastrar" type="submit" size="large" />
+              <Anchor href="/forgot-password" color="neutral-1">
+                Esqueceu sua senha?
+              </Anchor>
             </Box>
-          </Card>
-        </Col>
-      </Row>
+          </Form>
+          <Paragraph alignSelf="center">Registra-se com</Paragraph>
+          <Box direction="row" justify="center">
+            <Button icon={<Facebook />} hoverIndicator={{ color: "red" }} />
+            <Button icon={<Google />} />
+          </Box>
+        </Card>
+      </Box>
 
-      <Footer></Footer>
-    </>
+      <Footer />
+    </DesktopGrid>
   )
 }
