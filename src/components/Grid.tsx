@@ -1,25 +1,20 @@
-import React from "react"
-import { Grid, GridProps } from "grommet"
+import React, { useContext } from "react"
+import { Grid, ResponsiveContext } from "grommet"
+import { IGrid, TypesAreas } from "@/components/types/GridTypes"
 
-class DesktopGrid extends React.Component<GridProps, {}> {
-  render() {
-    const { children } = this.props
-    return (
-      <Grid
-        rows={["1fr", "5fr", "1fr"]}
-        areas={[
-          ["header", "header", "header"],
-          ["sidebar", "sidebar", "main"],
-          ["footer", "footer", "footer"],
-          ,
-        ]}
-        gap="medium"
-        pad={{ horizontal: "150px" }}
-      >
-        {children}
-      </Grid>
-    )
-  }
+const DesktopGrid = ({ gridType, children }: IGrid) => {
+  const size = useContext(ResponsiveContext)
+  return (
+    <Grid
+      rows={TypesAreas[gridType].rows}
+      areas={TypesAreas[gridType].areas}
+      columns={TypesAreas[gridType].columns}
+      gap="medium"
+      pad={size === "medium" ? { horizontal: "15px" } : { horizontal: "150px" }}
+    >
+      {children}
+    </Grid>
+  )
 }
 
 export { DesktopGrid }

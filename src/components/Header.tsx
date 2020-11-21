@@ -1,50 +1,51 @@
-import { Heading, Keyboard, TextInput, Box, Anchor, Nav } from "grommet"
+import { Keyboard, Anchor, ResponsiveContext } from "grommet"
 import { useRouter } from "next/router"
 import { ILayoutHeader } from "@/components/types/HeaderTypes"
+
 import {
   Container,
   ContainerSearchInput,
   Logo,
   SearchInput,
+  Navigation,
+  RegisterButton,
 } from "@/components/layouts/HeaderLayout"
+import { useContext } from "react"
 
 export default function PlantasiaHeader({
   inputSearch = "",
   setInputSearch,
 }: ILayoutHeader) {
   const router = useRouter()
+  const size = useContext(ResponsiveContext)
   const handleInputSearchChange = ({ target: { value } }) => {
     setInputSearch(value)
   }
+
   return (
     <Container>
       <Logo onClick={() => router.push("/")} />
 
-      <ContainerSearchInput>
-        <Keyboard onEnter={() => console.log(inputSearch)}>
-          <SearchInput value={inputSearch} onChange={handleInputSearchChange} />
-        </Keyboard>
-      </ContainerSearchInput>
+      {size !== "small" ? (
+        <ContainerSearchInput>
+          <Keyboard onEnter={() => console.log(inputSearch)}>
+            <SearchInput
+              value={inputSearch}
+              onChange={handleInputSearchChange}
+            />
+          </Keyboard>
+        </ContainerSearchInput>
+      ) : null}
 
       {/* 
         REFATORAR PARA PASSAR ESTADO PARA ESTE COMPONENTE
         [] LOGGED
         [] GUEST
       */}
-      <Nav direction="row" pad="medium" gap="medium" align="center">
+      <Navigation>
         <Anchor label="Entrar" href="/login" />
-        <Anchor
-          label={
-            <Box
-              border={{ side: "all" }}
-              pad={{ vertical: "5px", horizontal: "10px" }}
-            >
-              <span>Registrar-se</span>
-            </Box>
-          }
-          href="/register"
-        />
-      </Nav>
+        <RegisterButton href="/register" />
+      </Navigation>
     </Container>
   )
 }

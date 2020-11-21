@@ -4,7 +4,6 @@ import LoginSVG from "@/assets/svg/Login"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import {
-  Form,
   TextInput,
   Box,
   FormField,
@@ -12,36 +11,27 @@ import {
   Heading,
   CheckBox,
   Anchor,
-  Card,
   Paragraph,
 } from "grommet"
 import { Facebook, Google } from "grommet-icons"
 import { DesktopGrid } from "@/components/Grid"
+import { gridAreasAuth, GridTypes } from "@/components/types/GridTypes"
+import { FormCard, Form, FormWrapper } from "@/components/layouts/AuthLayout"
 
 export default function HomePage() {
   const [inputSearch, setInputSearch] = useState("")
   const [keepLogged, setKeepLogged] = useState(false)
   return (
-    <DesktopGrid>
+    <DesktopGrid gridType={GridTypes.AuthArea}>
       <Header inputSearch={inputSearch} setInputSearch={setInputSearch} />
-      {/* 
-        COMPONENTS
-        [] BODY, acredito que o body deve ficar aqui. Varia a cada pagina
-        [] FOOTER
-       */}
 
-      <Box justify="center" fill="vertical" gridArea="sidebar">
+      <Box justify="center" fill="vertical" gridArea={gridAreasAuth.Banner}>
         <LoginSVG />
       </Box>
-      <Box gridArea="main">
-        <Card fill="vertical" justify="center" pad="medium" elevation="xsmall">
-          <Form
-            style={{
-              borderBottom: "1px solid black",
-              paddingBottom: "10px",
-            }}
-          >
-            <Box gap="small">
+      <Box gridArea={gridAreasAuth.Main}>
+        <FormCard>
+          <Form>
+            <FormWrapper>
               <Heading size="small">Registrar</Heading>
               <FormField label="Email" type="email">
                 <TextInput placeholder="exemplo@gmail.com" />
@@ -76,14 +66,14 @@ export default function HomePage() {
               <Anchor href="/forgot-password" color="neutral-1">
                 Esqueceu sua senha?
               </Anchor>
-            </Box>
+            </FormWrapper>
           </Form>
           <Paragraph alignSelf="center">Registra-se com</Paragraph>
           <Box direction="row" justify="center">
             <Button icon={<Facebook />} hoverIndicator={{ color: "red" }} />
             <Button icon={<Google />} />
           </Box>
-        </Card>
+        </FormCard>
       </Box>
 
       <Footer />

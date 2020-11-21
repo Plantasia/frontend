@@ -1,15 +1,13 @@
-import React from "react"
 import { BoxProps, Footer } from "grommet"
 import styled from "styled-components"
+import { gridAreasCommon } from "../types/GridTypes"
 
-const TypesFooter: React.FC<BoxProps> = ({ children }) => {
-  return (
-    <Footer background="brand" height="1fr" gridArea="footer">
-      {children}
-    </Footer>
-  )
-}
-
-const Container = styled(TypesFooter)``
+const Container = styled(Footer).attrs(
+  (): BoxProps => ({
+    background: "brand",
+    height: "1fr",
+    gridArea: gridAreasCommon.Footer,
+  })
+)``
 
 export { Container }
