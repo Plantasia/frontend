@@ -19,6 +19,7 @@ import {
 } from "grommet"
 import { GetServerSideProps } from "next"
 import Axios from "axios"
+import { useRouter } from "next/router"
 
 interface Category {
   image: string
@@ -65,6 +66,7 @@ function MainCategories(props: Category) {
 
 export default function HomePage({ categories }: IHomePage) {
   const [inputSearch, setInputSearch] = useState("")
+  const route = useRouter()
   return (
     <DesktopGrid gridType={GridTypes.HomeArea}>
       <Header inputSearch={inputSearch} setInputSearch={setInputSearch} />
@@ -83,7 +85,13 @@ export default function HomePage({ categories }: IHomePage) {
         </Text>
         <Box align="start">
           <Box align="center">
-            <Button label="Acesse nosso fórum" size="large"></Button>
+            <Button
+              label="Acesse nosso fórum"
+              size="large"
+              onClick={() => {
+                route.push("/forum")
+              }}
+            ></Button>
           </Box>
         </Box>
       </Box>
@@ -91,7 +99,7 @@ export default function HomePage({ categories }: IHomePage) {
         <HomeSVG />
       </Box>
 
-      <Box gridArea={gridAreasHome.Topics} justify="center">
+      <Box gridArea={gridAreasHome.Categories} justify="center">
         <Heading size="3">Saca só, alguma categorias dos temas</Heading>
         <Box
           direction="row"
