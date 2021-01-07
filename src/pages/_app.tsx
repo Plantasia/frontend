@@ -3,6 +3,7 @@ import GlobalStyle from "../styles/GlobalStyle"
 import { Grommet } from "grommet"
 import { deepTheme } from "@/components/GrommetTheme"
 import "bootstrap/dist/css/bootstrap.min.css"
+import React from "react"
 
 function MyApp({ Component, pageProps }) {
   return (
