@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import { GetStaticPaths, GetStaticProps } from "next"
-import StrapiAPI from "@/lib/strapi"
+import StrapiAPI from "@/strapi/index"
 import ReactMarkdown from "react-markdown"
 
 interface ArticleProps {

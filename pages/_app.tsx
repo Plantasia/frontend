@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import GlobalStyle from "../styles/GlobalStyle"
+import GlobalStyle from "../src/styles/GlobalStyle"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 function MyApp({ Component, pageProps }) {
