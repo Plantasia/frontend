@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Col, Container, Row, Jumbotron, Button} from "reactstrap"
 import styled from "styled-components";
-import GlobalStyle from '../src/styles/GlobalStyle'
+import GlobalStyle from '../styles/GlobalStyle'
 
 
 export default function HomePage(props) {

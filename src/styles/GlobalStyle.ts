@@ -6,8 +6,19 @@ export default createGlobalStyle`
     padding: 0 ;
     outline:0;
     box-sizing: border-box;
-    background-color: #f2f2f2;
+  
 
   }
-  
+  body{
+    background-color: #f2f2f2;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body,button, input{
+    font:16px;
+    font-family: Roboto, sans-serif;
+  } 
+
 `
+
+
