@@ -3,8 +3,8 @@ import {FaFacebook} from 'react-icons/fa';
 import {AiFillGoogleCircle} from 'react-icons/ai';
 import {BiSearchAlt} from 'react-icons/bi'
 import Image from 'next/image';
-import SearchLoginBar  from '../components/SearchLoginBar'
-import BoxLogin from '../components/BoxLogin'
+import SearchRegisterBar  from '../components/SearchRegisterBar'
+import BoxRegister from '../components/BoxRegister';
 
 
 
@@ -19,9 +19,9 @@ export default function Login(){
   return(
     <Container  >
 
-        <SearchLoginBar />
+        <SearchRegisterBar/>
 
-        <Container  style={{marginTop:"0.1em"}}>
+        <Container className="mt-5 mb-5" >
             <Row >
                   <Col style={{borderColor:'red'}}>
                     
@@ -36,7 +36,7 @@ export default function Login(){
                 
                   <Col xs="5">
 
-                    <BoxLogin/>
+                    <BoxRegister/>
 
                   </Col>
             </Row>

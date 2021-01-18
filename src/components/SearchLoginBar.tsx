@@ -8,29 +8,36 @@ export default function SearchComponent() {
   border-radius:8px;
   max-width:1200px;
   height: 120px;
-
 `;
+
+
+const border ={
+  borderColor:"red",
+  borderStyle: "solid",
+  borderWidth:"2px"
+
+}
   return(
-  <SearchComponentStyle  className="row align-content-center">
+  <SearchComponentStyle   className="row align-content-center">
      
-      <Col xs="2"  className="align-self-center justify-content-center ">
+      <Col  xs="2"  className="align-self-center justify-content-center ">
         <h3 className="align-self-center justify-self-center">Plantasia</h3>
       </Col>
 
-      <Col xs="8" >
+      <Col   xs="8" >
         <Input type="text" placeholder=" Digite um nome de planta">
       
         </Input>
       </Col>
 
-      <Col  xs="2" >
+      <Col   xs="2" >
           <div className="d-flex justify-content-center ">
             <h6 className="align-self-center">Registre-se</h6>
           </div>
         
       </Col>
 
-      <Col>
+      <Col  >
         <hr style={{borderColor:"black"}}></hr>
       </Col>
 

@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
 
-export const  TitleLoginStyle = styled.h2`
+export const  TitleRegisterStyle = styled.h2`
 
 font-family: Roboto, sans-serif;
 font-weight:bold;
-
+-webkit-font-smoothing: antialiased;
 
 `;
 export const TitleLabelStyle = styled.strong`
@@ -31,7 +31,7 @@ color: #999999;
 
 `;
 
-export const BoxLoginStyle = styled.div`
+export const BoxRegisterStyle = styled.div`
 
 border-radius:4px;
 box-shadow:0 0 0.3em  #979797;
