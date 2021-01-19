@@ -21,7 +21,7 @@ export default function Login(){
 
         <SearchRegisterBar/>
 
-        <Container className="mt-5 mb-5" >
+        <Container className=" mb-5" >
             <Row >
                   <Col style={{borderColor:'red'}}>
                     

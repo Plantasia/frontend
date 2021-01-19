@@ -10,15 +10,17 @@ export const StyledButtonTheme = styled.button`
   border-radius:6px;
   display:inline-block;
   line-height:40px;
-  transition:filter .4s
+  transition:filter .4s;
+  transition: opacity 0.2s;
  
 
-  /*&:hover{
+  &:hover{
   font-weight:bold;
-  color: #006600;
-  font-size:1.2em;
+  color:#000000;
   text-decoration: none;
-}*/
+  transition:filter .4s;
+  opacity:0.6;
+}
 
 
 `;

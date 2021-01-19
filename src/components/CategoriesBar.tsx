@@ -39,7 +39,7 @@ const verticalLine ={
     borderLeft: "2px",
     borderWidth:"2px"
   }
-}
+
  
 
 
