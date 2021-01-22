@@ -10,9 +10,6 @@ import {
   Input,
 } from "reactstrap"
 
-import { FaFacebook } from "react-icons/fa"
-import { AiFillGoogleCircle } from "react-icons/ai"
-import { BiSearchAlt } from "react-icons/bi"
 import Image from "next/image"
 import SearchRegisterBar from "../components/SearchRegisterBar"
 import BoxRegister from "../components/BoxRegister"

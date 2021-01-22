@@ -17,7 +17,7 @@ import React from "react"
 
 export default function CategoryListingOneItem() {
   return (
-    <CategoriesItemsStyle className="container mt-4 pr-4 pt-4 pl-1 pb-3">
+    <CategoriesItemsStyle className="container mt-5 mb-5 pr-4 pt-4 pl-1 pb-3">
       <Row>
         <Col xs="8" className="d-flex">
           <Col xs="3">

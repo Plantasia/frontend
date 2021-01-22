@@ -16,7 +16,8 @@ export default createGlobalStyle`
 
   body,button, input{
     font-size:14px;
-    font-family: Roboto, sans-serif;
+    font-family: Fira Code, sans-serif;
+    font-weight:normal;
   } 
 
   p{
@@ -26,5 +27,3 @@ export default createGlobalStyle`
   }
 
 `
-
-

@@ -16,7 +16,7 @@ import CategoryListingOneItem from "../components/CategoryListingItem"
 import { CustomTextInfoItems } from "../styles/styledComponents/categories/CustomTextInfoItems"
 import { CategoriesItemsStyle } from "../styles/styledComponents/categories/CategoriesItemsStyles"
 import { BsCircleFill } from "react-icons/bs"
-
+import CategoryBeforeItems from "../components/CategoryBeforeItems"
 import { AiOutlinePlus } from "react-icons/ai"
 import Image from "next/image"
 import { MainTitleStyle } from "../styles/styledComponents/categories/MainTitleStyle"
@@ -43,23 +43,9 @@ export default function ListCategories() {
         <CategoriesBar />
       </Container>
 
-      <MainTitleStyle>
-        <Container>
-          <Row>
-            <Col xs="10" className="d-flex align-items-center">
-              Categorias
-            </Col>
+      <CategoryBeforeItems />
 
-            <Col xs="2" className="d-flex justify-content-center ">
-              <StyledButtonTheme className="btn">
-                Novo tópico
-                <AiOutlinePlus />
-              </StyledButtonTheme>
-            </Col>
-          </Row>
-        </Container>
-      </MainTitleStyle>
-
+      <CategoryListingOneItem />
       <CategoryListingOneItem />
     </>
   )
