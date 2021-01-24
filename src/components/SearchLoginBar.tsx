@@ -6,41 +6,51 @@ import {
   Button,
   Form,
   FormGroup,
-  Label,
-  Input,
-} from "reactstrap"
+  InputGroup,
+  FormControl,
+  RowProps,
+  ColProps,
+  ButtonProps,
+} from "react-bootstrap"
 import styled from "styled-components"
 
+const SearchComponentStyle = styled(Row).attrs(
+  (): RowProps => ({
+    className: "d-flex align-content-center align-items-center pb-2 pt-2 mb-5",
+  })
+)`
+  margin-top: 1.5em;
+  border-bottom: 1px black solid;
+`
+const CallToAction = styled(Button).attrs(
+  (): ButtonProps => ({
+    size: "lg",
+  })
+)`
+  background-color: transparent;
+  color: black;
+  border: 2px black solid;
+  border-radius: 10px;
+`
 export default function SearchComponent() {
-  const SearchComponentStyle = styled.div`
-    border-radius: 8px;
-    max-width: 1200px;
-    height: 120px;
-  `
-
-  const border = {
-    borderColor: "red",
-    borderStyle: "solid",
-    borderWidth: "2px",
-  }
   return (
-    <SearchComponentStyle className="row align-content-center">
-      <Col xs="2" className="align-self-center justify-content-center ">
-        <h3 className="align-self-center justify-self-center">Plantasia</h3>
+    <SearchComponentStyle>
+      <Col xs="3">
+        <h3>Plantasia</h3>
       </Col>
 
-      <Col xs="8">
-        <Input type="text" placeholder=" Digite um nome de planta"></Input>
+      <Col xs="6">
+        <InputGroup className="mb-3">
+          <FormControl
+            placeholder="Procure pelo nome de uma planta"
+            aria-label="Procure pelo nome de uma planta"
+            aria-describedby="basic-addon2"
+          />
+        </InputGroup>
       </Col>
 
-      <Col xs="2">
-        <div className="d-flex justify-content-center ">
-          <h6 className="align-self-center">Registre-se</h6>
-        </div>
-      </Col>
-
-      <Col>
-        <hr style={{ borderColor: "black" }}></hr>
+      <Col xs="3" className="d-flex justify-content-end">
+        <CallToAction>Registre-se</CallToAction>
       </Col>
     </SearchComponentStyle>
   )

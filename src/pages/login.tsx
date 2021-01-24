@@ -10,12 +10,9 @@ import {
   Input,
 } from "reactstrap"
 
-import { FaFacebook } from "react-icons/fa"
-import { AiFillGoogleCircle } from "react-icons/ai"
-import { BiSearchAlt } from "react-icons/bi"
 import Image from "next/image"
-import SearchLoginBar from "../components/SearchLoginBar"
-import BoxLogin from "../components/BoxLogin"
+import SearchLoginBar from "@/components/Header"
+import { Header, BoxLogin } from "@components"
 
 export default function Login() {
   const border = {
@@ -26,7 +23,7 @@ export default function Login() {
 
   return (
     <Container>
-      <SearchLoginBar />
+      <Header actionText="Registre-se" />
 
       <Container style={{ marginTop: "0.1em" }}>
         <Row>
@@ -37,10 +34,6 @@ export default function Login() {
               width={750}
               height={600}
             />
-          </Col>
-
-          <Col xs="5">
-            <BoxLogin />
           </Col>
         </Row>
       </Container>
