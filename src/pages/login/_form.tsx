@@ -33,81 +33,82 @@ export default function LoginForm({
   setEmail,
   setPassword,
 }: ILoginForm) {
-export default function LoginForm() {
   return (
     <BoxLoginStyle>
-      <TitleLoginStyle className="d-flex justify-content-start ml-4">
-        Login
-      </TitleLoginStyle>
+      <>
+        <TitleLoginStyle className="d-flex justify-content-start ml-4">
+          Login
+        </TitleLoginStyle>
 
-      <Form>
-        <FormGroup className="m-4">
-          <TitleLabelStyle>
-            <Label for="Email">Email</Label>
-          </TitleLabelStyle>
+        <Form>
+          <FormGroup className="m-4">
+            <TitleLabelStyle>
+              <Label for="Email">Email</Label>
+            </TitleLabelStyle>
 
-          <Input
-            type="email"
-            name="email"
-            id="exampleEmail"
-            placeholder="Seu email"
-            value={email}
-            onChange={({ target: { value } }) => setEmail(value)}
-          />
-        </FormGroup>
-
-        <FormGroup className="mt-4 ml-4 mr-4">
-          <TitleLabelStyle>
-            <Label for="Password">Password</Label>
-          </TitleLabelStyle>
-
-          <InputStyle>
             <Input
-              type="password"
-              name="password"
-              id="examplePassword"
-              placeholder="Sua senha"
-              value={password}
-              onChange={({ target: { value } }) => setPassword(value)}
+              type="email"
+              name="email"
+              id="exampleEmail"
+              placeholder="Seu email"
+              value={email}
+              onChange={({ target: { value } }) => setEmail(value)}
             />
-          </InputStyle>
-        </FormGroup>
+          </FormGroup>
 
-        <FormGroup>
-          <Label className="ml-5">
-            <Input type="checkbox" />
-            Manter logado
-          </Label>
-        </FormGroup>
-      </Form>
+          <FormGroup className="mt-4 ml-4 mr-4">
+            <TitleLabelStyle>
+              <Label for="Password">Password</Label>
+            </TitleLabelStyle>
 
-      <Button
-        color="secondary"
-        className="m-2 text-light"
-        style={{Merge branch 'develop' of github.com:Plantasia/frontend into develop
-          color: "#1a1a1a",
-        }}
-        onClick={handleSubmitLogin}
-      >
-        Entrar
-      </Button>
+            <InputStyle>
+              <Input
+                type="password"
+                name="password"
+                id="examplePassword"
+                placeholder="Sua senha"
+                value={password}
+                onChange={({ target: { value } }) => setPassword(value)}
+              />
+            </InputStyle>
+          </FormGroup>
 
-      <LostPassword className="align-self-start ml-3">
-        Esqueceu sua senha?
-      </LostPassword>
+          <FormGroup>
+            <Label className="ml-5">
+              <Input type="checkbox" />
+              Manter logado
+            </Label>
+          </FormGroup>
+        </Form>
 
-      <hr style={{ borderColor: "black" }}></hr>
+        <Button
+          color="secondary"
+          className="m-2 text-light"
+          style={{
+            color: "#1a1a1a",
+          }}
+          onClick={handleSubmitLogin}
+        >
+          Entrar
+        </Button>
 
-      <Row className="d-flex align-self-center mt-3">Logar com</Row>
+        <LostPassword className="align-self-start ml-3">
+          Esqueceu sua senha?
+        </LostPassword>
 
-      <Row className="d-flex align-self-center">
-        <Col>
-          <AiFillGoogleCircle size={30} />
-        </Col>
-        <Col>
-          <FaFacebook size={30} />
-        </Col>
-      </Row>
+        <hr style={{ borderColor: "black" }}></hr>
+
+        <Row className="d-flex align-self-center mt-3">Logar com</Row>
+
+        <Row className="d-flex align-self-center">
+          <Col>
+            <AiFillGoogleCircle size={30} />
+          </Col>
+          <Col>
+            <FaFacebook size={30} />
+          </Col>
+        </Row>
+      </>
     </BoxLoginStyle>
   )
 }
