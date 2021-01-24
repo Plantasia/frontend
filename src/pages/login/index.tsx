@@ -16,12 +16,6 @@ import { Header, BoxLogin } from "@components"
 import LoginForm from "./_form"
 
 export default function Login() {
-  const border = {
-    borderColor: "red",
-    borderStyle: "solid",
-    borderWidth: "2px",
-  }
-
   return (
     <Container>
       <Header actionText="Registre-se" />
