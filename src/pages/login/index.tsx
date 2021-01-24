@@ -1,14 +1,4 @@
-import {
-  Alert,
-  Container,
-  Col,
-  Row,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-} from "reactstrap"
+import { Container, Col, Row } from "reactstrap"
 
 import Image from "next/image"
 import { Header } from "@components"

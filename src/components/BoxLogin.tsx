@@ -1,39 +1,34 @@
-import { Dispatch, SetStateAction } from "react"
-
-import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap"
+import {
+  Alert,
+  Container,
+  Col,
+  Row,
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+} from "reactstrap"
 import styled from "styled-components"
 import { FaFacebook } from "react-icons/fa"
 import { AiFillGoogleCircle } from "react-icons/ai"
+import { BiSearchAlt } from "react-icons/bi"
+import Image from "next/image"
 import {
   TitleLoginStyle,
   TitleLabelStyle,
   LostPassword,
   BoxLoginStyle,
-} from "../../styles/styledComponents/login/LoginStyles"
+} from "../styles/styledComponents/login/LoginStyles"
 
-const InputStyle = styled.div`
-  input .form-control {
-    border-radius: 15px;
-    box-shadow: 0 0 2.9em red;
-  }
-`
+export default function BoxLogin() {
+  const InputStyle = styled.div`
+    input .form-control {
+      border-radius: 15px;
+      box-shadow: 0 0 2.9em red;
+    }
+  `
 
-interface ILoginForm {
-  handleSubmitLogin(): void
-  setPassword: Dispatch<SetStateAction<string>>
-  setEmail: Dispatch<SetStateAction<string>>
-  password: string
-  email: string
-}
-
-export default function LoginForm({
-  email,
-  password,
-  handleSubmitLogin,
-  setEmail,
-  setPassword,
-}: ILoginForm) {
-export default function LoginForm() {
   return (
     <BoxLoginStyle>
       <TitleLoginStyle className="d-flex justify-content-start ml-4">
@@ -51,8 +46,6 @@ export default function LoginForm() {
             name="email"
             id="exampleEmail"
             placeholder="Seu email"
-            value={email}
-            onChange={({ target: { value } }) => setEmail(value)}
           />
         </FormGroup>
 
@@ -67,8 +60,6 @@ export default function LoginForm() {
               name="password"
               id="examplePassword"
               placeholder="Sua senha"
-              value={password}
-              onChange={({ target: { value } }) => setPassword(value)}
             />
           </InputStyle>
         </FormGroup>
@@ -84,10 +75,9 @@ export default function LoginForm() {
       <Button
         color="secondary"
         className="m-2 text-light"
-        style={{Merge branch 'develop' of github.com:Plantasia/frontend into develop
+        style={{
           color: "#1a1a1a",
         }}
-        onClick={handleSubmitLogin}
       >
         Entrar
       </Button>

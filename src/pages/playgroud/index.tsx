@@ -1,5 +1,5 @@
-import SEO from "@/components/SEO"
-import SideForm from "@/components/SideForm"
+import SEO from "@/src/components/SEO"
+import SideForm from "@/src/components/SEO"
 import { GetServerSideProps } from "next"
 
 import { useState } from "react"

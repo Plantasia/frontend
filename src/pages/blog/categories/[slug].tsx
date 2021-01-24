@@ -2,10 +2,9 @@ import { useRouter } from "next/router"
 import dynamic from "next/dynamic"
 import { useState } from "react"
 
-const CategoryModal = dynamic(
+/* const CategoryModal = dynamic(
   () => import("../../../components/CategoryModal"),
-  { loading: () => <p>Carregando...</p>, ssr: false }
-)
+  { loading: () => <p>Carregando...</p>, ssr: false }) */
 
 export default function Category() {
   const router = useRouter()
@@ -19,7 +18,7 @@ export default function Category() {
 
       <button onClick={handleClick}>Show Modal</button>
 
-      {isModalVisible && <CategoryModal />}
+      {/*  {isModalVisible && <CategoryModal />} */}
     </div>
   )
 }
