@@ -1,27 +1,24 @@
 import {
-  Alert,
-  Container,
   Col,
   Row,
   Button,
-  Form,
-  FormGroup,
   InputGroup,
   FormControl,
   RowProps,
-  ColProps,
   ButtonProps,
 } from "react-bootstrap"
 import styled from "styled-components"
 
-const SearchComponentStyle = styled(Row).attrs(
+// Jogar para pasta de styles dps
+const HeaderWrapper = styled(Row).attrs(
   (): RowProps => ({
-    className: "d-flex align-content-center align-items-center pb-2 pt-2 mb-5",
+    className: "d-flex align-content-center align-items-center py-3 mb-5",
   })
 )`
   margin-top: 1.5em;
   border-bottom: 1px black solid;
 `
+
 const CallToAction = styled(Button).attrs(
   (): ButtonProps => ({
     size: "lg",
@@ -32,15 +29,25 @@ const CallToAction = styled(Button).attrs(
   border: 2px black solid;
   border-radius: 10px;
 `
-export default function SearchComponent() {
+
+interface User {
+  id: string
+  name: string
+}
+interface HeaderProps {
+  currentUser?: User
+  actionText: string
+}
+
+export default function Header({ currentUser, actionText }: HeaderProps) {
   return (
-    <SearchComponentStyle>
+    <HeaderWrapper>
       <Col xs="3">
         <h3>Plantasia</h3>
       </Col>
 
       <Col xs="6">
-        <InputGroup className="mb-3">
+        <InputGroup>
           <FormControl
             placeholder="Procure pelo nome de uma planta"
             aria-label="Procure pelo nome de uma planta"
@@ -50,8 +57,8 @@ export default function SearchComponent() {
       </Col>
 
       <Col xs="3" className="d-flex justify-content-end">
-        <CallToAction>Registre-se</CallToAction>
+        <CallToAction>{actionText}</CallToAction>
       </Col>
-    </SearchComponentStyle>
+    </HeaderWrapper>
   )
 }

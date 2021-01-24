@@ -7,6 +7,14 @@ import Link from "next/link"
 function MyApp({ Component, pageProps }) {
   return (
     <>
+      <Head>
+        <link
+          rel="preload"
+          as="font"
+          crossOrigin=""
+          href="/assets/fonts/RobotoSlab-ExtraBold.ttf"
+        />
+      </Head>
       <GlobalStyle />
       <Component {...pageProps}></Component>
     </>

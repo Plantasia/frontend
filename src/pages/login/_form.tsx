@@ -1,34 +1,21 @@
-import {
-  Alert,
-  Container,
-  Col,
-  Row,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-} from "reactstrap"
+import { Col, Row, Button, Form, FormGroup, Label, Input } from "reactstrap"
 import styled from "styled-components"
 import { FaFacebook } from "react-icons/fa"
 import { AiFillGoogleCircle } from "react-icons/ai"
-import { BiSearchAlt } from "react-icons/bi"
-import Image from "next/image"
 import {
   TitleLoginStyle,
   TitleLabelStyle,
   LostPassword,
   BoxLoginStyle,
-} from "../styles/styledComponents/login/LoginStyles"
+} from "../../styles/styledComponents/login/LoginStyles"
 
-export default function BoxLogin() {
-  const InputStyle = styled.div`
-    input .form-control {
-      border-radius: 15px;
-      box-shadow: 0 0 2.9em red;
-    }
-  `
-
+const InputStyle = styled.div`
+  input .form-control {
+    border-radius: 15px;
+    box-shadow: 0 0 2.9em red;
+  }
+`
+export default function LoginForm() {
   return (
     <BoxLoginStyle>
       <TitleLoginStyle className="d-flex justify-content-start ml-4">
