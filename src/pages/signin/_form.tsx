@@ -1,13 +1,20 @@
 import { Dispatch, SetStateAction } from "react"
-
-import { Col, Row, Button, FormGroup } from "react-bootstrap"
-import styled from "styled-components"
-import { FaFacebook } from "react-icons/fa"
-import { AiFillGoogleCircle } from "react-icons/ai"
-import { FormTitle, Form, Label } from "@styled/Login"
+import { Button } from "react-bootstrap"
+import { FaFacebook, FaGoogle } from "react-icons/fa"
+import {
+  Title,
+  Form,
+  Label,
+  FormWrapper,
+  ForgotPassword,
+  SocialAuths,
+  SocialAuthsIcons,
+} from "@styled/Login"
 
 interface ILoginForm {
   handleSubmitLogin(): void
+  handleFacebookAuth(): void
+  handleGoogleAuth(): void
   setPassword: Dispatch<SetStateAction<string>>
   setEmail: Dispatch<SetStateAction<string>>
   password: string
@@ -20,104 +27,63 @@ export default function LoginForm({
   handleSubmitLogin,
   setEmail,
   setPassword,
+  handleFacebookAuth,
+  handleGoogleAuth,
 }: ILoginForm) {
   return (
-    <Form>
-      <FormTitle>Login</FormTitle>
-
-      <Form.Group className="mt-2">
-        <Label>Email</Label>
-        <Form.Control
-          type="email"
-          value={email}
-          onChange={({ target: { value } }) => setEmail(value)}
-        ></Form.Control>
-      </Form.Group>
-
-      <Form.Group>
-        <Label>Senha</Label>
-        <Form.Control
-          type="password"
-          value={password}
-          onChange={({ target: { value } }) => setPassword(value)}
-        ></Form.Control>
-      </Form.Group>
-
-      <Form.Group>
-        <Form.Check type="checkbox" label="Manter logado" />
-      </Form.Group>
-
-      <Button variant="primary">Teste</Button>
-
-      {/* 
+    <FormWrapper>
+      <Title>
+        Bem-vindo! <br />
+        <span>Entre na comunidade.</span>
+      </Title>
       <Form>
-        <FormGroup className="m-4">
-          <TitleLabelStyle>
-            <Label for="Email">Email</Label>
-          </TitleLabelStyle>
-
-          <Input
+        <Form.Group>
+          <Label>Email</Label>
+          <Form.Control
             type="email"
-            name="email"
-            id="exampleEmail"
-            placeholder="Seu email"
             value={email}
             onChange={({ target: { value } }) => setEmail(value)}
-          />
-        </FormGroup>
+          ></Form.Control>
+        </Form.Group>
 
-        <FormGroup className="mt-4 ml-4 mr-4">
-          <TitleLabelStyle>
-            <Label for="Password">Password</Label>
-          </TitleLabelStyle>
+        <Form.Group>
+          <Label>Senha</Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={({ target: { value } }) => setPassword(value)}
+          ></Form.Control>
+        </Form.Group>
 
-          <InputStyle>
-            <Input
-              type="password"
-              name="password"
-              id="examplePassword"
-              placeholder="Sua senha"
-              value={password}
-              onChange={({ target: { value } }) => setPassword(value)}
-            />
-          </InputStyle>
-        </FormGroup>
+        <Form.Group>
+          <Form.Check type="checkbox" label="Manter logado" />
+        </Form.Group>
 
-        <FormGroup>
-          <Label className="ml-5">
-            <Input type="checkbox" />
-            Manter logado
-          </Label>
-        </FormGroup>
+        <Button variant="primary" size="lg" onClick={handleSubmitLogin}>
+          Logar
+        </Button>
+
+        <Form.Group>
+          <ForgotPassword href="/forgot-password">
+            Esqueceu sua senha?
+          </ForgotPassword>
+        </Form.Group>
       </Form>
-
-      <Button
-        color="secondary"
-        className="m-2 text-light"
-        style={{
-          color: "#1a1a1a",
-        }}
-        onClick={handleSubmitLogin}
-      >
-        Entrar
-      </Button>
-
-      <LostPassword className="align-self-start ml-3">
-        Esqueceu sua senha?
-      </LostPassword>
-
-      <hr style={{ borderColor: "black" }}></hr>
-
-      <Row className="d-flex align-self-center mt-3">Logar com</Row>
-
-      <Row className="d-flex align-self-center">
-        <Col>
-          <AiFillGoogleCircle size={30} />
-        </Col>
-        <Col>
-          <FaFacebook size={30} />
-        </Col>
-      </Row> */}
-    </Form>
+      <SocialAuths>
+        <h5>Entre com</h5>
+        <SocialAuthsIcons>
+          <FaGoogle
+            size="3em"
+            onClick={handleGoogleAuth}
+            style={{ cursor: "pointer" }}
+          />
+          <FaFacebook
+            size="3em"
+            onClick={handleFacebookAuth}
+            style={{ cursor: "pointer" }}
+          />
+        </SocialAuthsIcons>
+      </SocialAuths>
+    </FormWrapper>
   )
 }

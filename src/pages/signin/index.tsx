@@ -1,37 +1,36 @@
-import { Container, Col, Row } from "react-bootstrap"
+import { Col, Row } from "react-bootstrap"
 
-import Image from "next/image"
-import { Header } from "@components"
+import { Header, SEO } from "@components"
 import LoginForm from "./_form"
 import { useState } from "react"
+import AuthImage from "@/src/assets/AuthImage"
 
 export default function Login() {
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
 
   async function handleLoginSubmit(): Promise<void> {}
+  async function handleFacebookAuth(): Promise<void> {}
+  async function handleGoogleAuth(): Promise<void> {}
 
   return (
     <>
+      <SEO title="Login" />
       <Header actionText="Registre-se" />
       <Row>
-        <Col xs="6">
-          <Image
-            className="mt-2"
-            src="/assets/img_provisoria.png"
-            width={750}
-            height={600}
-          />
-          aaaa
+        <Col xs="7">
+          <AuthImage />
         </Col>
 
-        <Col xs="6">
+        <Col xs="5">
           <LoginForm
             handleSubmitLogin={handleLoginSubmit}
+            handleFacebookAuth={handleFacebookAuth}
+            handleGoogleAuth={handleGoogleAuth}
             password={password}
+            setPassword={setPassword}
             email={email}
             setEmail={setEmail}
-            setPassword={setPassword}
           />
         </Col>
       </Row>
