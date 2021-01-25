@@ -57,13 +57,12 @@ export const Label = styled(BootstrapForm.Label)`
   font-size: 1.5em;
 `
 
-export const ForgotPassword = styled(Form.Text).attrs(
+export const AuxLink = styled(Form.Text).attrs(
   (): FormTextProps => ({
     as: "a",
-    className: "mt-3",
   })
 )`
-  font-size: 1.1em;
+  font-size: 1.25em;
 `
 
 export const SocialAuthsIcons = styled.div.attrs({

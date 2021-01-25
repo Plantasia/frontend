@@ -1,98 +1,84 @@
-import { Container, Col, Row } from "react-bootstrap"
-import { FaFacebook, FaGooglePlus } from "react-icons/fa"
-import { AiFillGoogleCircle } from "react-icons/ai"
-
+import { Dispatch, SetStateAction } from "react"
+import { Button } from "react-bootstrap"
+import { FaFacebook, FaGoogle } from "react-icons/fa"
 import {
-  TitleRegisterStyle,
-  TitleLabelStyle,
-  LostPassword,
-  BoxRegisterStyle,
-} from "@styled/Register"
+  Title,
+  Form,
+  Label,
+  FormWrapper,
+  AuxLink,
+  SocialAuths,
+  SocialAuthsIcons,
+} from "@/src/styles/components/Auth"
 
-export default function BoxRegister() {
+interface ILoginForm {
+  handleSubmitLogin(): void
+  handleFacebookAuth(): void
+  handleGoogleAuth(): void
+  setPassword: Dispatch<SetStateAction<string>>
+  setEmail: Dispatch<SetStateAction<string>>
+  password: string
+  email: string
+}
+
+export default function LoginForm({
+  email,
+  password,
+  handleSubmitLogin,
+  setEmail,
+  setPassword,
+  handleFacebookAuth,
+  handleGoogleAuth,
+}: ILoginForm) {
   return (
-    <FaGooglePlus size="3em" />
-    // <BoxRegisterStyle>
-    //   <TitleRegisterStyle className="d-flex justify-content-start ml-4">
-    //     Registre-se
-    //   </TitleRegisterStyle>
+    <FormWrapper>
+      <Title>
+        Bem-vindo! <br />
+        <span>Entre na comunidade.</span>
+      </Title>
+      <Form>
+        <Form.Group>
+          <Label>Email</Label>
+          <Form.Control
+            type="email"
+            value={email}
+            onChange={({ target: { value } }) => setEmail(value)}
+          ></Form.Control>
+        </Form.Group>
 
-    //   <Form>
-    //     <FormGroup className="m-4">
-    //       <TitleLabelStyle>
-    //         <Label for="Email">Seu Nome</Label>
-    //       </TitleLabelStyle>
+        <Form.Group>
+          <Label>Senha</Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={({ target: { value } }) => setPassword(value)}
+          ></Form.Control>
+          <Form.Check type="checkbox" label="Manter logado" className="my-1" />
+        </Form.Group>
 
-    //       <Input
-    //         type="email"
-    //         name="email"
-    //         id="exampleEmail"
-    //         placeholder="Digite seu primeiro nome"
-    //       />
-    //     </FormGroup>
+        <Button variant="primary" size="lg" onClick={handleSubmitLogin}>
+          Logar
+        </Button>
 
-    //     <FormGroup className="m-4">
-    //       <TitleLabelStyle>
-    //         <Label for="Email">Email</Label>
-    //       </TitleLabelStyle>
-
-    //       <Input
-    //         type="email"
-    //         name="email"
-    //         id="exampleEmail"
-    //         placeholder="Digite seu email"
-    //       />
-    //     </FormGroup>
-
-    //     <FormGroup className="mt-4 ml-4 mr-4">
-    //       <TitleLabelStyle>
-    //         <Label for="Password">Password</Label>
-    //       </TitleLabelStyle>
-
-    //       <InputStyle>
-    //         <Input
-    //           type="password"
-    //           name="password"
-    //           id="examplePassword"
-    //           placeholder="Sua senha"
-    //         />
-    //       </InputStyle>
-    //     </FormGroup>
-
-    //     <FormGroup>
-    //       <Label className="ml-5">
-    //         <Input type="checkbox" />
-    //         Manter logado
-    //       </Label>
-    //     </FormGroup>
-    //   </Form>
-
-    //   <Button
-    //     color="secondary"
-    //     className="m-2 text-light"
-    //     style={{
-    //       color: "#1a1a1a",
-    //     }}
-    //   >
-    //     Entrar
-    //   </Button>
-
-    //   <LostPassword className="align-self-start ml-3">
-    //     Esqueceu sua senha?
-    //   </LostPassword>
-
-    //   <hr style={{ borderColor: "black" }}></hr>
-
-    //   <Row className="d-flex align-self-center mt-3">Logar com</Row>
-
-    //   <Row className="d-flex align-self-center">
-    //     <Col>
-    //       <AiFillGoogleCircle size={30} />
-    //     </Col>
-    //     <Col>
-    //       <FaFacebook size={30} />
-    //     </Col>
-    //   </Row>
-    // </BoxRegisterStyle>
+        <Form.Group>
+          <AuxLink href="/signin">Já possui conta?</AuxLink>
+        </Form.Group>
+      </Form>
+      <SocialAuths>
+        <h5>Entre com</h5>
+        <SocialAuthsIcons>
+          <FaGoogle
+            size="3em"
+            onClick={handleGoogleAuth}
+            style={{ cursor: "pointer" }}
+          />
+          <FaFacebook
+            size="3em"
+            onClick={handleFacebookAuth}
+            style={{ cursor: "pointer" }}
+          />
+        </SocialAuthsIcons>
+      </SocialAuths>
+    </FormWrapper>
   )
 }

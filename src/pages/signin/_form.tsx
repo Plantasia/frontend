@@ -6,10 +6,10 @@ import {
   Form,
   Label,
   FormWrapper,
-  ForgotPassword,
+  AuxLink,
   SocialAuths,
   SocialAuthsIcons,
-} from "@styled/Login"
+} from "@/src/styles/components/Auth"
 
 interface ILoginForm {
   handleSubmitLogin(): void
@@ -53,9 +53,6 @@ export default function LoginForm({
             value={password}
             onChange={({ target: { value } }) => setPassword(value)}
           ></Form.Control>
-        </Form.Group>
-
-        <Form.Group>
           <Form.Check type="checkbox" label="Manter logado" />
         </Form.Group>
 
@@ -64,11 +61,10 @@ export default function LoginForm({
         </Button>
 
         <Form.Group>
-          <ForgotPassword href="/forgot-password">
-            Esqueceu sua senha?
-          </ForgotPassword>
+          <AuxLink href="/forgot-password">Esqueceu sua senha?</AuxLink>
         </Form.Group>
       </Form>
+
       <SocialAuths>
         <h5>Entre com</h5>
         <SocialAuthsIcons>

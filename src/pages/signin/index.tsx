@@ -1,11 +1,11 @@
 import { Col, Row } from "react-bootstrap"
 
 import { Header, SEO } from "@components"
-import LoginForm from "./_form"
+import SignInForm from "./_form"
 import { useState } from "react"
 import AuthImage from "@/src/assets/AuthImage"
 
-export default function Login() {
+export default function SignIn() {
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
 
@@ -23,7 +23,7 @@ export default function Login() {
         </Col>
 
         <Col xs="5">
-          <LoginForm
+          <SignInForm
             handleSubmitLogin={handleLoginSubmit}
             handleFacebookAuth={handleFacebookAuth}
             handleGoogleAuth={handleGoogleAuth}
