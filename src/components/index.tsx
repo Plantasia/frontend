@@ -1,4 +1,4 @@
 import Header from "./Header"
-import BoxLogin from "./BoxLogin"
+import SEO from "./SEO"
 
-export { Header, BoxLogin }
+export { Header, SEO }
