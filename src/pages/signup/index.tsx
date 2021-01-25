@@ -2,12 +2,13 @@ import { Container, Col, Row } from "react-bootstrap"
 
 import Image from "next/image"
 
-import { Header } from "@components"
+import { Header, SEO } from "@components"
 import Form from "./_form"
 
 export default function Login() {
   return (
     <Container>
+      <SEO title="login" />
       <Header />
 
       <Container className=" mb-5">
