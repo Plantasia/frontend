@@ -36,7 +36,7 @@ interface User {
 }
 interface HeaderProps {
   currentUser?: User
-  actionText: string
+  actionText?: string
 }
 
 export default function Header({ currentUser, actionText }: HeaderProps) {
@@ -57,7 +57,11 @@ export default function Header({ currentUser, actionText }: HeaderProps) {
       </Col>
 
       <Col xs="3" className="d-flex justify-content-end">
-        <CallToAction>{actionText}</CallToAction>
+        {currentUser ? (
+          <p>{currentUser.name}</p>
+        ) : (
+          <CallToAction>{actionText || "Registre-se"}</CallToAction>
+        )}
       </Col>
     </HeaderWrapper>
   )

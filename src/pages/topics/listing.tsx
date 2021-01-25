@@ -1,17 +1,6 @@
-import {
-  Alert,
-  Container,
-  Col,
-  Row,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-} from "reactstrap"
-import SearchLoginBar from "../../components/SearchLoginBar"
+import { Container, Col, Row } from "reactstrap"
 import CategoryBeforeItems from "../../components/CategoryBeforeItems"
-import CategoriesBar from "../../components/DefaultIndexBar"
+import { Header } from "@components"
 
 const border = {
   borderColor: "red",
@@ -22,7 +11,7 @@ const border = {
 export default function listTopics() {
   return (
     <>
-      <CategoriesBar />
+      <Header />
       <Container>
         <CategoryBeforeItems />
 

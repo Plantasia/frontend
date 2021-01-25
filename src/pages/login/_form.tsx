@@ -9,7 +9,7 @@ import {
   TitleLabelStyle,
   LostPassword,
   BoxLoginStyle,
-} from "../../styles/styledComponents/login/LoginStyles"
+} from "@styled/Login"
 
 const InputStyle = styled.div`
   input .form-control {
@@ -17,7 +17,6 @@ const InputStyle = styled.div`
     box-shadow: 0 0 2.9em red;
   }
 `
-
 interface ILoginForm {
   handleSubmitLogin(): void
   setPassword: Dispatch<SetStateAction<string>>

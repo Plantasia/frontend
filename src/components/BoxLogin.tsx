@@ -19,7 +19,7 @@ import {
   TitleLabelStyle,
   LostPassword,
   BoxLoginStyle,
-} from "../styles/styledComponents/login/LoginStyles"
+} from "@styled/Login"
 
 export default function BoxLogin() {
   const InputStyle = styled.div`

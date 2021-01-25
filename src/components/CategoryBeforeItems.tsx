@@ -1,19 +1,8 @@
-import CategoriesBar from "../components/CategoriesBar"
-import {
-  Alert,
-  Container,
-  Col,
-  Row,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-} from "reactstrap"
+import { Container, Col, Row } from "reactstrap"
 
-import { StyledButtonTheme } from "../styles/styledComponents/general/StyledButtonTheme"
+import { StyledButtonTheme } from "@/src/styles/components/Shared"
+import { MainTitleStyle } from "@styled/Categories"
 import { AiOutlinePlus } from "react-icons/ai"
-import { MainTitleStyle } from "../styles/styledComponents/categories/MainTitleStyle"
 
 export default function CategoryBeforeItems() {
   return (

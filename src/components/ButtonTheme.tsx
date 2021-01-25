@@ -1,10 +1,9 @@
-import {StyledButtonTheme} from '../styles/styledComponents/general/StyledButtonTheme'
+import { StyledButtonTheme } from "@styled/Shared"
 
-export default function ButtonTheme(){
-   
-  return(
+export default function ButtonTheme() {
+  return (
     <StyledButtonTheme>
-    <button></button>
+      <button></button>
     </StyledButtonTheme>
-   )
+  )
 }

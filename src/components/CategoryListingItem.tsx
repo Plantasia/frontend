@@ -1,19 +1,7 @@
-import {
-  Alert,
-  Container,
-  Col,
-  Row,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-} from "reactstrap"
-import { CategoriesItemsStyle } from "../styles/styledComponents/categories/CategoriesItemsStyles"
+import { Col, Row } from "reactstrap"
 import { BsCircleFill } from "react-icons/bs"
-import { CustomTextInfoItems } from "../styles/styledComponents/categories/CustomTextInfoItems"
+import { CustomTextInfoItems, CategoriesItemsStyle } from "@styled/Categories"
 import Image from "next/image"
-import React from "react"
 
 export default function CategoryListingOneItem() {
   return (
