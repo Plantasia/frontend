@@ -1,4 +1,4 @@
-import { Container, Col, Row } from "reactstrap"
+import { Container, Col, Row } from "react-bootstrap"
 
 import Image from "next/image"
 import { Header } from "@components"
@@ -12,31 +12,29 @@ export default function Login() {
   async function handleLoginSubmit(): Promise<void> {}
 
   return (
-    <Container>
+    <>
       <Header actionText="Registre-se" />
+      <Row>
+        <Col xs="6">
+          <Image
+            className="mt-2"
+            src="/assets/img_provisoria.png"
+            width={750}
+            height={600}
+          />
+          aaaa
+        </Col>
 
-      <Container style={{ marginTop: "0.1em" }}>
-        <Row>
-          <Col style={{ borderColor: "red" }}>
-            <Image
-              className="mt-2"
-              src="/assets/img_provisoria.png"
-              width={750}
-              height={600}
-            />
-          </Col>
-
-          <Col xs="5">
-            <LoginForm
-              handleSubmitLogin={handleLoginSubmit}
-              password={password}
-              email={email}
-              setEmail={setEmail}
-              setPassword={setPassword}
-            />
-          </Col>
-        </Row>
-      </Container>
-    </Container>
+        <Col xs="6">
+          <LoginForm
+            handleSubmitLogin={handleLoginSubmit}
+            password={password}
+            email={email}
+            setEmail={setEmail}
+            setPassword={setPassword}
+          />
+        </Col>
+      </Row>
+    </>
   )
 }

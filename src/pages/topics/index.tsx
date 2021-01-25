@@ -1,4 +1,4 @@
-import { Container, Col, Row } from "reactstrap"
+import { Container, Col, Row } from "react-bootstrap"
 import CategoryBeforeItems from "../../components/CategoryBeforeItems"
 import { Header } from "@components"
 

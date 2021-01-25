@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Col, Container, Row, Jumbotron, Button } from "reactstrap"
+import { Jumbotron, Button } from "react-bootstrap"
 import styled from "styled-components"
 import GlobalStyle from "../styles/GlobalStyle"
 

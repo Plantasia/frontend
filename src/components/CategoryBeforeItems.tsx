@@ -1,4 +1,4 @@
-import { Container, Col, Row } from "reactstrap"
+import { Container, Col, Row } from "react-bootstrap"
 
 import { StyledButtonTheme } from "@/src/styles/components/Shared"
 import { MainTitleStyle } from "@styled/Categories"

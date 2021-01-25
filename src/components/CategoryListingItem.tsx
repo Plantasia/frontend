@@ -1,4 +1,4 @@
-import { Col, Row } from "reactstrap"
+import { Col, Row } from "react-bootstrap"
 import { BsCircleFill } from "react-icons/bs"
 import { CustomTextInfoItems, CategoriesItemsStyle } from "@styled/Categories"
 import Image from "next/image"
