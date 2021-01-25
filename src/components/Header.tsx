@@ -22,13 +22,9 @@ const HeaderWrapper = styled(Row).attrs(
 const CallToAction = styled(Button).attrs(
   (): ButtonProps => ({
     size: "lg",
+    variant: "outline-primary",
   })
-)`
-  background-color: transparent;
-  color: black;
-  border: 2px black solid;
-  border-radius: 10px;
-`
+)``
 
 interface User {
   id: string
