@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction } from "react"
 import { Button } from "react-bootstrap"
-import { FaFacebook, FaGoogle } from "react-icons/fa"
 import {
   Title,
   Form,
@@ -9,6 +8,9 @@ import {
   AuxLink,
   SocialAuths,
   SocialAuthsIcons,
+  TermsCheck,
+  GoogleIcon,
+  FacebookIcon,
 } from "@/src/styles/components/Auth"
 
 interface ILoginForm {
@@ -17,31 +19,46 @@ interface ILoginForm {
   handleGoogleAuth(): void
   setPassword: Dispatch<SetStateAction<string>>
   setEmail: Dispatch<SetStateAction<string>>
+  setName: Dispatch<SetStateAction<string>>
   password: string
   email: string
+  name: string
 }
 
 export default function LoginForm({
-  email,
-  password,
   handleSubmitLogin,
-  setEmail,
-  setPassword,
   handleFacebookAuth,
   handleGoogleAuth,
+  email,
+  setEmail,
+  password,
+  setPassword,
+  name,
+  setName,
 }: ILoginForm) {
   return (
     <FormWrapper>
       <Title>
-        Bem-vindo! <br />
-        <span>Entre na comunidade.</span>
+        Bem-vindo, <br />
+        <span>cadastre-se já!</span>
       </Title>
       <Form>
+        <Form.Group>
+          <Label>Nome</Label>
+          <Form.Control
+            type="text"
+            value={name}
+            onChange={({ target: { value } }) => setName(value)}
+            placeholder="digite o seu nome"
+          ></Form.Control>
+        </Form.Group>
+
         <Form.Group>
           <Label>Email</Label>
           <Form.Control
             type="email"
             value={email}
+            placeholder="digite o seu email"
             onChange={({ target: { value } }) => setEmail(value)}
           ></Form.Control>
         </Form.Group>
@@ -49,11 +66,21 @@ export default function LoginForm({
         <Form.Group>
           <Label>Senha</Label>
           <Form.Control
+            placeholder="digite uma senha"
             type="password"
             value={password}
             onChange={({ target: { value } }) => setPassword(value)}
           ></Form.Control>
-          <Form.Check type="checkbox" label="Manter logado" className="my-1" />
+        </Form.Group>
+
+        <Form.Group>
+          <TermsCheck>
+            <TermsCheck.Input type="checkbox" name="termsCheck" />
+            <TermsCheck.Label>
+              Declaro que li e concordo com os{" "}
+              <a href="/terms">termos de uso</a>
+            </TermsCheck.Label>
+          </TermsCheck>
         </Form.Group>
 
         <Button variant="primary" size="lg" onClick={handleSubmitLogin}>
@@ -65,18 +92,10 @@ export default function LoginForm({
         </Form.Group>
       </Form>
       <SocialAuths>
-        <h5>Entre com</h5>
+        <h5>Cadastre-se com</h5>
         <SocialAuthsIcons>
-          <FaGoogle
-            size="3em"
-            onClick={handleGoogleAuth}
-            style={{ cursor: "pointer" }}
-          />
-          <FaFacebook
-            size="3em"
-            onClick={handleFacebookAuth}
-            style={{ cursor: "pointer" }}
-          />
+          <GoogleIcon onClick={handleGoogleAuth} />
+          <FacebookIcon onClick={handleFacebookAuth} />
         </SocialAuthsIcons>
       </SocialAuths>
     </FormWrapper>

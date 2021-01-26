@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react"
 import { Button } from "react-bootstrap"
-import { FaFacebook, FaGoogle } from "react-icons/fa"
+
 import {
   Title,
   Form,
@@ -9,6 +9,8 @@ import {
   AuxLink,
   SocialAuths,
   SocialAuthsIcons,
+  GoogleIcon,
+  FacebookIcon,
 } from "@/src/styles/components/Auth"
 
 interface ILoginForm {
@@ -43,12 +45,14 @@ export default function LoginForm({
             type="email"
             value={email}
             onChange={({ target: { value } }) => setEmail(value)}
+            placeholder="digite o seu email"
           ></Form.Control>
         </Form.Group>
 
         <Form.Group>
           <Label>Senha</Label>
           <Form.Control
+            placeholder="digite a sua senha"
             type="password"
             value={password}
             onChange={({ target: { value } }) => setPassword(value)}
@@ -67,17 +71,10 @@ export default function LoginForm({
 
       <SocialAuths>
         <h5>Entre com</h5>
+
         <SocialAuthsIcons>
-          <FaGoogle
-            size="3em"
-            onClick={handleGoogleAuth}
-            style={{ cursor: "pointer" }}
-          />
-          <FaFacebook
-            size="3em"
-            onClick={handleFacebookAuth}
-            style={{ cursor: "pointer" }}
-          />
+          <GoogleIcon onClick={handleGoogleAuth} />
+          <FacebookIcon onClick={handleFacebookAuth} />
         </SocialAuthsIcons>
       </SocialAuths>
     </FormWrapper>

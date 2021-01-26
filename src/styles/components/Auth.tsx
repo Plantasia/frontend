@@ -1,11 +1,15 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import {
   ColProps,
   Form as BootstrapForm,
   FormProps,
   Col,
   FormTextProps,
+  FormCheckProps,
 } from "react-bootstrap"
+
+import { FaFacebook, FaGoogle } from "react-icons/fa"
+import { IconBaseProps } from "react-icons/lib"
 
 export const Title = styled.h1.attrs({
   className: "mt-4",
@@ -75,4 +79,37 @@ export const SocialAuths = styled.div.attrs({
   className: "d-flex align-items-center flex-column mb-4",
 })`
   text-align: center;
+`
+
+const pointer = css`
+  cursor: pointer;
+`
+
+export const FacebookIcon = styled(FaFacebook).attrs(
+  (): IconBaseProps => ({
+    size: "3em",
+  })
+)`
+  ${pointer}
+`
+
+export const GoogleIcon = styled(FaGoogle).attrs(
+  (): IconBaseProps => ({
+    size: "3em",
+  })
+)`
+  ${pointer}
+`
+
+export const TermsCheck = styled(Form.Check).attrs(
+  (): FormCheckProps => ({
+    type: "checkbox",
+    className: " my-1",
+  })
+)`
+  & input {
+    display: block;
+    align-items: center;
+    margin-top: 4px;
+  }
 `

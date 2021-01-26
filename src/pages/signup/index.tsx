@@ -8,6 +8,7 @@ import AuthImage from "@/src/assets/AuthImage"
 export default function SignUp() {
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
+  const [name, setName] = useState("")
 
   async function handleLoginSubmit(): Promise<void> {}
   async function handleFacebookAuth(): Promise<void> {}
@@ -17,7 +18,7 @@ export default function SignUp() {
     <>
       <SEO title="Login" />
       <Header actionText="Login" />
-      <Row>
+      <Row className="">
         <Col xs="7">
           <AuthImage />
         </Col>
@@ -31,6 +32,8 @@ export default function SignUp() {
             setPassword={setPassword}
             email={email}
             setEmail={setEmail}
+            name={name}
+            setName={setName}
           />
         </Col>
       </Row>
