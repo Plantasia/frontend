@@ -1,12 +1,24 @@
 /* eslint-disable react/prop-types */
 import GlobalStyle from "../styles/GlobalStyle"
-import "bootstrap/dist/css/bootstrap.min.css"
+import "@/src/styles/customTheme.sass"
 import Head from "next/head"
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
+        <link
+          rel="preload"
+          as="font"
+          crossOrigin=""
+          href="/assets/fonts/RobotoSlab-Light.ttf"
+        />
+        <link
+          rel="preload"
+          as="font"
+          crossOrigin=""
+          href="/assets/fonts/RobotoSlab-Medium.ttf"
+        />
         <link
           rel="preload"
           as="font"
