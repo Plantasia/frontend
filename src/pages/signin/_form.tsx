@@ -13,7 +13,7 @@ import {
   FacebookIcon,
 } from "@/src/styles/components/Auth"
 
-interface ILoginForm {
+interface ISignInForm {
   handleSubmitLogin(): void
   handleFacebookAuth(): void
   handleGoogleAuth(): void
@@ -23,7 +23,7 @@ interface ILoginForm {
   email: string
 }
 
-export default function LoginForm({
+export default function SignInForm({
   email,
   password,
   handleSubmitLogin,
@@ -31,7 +31,7 @@ export default function LoginForm({
   setPassword,
   handleFacebookAuth,
   handleGoogleAuth,
-}: ILoginForm) {
+}: ISignInForm) {
   return (
     <FormWrapper>
       <Title>
@@ -60,7 +60,12 @@ export default function LoginForm({
           <Form.Check type="checkbox" label="Manter logado" />
         </Form.Group>
 
-        <Button variant="primary" size="lg" onClick={handleSubmitLogin}>
+        <Button
+          variant="primary"
+          size="lg"
+          onClick={handleSubmitLogin}
+          type="submit"
+        >
           Logar
         </Button>
 

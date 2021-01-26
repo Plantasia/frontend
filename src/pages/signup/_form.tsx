@@ -13,7 +13,7 @@ import {
   FacebookIcon,
 } from "@/src/styles/components/Auth"
 
-interface ILoginForm {
+interface ISignUpForm {
   handleSubmitLogin(): void
   handleFacebookAuth(): void
   handleGoogleAuth(): void
@@ -25,7 +25,7 @@ interface ILoginForm {
   name: string
 }
 
-export default function LoginForm({
+export default function SignUpForm({
   handleSubmitLogin,
   handleFacebookAuth,
   handleGoogleAuth,
@@ -35,7 +35,7 @@ export default function LoginForm({
   setPassword,
   name,
   setName,
-}: ILoginForm) {
+}: ISignUpForm) {
   return (
     <FormWrapper>
       <Title>

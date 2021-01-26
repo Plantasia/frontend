@@ -1,14 +1,16 @@
-import { Col, Row } from "react-bootstrap"
+import { Col, Row, Button } from "react-bootstrap"
 
 import { Header, SEO } from "@components"
 import SignUpForm from "./_form"
 import { useState } from "react"
 import AuthImage from "@/src/assets/AuthImage"
+import { useRouter } from "next/router"
 
 export default function SignUp() {
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
+  const router = useRouter()
 
   async function handleLoginSubmit(): Promise<void> {}
   async function handleFacebookAuth(): Promise<void> {}
@@ -17,7 +19,19 @@ export default function SignUp() {
   return (
     <>
       <SEO title="Login" />
-      <Header actionText="Login" />
+      <Header>
+        {{
+          right: (
+            <Button
+              onClick={() => {
+                router.push("/signin")
+              }}
+            >
+              Entrar
+            </Button>
+          ),
+        }}
+      </Header>
       <Row className="">
         <Col xs="7">
           <AuthImage />
