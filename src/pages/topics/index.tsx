@@ -1,63 +1,30 @@
-import { Container, Col, Row, Button } from "react-bootstrap"
-import CategoryBeforeItems from "../../components/CategoryBeforeItems"
+import { Button } from "react-bootstrap"
 import { Header } from "@components"
+import ListTopics from "./_ListTopics"
 
-const border = {
-  borderColor: "red",
-  borderStyle: "solid",
-  borderWidth: "2px",
-}
-
+const data = [
+  {
+    topicTitle: "Melhores solos para suculentas",
+    topicDescription:
+      "Quis ullamco sint sit velit voluptate do nostrud tempor exercitation qui esse. Sint sunt reprehenderit officia commodo anim nulla esse deserunt. Occaecat enim commodo dolor consequat tempor commodo enim culpa consequat laboris commodo sit.",
+    ranking: 1,
+    lastReply: {
+      user: "Matheus Faggi",
+      when: "2 dias atrás",
+    },
+    replies: 30,
+  },
+]
 export default function listTopics() {
+  function handleNewTopic() {}
   return (
     <>
       <Header>
         {{
-          right: <Button>Registre-se aqui </Button>,
+          right: <Button variant="outline-primary">Registre-se aqui </Button>,
         }}
       </Header>
-      <Container>
-        <CategoryBeforeItems />
-
-        <Row className="justify-content-around mt-4 mb-2">
-          <Col xs="6" style={border}>
-            Tópico
-          </Col>
-          <Col style={border} xs="2">
-            Status
-          </Col>
-          <Col style={border} xs="1">
-            Views
-          </Col>
-          <Col style={border} xs="1">
-            Replies
-          </Col>
-          <Col style={border} xs="1">
-            Reaction
-          </Col>
-        </Row>
-        <hr style={{ borderColor: " #666666", borderWidth: ".5px" }}></hr>
-      </Container>
-
-      <Container>
-        <Row className="justify-content-around mt-4 mb-2">
-          <Col xs="6" style={border}>
-            Cactáceas e o que não fazer!
-          </Col>
-          <Col style={border} xs="2">
-            Aberto
-          </Col>
-          <Col style={border} xs="1">
-            600
-          </Col>
-          <Col style={border} xs="1">
-            2
-          </Col>
-          <Col style={border} xs="1">
-            25
-          </Col>
-        </Row>
-      </Container>
+      <ListTopics handleNewTopic={handleNewTopic} data={data} />
     </>
   )
 }
