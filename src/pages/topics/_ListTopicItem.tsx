@@ -1,4 +1,5 @@
 import { Col, Row } from "react-bootstrap"
+import { ItemWrapper } from "@styled/Topics"
 
 type User = {
   id: string
@@ -27,29 +28,20 @@ export function ListItem({
   author,
 }: ListItemProps) {
   return (
-    <Col
-      xs="12"
-      style={{
-        cursor: "pointer",
-        boxShadow: "-1px 1.5px 3px 0px #0000004f",
-        marginBottom: "1em",
-        borderRadius: "5px",
-      }}
-      className="py-2 px-4"
-    >
+    <ItemWrapper>
       <Row className="d-flex align-items-end">
         <Col xs="12" lg="8">
           <div className="mb-2">
             <h4>{topicTitle}</h4>
-            <a href={`/users/${author.id}`}>{author.name}</a>{" "}
-            <span>{createAt}</span>
+            <a href={`/user/${author.id}`}>{author.name}</a>
+            <span> - {createAt}</span>
           </div>
           <p
             className="text-break"
             style={{
               overflow: "hidden",
               display: "-webkit-box",
-              WebkitLineClamp: 2,
+              WebkitLineClamp: 3,
               WebkitBoxOrient: "vertical",
             }}
           >
@@ -71,11 +63,11 @@ export function ListItem({
             ></img>
             <div className="d-flex-column justify-content-center">
               <p style={{ margin: 0 }}>último reply</p>
-              <a href={`/users/${lastReply.user.id}`}>{lastReply.user.name}</a>
+              <a href={`/user/${lastReply.user.id}`}>{lastReply.user.name}</a>
             </div>
           </div>
         </Col>
       </Row>
-    </Col>
+    </ItemWrapper>
   )
 }

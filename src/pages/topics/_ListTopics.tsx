@@ -1,5 +1,6 @@
-import { Col, Row, Button } from "react-bootstrap"
+import { Row, Button, Pagination } from "react-bootstrap"
 import { ListItemProps, ListItem } from "./_ListTopicItem"
+import { TopicHeader } from "@styled/Topics"
 
 type ListTopicProps = {
   data: ListItemProps[]
@@ -9,15 +10,12 @@ type ListTopicProps = {
 export default function listTopics({ data, handleNewTopic }: ListTopicProps) {
   return (
     <Row>
-      <Col
-        className="d-flex justify-content-between align-items-end mb-5"
-        xs="12"
-      >
+      <TopicHeader>
         <h2>Tópicos</h2>
         <Button variant="primary" onClick={handleNewTopic}>
           Novo tópico
         </Button>
-      </Col>
+      </TopicHeader>
       {data.map((item, index) => (
         <ListItem {...item} key={index} />
       ))}
