@@ -1,24 +1,20 @@
-import { Col, Row, ColProps } from "react-bootstrap"
-import { FaEllipsisV } from "react-icons/fa"
-import styled from "styled-components"
+import { Col, Row } from "react-bootstrap"
 
-const Stats = styled(Col).attrs(
-  (): ColProps => ({
-    xs: "1",
-    className: "d-flex align-items-center my-4",
-  })
-)`
-  border-left: 1px solid black;
-`
+type User = {
+  id: string
+  name: string
+}
 export type ListItemProps = {
   topicTitle: string | ""
   topicDescription: string
   ranking: number
   replies: number
   lastReply: {
-    user: string
+    user: User
     when: string
   }
+  createAt: string
+  author: User
 }
 
 export function ListItem({
@@ -27,12 +23,27 @@ export function ListItem({
   ranking,
   lastReply,
   replies,
+  createAt,
+  author,
 }: ListItemProps) {
   return (
-    <Col xs="12">
-      <Row>
-        <Col xs="8">
-          <h4>{topicTitle}</h4>
+    <Col
+      xs="12"
+      style={{
+        cursor: "pointer",
+        boxShadow: "-1px 1.5px 3px 0px #0000004f",
+        marginBottom: "1em",
+        borderRadius: "5px",
+      }}
+      className="py-2 px-4"
+    >
+      <Row className="d-flex align-items-end">
+        <Col xs="12" lg="8">
+          <div className="mb-2">
+            <h4>{topicTitle}</h4>
+            <a href={`/users/${author.id}`}>{author.name}</a>{" "}
+            <span>{createAt}</span>
+          </div>
           <p
             className="text-break"
             style={{
@@ -45,13 +56,24 @@ export function ListItem({
             {topicDescription}
           </p>
         </Col>
-        <Stats>{ranking}</Stats>
-        <Stats>
-          <a href="/">{lastReply.user}</a> {lastReply.when}
-        </Stats>
-        <Stats>{replies}</Stats>
-        <Col className="d-flex align-items-center">
-          <FaEllipsisV />
+        <Col xs="12" lg="4" className="d-flex justify-content-between">
+          <div className="d-flex-column">
+            <b>ranking: &nbsp;#{ranking}</b>
+            <p>replies: &nbsp;&nbsp;&nbsp; {replies}</p>
+          </div>
+          <div className="d-flex">
+            <img
+              width="50"
+              height="50"
+              src="https://picsum.photos/50"
+              className="mr-2"
+              style={{ borderRadius: "50%" }}
+            ></img>
+            <div className="d-flex-column justify-content-center">
+              <p style={{ margin: 0 }}>último reply</p>
+              <a href={`/users/${lastReply.user.id}`}>{lastReply.user.name}</a>
+            </div>
+          </div>
         </Col>
       </Row>
     </Col>
