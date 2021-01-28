@@ -11,8 +11,16 @@ const loadFonts = css`
 
   @font-face {
     font-family: "Roboto Slab";
-    src: url("/assets/fonts/RobotoSlab-Medium.ttf");
+    src: url("/assets/fonts/RobotoSlab-Regular.ttf");
     font-style: regular;
+    font-weight: 400;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Roboto Slab";
+    src: url("/assets/fonts/RobotoSlab-Medium.ttf");
+    font-style: medium;
     font-weight: 500;
     font-display: swap;
   }
