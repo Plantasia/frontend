@@ -1,4 +1,4 @@
-import { Container, Col, Row } from "react-bootstrap"
+import { Container, Col, Row, Button } from "react-bootstrap"
 import CategoryBeforeItems from "../../components/CategoryBeforeItems"
 import { Header } from "@components"
 
@@ -11,7 +11,11 @@ const border = {
 export default function listTopics() {
   return (
     <>
-      <Header />
+      <Header>
+        {{
+          right: <Button>Registre-se aqui </Button>,
+        }}
+      </Header>
       <Container>
         <CategoryBeforeItems />
 
