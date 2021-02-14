@@ -12,7 +12,7 @@ import {
   GoogleIcon,
   FacebookIcon,
 } from "@/src/styles/components/Auth"
-
+import api  from  "../../services/api.js"
 interface ISignUpForm {
   handleSubmitLogin(): void
   handleFacebookAuth(): void
@@ -23,6 +23,19 @@ interface ISignUpForm {
   password: string
   email: string
   name: string
+}
+
+async function handleSubmitLogin(e) {
+  e.preventDefault();
+        const data = {
+            email,
+            name,
+            password,
+        }
+        const response = await api.post('/users', data);
+        if (response.data !== undefined) {
+            alert('Campaign has been registered!');
+        }
 }
 
 export default function SignUpForm({
