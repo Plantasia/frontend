@@ -1,11 +1,19 @@
-import { Col, Row } from "react-bootstrap"
-import { ItemWrapper } from "@styled/Topics"
+import { Row, Image } from "react-bootstrap"
+import {
+  ItemWrapper,
+  TopicDescription,
+  TopicStats,
+  TopicContent,
+} from "@styled/Topics"
+import { useRouter } from "next/router"
 
 type User = {
   id: string
   name: string
+  avatar: string
 }
 export type ListItemProps = {
+  id: string
   topicTitle: string | ""
   topicDescription: string
   ranking: number
@@ -19,6 +27,7 @@ export type ListItemProps = {
 }
 
 export function ListItem({
+  id,
   topicTitle,
   topicDescription,
   ranking,
@@ -27,46 +36,46 @@ export function ListItem({
   createAt,
   author,
 }: ListItemProps) {
+  const router = useRouter()
   return (
     <ItemWrapper>
       <Row className="d-flex align-items-end">
-        <Col xs="12" lg="8">
+        <TopicContent>
           <div className="mb-2">
-            <h4>{topicTitle}</h4>
+            <h4
+              style={{
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                router.push(`/topic/${id}`)
+              }}
+            >
+              {topicTitle}
+            </h4>
             <a href={`/user/${author.id}`}>{author.name}</a>
             <span> - {createAt}</span>
           </div>
-          <p
-            className="text-break"
-            style={{
-              overflow: "hidden",
-              display: "-webkit-box",
-              WebkitLineClamp: 3,
-              WebkitBoxOrient: "vertical",
-            }}
-          >
-            {topicDescription}
-          </p>
-        </Col>
-        <Col xs="12" lg="4" className="d-flex justify-content-between">
+          <TopicDescription>{topicDescription}</TopicDescription>
+        </TopicContent>
+        <TopicStats>
           <div className="d-flex-column">
             <b>ranking: &nbsp;#{ranking}</b>
             <p>replies: &nbsp;&nbsp;&nbsp; {replies}</p>
           </div>
           <div className="d-flex">
-            <img
-              width="50"
+            <Image
               height="50"
-              src="https://picsum.photos/50"
+              width="50"
+              src={lastReply.user.avatar}
               className="mr-2"
-              style={{ borderRadius: "50%" }}
-            ></img>
+              roundedCircle
+            />
             <div className="d-flex-column justify-content-center">
               <p style={{ margin: 0 }}>último reply</p>
               <a href={`/user/${lastReply.user.id}`}>{lastReply.user.name}</a>
             </div>
           </div>
-        </Col>
+        </TopicStats>
       </Row>
     </ItemWrapper>
   )
