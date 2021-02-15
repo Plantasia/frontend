@@ -1,85 +1,58 @@
 import { Col, Row } from "react-bootstrap"
-import { BsCircleFill } from "react-icons/bs"
-import { CustomTextInfoItems, CategoriesItemsStyle } from "@styled/Categories"
-import Image from "next/image"
+import { CategoriesItemsStyle } from "@styled/Categories"
 
 export default function CategoryListingOneItem() {
   return (
-    <CategoriesItemsStyle className="container mt-5 mb-5 pr-4 pt-4 pl-1 pb-3">
+    <CategoriesItemsStyle className="mt-4 py-4">
       <Row>
-        <Col xs="8" className="d-flex">
-          <Col xs="3">
-            <Image src="/assets/hortalicas.jpg" width={200} height={200} />
-          </Col>
-
-          <Col className="">
-            <Row className="d-flex justify-content-start ">
-              <h4>Hortaliças</h4>
-            </Row>
-
-            <Row className="d-flex ">
-              <p className="text-justify p-1 mt-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                turpis elit, porttitor sit amet tellus nec, blandit aliquam
-                sapien.
-              </p>
-            </Row>
-          </Col>
-
-          <div
+        <Col xs="3" className="d-flex justify-content-center">
+          <img
+            src="/assets/hortalicas.jpg"
             style={{
-              borderColor: " #666666",
-              borderStyle: "solid",
-              borderWidth: "2px",
-              borderLeft: "2px",
+              width: "75%",
+              aspectRatio: "1/1",
             }}
-          ></div>
+          />
         </Col>
+        <Col xs="5" className="d-flex flex-column justify-content-between">
+          <h3>Hortaliças</h3>
+          <p>
+            Reprehenderit eiusmod id nisi pariatur nisi. Consectetur aliquip
+            laboris dolore enim est
+          </p>
+        </Col>
+        <Col xs="4" className="d-flex flex-column justify-content-between">
+          <div className="d-flex justify-content-between pr-5">
+            <div>
+              <h5>Tópicos</h5>
+              <p>150</p>
+            </div>
 
-        <Col xs="4">
-          {/* Begin Detailed Info Component */}
-          <Row>
-            <Col>
-              <Row className="justify-content-center ">
-                <CustomTextInfoItems>Topics</CustomTextInfoItems>
-              </Row>
+            <div>
+              <h5>Tópicos</h5>
+              <p>150</p>
+            </div>
 
-              <Row className="justify-content-center ">162</Row>
-            </Col>
+            <div>
+              <h5>Tópicos</h5>
+              <p>150</p>
+            </div>
+          </div>
+          <div className="d-flex flex-column">
+            <h6 style={{ fontWeight: 300 }} className="mb-2">
+              último tópico - <a href="#">fulano de tal</a>
+            </h6>
 
-            <Col>
-              <Row className="justify-content-center ">
-                <CustomTextInfoItems> Atividades</CustomTextInfoItems>
-              </Row>
-
-              <Row className="justify-content-center ">150</Row>
-            </Col>
-
-            <Col>
-              <Row className="justify-content-center ">
-                <CustomTextInfoItems className="d-flex">
-                  {" "}
-                  Usuários{" "}
-                </CustomTextInfoItems>
-              </Row>
-
-              <Row className="justify-content-center ">156</Row>
-            </Col>
-          </Row>
-          {/* Begin Detailed Info Component */}
-
-          <hr style={{ borderColor: " #666666", borderWidth: "2px" }}></hr>
-
-          {/* Bottom info */}
-          <Row className="justify-content-start pl-4">
-            <CustomTextInfoItems> Ultimo tópico </CustomTextInfoItems>
-          </Row>
-
-          <Row className="justify-content-start pl-4">
-            <BsCircleFill className="mr-2" color="#c4c4c4" size={20} /> Lorem
-            ipsum dolor sit amet
-          </Row>
-          {/* Bottom info */}
+            <div className="d-flex align-items-center">
+              <img
+                src="https://picsum.photos/seed/picsum/50"
+                style={{ borderRadius: "50%" }}
+              />
+              <h5 className="ml-3">
+                <a href="#">Título do tópico</a>
+              </h5>
+            </div>
+          </div>
         </Col>
       </Row>
     </CategoriesItemsStyle>

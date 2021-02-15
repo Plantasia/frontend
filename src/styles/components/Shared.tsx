@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Image, ImageProps } from "react-bootstrap"
 
 export const StyledButtonTheme = styled.button`
   background-color: #c4c4c4;
