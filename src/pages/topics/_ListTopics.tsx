@@ -1,4 +1,4 @@
-import { Row, Button, Pagination } from "react-bootstrap"
+import { Row, Button } from "react-bootstrap"
 import { ListItemProps, ListItem } from "./_ListTopicItem"
 import { TopicHeader } from "@styled/Topics"
 
