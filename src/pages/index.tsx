@@ -22,7 +22,7 @@ export default function HomePage(props) {
 
       <Button
         onClick={() => {
-          router.push("/sigin")
+          router.push("/signin")
         }}
       >
         login

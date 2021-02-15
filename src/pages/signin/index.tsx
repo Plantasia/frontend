@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { Button, Col, Row } from "react-bootstrap"
 import api from "../../services/api"
 import { Header, SEO } from "@components"
@@ -10,18 +11,24 @@ export default function SignIn() {
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
   const router = useRouter()
+  const token = ""
   async function handleLoginSubmit(): Promise<void> {
     const response = await api
       .post("/signin", { email, password })
-      .then(() => {
-        window.alert("User logged successfully")
-
-        router.push("/topics")
-      })
-
       .catch(error => {
         console.log(error)
       })
+
+    if (response) {
+      router.push("/category")
+      token = response.data.access_token
+
+      window.alert("User logged successfully")
+      if (typeof window !== "undefined") {
+        localStorage.setItem("token", token)
+      }
+    }
+
     console.log(response)
   }
   async function handleFacebookAuth(): Promise<void> {}
