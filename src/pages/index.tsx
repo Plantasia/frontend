@@ -1,28 +1,40 @@
-import { useState } from "react"
-import { Jumbotron, Button } from "react-bootstrap"
-import styled from "styled-components"
-import GlobalStyle from "../styles/GlobalStyle"
+import { useRouter } from "next/router"
+import { Button, Col } from "react-bootstrap"
 
 export default function HomePage(props) {
-  const [inputSearch, setInputSearch] = useState("")
+  const router = useRouter()
   return (
-    <>
-      <Jumbotron>
-        <h1 className="display-3">Bem vindo ao Plantasia!</h1>
-        <p className="lead">
-          This is a simple hero unit, a simple Jumbotron-style component for
-          calling extra attention to featured content or information.
-        </p>
-        <hr className="" />
-        <p>
-          It uses utility classes for typography and spacing to space content
-          out within the larger container.
-        </p>
-        <p className="lead">
-          <Button color="primary">Quero saber mais!</Button>
-        </p>
-      </Jumbotron>
-      <GlobalStyle />
-    </>
+    <Col className="d-flex justify-content-between align-items-center vh-100">
+      <Button
+        onClick={() => {
+          router.push("/topics")
+        }}
+      >
+        Topicos
+      </Button>
+      <Button
+        onClick={() => {
+          router.push("/category")
+        }}
+      >
+        Categorias
+      </Button>
+
+      <Button
+        onClick={() => {
+          router.push("/sigin")
+        }}
+      >
+        login
+      </Button>
+
+      <Button
+        onClick={() => {
+          router.push("/signup")
+        }}
+      >
+        cadastro
+      </Button>
+    </Col>
   )
 }
