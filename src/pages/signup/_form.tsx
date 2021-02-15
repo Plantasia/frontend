@@ -84,7 +84,7 @@ export default function SignUpForm({
         </Form.Group>
 
         <Button variant="primary" size="lg" onClick={handleSubmitLogin}>
-          Logar
+          Registrar-se
         </Button>
 
         <Form.Group>
