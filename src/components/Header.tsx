@@ -14,7 +14,7 @@ import styled from "styled-components"
 // Jogar para pasta de styles dps
 const HeaderWrapper = styled(Row).attrs(
   (): RowProps => ({
-    className: "d-flex align-content-center align-items-center pb-3 mb-5",
+    className: "d-flex align-content-center align-items-center pb-3 mb-4",
   })
 )`
   margin-top: 1.5em;
