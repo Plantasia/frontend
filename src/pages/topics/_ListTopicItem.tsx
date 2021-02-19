@@ -7,24 +7,7 @@ import {
 } from "@styled/Topics"
 import { useRouter } from "next/router"
 
-type User = {
-  id: string
-  name: string
-  avatar: string
-}
-export type ListItemProps = {
-  id: string
-  topicTitle: string | ""
-  topicDescription: string
-  ranking: number
-  replies: number
-  lastReply: {
-    user: User
-    when: string
-  }
-  createAt: string
-  author: User
-}
+import { ListItemProps } from "@src/interfaces/topics"
 
 export function ListItem({
   id,
