@@ -11,7 +11,7 @@ import {
   SocialAuthsIcons,
   GoogleIcon,
   FacebookIcon,
-} from "@/src/styles/components/Auth"
+} from "@src/styles/components/Auth"
 
 interface ISignInForm {
   handleSubmitLogin(): void
