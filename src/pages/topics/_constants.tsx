@@ -1,6 +1,6 @@
-import { ListItemProps } from "@interfaces/topics"
+import { TopicItemProps } from "./_ListTopics"
 
-export const data: ListItemProps[] = [
+export const data: TopicItemProps[] = [
   {
     id: "randomid-salamaleico",
     topicTitle: "Melhores solos para suculentas",
