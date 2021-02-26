@@ -5,7 +5,7 @@ import {
   InstagramIcon,
   WhatsappIcon,
   GithubIcon,
-} from "@/src/styles/components/Auth"
+} from "@src/styles/components/Auth"
 
 const FooterWrapper = styled(Row).attrs(
   (): RowProps => ({

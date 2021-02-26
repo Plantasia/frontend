@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react"
 import { Button, Row, Col } from "react-bootstrap"
 
-import { Title, Form, Label, FormWrapper } from "@/src/styles/components/Auth"
+import { Title, Form, Label, FormWrapper } from "@src/styles/components/Auth"
 
 interface ContactForm {
   handleSubmitLogin(): void

@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react"
 import { Button } from "react-bootstrap"
 
-import { Title, Form, FormWrapper } from "@/src/styles/components/Auth"
+import { Title, Form, FormWrapper } from "@src/styles/components/Auth"
 
 interface IsNewPasswordLinkForm {
   handleNewPasswordLinkRequest(): void
