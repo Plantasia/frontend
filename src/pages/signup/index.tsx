@@ -2,7 +2,7 @@ import { Col, Row, Button } from "react-bootstrap"
 import { Header, SEO } from "@components"
 import SignUpForm from "./_form"
 import { useState } from "react"
-import AuthImage from "@/src/assets/AuthImage"
+import AuthImage from "@src/assets/AuthImage"
 import { useRouter } from "next/router"
 import api from "../../services/api"
 
