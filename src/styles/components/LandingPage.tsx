@@ -18,11 +18,6 @@ export const ColColeredText = styled(Col)`
   color: #56537f;
 `
 
-export const P = styled.p`
-  font-size: 16px;
-  font-family: "Roboto";
-`
-
 export const RowPeople = styled(Row)`
   background-color: #668764;
 `
@@ -56,6 +51,7 @@ export const CardHeaderQuestion = styled(Card.Header)`
 `
 
 export const AccordionCollapseQuestion = styled(Accordion.Collapse)`
+  box-shadow: none;
   background-color: #fff;
 `
 

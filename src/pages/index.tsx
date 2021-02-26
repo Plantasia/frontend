@@ -13,7 +13,6 @@ import {
   CardHeaderQuestion,
   AccordionCollapseQuestion,
   CardBodyQuestion,
-  P,
 } from "../styles/components/LandingPage"
 
 export default function HomePage(props) {
@@ -39,12 +38,12 @@ export default function HomePage(props) {
         </Col>
 
         <ColColeredText xs="6" className="pt-5">
-          <h3>Comunidade de compartilhamento de conhecimento</h3>
-          <P>
+          <h2>Comunidade de compartilhamento de conhecimento</h2>
+          <h5>
             Compartilhe seu conhecimento, engaje com a comunidade, ajude outras
             pessoas a cultivarem o interesse por plantas e com tudo relacionado
             a elas
-          </P>
+          </h5>
         </ColColeredText>
       </Row>
       <RowPeople className="justify-content-md-center mb-5">
@@ -109,7 +108,7 @@ export default function HomePage(props) {
                   as={Button}
                   variant="link"
                   eventKey="0"
-                  styled={{ color: "#56537f" }}
+                  style={{ color: "#56537f", boxShadow: "none" }}
                 >
                   1. Para usar o site é necessário pagar?
                 </Accordion.Toggle>
