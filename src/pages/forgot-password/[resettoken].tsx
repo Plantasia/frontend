@@ -1,18 +1,15 @@
 import { Button, Col, Row } from "react-bootstrap"
 
 import { Header, SEO } from "@components"
-import SignInForm from "./_form"
+import NewPasswordForm from "./_form-new-password"
 import { useState } from "react"
-import AuthImage from "@src/assets/AuthImage"
 import { useRouter } from "next/router"
 
 export default function SignIn() {
   const [password, setPassword] = useState("")
-  const [email, setEmail] = useState("")
+  const [passwordConfirmation, setpasswordConfirmation] = useState("")
   const router = useRouter()
-  async function handleLoginSubmit(): Promise<void> {}
-  async function handleFacebookAuth(): Promise<void> {}
-  async function handleGoogleAuth(): Promise<void> {}
+  async function handlePasswordReset(): Promise<void> {}
 
   return (
     <>
@@ -31,21 +28,17 @@ export default function SignIn() {
         }}
       </Header>
       <Row>
-        <Col xs="7">
-          <AuthImage />
-        </Col>
-
-        <Col xs="5">
-          <SignInForm
-            handleSubmitLogin={handleLoginSubmit}
-            handleFacebookAuth={handleFacebookAuth}
-            handleGoogleAuth={handleGoogleAuth}
+        <Col xs="4" />
+        <Col xs="4">
+          <NewPasswordForm
+            handlePasswordReset={handlePasswordReset}
             password={password}
             setPassword={setPassword}
-            email={email}
-            setEmail={setEmail}
+            passwordConfirmation={passwordConfirmation}
+            setpasswordConfirmation={setpasswordConfirmation}
           />
         </Col>
+        <Col xs="4" />
       </Row>
     </>
   )

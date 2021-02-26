@@ -35,3 +35,6 @@ yarn-error.log*
 
 # Faggi
 /src/pages/playground
+
+#vscode
+.vscode/

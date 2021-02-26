@@ -1,23 +1,17 @@
 import styled from "styled-components"
-import { Image, ImageProps } from "react-bootstrap"
+import { Row, RowProps } from "react-bootstrap"
 
-export const StyledButtonTheme = styled.button`
-  background-color: #c4c4c4;
-  margin: 0.2vw 0.3vh;
-  padding: 0 -2px;
-  border: solid 1px #c4c4c4;
-  height: 55px;
-  border-radius: 6px;
-  display: inline-block;
-  line-height: 40px;
-  transition: filter 0.4s;
-  transition: opacity 0.2s;
-
-  &:hover {
-    font-weight: bold;
-    color: #000000;
-    text-decoration: none;
-    transition: filter 0.4s;
-    opacity: 0.6;
-  }
+export const InlineGap = styled.div`
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+`
+export const PlantasiaCard = styled(Row).attrs(
+  (): RowProps => ({
+    className: "pt-3 pb-4 px-1 mb-3",
+  })
+)`
+  filter: drop-shadow(0px 2px 10px rgba(125, 72, 163, 0.13));
+  border-radius: 10px;
+  background-color: #f5f5f5;
 `
