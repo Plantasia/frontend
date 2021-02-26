@@ -8,7 +8,13 @@ import {
   FormCheckProps,
 } from "react-bootstrap"
 
-import { FaFacebook, FaGoogle } from "react-icons/fa"
+import {
+  FaFacebook,
+  FaGoogle,
+  FaWhatsapp,
+  FaInstagram,
+  FaGithub,
+} from "react-icons/fa"
 import { IconBaseProps } from "react-icons/lib"
 
 export const Title = styled.h1.attrs({
@@ -86,6 +92,30 @@ const pointer = css`
 `
 
 export const FacebookIcon = styled(FaFacebook).attrs(
+  (): IconBaseProps => ({
+    size: "3em",
+  })
+)`
+  ${pointer}
+`
+
+export const WhatsappIcon = styled(FaWhatsapp).attrs(
+  (): IconBaseProps => ({
+    size: "3em",
+  })
+)`
+  ${pointer}
+`
+
+export const InstagramIcon = styled(FaInstagram).attrs(
+  (): IconBaseProps => ({
+    size: "3em",
+  })
+)`
+  ${pointer}
+`
+
+export const GithubIcon = styled(FaGithub).attrs(
   (): IconBaseProps => ({
     size: "3em",
   })
