@@ -1,3 +1,3 @@
 export default function showTopicsByCategory() {
-  return <p>Show Topics By Category</p>
+  return <p>Show specific topic</p>
 }

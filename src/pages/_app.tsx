@@ -17,6 +17,12 @@ function MyApp({ Component, pageProps }) {
           rel="preload"
           as="font"
           crossOrigin=""
+          href="/assets/fonts/RobotoSlab-Regular.ttf"
+        />
+        <link
+          rel="preload"
+          as="font"
+          crossOrigin=""
           href="/assets/fonts/RobotoSlab-Medium.ttf"
         />
         <link

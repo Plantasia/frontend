@@ -16,9 +16,8 @@ export const CustomTextInfoItems = styled.p`
   }
 `
 export const CategoriesItemsStyle = styled.div`
-  background-color: white;
-  border-radius: 15px;
-  box-shadow: 0 0 1em #a1a1a1;
+  background-color: transparent;
+  box-shadow: -1px 1.5px 3px 0px #0000004f;
   font-family: Roboto, sans-serif;
   font-weight: normal;
 `

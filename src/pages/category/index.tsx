@@ -1,5 +1,5 @@
 import { Header } from "@components"
-import CategoryListingOneItem from "../components/CategoryListingItem"
+import CategoryListingOneItem from "@components/CategoryListingItem"
 import CategoryBeforeItems from "@components/CategoryBeforeItems"
 import { Button } from "react-bootstrap"
 

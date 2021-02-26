@@ -1,4 +1,4 @@
-import { Component, ReactChild, ReactElement, ReactNode } from "react"
+import { ReactNode } from "react"
 import {
   Col,
   Row,
@@ -8,6 +8,7 @@ import {
   RowProps,
   ButtonProps,
 } from "react-bootstrap"
+import { FaSearch } from "react-icons/fa"
 import styled from "styled-components"
 
 // Jogar para pasta de styles dps
@@ -51,6 +52,12 @@ export default function Header({ currentUser, children }: Props) {
               aria-label="Procure pelo nome de uma planta"
               aria-describedby="basic-addon2"
             />
+            <InputGroup.Append
+              onClick={() => {}}
+              className="d-flex justify-content-center align-items-center ml-3"
+            >
+              <FaSearch size="1.5em" />
+            </InputGroup.Append>
           </InputGroup>
         ) : (
           middle
