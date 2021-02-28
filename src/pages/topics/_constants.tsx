@@ -1,6 +1,6 @@
-import { ListItemProps } from "./_ListTopicItem"
+import { TopicItemProps } from "./_ListTopics"
 
-export const data: ListItemProps[] = [
+export const data: TopicItemProps[] = [
   {
     id: "randomid-salamaleico",
     topicTitle: "Melhores solos para suculentas",
@@ -12,6 +12,7 @@ export const data: ListItemProps[] = [
         id: "912-319283=00231",
         name: "Fulano da Silva",
         avatar: "https://picsum.photos/200",
+        memberSince: "01/10/2020",
       },
       when: "2 dias atrás",
     },
@@ -20,6 +21,7 @@ export const data: ListItemProps[] = [
       id: "912-319283=00231",
       name: "Fulano da Silva",
       avatar: "https://picsum.photos/200",
+      memberSince: "01/10/2020",
     },
     createAt: "5 dias atrás",
   },
@@ -34,6 +36,7 @@ export const data: ListItemProps[] = [
         id: "912-319283=00231",
         name: "Fulano da Silva",
         avatar: "https://picsum.photos/200",
+        memberSince: "01/10/2020",
       },
       when: "2 dias atrás",
     },
@@ -42,6 +45,7 @@ export const data: ListItemProps[] = [
       id: "912-319283=00231",
       name: "Fulano da Silva",
       avatar: "https://picsum.photos/200",
+      memberSince: "01/10/2020",
     },
     createAt: "5 dias atrás",
   },
@@ -56,6 +60,7 @@ export const data: ListItemProps[] = [
         id: "912-319283=00231",
         name: "Fulano da Silva",
         avatar: "https://picsum.photos/200",
+        memberSince: "01/10/2020",
       },
       when: "2 dias atrás",
     },
@@ -64,6 +69,7 @@ export const data: ListItemProps[] = [
       id: "912-319283=00231",
       name: "Fulano da Silva",
       avatar: "https://picsum.photos/200",
+      memberSince: "01/10/2020",
     },
     createAt: "5 dias atrás",
   },
@@ -78,6 +84,7 @@ export const data: ListItemProps[] = [
         id: "912-319283=00231",
         name: "Fulano da Silva",
         avatar: "https://picsum.photos/200",
+        memberSince: "01/10/2020",
       },
       when: "2 dias atrás",
     },
@@ -86,6 +93,7 @@ export const data: ListItemProps[] = [
       id: "912-319283=00231",
       name: "Fulano da Silva",
       avatar: "https://picsum.photos/200",
+      memberSince: "01/10/2020",
     },
     createAt: "5 dias atrás",
   },
@@ -100,6 +108,7 @@ export const data: ListItemProps[] = [
         id: "912-319283=00231",
         name: "Fulano da Silva",
         avatar: "https://picsum.photos/200",
+        memberSince: "01/10/2020",
       },
       when: "2 dias atrás",
     },
@@ -108,6 +117,7 @@ export const data: ListItemProps[] = [
       id: "912-319283=00231",
       name: "Fulano da Silva",
       avatar: "https://picsum.photos/200",
+      memberSince: "01/10/2020",
     },
     createAt: "5 dias atrás",
   },

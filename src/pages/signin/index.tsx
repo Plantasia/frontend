@@ -3,7 +3,7 @@ import api from "../../services/api"
 import { Header, SEO } from "@components"
 import SignInForm from "./_form"
 import { useState } from "react"
-import AuthImage from "@/src/assets/AuthImage"
+import AuthImage from "@src/assets/AuthImage"
 import { useRouter } from "next/router"
 
 export default function SignIn() {

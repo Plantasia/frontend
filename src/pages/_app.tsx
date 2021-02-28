@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import GlobalStyle from "../styles/GlobalStyle"
-import "@/src/styles/customTheme.sass"
+import "@src/styles/customTheme.sass"
 import Head from "next/head"
 
 function MyApp({ Component, pageProps }) {
