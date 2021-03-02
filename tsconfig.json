@@ -19,6 +19,7 @@
       "@src/*": ["./src/*"],
       "@public/*": ["./public/*"],
       "@components": ["./src/components/index"],
+      "@contexts/*": ["./src/contexts/*"],
       "@utils/*": ["./src/utils/*"],
       "@components/*": ["./src/components/*"],
       "@styled/*": ["./src/styles/components/*"],
