@@ -1,4 +1,5 @@
-import { ReactNode } from "react"
+import { ReactNode, useContext } from "react"
+
 import {
   Col,
   Row,
@@ -8,9 +9,11 @@ import {
   RowProps,
   ButtonProps,
 } from "react-bootstrap"
+import { useRouter } from "next/router"
 import { FaSearch } from "react-icons/fa"
 import styled from "styled-components"
-
+import { UserContext } from "@contexts/User"
+import { MenuDropdown } from "@components"
 // Jogar para pasta de styles dps
 const HeaderWrapper = styled(Row).attrs(
   (): RowProps => ({
@@ -28,19 +31,26 @@ interface User {
 type NamedChildrenSlots = {
   left?: ReactNode
   middle?: ReactNode
-  right: ReactNode
+  right?: ReactNode
 }
 interface Props {
-  children: NamedChildrenSlots
+  children?: NamedChildrenSlots
   currentUser?: User
   actionText?: string
 }
 
 export default function Header({ currentUser, children }: Props) {
   const { left, middle, right } = children
+  const { user, storeUser } = useContext(UserContext)
+
+  const router = useRouter()
   return (
     <HeaderWrapper>
-      <Col xs="3">
+      <Col
+        xs="3"
+        onClick={() => router.push("/")}
+        style={{ cursor: "pointer" }}
+      >
         <h3>Plantasia</h3>
       </Col>
 
@@ -65,7 +75,22 @@ export default function Header({ currentUser, children }: Props) {
       </Col>
 
       <Col xs="3" className="d-flex justify-content-end">
-        {right}
+        {!right ? (
+          Object.keys(user).length === 0 ? (
+            <Button
+              variant="outline-primary"
+              onClick={() => {
+                storeUser({ id: "teste", name: "teste" })
+              }}
+            >
+              registre-se
+            </Button>
+          ) : (
+            <MenuDropdown />
+          )
+        ) : (
+          right
+        )}
       </Col>
     </HeaderWrapper>
   )

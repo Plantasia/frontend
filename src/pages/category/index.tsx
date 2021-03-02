@@ -1,21 +1,22 @@
+import { useContext } from "react"
+import { GetServerSideProps } from "next"
+import { UserContext } from "@contexts/User"
 import { Header } from "@components"
 import { InlineGap } from "@styled/Shared"
 import { ListCategoryItem, CategoryProps } from "./_categoryItem"
 import { Button, Row, Col } from "react-bootstrap"
-import { GetServerSideProps } from "next"
+import { DropdownMenu } from "@components/MenuDropdown"
 
 export interface ListCategoriesProps {
   categories: CategoryProps[]
 }
 
 export default function ListCategories({ categories }: ListCategoriesProps) {
+  const { user, storeUser } = useContext(UserContext)
+  console.log(user)
   return (
     <>
-      <Header>
-        {{
-          right: <Button>Registre-se aqui</Button>,
-        }}
-      </Header>
+      <Header />
       <Row>
         <Col xs="2">
           <h2>Categorias</h2>
@@ -26,9 +27,10 @@ export default function ListCategories({ categories }: ListCategoriesProps) {
           </InlineGap>
         </Col>
       </Row>
-      {categories.map(category => (
-        <ListCategoryItem {...category} />
-      ))}
+      {categories &&
+        categories.map((category, key) => (
+          <ListCategoryItem {...category} key={key} />
+        ))}
     </>
   )
 }
