@@ -1,6 +1,5 @@
 import styled from "styled-components"
 import { Col, ColProps } from "react-bootstrap"
-import { ReactHTMLElement } from "react"
 
 export const TopicHeader = styled(Col).attrs(
   (): ColProps => ({

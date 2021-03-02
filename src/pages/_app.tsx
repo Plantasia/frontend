@@ -2,10 +2,11 @@
 import GlobalStyle from "../styles/GlobalStyle"
 import "@src/styles/customTheme.sass"
 import Head from "next/head"
+import UserContextProvider from "@contexts/User"
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <UserContextProvider>
       <Head>
         <link
           rel="preload"
@@ -34,7 +35,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <GlobalStyle />
       <Component {...pageProps}></Component>
-    </>
+    </UserContextProvider>
   )
 }
 
