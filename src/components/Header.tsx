@@ -23,25 +23,23 @@ const HeaderWrapper = styled(Row).attrs(
   margin-top: 1.5em;
   border-bottom: 1px black solid;
 `
-
 interface User {
   id: string
   name: string
 }
-type NamedChildrenSlots = {
-  left?: ReactNode
-  middle?: ReactNode
-  right?: ReactNode
+type CallToAction = {
+  label: string
+  onClick(): void
+  variant?: string
 }
 interface Props {
-  children?: NamedChildrenSlots
+  callToAction: CallToAction
   currentUser?: User
   actionText?: string
 }
 
-export default function Header({ currentUser, children }: Props) {
-  const { left, middle, right } = children
-  const { user, storeUser } = useContext(UserContext)
+export default function Header({ currentUser, callToAction }: Props) {
+  const { user } = useContext(UserContext)
 
   const router = useRouter()
   return (
@@ -55,41 +53,33 @@ export default function Header({ currentUser, children }: Props) {
       </Col>
 
       <Col xs="6">
-        {!middle ? (
-          <InputGroup>
-            <FormControl
-              placeholder="Procure pelo nome de uma planta"
-              aria-label="Procure pelo nome de uma planta"
-              aria-describedby="basic-addon2"
-            />
-            <InputGroup.Append
-              onClick={() => {}}
-              className="d-flex justify-content-center align-items-center ml-3"
-            >
-              <FaSearch size="1.5em" />
-            </InputGroup.Append>
-          </InputGroup>
-        ) : (
-          middle
-        )}
+        <InputGroup>
+          <FormControl
+            placeholder="Procure pelo nome de uma planta"
+            aria-label="Procure pelo nome de uma planta"
+            aria-describedby="basic-addon2"
+          />
+          <InputGroup.Append
+            onClick={() => {}}
+            className="d-flex justify-content-center align-items-center ml-3"
+          >
+            <FaSearch size="1.5em" />
+          </InputGroup.Append>
+        </InputGroup>
       </Col>
 
       <Col xs="3" className="d-flex justify-content-end">
-        {!right ? (
-          Object.keys(user).length === 0 ? (
-            <Button
-              variant="outline-primary"
-              onClick={() => {
-                storeUser({ id: "teste", name: "teste" })
-              }}
-            >
-              registre-se
-            </Button>
-          ) : (
-            <MenuDropdown />
-          )
+        {Object.keys(user).length === 0 ? (
+          <Button
+            variant={callToAction.variant || "outline-primary"}
+            onClick={() => {
+              callToAction.onClick()
+            }}
+          >
+            {callToAction.label}
+          </Button>
         ) : (
-          right
+          <MenuDropdown />
         )}
       </Col>
     </HeaderWrapper>
