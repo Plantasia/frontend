@@ -12,7 +12,7 @@ import {
 import { useRouter } from "next/router"
 import { FaSearch } from "react-icons/fa"
 import styled from "styled-components"
-import { UserContext } from "@contexts/User"
+import { UserContext, UserConsumer } from "@contexts/User"
 import { MenuDropdown } from "@components"
 // Jogar para pasta de styles dps
 const HeaderWrapper = styled(Row).attrs(
@@ -69,18 +69,22 @@ export default function Header({ currentUser, callToAction }: Props) {
       </Col>
 
       <Col xs="3" className="d-flex justify-content-end">
-        {Object.keys(user).length === 0 ? (
-          <Button
-            variant={callToAction.variant || "outline-primary"}
-            onClick={() => {
-              callToAction.onClick()
-            }}
-          >
-            {callToAction.label}
-          </Button>
-        ) : (
-          <MenuDropdown />
-        )}
+        <UserConsumer>
+          {({ user }) =>
+            Object.keys(user).length === 0 ? (
+              <Button
+                variant={callToAction.variant || "outline-primary"}
+                onClick={() => {
+                  callToAction.onClick()
+                }}
+              >
+                {callToAction.label}
+              </Button>
+            ) : (
+              <MenuDropdown />
+            )
+          }
+        </UserConsumer>
       </Col>
     </HeaderWrapper>
   )

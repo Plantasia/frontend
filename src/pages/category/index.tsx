@@ -12,11 +12,17 @@ export interface ListCategoriesProps {
 }
 
 export default function ListCategories({ categories }: ListCategoriesProps) {
-  const { user, storeUser } = useContext(UserContext)
-  console.log(user)
+  const { user, storeUser, logout } = useContext(UserContext)
   return (
     <>
-      <Header />
+      <Header
+        callToAction={{
+          label: "cadastre-se",
+          onClick: () => {
+            storeUser({ name: "teste", id: "teste" })
+          },
+        }}
+      />
       <Row>
         <Col xs="2">
           <h2>Categorias</h2>

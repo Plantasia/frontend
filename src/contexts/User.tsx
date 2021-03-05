@@ -12,7 +12,6 @@ export default function UserContextProvider({ children }) {
   const [user, setUser] = useState<UserProps>({})
   const storeUser = (params: UserProps) => {
     setUser(params)
-    console.log(user)
   }
   const logout = () => {
     setUser({})
@@ -24,3 +23,4 @@ export default function UserContextProvider({ children }) {
     </UserContext.Provider>
   )
 }
+export const UserConsumer = UserContext.Consumer

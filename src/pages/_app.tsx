@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       <GlobalStyle />
-      <Component {...pageProps}></Component>
+      <Component {...pageProps} />
     </UserContextProvider>
   )
 }
