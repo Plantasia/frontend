@@ -69,22 +69,18 @@ export default function Header({ currentUser, callToAction }: Props) {
       </Col>
 
       <Col xs="3" className="d-flex justify-content-end">
-        <UserConsumer>
-          {({ user }) =>
-            Object.keys(user).length === 0 ? (
-              <Button
-                variant={callToAction.variant || "outline-primary"}
-                onClick={() => {
-                  callToAction.onClick()
-                }}
-              >
-                {callToAction.label}
-              </Button>
-            ) : (
-              <MenuDropdown />
-            )
-          }
-        </UserConsumer>
+        {Object.keys(user).length === 0 ? (
+          <Button
+            variant={callToAction.variant || "outline-primary"}
+            onClick={() => {
+              callToAction.onClick()
+            }}
+          >
+            {callToAction.label}
+          </Button>
+        ) : (
+          <MenuDropdown />
+        )}
       </Col>
     </HeaderWrapper>
   )
