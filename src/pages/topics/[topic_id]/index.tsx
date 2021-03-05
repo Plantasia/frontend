@@ -4,6 +4,8 @@ import { Header } from "@components"
 import { InlineGap } from "@styled/Shared"
 import { CommentProps, Comment } from "./_comment"
 import { UserProps } from "@utils/types"
+import { useContext } from "react"
+import { UserContext } from "@contexts/User"
 
 export interface BadgeCategoryProps {
   id: string
@@ -23,11 +25,17 @@ export default function showTopicsByCategory({
   categories,
   comments,
 }: TopicProps) {
+  const { storeUser } = useContext(UserContext)
   return (
     <>
-      <Header>
-        {{ right: <Button variant="outline-primary">Login</Button> }}
-      </Header>
+      <Header
+        callToAction={{
+          label: "cadastre-se",
+          onClick: () => {
+            storeUser({ name: "teste", id: "teste" })
+          },
+        }}
+      />
       <Row>
         <Col xs="12" className="mb-4">
           <h1>{title}</h1>
