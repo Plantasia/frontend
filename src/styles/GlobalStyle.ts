@@ -62,4 +62,8 @@ export default createGlobalStyle`
     margin: 0;
   }
 
+  .ck-editor__editable_inline {
+    min-height: 200px;
+  }
+
 `
