@@ -1,9 +1,8 @@
-import { useContext, useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Button, Row, Col, Image } from "react-bootstrap"
-import { FaEllipsisV, FaSeedling } from "react-icons/fa"
+import { FaSeedling } from "react-icons/fa"
 import { PlantasiaCard, InlineGap } from "@styled/Shared"
 import { UserProps } from "@utils/types"
-import { UserContext, UserContextType } from "@contexts/User"
 import { CommentDropdown } from "@components/CommentDropdown"
 
 export interface CommentProps {
@@ -20,13 +19,9 @@ type EditorRefType = {
 
 type ProfileCommentProps = {
   user: UserProps
-  // owner: boolean
 }
 
-type ContentCommentProps = {}
-
 const ProfileComment: React.FC<ProfileCommentProps> = ({
-  // owner,
   user: { name, createdAt, bio },
 }) => {
   return (
@@ -63,12 +58,14 @@ export function Comment({
   const handleQuote = () => {}
 
   const [editMode, setEditMode] = useState(false)
+
   useEffect(() => {
     editorRef.current = {
       CKEditor: require("@ckeditor/ckeditor5-react").CKEditor,
       ClassicEditor: require("@ckeditor/ckeditor5-build-classic"),
     }
   }, [])
+
   return (
     <PlantasiaCard className="mt-2">
       <ProfileComment user={{ ...user }} />

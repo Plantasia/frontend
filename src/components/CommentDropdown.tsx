@@ -16,6 +16,7 @@ const Toggle = React.forwardRef<HTMLDivElement, ToggleProps>(
         e.preventDefault()
         onClick(e)
       }}
+      style={{ cursor: "pointer" }}
     >
       <FaEllipsisV />
     </div>
@@ -54,8 +55,8 @@ const CommentDropdown: React.FC<CommentDropdownProps> = ({
           </>
         ) : (
           <>
-            <Dropdown.Item onClick={handleReport}>reportar</Dropdown.Item>
             <Dropdown.Item onClick={handleQuote}>citar</Dropdown.Item>
+            <Dropdown.Item onClick={handleReport}>reportar</Dropdown.Item>
           </>
         )}
       </Dropdown.Menu>
