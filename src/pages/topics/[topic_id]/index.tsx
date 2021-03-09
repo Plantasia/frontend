@@ -56,8 +56,8 @@ export default function showTopicsByCategory({
       </Row>
       <Row>
         <Col xs="12">
-          {comments.map(item => (
-            <Comment {...item} />
+          {comments.map((item, index) => (
+            <Comment {...item} key={index} />
           ))}
         </Col>
       </Row>
@@ -65,7 +65,9 @@ export default function showTopicsByCategory({
   )
 }
 
-export const getServerSideProps: GetServerSideProps<TopicProps> = async context => {
+export const getServerSideProps: GetServerSideProps<TopicProps> = async ({
+  query,
+}) => {
   return {
     props: {
       title: "Árvores de fruto em vasos",
@@ -79,13 +81,14 @@ export const getServerSideProps: GetServerSideProps<TopicProps> = async context 
             "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia hic modi provident veniam mollitia. Velit vitae quidem perferendis corrupti dolore saepe neque earum. Eaque quos nobis at quibusdam unde laudantium!</p>",
           likes: 20,
           user: {
-            id: "1928309182",
+            id: "200",
             name: "Matheus Faggi",
             createdAt: "10/01/2020",
             bio:
               "Duis dolor nisi consequat in pariatur. Quis cillum ad ad exercitation cillum occaecat.",
           },
           createdAt: "05/01/2020",
+          owner: true,
         },
         {
           content:
@@ -99,6 +102,7 @@ export const getServerSideProps: GetServerSideProps<TopicProps> = async context 
               "Duis dolor nisi consequat in pariatur. Quis cillum ad ad exercitation cillum occaecat.",
           },
           createdAt: "05/01/2020",
+          owner: false,
         },
         {
           content:
@@ -112,6 +116,7 @@ export const getServerSideProps: GetServerSideProps<TopicProps> = async context 
               "Duis dolor nisi consequat in pariatur. Quis cillum ad ad exercitation cillum occaecat.",
           },
           createdAt: "05/01/2020",
+          owner: false,
         },
       ],
       author: {
