@@ -1,26 +1,37 @@
-import { createContext, useState } from "react"
 import { UserProps } from "@utils/types"
+import React, { createContext, Dispatch, useEffect, useReducer } from "react"
+import { UserReducer, UserState, UserAction } from "./reducer/User"
 
 export type UserContextType = {
-  user: UserProps
-  storeUser(user: UserProps): void
-  logout(): void
+  state: UserState
+  dispatch: Dispatch<UserAction>
+  store: UserProps
 }
-export const UserContext = createContext<UserContextType>(null)
 
-export default function UserContextProvider({ children }) {
-  const [user, setUser] = useState<UserProps>({})
-  const storeUser = (params: UserProps) => {
-    setUser(params)
-  }
-  const logout = () => {
-    setUser({})
-  }
+const initialState: UserState = {
+  isLoading: false,
+  user: null,
+  error: null,
+}
+
+export const UserContext = createContext<UserContextType>({
+  dispatch: () => null,
+  state: initialState,
+  store: null,
+})
+
+export const UserContextProvider: React.FC = ({ children }) => {
+  const [state, dispatch] = useReducer(UserReducer, initialState)
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    if (localStorage.getItem("@PLTuser")) dispatch({ type: "success" })
+  }, [])
 
   return (
-    <UserContext.Provider value={{ user, storeUser, logout }}>
+    <UserContext.Provider value={{ state, dispatch, store: null }}>
       {children}
     </UserContext.Provider>
   )
 }
+
 export const UserConsumer = UserContext.Consumer

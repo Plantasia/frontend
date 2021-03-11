@@ -25,14 +25,14 @@ export default function showTopicsByCategory({
   categories,
   comments,
 }: TopicProps) {
-  const { storeUser } = useContext(UserContext)
+  const { dispatch } = useContext(UserContext)
   return (
     <>
       <Header
         callToAction={{
           label: "cadastre-se",
           onClick: () => {
-            storeUser({ name: "teste", id: "teste" })
+            dispatch({ type: "success" })
           },
         }}
       />

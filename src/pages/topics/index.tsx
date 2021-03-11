@@ -9,7 +9,7 @@ import { useRouter } from "next/router"
 export default function listTopics() {
   const [currentPage, setCurrentPage] = useState(0)
   const pages = new Array(10).fill(1).map((x, index) => index)
-  const { storeUser } = useContext(UserContext)
+  const { dispatch } = useContext(UserContext)
   const router = useRouter()
   useEffect(() => {}, [])
   function handleNewTopic() {
@@ -21,7 +21,7 @@ export default function listTopics() {
         callToAction={{
           label: "cadastre-se",
           onClick: () => {
-            storeUser({ name: "teste", id: "teste" })
+            dispatch({ type: "success" })
           },
         }}
       />

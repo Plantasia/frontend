@@ -2,7 +2,7 @@
 import GlobalStyle from "../styles/GlobalStyle"
 import "@src/styles/customTheme.sass"
 import Head from "next/head"
-import UserContextProvider from "@contexts/User"
+import { UserContextProvider } from "@contexts/User"
 
 function MyApp({ Component, pageProps }) {
   return (

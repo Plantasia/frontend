@@ -39,7 +39,7 @@ interface Props {
 }
 
 export default function Header({ currentUser, callToAction }: Props) {
-  const { user } = useContext(UserContext)
+  const { state } = useContext(UserContext)
 
   const router = useRouter()
   return (
@@ -69,7 +69,7 @@ export default function Header({ currentUser, callToAction }: Props) {
       </Col>
 
       <Col xs="3" className="d-flex justify-content-end">
-        {Object.keys(user).length === 0 ? (
+        {!state.user ? (
           <Button
             variant={callToAction.variant || "outline-primary"}
             onClick={() => {

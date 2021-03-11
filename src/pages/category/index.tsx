@@ -5,21 +5,21 @@ import { Header } from "@components"
 import { InlineGap } from "@styled/Shared"
 import { ListCategoryItem, CategoryProps } from "./_categoryItem"
 import { Button, Row, Col } from "react-bootstrap"
-import { DropdownMenu } from "@components/MenuDropdown"
-
 export interface ListCategoriesProps {
   categories: CategoryProps[]
 }
 
 export default function ListCategories({ categories }: ListCategoriesProps) {
-  const { user, storeUser, logout } = useContext(UserContext)
+  const { dispatch } = useContext(UserContext)
   return (
     <>
       <Header
         callToAction={{
           label: "cadastre-se",
           onClick: () => {
-            storeUser({ name: "teste", id: "teste" })
+            dispatch({
+              type: "success",
+            })
           },
         }}
       />
