@@ -4,6 +4,8 @@ import { Header } from "@components"
 import { InlineGap } from "@styled/Shared"
 import { CommentProps, Comment } from "./_comment"
 import { UserProps } from "@utils/types"
+import { useContext } from "react"
+import { UserContext } from "@contexts/User"
 
 export interface BadgeCategoryProps {
   id: string
@@ -21,21 +23,28 @@ export interface TopicProps {
 export default function showTopicsByCategory({
   title,
   categories,
+  comments,
 }: TopicProps) {
+  const { storeUser } = useContext(UserContext)
   return (
     <>
-      <Header>
-        {{ right: <Button variant="outline-primary">Login</Button> }}
-      </Header>
+      <Header
+        callToAction={{
+          label: "cadastre-se",
+          onClick: () => {
+            storeUser({ name: "teste", id: "teste" })
+          },
+        }}
+      />
       <Row>
         <Col xs="12" className="mb-4">
           <h1>{title}</h1>
         </Col>
         <Col xs="12" className="d-flex justify-content-between mb-3">
           <InlineGap>
-            {categories.map((item, i) => (
-              <Button variant="outline-secondary" key={i} size="sm">
-                {item}
+            {categories.map(({ name, color }, i) => (
+              <Button variant={`outline-${color}`} key={i} size="sm">
+                {name}
               </Button>
             ))}
           </InlineGap>
@@ -47,33 +56,76 @@ export default function showTopicsByCategory({
       </Row>
       <Row>
         <Col xs="12">
-          <Comment
-            content="<h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia hic modi provident veniam mollitia. Velit vitae quidem perferendis corrupti dolore saepe neque earum. Eaque quos nobis at quibusdam unde laudantium!</h1>"
-            likes={10}
-            user={{}}
-          />
-          <Comment
-            content="<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia hic modi provident veniam mollitia. Velit vitae quidem perferendis corrupti dolore saepe neque earum. Eaque quos nobis at quibusdam unde laudantium!</p>"
-            likes={10}
-            user={{}}
-          />
-          <Comment
-            content="<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia hic modi provident veniam mollitia. Velit vitae quidem perferendis corrupti dolore saepe neque earum. Eaque quos nobis at quibusdam unde laudantium!</p>"
-            likes={10}
-            user={{}}
-          />
+          {comments.map((item, index) => (
+            <Comment {...item} key={index} />
+          ))}
         </Col>
       </Row>
     </>
   )
 }
 
-export const getServerSideProps: GetServerSideProps<TopicProps> = async context => {
+export const getServerSideProps: GetServerSideProps<TopicProps> = async ({
+  query,
+}) => {
   return {
     props: {
       title: "Árvores de fruto em vasos",
-      categories: ["suculentas", "solos", "fertilizante"],
-      comments: [],
+      categories: [
+        { color: "secondary", id: "022913282", name: "suculentas" },
+        { color: "danger", id: "022913282", name: "solos" },
+      ],
+      comments: [
+        {
+          content:
+            "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia hic modi provident veniam mollitia. Velit vitae quidem perferendis corrupti dolore saepe neque earum. Eaque quos nobis at quibusdam unde laudantium!</p>",
+          likes: 20,
+          user: {
+            id: "200",
+            name: "Matheus Faggi",
+            createdAt: "10/01/2020",
+            bio:
+              "Duis dolor nisi consequat in pariatur. Quis cillum ad ad exercitation cillum occaecat.",
+          },
+          createdAt: "05/01/2020",
+          owner: true,
+        },
+        {
+          content:
+            "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia hic modi provident veniam mollitia. Velit vitae quidem perferendis corrupti dolore saepe neque earum. Eaque quos nobis at quibusdam unde laudantium!</p>",
+          likes: 20,
+          user: {
+            id: "1928309182",
+            name: "Matheus Faggi",
+            createdAt: "10/01/2020",
+            bio:
+              "Duis dolor nisi consequat in pariatur. Quis cillum ad ad exercitation cillum occaecat.",
+          },
+          createdAt: "05/01/2020",
+          owner: false,
+        },
+        {
+          content:
+            "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia hic modi provident veniam mollitia. Velit vitae quidem perferendis corrupti dolore saepe neque earum. Eaque quos nobis at quibusdam unde laudantium!</p>",
+          likes: 20,
+          user: {
+            id: "1928309182",
+            name: "Matheus Faggi",
+            createdAt: "10/01/2020",
+            bio:
+              "Duis dolor nisi consequat in pariatur. Quis cillum ad ad exercitation cillum occaecat.",
+          },
+          createdAt: "05/01/2020",
+          owner: false,
+        },
+      ],
+      author: {
+        id: "1928309182",
+        name: "Matheus Faggi",
+        createdAt: "10/01/2020",
+        bio:
+          "Duis dolor nisi consequat in pariatur. Quis cillum ad ad exercitation cillum occaecat. In est magna reprehenderit dolore duis qui id dolore culpa labore ex commodo. Eiusmod ipsum adipisicing commodo dolore ullamco aliquip.",
+      },
     },
   }
 }
