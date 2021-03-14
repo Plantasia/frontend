@@ -30,6 +30,7 @@ export const UserReducer: Reducer<UserState, UserAction> = (state, action) => {
     case "failure":
       return { isLoading: true, error: "action failure" }
     case "logout":
+      localStorage.removeItem("@PLTuser")
       return { data: null, isLoading: false }
     default:
       throw new Error()
