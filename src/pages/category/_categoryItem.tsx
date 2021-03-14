@@ -27,14 +27,13 @@ export interface CategoryProps {
 }
 
 export function ListCategoryItem({
-  id = "",
-  name,
-  authorId,
   description,
+  id,
+  lastActivity,
   lastTopic,
-  countComments,
-  countTopics,
-  lastComment,
+  name,
+  repliesCount,
+  topicsCount,
 }: CategoryProps) {
   return (
     <PlantasiaCard className="mt-4 py-4">
@@ -47,25 +46,25 @@ export function ListCategoryItem({
           }}
         />
       </Col>
-      <Col xs="5" className="d-flex flex-column justify-content-between">
+      <Col xs="4" className="d-flex flex-column justify-content-between">
         <h3>{name}</h3>
         <p>{description}</p>
       </Col>
-      <Col xs="4" className="d-flex flex-column justify-content-between">
+      <Col xs="5" className="d-flex flex-column justify-content-between">
         <div className="d-flex justify-content-between pr-5">
           <div>
             <h5>Tópicos</h5>
-            <p>150</p>
+            <p>{topicsCount}</p>
           </div>
 
           <div>
-            <h5>Tópicos</h5>
-            <p>150</p>
+            <h5>Último comentário</h5>
+            <p>{lastActivity}</p>
           </div>
 
           <div>
-            <h5>Tópicos</h5>
-            <p>150</p>
+            <h5>Comentário</h5>
+            <p>{repliesCount}</p>
           </div>
         </div>
 
