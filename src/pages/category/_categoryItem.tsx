@@ -6,38 +6,28 @@ import { TopicLink, UserLink, TopicLinkProps } from "@components/Links"
 
 interface TopicProps {
   id: string
-
   name: string
-
   textBody: string
-
   imageStorage: string
-
   created_at: string
-
   updated_at: string
 }
 export interface CategoryProps {
   id: string
-
   name: string
-
-  authorId: string
-
   description: string
-
-  lastComment: string
-
-  countComments: number
-
-  countTopics: number
-
-  // eslint-disable-next-line no-undef
-  lastTopic: TopicProps
+  topicsCount: number
+  repliesCount: number
+  lastActivity: string
+  lastTopic: {
+    author: UserProps
+    id: string
+    title: string
+  }
 }
 
 export function ListCategoryItem({
-  id,
+  id = "",
   name,
   authorId,
   description,
@@ -78,9 +68,11 @@ export function ListCategoryItem({
             <p>150</p>
           </div>
         </div>
+
         <div className="d-flex flex-column">
           <h6 style={{ fontWeight: 300 }} className="mb-2">
-            último tópico - <UserLink id={lastTopic.id} name={lastTopic.name} />
+            {/* API INCOMPATIBILITY */}
+            {/* último tópico - <UserLink id={authorId} name={author} /> */}
           </h6>
 
           <div className="d-flex align-items-center">
@@ -89,7 +81,8 @@ export function ListCategoryItem({
               style={{ borderRadius: "50%" }}
             />
             <h5 className="ml-3">
-              <TopicLink id={lastTopic.id} title={lastTopic.name} />
+              {/* API INCOMPATIBILITY */}
+              {/* <TopicLink id={lastTopicId} title={title} /> */}
             </h5>
           </div>
         </div>
