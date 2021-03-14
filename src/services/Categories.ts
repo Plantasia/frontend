@@ -4,10 +4,16 @@ import { CategoryProps } from "@src/pages/category/_categoryItem"
 import { CategoryAPI } from "./protocols"
 
 export const GetCategories = async (): Promise<CategoryProps[]> => {
-  const { data } = await axios.get<{ categories: CategoryAPI[] }>(
-    "http://backend:3333/forum/categories/"
-  )
+  const { data } = await axios.get<{
+    categories: CategoryAPI[]
+    currentPage: number
+    prevPage: number
+    nextPage: number
+    perPage: number
+    totalRegisters: number
+  }>("http://backend:3333/forum/categories/")
   // @TO-DO tratar exceções
+
   return data.categories.map(
     // API keys
     ({
