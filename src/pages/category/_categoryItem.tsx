@@ -1,25 +1,50 @@
+/* eslint-disable camelcase */
 import { Col, Row } from "react-bootstrap"
 import { PlantasiaCard } from "@styled/Shared"
 import { UserProps } from "@utils/types"
 import { TopicLink, UserLink, TopicLinkProps } from "@components/Links"
 
-export interface CategoryProps {
+interface TopicProps {
+  id: string
+
   name: string
+
+  textBody: string
+
+  imageStorage: string
+
+  created_at: string
+
+  updated_at: string
+}
+export interface CategoryProps {
+  id: string
+
+  name: string
+
+  authorId: string
+
   description: string
-  topicsCount: number
-  repliesCount: number
-  lastActivity: string
-  lastTopic: {
-    author: UserProps
-    id: string
-    title: string
-  }
+
+  lastComment: string
+
+  countComments: number
+
+  countTopics: number
+
+  // eslint-disable-next-line no-undef
+  lastTopic: TopicProps
 }
 
 export function ListCategoryItem({
+  id,
   name,
+  authorId,
   description,
   lastTopic,
+  countComments,
+  countTopics,
+  lastComment,
 }: CategoryProps) {
   return (
     <PlantasiaCard className="mt-4 py-4">
@@ -55,8 +80,7 @@ export function ListCategoryItem({
         </div>
         <div className="d-flex flex-column">
           <h6 style={{ fontWeight: 300 }} className="mb-2">
-            último tópico -{" "}
-            <UserLink id={lastTopic.author.id} name={lastTopic.author.name} />
+            último tópico - <UserLink id={lastTopic.id} name={lastTopic.name} />
           </h6>
 
           <div className="d-flex align-items-center">
@@ -65,7 +89,7 @@ export function ListCategoryItem({
               style={{ borderRadius: "50%" }}
             />
             <h5 className="ml-3">
-              <TopicLink id={lastTopic.id} title={lastTopic.title} />
+              <TopicLink id={lastTopic.id} title={lastTopic.name} />
             </h5>
           </div>
         </div>

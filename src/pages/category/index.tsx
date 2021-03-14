@@ -5,12 +5,14 @@ import { Header } from "@components"
 import { InlineGap } from "@styled/Shared"
 import { ListCategoryItem, CategoryProps } from "./_categoryItem"
 import { Button, Row, Col } from "react-bootstrap"
+import axios from "axios"
 export interface ListCategoriesProps {
   categories: CategoryProps[]
 }
 
 export default function ListCategories({ categories }: ListCategoriesProps) {
   const { dispatch } = useContext(UserContext)
+  // console.log(categories)
   return (
     <>
       <Header
@@ -42,20 +44,34 @@ export default function ListCategories({ categories }: ListCategoriesProps) {
 }
 
 export const getServerSideProps: GetServerSideProps<ListCategoriesProps> = async context => {
-  const category: CategoryProps = {
-    name: "Hortaliças",
-    description:
-      "Et ut esse irure tempor eu aliquip labore proident duis ullamco proident. Aliqua in est cillum. Amet voluptate laborum Lorem exercitation commodo ",
-    repliesCount: 10,
-    topicsCount: 20,
-    lastActivity: "10/04/2021",
-    lastTopic: {
-      author: { name: "matheus faggi", id: "2012930909asbh1bhnwb10" },
-      id: "12381297812738123",
-      title: "Cuidados com alecrim",
-    },
-  }
-  const categories = new Array(5).fill(category)
+  const { data } = await axios.get<CategoryProps[]>(
+    "http://backend:3333/forum/categories/"
+  )
+  console.log("**data")
+  console.log(data)
+
+  const categories = await data.data.map(
+    ({
+      authorId,
+      countComments,
+      description,
+      id,
+      lastComment,
+      name,
+      lastTopic,
+      countTopics,
+    }) => ({
+      authorId,
+      countComments,
+      description,
+      id,
+      lastComment,
+      name,
+      lastTopic,
+      countTopics,
+    })
+  )
+  // console.log(categories)
 
   return {
     props: { categories },
