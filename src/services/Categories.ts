@@ -1,17 +1,16 @@
 /* eslint-disable camelcase */
-import axios from "axios"
 import { CategoryProps } from "@src/pages/category/_categoryItem"
 import { CategoryAPI } from "./protocols"
+import { Api } from "./Api"
 
 export const GetCategories = async (): Promise<CategoryProps[]> => {
-  const { data } = await axios.get<{
+  const { data } = await Api.get<{
     categories: CategoryAPI[]
-    currentPage: number
     prevPage: number
     nextPage: number
     perPage: number
     totalRegisters: number
-  }>("http://backend:3333/forum/categories/")
+  }>("/forum/categories/")
   // @TO-DO tratar exceções
 
   return data.categories.map(
