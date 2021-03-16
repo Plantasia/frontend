@@ -4,25 +4,23 @@ import { UserContext } from "@contexts/User"
 import { Header } from "@components"
 import { InlineGap } from "@styled/Shared"
 import { ListCategoryItem, CategoryProps } from "./_categoryItem"
-import axios from "axios"
 import { Button, Row, Col } from "react-bootstrap"
 import { GetCategories } from "@src/services/Categories"
+import { useRouter } from "next/router"
 export interface ListCategoriesProps {
   categories: CategoryProps[]
 }
 
 export default function ListCategories({ categories }: ListCategoriesProps) {
   const { dispatch } = useContext(UserContext)
-  // console.log(categories)
+  const router = useRouter()
   return (
     <>
       <Header
         callToAction={{
           label: "cadastre-se",
           onClick: () => {
-            dispatch({
-              type: "success",
-            })
+            router.push("/signup")
           },
         }}
       />

@@ -1,10 +1,9 @@
 import { Col, Row } from "react-bootstrap"
 import { Header, SEO } from "@components"
 import SignUpForm from "./_form"
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext } from "react"
 import AuthImage from "@src/assets/AuthImage"
 import { useRouter } from "next/router"
-import api from "../../services/api"
 import { UserContext } from "@contexts/User"
 
 export default function SignUp() {
@@ -24,7 +23,9 @@ export default function SignUp() {
       <Header
         callToAction={{
           label: "Entrar",
-          onClick: () => {},
+          onClick: () => {
+            router.push("/signin")
+          },
         }}
       />
 
