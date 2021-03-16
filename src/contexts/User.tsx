@@ -5,7 +5,6 @@ import { UserReducer, UserState, UserAction } from "./reducer/User"
 export type UserContextType = {
   state: UserState
   dispatch: Dispatch<UserAction>
-  store: UserProps
 }
 
 const initialState: UserState = {
@@ -17,7 +16,6 @@ const initialState: UserState = {
 export const UserContext = createContext<UserContextType>({
   dispatch: () => null,
   state: initialState,
-  store: null,
 })
 
 export const UserContextProvider: React.FC = ({ children }) => {
@@ -28,7 +26,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
   }, [])
 
   return (
-    <UserContext.Provider value={{ state, dispatch, store: null }}>
+    <UserContext.Provider value={{ state, dispatch }}>
       {children}
     </UserContext.Provider>
   )

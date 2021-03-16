@@ -71,7 +71,7 @@ export default function Header({ currentUser, callToAction }: Props) {
       <Col xs="3" className="d-flex justify-content-end">
         {!state.user ? (
           <Button
-            variant={callToAction.variant ? null : "outline-primary"}
+            variant={"outline-primary"}
             onClick={() => {
               callToAction.onClick()
             }}
