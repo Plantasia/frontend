@@ -15,7 +15,7 @@ const LoadingIndicator: React.FC<IPlayerProps> = props => {
         ref={player.current}
         {...props}
         speed={3}
-        style={{ transform: "rotate(180deg)" }}
+        style={{ transform: "rotate(180deg)", ...props.style }}
       />
     </div>
   )

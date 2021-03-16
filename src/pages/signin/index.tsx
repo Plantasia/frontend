@@ -1,6 +1,5 @@
-import { Button, Col, Row } from "react-bootstrap"
-import api from "../../services/api"
-import { Header, SEO } from "@components"
+import { Col, Row } from "react-bootstrap"
+import { Header, SEO, LoadingIndicator } from "@components"
 import SignInForm from "./_form"
 import { useState, useEffect, useContext } from "react"
 import AuthImage from "@src/assets/AuthImage"
@@ -10,48 +9,69 @@ import { UserContext } from "@contexts/User"
 export default function SignIn() {
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
-  const { store } = useContext(UserContext)
+  const {
+    dispatch,
+    state: { isLoading, user },
+  } = useContext(UserContext)
   const router = useRouter()
 
   useEffect(() => {
-    if (!store) {
-      router.push("dashboard")
+    if (user) {
+      router.push("/dashboard")
     }
   }, [])
 
-  async function handleLoginSubmit(): Promise<void> {}
+  async function handleLoginSubmit(): Promise<void> {
+    dispatch({ type: "request", payload: {} })
+    setTimeout(() => {
+      dispatch({ type: "success" })
+    }, 2000)
+  }
   async function handleFacebookAuth(): Promise<void> {}
   async function handleGoogleAuth(): Promise<void> {}
 
   return (
     <>
       <SEO title="Login" />
-      <Header
-        callToAction={{
-          label: "Entrar",
-          onClick: () => {
-            router.push("/signup")
-          },
-        }}
-        actionText="Entrar"
-      />
-      <Row>
-        <Col xs="7">
-          <AuthImage />
-        </Col>
-
-        <Col xs="5">
-          <SignInForm
-            handleSubmitLogin={handleLoginSubmit}
-            handleFacebookAuth={handleFacebookAuth}
-            handleGoogleAuth={handleGoogleAuth}
-            password={password}
-            setPassword={setPassword}
-            email={email}
-            setEmail={setEmail}
+      {isLoading ? (
+        <>
+          <LoadingIndicator
+            autoplay={true}
+            loop={true}
+            controls={true}
+            src="https://assets3.lottiefiles.com/packages/lf20_dW4EWA.json"
+            style={{ height: "400px", width: "400px" }}
           />
-        </Col>
-      </Row>
+        </>
+      ) : (
+        <>
+          <Header
+            callToAction={{
+              label: "Cadastar",
+              onClick: () => {
+                router.push("/signup")
+              },
+              variant: "outline-primary",
+            }}
+          />
+          <Row>
+            <Col xs="7">
+              <AuthImage />
+            </Col>
+            <Col xs="5">
+              <SignInForm
+                handleSubmitLogin={handleLoginSubmit}
+                handleFacebookAuth={handleFacebookAuth}
+                handleGoogleAuth={handleGoogleAuth}
+                password={password}
+                setPassword={setPassword}
+                email={email}
+                setEmail={setEmail}
+              />
+            </Col>
+          </Row>
+        </>
+      )}
     </>
   )
 }
