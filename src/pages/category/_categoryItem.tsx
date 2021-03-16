@@ -46,24 +46,28 @@ export function ListCategoryItem({
           }}
         />
       </Col>
-      <Col xs="4" className="d-flex flex-column justify-content-between">
+      <Col
+        md="4"
+        lg="5"
+        className="d-flex flex-column justify-content-between "
+      >
         <h3>{name}</h3>
         <p>{description}</p>
       </Col>
-      <Col xs="5" className="d-flex flex-column justify-content-between">
-        <div className="d-flex justify-content-between pr-5">
-          <div>
-            <h5>Tópicos</h5>
+      <Col md="5" lg="4" className="d-flex flex-column justify-content-between">
+        <div className="d-flex justify-content-between">
+          <div className="">
+            <h6>Tópicos</h6>
             <p>{topicsCount}</p>
           </div>
 
-          <div>
-            <h5>Último comentário</h5>
+          <div className="" style={{ minWidth: 150 }}>
+            <h6>Última atividade</h6>
             <p>{lastActivity}</p>
           </div>
 
-          <div>
-            <h5>Comentário</h5>
+          <div className="">
+            <h6>Comentário</h6>
             <p>{repliesCount}</p>
           </div>
         </div>
