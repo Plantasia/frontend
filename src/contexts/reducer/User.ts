@@ -18,20 +18,13 @@ export type UserAction =
 export const UserReducer: Reducer<UserState, UserAction> = (state, action) => {
   switch (action.type) {
     case "request":
-      return { isLoading: true, ...state }
+      return { isLoading: true, error: null, user: null }
     case "success":
-      // eslint-disable-next-line no-case-declarations
-      const user: UserProps = {
-        name: "Matheus",
-        id: "1029302",
-      }
-      localStorage.setItem("@PLTuser", `${user.id}${user.name}`)
-      return { isLoading: true, user }
+      return { isLoading: false, user: null }
     case "failure":
-      return { isLoading: true, error: "action failure" }
+      return { isLoading: false, error: "action failure" }
     case "logout":
-      localStorage.removeItem("@PLTuser")
-      return { data: null, isLoading: false }
+      return { isLoading: false, user: null }
     default:
       throw new Error()
   }
