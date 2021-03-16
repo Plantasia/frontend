@@ -32,9 +32,21 @@ export const GetCategories = async (): Promise<CategoryProps[]> => {
         topicsCount: qtdeTopics || 0,
         name,
         description,
-        lastActivity: lastComment === undefined ? "" : lastComment.created_at,
+        lastActivity:
+          lastComment === undefined
+            ? ""
+            : new Date(lastComment.created_at)
+                .toLocaleString("pt-BR")
+                .split(",")[0],
         // FAILURE API COMPATIBILITY
-        lastTopic: null,
+        lastTopic: {
+          id: (lastTopic && lastTopic.id) || "12389",
+          author: {
+            name: "teste",
+            id: "testeee",
+          },
+          title: (lastTopic && lastTopic.name) || "teste",
+        },
       })
   )
 }

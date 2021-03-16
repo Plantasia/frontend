@@ -11,9 +11,9 @@ export interface CategoryAPI {
   qtdeComments?: number
   qtdeTopics: number
   lastTopic: {
-    id: string
-    name: string
-    textBody: string
+    id?: string
+    name?: string
+    textBody?: string
     imageStore: string
     isActive: boolean
     created_at: string
