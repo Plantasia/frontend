@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-export interface CategoryAPI {
+export interface CategoryDTO {
   name: string
   id: string
   description: string
@@ -20,7 +20,7 @@ export interface CategoryAPI {
   }
 }
 
-export type TopicAPI = {
+export type TopicDTO = {
   id: string
   name: string
   textBody: string

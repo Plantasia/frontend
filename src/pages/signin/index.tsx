@@ -33,45 +33,40 @@ export default function SignIn() {
   return (
     <>
       <SEO title="Login" />
-      {isLoading ? (
-        <>
-          <LoadingIndicator
-            autoplay={true}
-            loop={true}
-            controls={true}
-            src="https://assets3.lottiefiles.com/packages/lf20_dW4EWA.json"
-            style={{ height: "400px", width: "400px" }}
-          />
-        </>
-      ) : (
-        <>
-          <Header
-            callToAction={{
-              label: "Cadastar",
-              onClick: () => {
-                router.push("/signup")
-              },
-              variant: "outline-primary",
-            }}
-          />
-          <Row>
-            <Col xs="7">
-              <AuthImage />
-            </Col>
-            <Col xs="5">
-              <SignInForm
-                handleSubmitLogin={handleLoginSubmit}
-                handleFacebookAuth={handleFacebookAuth}
-                handleGoogleAuth={handleGoogleAuth}
-                password={password}
-                setPassword={setPassword}
-                email={email}
-                setEmail={setEmail}
-              />
-            </Col>
-          </Row>
-        </>
+      {isLoading && (
+        <LoadingIndicator
+          autoplay={true}
+          loop={true}
+          controls={true}
+          src="https://assets3.lottiefiles.com/packages/lf20_dW4EWA.json"
+          style={{ height: "400px", width: "400px" }}
+        />
       )}
+      <Header
+        callToAction={{
+          label: "Cadastar",
+          onClick: () => {
+            router.push("/signup")
+          },
+          variant: "outline-primary",
+        }}
+      />
+      <Row>
+        <Col xs="7">
+          <AuthImage />
+        </Col>
+        <Col xs="5">
+          <SignInForm
+            handleSubmitLogin={handleLoginSubmit}
+            handleFacebookAuth={handleFacebookAuth}
+            handleGoogleAuth={handleGoogleAuth}
+            password={password}
+            setPassword={setPassword}
+            email={email}
+            setEmail={setEmail}
+          />
+        </Col>
+      </Row>
     </>
   )
 }
