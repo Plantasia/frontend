@@ -63,7 +63,10 @@ export default function SignInForm({
         <Button
           variant="primary"
           size="lg"
-          onClick={handleSubmitLogin}
+          onClick={e => {
+            e.preventDefault()
+            handleSubmitLogin()
+          }}
           type="submit"
         >
           Logar
