@@ -28,3 +28,7 @@ export type TopicDTO = {
   created_at: string
   updated_at: string
 }
+
+export type RequestTokenDTO = {
+  email: string
+}

@@ -5,7 +5,7 @@ import NewPasswordForm from "./_form-new-password"
 import { useState } from "react"
 import { useRouter } from "next/router"
 
-export default function SignIn() {
+export default function Recover() {
   const [password, setPassword] = useState("")
   const [passwordConfirmation, setpasswordConfirmation] = useState("")
   const router = useRouter()
@@ -13,20 +13,8 @@ export default function SignIn() {
 
   return (
     <>
-      <SEO title="Login" />
-      <Header>
-        {{
-          right: (
-            <Button
-              onClick={() => {
-                router.push("/signup")
-              }}
-            >
-              Criar conta
-            </Button>
-          ),
-        }}
-      </Header>
+      <SEO title="Recover" />
+      <Header callToAction={{label:"entrar", onClick:()=>{}}}/>
       <Row>
         <Col xs="4" />
         <Col xs="4">
@@ -35,7 +23,7 @@ export default function SignIn() {
             password={password}
             setPassword={setPassword}
             passwordConfirmation={passwordConfirmation}
-            setpasswordConfirmation={setpasswordConfirmation}
+            setPasswordConfirmation={setpasswordConfirmation}
           />
         </Col>
         <Col xs="4" />

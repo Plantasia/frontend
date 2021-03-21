@@ -6,6 +6,7 @@ import { Title, Form, FormWrapper } from "@src/styles/components/Auth"
 interface IsPassWordResetForm {
   password: string
   passwordConfirmation: string
+  setToken: string,
   setPassword: Dispatch<SetStateAction<string>>
   setPasswordConfirmation: Dispatch<SetStateAction<string>>
   handlePasswordReset(): void
@@ -16,6 +17,7 @@ export default function NewPasswordForm({
   passwordConfirmation,
   setPassword,
   setPasswordConfirmation,
+  setToken,
   handlePasswordReset,
 }: IsPassWordResetForm) {
   return (

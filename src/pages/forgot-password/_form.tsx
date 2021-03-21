@@ -14,6 +14,7 @@ export default function SendNewPassordLinkForm({
   handleNewPasswordLinkRequest,
   setEmail,
 }: IsNewPasswordLinkForm) {
+  console.log(email)
   return (
     <FormWrapper>
       <Title>
