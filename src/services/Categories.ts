@@ -12,8 +12,8 @@ export const GetCategories = async (): Promise<CategoryProps[]> => {
     totalRegisters: number
   }>("/forum/categories/")
   // @TO-DO tratar exceções
-
-  return data.categories.map(
+  console.log(data)
+  return data.data.map(
     // API keys
     ({
       authorId,
@@ -22,14 +22,14 @@ export const GetCategories = async (): Promise<CategoryProps[]> => {
       lastComment,
       lastTopic,
       name,
-      qtdeTopics,
-      qtdeComments,
+      countTopics,
+      countComments,
     }) =>
       // Component props
       ({
         id,
-        repliesCount: qtdeComments || 0,
-        topicsCount: qtdeTopics || 0,
+        repliesCount: countComments || 0,
+        topicsCount: countTopics || 0,
         name,
         description,
         lastActivity:

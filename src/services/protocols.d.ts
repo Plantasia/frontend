@@ -8,8 +8,8 @@ export interface CategoryDTO {
   lastComment: {
     created_at: string
   }
-  qtdeComments?: number
-  qtdeTopics: number
+  countComments?: number
+  countTopics: number
   lastTopic: {
     id?: string
     name?: string
