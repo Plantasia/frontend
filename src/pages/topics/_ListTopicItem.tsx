@@ -10,16 +10,16 @@ export function ListItem({
   id,
   name,
   imageStorage,
-  user,
+  lastComment,
+  topicOwner,
   textBody,
-  comments,
+  countComments,
   replies,
   created_at,
   updated_at,
 }: TopicItemProps) {
   const router = useRouter()
-  console.log("comments")
-  console.log(comments)
+
   created_at = `${new Date(created_at).toLocaleDateString("pt-br")}`
 
   return (
@@ -44,7 +44,7 @@ export function ListItem({
 
             {name}
           </h4>
-          <a href={`/users/${user.id}`}>{user.name}</a>
+          <a href={`/users/${topicOwner.id}`}>{topicOwner.name}</a>
           <span> - {created_at}</span>
         </div>
         <TopicDescription>{textBody}</TopicDescription>
@@ -52,20 +52,20 @@ export function ListItem({
       <TopicStats>
         <div className="d-flex-column">
           <b>ranking: &nbsp;#{""}</b>
-          <p>replies: &nbsp;&nbsp;&nbsp; {replies || ""}</p>
+          <p>replies: &nbsp;&nbsp;&nbsp; {countComments}</p>
         </div>
         <div className="d-flex">
           <Image
             height="50"
             width="50"
-            src={user.avatar}
+            src={lastComment.user.avatar}
             className="mr-2"
             roundedCircle
           />
           <div className="d-flex-column justify-content-center">
             <p style={{ margin: 0 }}>último reply</p>
 
-            <a href={user.id}>{user.name}</a>
+            <a href={""}>{lastComment.user.name}</a>
           </div>
         </div>
       </TopicStats>

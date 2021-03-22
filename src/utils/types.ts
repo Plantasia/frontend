@@ -22,12 +22,12 @@ export type TopicItemProps = {
   replies?: number
   created_at: string
   updated_at: string
-  comments: any
-  lastReply?: {
+  countComments: number
+  lastComment?: {
     user: UserProps
-    when: string
+    when?: string
   }
-  user: UserProps
+  topicOwner: UserProps
 }
 
 export type ListTopicProps = {

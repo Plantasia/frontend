@@ -14,11 +14,29 @@ export const GetTopics = async (): Promise<TopicItemProps[]> => {
   // @TO-DO tratar exceções
   console.log(data)
 
+  const comments = data.data
+
+  for (const comment of comments) {
+    console.log("****COMMENNTS")
+    console.log(comment.comments)
+  }
+
   return data.data.map(
-    ({ id, user, name, textBody, imageStorage, created_at, updated_at }) => ({
+    ({
+      id,
+      user,
+      name,
+      textBody,
+      comments,
+      imageStorage,
+      created_at,
+      updated_at,
+    }) => ({
       id,
       name,
-      user,
+      topicOwner: user,
+      lastComment: comments[0],
+      countComments: comments.length,
       textBody,
       imageStorage: imageStorage || "",
       created_at,

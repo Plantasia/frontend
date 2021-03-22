@@ -20,10 +20,18 @@ export interface CategoryDTO {
   }
 }
 
+export interface UserDTO {
+  id: string
+  name?: string
+  avatar?: string
+}
+
 export type TopicDTO = {
   id: string
   name: string
+  user: UserDTO
   textBody: string
+  comments: any[]
   imageStorage: string
   created_at: string
   updated_at: string
