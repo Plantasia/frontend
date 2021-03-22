@@ -5,21 +5,22 @@ import { Header } from "@components"
 import { InlineGap } from "@styled/Shared"
 import { ListCategoryItem, CategoryProps } from "./_categoryItem"
 import { Button, Row, Col } from "react-bootstrap"
-import { DropdownMenu } from "@components/MenuDropdown"
-
+import { GetCategories } from "@src/services/Categories"
+import { useRouter } from "next/router"
 export interface ListCategoriesProps {
   categories: CategoryProps[]
 }
 
 export default function ListCategories({ categories }: ListCategoriesProps) {
-  const { user, storeUser, logout } = useContext(UserContext)
+  const { dispatch } = useContext(UserContext)
+  const router = useRouter()
   return (
     <>
       <Header
         callToAction={{
           label: "cadastre-se",
           onClick: () => {
-            storeUser({ name: "teste", id: "teste" })
+            router.push("/signup")
           },
         }}
       />
@@ -42,22 +43,9 @@ export default function ListCategories({ categories }: ListCategoriesProps) {
 }
 
 export const getServerSideProps: GetServerSideProps<ListCategoriesProps> = async context => {
-  const category: CategoryProps = {
-    name: "Hortaliças",
-    description:
-      "Et ut esse irure tempor eu aliquip labore proident duis ullamco proident. Aliqua in est cillum. Amet voluptate laborum Lorem exercitation commodo ",
-    repliesCount: 10,
-    topicsCount: 20,
-    lastActivity: "10/04/2021",
-    lastTopic: {
-      author: { name: "matheus faggi", id: "2012930909asbh1bhnwb10" },
-      id: "12381297812738123",
-      title: "Cuidados com alecrim",
-    },
-  }
-  const categories = new Array(5).fill(category)
-
   return {
-    props: { categories },
+    props: {
+      categories: await GetCategories(),
+    },
   }
 }

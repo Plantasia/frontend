@@ -1,9 +1,19 @@
+/* eslint-disable camelcase */
 import { Col, Row } from "react-bootstrap"
 import { PlantasiaCard } from "@styled/Shared"
 import { UserProps } from "@utils/types"
 import { TopicLink, UserLink, TopicLinkProps } from "@components/Links"
 
+interface TopicProps {
+  id: string
+  name: string
+  textBody: string
+  imageStorage: string
+  created_at: string
+  updated_at: string
+}
 export interface CategoryProps {
+  id: string
   name: string
   description: string
   topicsCount: number
@@ -17,9 +27,13 @@ export interface CategoryProps {
 }
 
 export function ListCategoryItem({
-  name,
   description,
+  id,
+  lastActivity,
   lastTopic,
+  name,
+  repliesCount,
+  topicsCount,
 }: CategoryProps) {
   return (
     <PlantasiaCard className="mt-4 py-4">
@@ -32,31 +46,36 @@ export function ListCategoryItem({
           }}
         />
       </Col>
-      <Col xs="5" className="d-flex flex-column justify-content-between">
+      <Col
+        md="4"
+        lg="5"
+        className="d-flex flex-column justify-content-between "
+      >
         <h3>{name}</h3>
         <p>{description}</p>
       </Col>
-      <Col xs="4" className="d-flex flex-column justify-content-between">
-        <div className="d-flex justify-content-between pr-5">
-          <div>
-            <h5>Tópicos</h5>
-            <p>150</p>
+      <Col md="5" lg="4" className="d-flex flex-column justify-content-between">
+        <div className="d-flex justify-content-between">
+          <div className="">
+            <h6>Tópicos</h6>
+            <p>{topicsCount}</p>
           </div>
 
-          <div>
-            <h5>Tópicos</h5>
-            <p>150</p>
+          <div className="" style={{ minWidth: 150 }}>
+            <h6>Última atividade</h6>
+            <p>{lastActivity}</p>
           </div>
 
-          <div>
-            <h5>Tópicos</h5>
-            <p>150</p>
+          <div className="">
+            <h6>Comentário</h6>
+            <p>{repliesCount}</p>
           </div>
         </div>
+
         <div className="d-flex flex-column">
           <h6 style={{ fontWeight: 300 }} className="mb-2">
-            último tópico -{" "}
-            <UserLink id={lastTopic.author.id} name={lastTopic.author.name} />
+            {/* API INCOMPATIBILITY */}
+            {/* último tópico - <UserLink id={authorId} name={author} /> */}
           </h6>
 
           <div className="d-flex align-items-center">
@@ -65,7 +84,8 @@ export function ListCategoryItem({
               style={{ borderRadius: "50%" }}
             />
             <h5 className="ml-3">
-              <TopicLink id={lastTopic.id} title={lastTopic.title} />
+              {/* API INCOMPATIBILITY */}
+              {/* <TopicLink id={lastTopicId} title={title} /> */}
             </h5>
           </div>
         </div>
