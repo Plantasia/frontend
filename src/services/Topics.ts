@@ -15,9 +15,10 @@ export const GetTopics = async (): Promise<TopicItemProps[]> => {
   console.log(data)
 
   return data.data.map(
-    ({ id, name, textBody, imageStorage, created_at, updated_at }) => ({
+    ({ id, user, name, textBody, imageStorage, created_at, updated_at }) => ({
       id,
       name,
+      user,
       textBody,
       imageStorage: imageStorage || "",
       created_at,
