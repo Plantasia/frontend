@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { TopicDTO } from "./protocols"
+import { TopicByIdDTO, TopicDTO } from "./protocols"
 import { Api } from "./Api"
 import { TopicItemProps } from "@utils/types"
 
@@ -43,4 +43,12 @@ export const GetTopics = async (): Promise<TopicItemProps[]> => {
       updated_at,
     })
   )
+}
+
+export const GetTopicsById = async (id: number): Promise<TopicByIdDTO> => {
+  await Api.get<{
+    data: TopicByIdDTO
+  }>(`topics/${id}`)
+
+  return null
 }

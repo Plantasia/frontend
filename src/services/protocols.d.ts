@@ -1,5 +1,18 @@
 /* eslint-disable camelcase */
 
+export interface UserTopicByIdDTO {
+  id: string
+  name: string
+  avatar: string
+  email: string
+  created_at: string
+}
+export interface UserDTO {
+  id: string
+  name?: string
+  avatar?: string
+}
+
 export interface CategoryDTO {
   name: string
   id: string
@@ -20,10 +33,16 @@ export interface CategoryDTO {
   }
 }
 
-export interface UserDTO {
+export interface CategoryTopicByIdRouteDTO {
+  name: string
   id: string
-  name?: string
-  avatar?: string
+  description: string
+  authorId: string
+  imageStorage: string
+  created_at: string
+  updated_at: string
+  countComments?: number
+  user: UserDTO
 }
 
 export type TopicDTO = {
@@ -35,4 +54,23 @@ export type TopicDTO = {
   imageStorage: string
   created_at: string
   updated_at: string
+}
+
+export type CommentsDTO = {
+  id: string
+  textBody: string
+  updated_at?: string
+  created_at?: string
+  user: UserTopicByIdDTO
+}
+
+export type TopicByIdDTO = {
+  id: string
+  name: string
+  textBody: string
+  imageStorage: string
+  created_at: string
+  updated_at: string
+  comments: CommentsDTO[]
+  user: UserTopicByIdDTO
 }
