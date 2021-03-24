@@ -1,8 +1,7 @@
 // this file is a wrapper with defaults to be used in both API routes and `getServerSideProps` functions
 
 import { AxiosRequestConfig, AxiosResponse } from "axios"
-import { withIronSession } from "next-iron-session"
-export type Handler = (req: AxiosRequestConfig, res: AxiosResponse) => any
+import { withIronSession, Handler } from "next-iron-session"
 
 export default function withSession(handler: Handler) {
   return withIronSession(handler, {
