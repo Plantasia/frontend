@@ -6,13 +6,14 @@ import AuthImage from "@src/assets/AuthImage"
 import { useRouter } from "next/router"
 import { UserContext } from "@contexts/User"
 import useUser from "@src/lib/useUser"
-import fetchJson from "@src/lib/fetchJson"
+import { axiosFetcher } from "@src/lib/fetchJson"
 import { SelfApi } from "@src/services/Api"
+import axios from "axios"
+import { useSWR } from "swr"
 
 export default function SignIn() {
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
-  const { signIn, userToken } = useContext(UserContext)
   const router = useRouter()
   const { mutateUser } = useUser({
     redirectTo: "/",
@@ -21,17 +22,9 @@ export default function SignIn() {
 
   async function handleLoginSubmit(): Promise<void> {
     try {
-      await mutateUser(
-        fetchJson(
-          "/api/login",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-          },
-          true
-        )
-      )
+      const { data } = await axios.post("/api/login", { email, password })
+
+      await mutateUser(data, true)
     } catch (error) {
       console.error("An unexpected error happened:", error)
     }
