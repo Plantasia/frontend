@@ -4,13 +4,13 @@ import "@src/styles/customTheme.sass"
 import Head from "next/head"
 import { UserContextProvider } from "@contexts/User"
 import { SWRConfig } from "swr"
-import fetch from "@src/lib/fetchJson"
+import { axiosFetcher } from "@src/lib/fetchJson"
 
 function MyApp({ Component, pageProps }) {
   return (
     <SWRConfig
       value={{
-        fetcher: fetch,
+        fetcher: axiosFetcher,
         onError: err => {
           console.log(err)
         },

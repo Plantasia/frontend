@@ -1,8 +1,10 @@
 // this file is a wrapper with defaults to be used in both API routes and `getServerSideProps` functions
 
+import { AxiosRequestConfig, AxiosResponse } from "axios"
 import { withIronSession } from "next-iron-session"
+export type Handler = (req: AxiosRequestConfig, res: AxiosResponse) => any
 
-export default function withSession(handler) {
+export default function withSession(handler: Handler) {
   return withIronSession(handler, {
     password: process.env.SECRET_COOKIE_PASSWORD,
     cookieName: "next.js/examples/with-iron-session",
