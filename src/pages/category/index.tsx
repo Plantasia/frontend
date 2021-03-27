@@ -1,6 +1,4 @@
-import { useContext } from "react"
 import { GetServerSideProps } from "next"
-import { UserContext } from "@contexts/User"
 import { Header } from "@components"
 import { InlineGap } from "@styled/Shared"
 import { ListCategoryItem, CategoryProps } from "./_categoryItem"
@@ -12,7 +10,6 @@ export interface ListCategoriesProps {
 }
 
 export default function ListCategories({ categories }: ListCategoriesProps) {
-  const { dispatch } = useContext(UserContext)
   const router = useRouter()
   return (
     <>

@@ -1,9 +1,8 @@
-import { useContext, ReactNode } from "react"
+import { ReactNode } from "react"
 
 import { Col, Row, Button, RowProps } from "react-bootstrap"
 import { useRouter } from "next/router"
 import styled from "styled-components"
-import { UserContext } from "@contexts/User"
 // Jogar para pasta de styles dps
 const HeaderWrapper = styled(Row).attrs(
   (): RowProps => ({
@@ -27,8 +26,6 @@ export default function Header({
   callToAction: { onClick, label, variant },
   title,
 }: Props) {
-  const { state } = useContext(UserContext)
-
   const router = useRouter()
   return (
     <HeaderWrapper>

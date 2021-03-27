@@ -13,19 +13,7 @@ export default function SignIn() {
   return (
     <>
       <SEO title="Login" />
-      <Header>
-        {{
-          right: (
-            <Button
-              onClick={() => {
-                router.push("/signup")
-              }}
-            >
-              Criar conta
-            </Button>
-          ),
-        }}
-      </Header>
+      <Header callToAction={{ label: "teste", onClick: () => {} }} />
       <Row>
         <Col xs="4" />
         <Col xs="4">
