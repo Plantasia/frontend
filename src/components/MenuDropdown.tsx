@@ -46,7 +46,10 @@ Toggle.propTypes = {
   onClick: propTypes.func,
 }
 
-export default function MenuDropdown() {
+type Props = {
+  logout(): void
+}
+export default function MenuDropdown({ logout }: Props) {
   return (
     <Dropdown>
       <Dropdown.Toggle
@@ -63,7 +66,7 @@ export default function MenuDropdown() {
         <Dropdown.Divider />
         <CustomDropdownItem
           onClick={() => {
-            // USE SWR REQUEST
+            logout()
           }}
         >
           Sair <FaSignOutAlt />

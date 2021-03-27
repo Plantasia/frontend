@@ -14,8 +14,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": "./",
+    "types": ["node", "styled-components", "swr"],
     "paths": {
-      "@": ["./*"],
       "@src/*": ["./src/*"],
       "@shared/*":["./src/shared/*"],
       "@src/services/*": ["./src/services/*"],
