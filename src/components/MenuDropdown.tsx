@@ -9,7 +9,6 @@ import {
   FaUser,
 } from "react-icons/fa"
 import { InlineGap } from "@styled/Shared"
-import { UserContext } from "@contexts/User"
 interface ToggleProps {
   onClick?(event): void
 }
@@ -48,7 +47,6 @@ Toggle.propTypes = {
 }
 
 export default function MenuDropdown() {
-  const { dispatch } = useContext(UserContext)
   return (
     <Dropdown>
       <Dropdown.Toggle
@@ -65,7 +63,7 @@ export default function MenuDropdown() {
         <Dropdown.Divider />
         <CustomDropdownItem
           onClick={() => {
-            dispatch({ type: "logout" })
+            // USE SWR REQUEST
           }}
         >
           Sair <FaSignOutAlt />
