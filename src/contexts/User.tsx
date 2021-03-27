@@ -1,71 +1,32 @@
-/* eslint-disable camelcase */
-/* eslint-disable no-undef */
-
 import { UserProps } from "@utils/types"
-import React, {
-  createContext,
-  Dispatch,
-  useEffect,
-  useReducer,
-  useState,
-} from "react"
-import { ClientSideApi } from "@src/services/Api"
-
-// WITH REDUCER
-// export type UserContextTypeWithReducer = {
-//   state: UserState
-//   dispatch: Dispatch<UserAction>
-// }
-// const initialState: UserState = {
-//   isLoading: false,
-//   user: null,
-//   error: null,
-// }
-
-//
+import React, { createContext, Dispatch, useEffect, useReducer } from "react"
+import { UserReducer, UserState, UserAction } from "./reducer/User"
 
 export type UserContextType = {
-  userToken: string
-  signIn(email: string, password: string): Promise<void>
-  signOut(): void
+  state: UserState
+  dispatch: Dispatch<UserAction>
 }
 
-export const UserContext = createContext<UserContextType>(null)
+const initialState: UserState = {
+  isLoading: false,
+  user: null,
+  error: null,
+}
+
+export const UserContext = createContext<UserContextType>({
+  dispatch: () => null,
+  state: initialState,
+})
 
 export const UserContextProvider: React.FC = ({ children }) => {
-  const [userToken, setUserToken] = useState<string>(null)
-
+  const [state, dispatch] = useReducer(UserReducer, initialState)
   useEffect(() => {
-    if (localStorage.getItem("@PLTuser")) {
-      const token = localStorage.getItem("@PLTuser")
-      setUserToken(token)
-    }
+    // eslint-disable-next-line no-undef
+    if (localStorage.getItem("@PLTuser")) dispatch({ type: "success" })
   }, [])
 
-  const signIn = async (email, password) => {
-    const response = await ClientSideApi.post<{ access_token: string }>(
-      "/signin",
-      { data: { email, password } }
-    )
-    console.log(response)
-    if (response.data) {
-      const { access_token } = response.data
-      setUserToken(access_token)
-      localStorage.setItem("@PLTuser", access_token)
-    }
-  }
-  const signOut = () => {
-    setUserToken(null)
-  }
-
   return (
-    <UserContext.Provider
-      value={{
-        userToken,
-        signIn,
-        signOut,
-      }}
-    >
+    <UserContext.Provider value={{ state, dispatch }}>
       {children}
     </UserContext.Provider>
   )
