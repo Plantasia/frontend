@@ -4,7 +4,7 @@ import { Row, Image } from "react-bootstrap"
 import { TopicDescription, TopicStats, TopicContent } from "@styled/Topics"
 import { useRouter } from "next/router"
 import { PlantasiaCard } from "@styled/Shared"
-import { TopicItemProps } from "@utils/types"
+import { ComponentProps } from "@utils/types"
 
 export function ListItem({
   id,
@@ -17,10 +17,8 @@ export function ListItem({
   replies,
   created_at,
   updated_at,
-}: TopicItemProps) {
+}: ComponentProps.TopicItemProps) {
   const router = useRouter()
-
-  created_at = `${new Date(created_at).toLocaleDateString("pt-br")}`
 
   return (
     <PlantasiaCard className="d-flex align-items-end">
