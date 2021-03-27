@@ -1,17 +1,8 @@
 /* eslint-disable camelcase */
 import { Col, Row } from "react-bootstrap"
 import { PlantasiaCard } from "@styled/Shared"
-import { UserProps } from "@utils/types"
+import { ComponentProps } from "@utils/types"
 import { TopicLink, UserLink, TopicLinkProps } from "@components/Links"
-
-interface TopicProps {
-  id: string
-  name: string
-  textBody: string
-  imageStorage: string
-  created_at: string
-  updated_at: string
-}
 export interface CategoryProps {
   id: string
   name: string
@@ -20,7 +11,7 @@ export interface CategoryProps {
   repliesCount: number
   lastActivity: string
   lastTopic: {
-    author: UserProps
+    author: ComponentProps.UserProps
     id: string
     title: string
   }
