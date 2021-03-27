@@ -1,25 +1,8 @@
+/* eslint-disable camelcase */
 import { Row, Button, Col } from "react-bootstrap"
-import { UserProps } from "@utils/types"
 import { TopicHeader } from "@styled/Topics"
 import { ListItem } from "./_ListTopicItem"
-
-type ListTopicProps = {
-  data: TopicItemProps[]
-  handleNewTopic(): void
-}
-export type TopicItemProps = {
-  id: string
-  topicTitle: string | ""
-  topicDescription: string
-  ranking: number
-  replies: number
-  lastReply: {
-    user: UserProps
-    when: string
-  }
-  createAt: string
-  author: UserProps
-}
+import { ListTopicProps } from "@utils/types"
 
 export default function listTopics({ data, handleNewTopic }: ListTopicProps) {
   return (
