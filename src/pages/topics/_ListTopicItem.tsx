@@ -53,7 +53,7 @@ export function ListItem({
           <p>replies: &nbsp;&nbsp;&nbsp; {countComments}</p>
         </div>
         <div className="d-flex">
-          <Image
+          {/* <Image
             height="50"
             width="50"
             src={lastComment.user.avatar}
@@ -64,7 +64,7 @@ export function ListItem({
             <p style={{ margin: 0 }}>último reply</p>
 
             <a href={""}>{lastComment.user.name}</a>
-          </div>
+          </div> */}
         </div>
       </TopicStats>
     </PlantasiaCard>
