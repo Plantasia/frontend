@@ -47,10 +47,8 @@ Toggle.propTypes = {
   onClick: propTypes.func,
 }
 
-type Props = {
-  logout(): void
-}
-export default function MenuDropdown({ logout }: Props) {
+export default function MenuDropdown() {
+  const { dispatch } = useContext(UserContext)
   return (
     <Dropdown>
       <Dropdown.Toggle
@@ -67,7 +65,7 @@ export default function MenuDropdown({ logout }: Props) {
         <Dropdown.Divider />
         <CustomDropdownItem
           onClick={() => {
-            logout()
+            dispatch({ type: "logout" })
           }}
         >
           Sair <FaSignOutAlt />
