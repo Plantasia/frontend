@@ -3,7 +3,9 @@ import { BackendDTO } from "./protocols"
 import { Api } from "./Api"
 import { ComponentProps } from "@utils/types"
 
-export const GetTopics = async (): Promise<ComponentProps.TopicItemProps[]> => {
+export const GetTopics = async (
+  page: number
+): Promise<ComponentProps.TopicItemProps[]> => {
   const { data } = await Api.get<{
     data: BackendDTO.TopicDTO[]
     prevPage: number
@@ -45,7 +47,7 @@ export const GetTopics = async (): Promise<ComponentProps.TopicItemProps[]> => {
   )
 }
 
-export const GetTopicsById = async (
+export const GetTopicById = async (
   id: number
 ): Promise<BackendDTO.TopicByIdDTO> => {
   const { data } = await Api.get<{
