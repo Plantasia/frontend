@@ -1,12 +1,12 @@
 /* eslint-disable camelcase */
 import { BackendDTO } from "./protocols"
-import { Api } from "./Api"
+import { ServerSideApi } from "./Api"
 import { ComponentProps } from "@utils/types"
 
 export const GetTopics = async (
   page: number
 ): Promise<ComponentProps.TopicItemProps[]> => {
-  const { data } = await Api.get<{
+  const { data } = await ServerSideApi.get<{
     data: BackendDTO.TopicDTO[]
     prevPage: number
     nextPage: number
@@ -50,7 +50,7 @@ export const GetTopics = async (
 export const GetTopicById = async (
   id: number
 ): Promise<BackendDTO.TopicByIdDTO> => {
-  const { data } = await Api.get<{
+  const { data } = await ServerSideApi.get<{
     data: BackendDTO.TopicByIdDTO
   }>(`topics/${id}`)
 

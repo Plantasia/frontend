@@ -2,9 +2,12 @@
 import { Row, Button, Col } from "react-bootstrap"
 import { TopicHeader } from "@styled/Topics"
 import { ListItem } from "./_ListTopicItem"
-import { ListTopicProps } from "@utils/types"
+import { ComponentProps } from "@utils/types"
 
-export default function listTopics({ data, handleNewTopic }: ListTopicProps) {
+export default function listTopics({
+  data,
+  handleNewTopic,
+}: ComponentProps.ListTopicProps) {
   return (
     <Row>
       <TopicHeader>

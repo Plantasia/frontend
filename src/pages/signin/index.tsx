@@ -1,15 +1,13 @@
 import { Col, Row } from "react-bootstrap"
 import { Header, SEO } from "@components"
 import SignInForm from "./_form"
-import { useState, useEffect, useContext } from "react"
+import { useState } from "react"
 import AuthImage from "@src/assets/AuthImage"
 import { useRouter } from "next/router"
-import { UserContext } from "@contexts/User"
+
 import useUser from "@src/lib/useUser"
-import { axiosFetcher } from "@src/lib/fetchJson"
-import { SelfApi } from "@src/services/Api"
+
 import axios from "axios"
-import { useSWR } from "swr"
 
 export default function SignIn() {
   const [password, setPassword] = useState("")

@@ -3,9 +3,7 @@ import { GetServerSideProps } from "next"
 import { Header } from "@components"
 import { InlineGap } from "@styled/Shared"
 import { CommentProps, Comment } from "./_comment"
-import { UserProps } from "@utils/types"
-import { useContext } from "react"
-import { UserContext } from "@contexts/User"
+import { ComponentProps } from "@utils/types"
 
 export interface BadgeCategoryProps {
   id: string
@@ -17,7 +15,7 @@ export interface TopicProps {
   title: string
   categories: BadgeCategoryProps[]
   comments: CommentProps[]
-  author: UserProps
+  author: ComponentProps.UserProps
 }
 
 export default function showTopicsByCategory({
@@ -25,15 +23,12 @@ export default function showTopicsByCategory({
   categories,
   comments,
 }: TopicProps) {
-  const { dispatch } = useContext(UserContext)
   return (
     <>
       <Header
         callToAction={{
           label: "cadastre-se",
-          onClick: () => {
-            dispatch({ type: "success" })
-          },
+          onClick: () => {},
         }}
       />
       <Row>

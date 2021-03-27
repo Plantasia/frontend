@@ -50,7 +50,7 @@ export default function listTopics({ topics }: ListTopicsProps) {
 export const getServerSideProps: GetServerSideProps<ListTopicsProps> = async context => {
   return {
     props: {
-      topics: await GetTopics(),
+      topics: await GetTopics(1),
     },
   }
 }
