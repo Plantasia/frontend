@@ -14,19 +14,7 @@ export default function SignIn() {
   return (
     <>
       <SEO title="Login" />
-      <Header>
-        {{
-          right: (
-            <Button
-              onClick={() => {
-                router.push("/signup")
-              }}
-            >
-              Criar conta
-            </Button>
-          ),
-        }}
-      </Header>
+      <Header callToAction={{ label: "teste", onClick: () => {} }} />
       <Row>
         <Col xs="4" />
         <Col xs="4">
@@ -35,7 +23,7 @@ export default function SignIn() {
             password={password}
             setPassword={setPassword}
             passwordConfirmation={passwordConfirmation}
-            setpasswordConfirmation={setpasswordConfirmation}
+            setPasswordConfirmation={setpasswordConfirmation}
           />
         </Col>
         <Col xs="4" />

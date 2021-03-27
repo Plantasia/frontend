@@ -1,5 +1,5 @@
 import { Header } from "@components"
-import { Button } from "react-bootstrap"
+
 import { useRouter } from "next/router"
 
 export default function ListCategories() {
@@ -9,11 +9,7 @@ export default function ListCategories() {
 
   return (
     <>
-      <Header>
-        {{
-          right: <Button></Button>,
-        }}
-      </Header>
+      <Header callToAction={{ label: "Teste", onClick: () => {} }} />
       Tópico: {slug}
     </>
   )

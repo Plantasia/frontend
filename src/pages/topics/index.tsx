@@ -15,7 +15,6 @@ export default function listTopics({ topics }: ListTopicsProps) {
   const [currentPage, setCurrentPage] = useState(0)
   const pages = new Array(10).fill(1).map((x, index) => index)
   const router = useRouter()
-  const data = topics
 
   useEffect(() => {}, [])
 
@@ -30,7 +29,7 @@ export default function listTopics({ topics }: ListTopicsProps) {
           onClick: () => {},
         }}
       />
-      <ListTopics handleNewTopic={handleNewTopic} data={data} />
+      <ListTopics handleNewTopic={handleNewTopic} data={topics} />
       <Pagination className="d-flex justify-content-center">
         {pages.map(page => (
           <Pagination.Item
