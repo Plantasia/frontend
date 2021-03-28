@@ -8,10 +8,13 @@ import { useRouter } from "next/router"
 import useUser from "@src/lib/useUser"
 
 import axios from "axios"
+import { BackendDTO } from "@src/services/protocols"
+import { stringify } from "querystring"
 
 export default function SignIn() {
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
+  const [alert, setAlert] = useState<{ message: string; variant: string }>(null)
   const router = useRouter()
   const { mutateUser } = useUser({
     redirectTo: "/",
@@ -20,10 +23,20 @@ export default function SignIn() {
 
   async function handleLoginSubmit(): Promise<void> {
     try {
-      const { data } = await axios.post("/api/login", { email, password })
+      const { data: user, status } = await axios.post<BackendDTO.UserDTO>(
+        "/api/login",
+        {
+          email,
+          password,
+        }
+      )
 
-      await mutateUser(data, true)
+      if (status === 200) await mutateUser({ ...user, isLoggedIn: true }, true)
     } catch (error) {
+      setAlert({ message: error.message, variant: "danger" })
+      setInterval(() => {
+        setAlert(null)
+      }, 3000)
       console.error("An unexpected error happened:", error)
     }
   }
@@ -57,6 +70,7 @@ export default function SignIn() {
             setPassword={setPassword}
             email={email}
             setEmail={setEmail}
+            alert={alert}
           />
         </Col>
       </Row>

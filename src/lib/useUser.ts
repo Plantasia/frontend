@@ -1,12 +1,15 @@
 import { useEffect } from "react"
 import Router from "next/router"
 import useSWR from "swr"
+import { BackendDTO } from "@src/services/protocols"
 
 export default function useUser({
   redirectTo = null,
   redirectIfFound = false,
 } = {}) {
-  const { data: user, mutate: mutateUser } = useSWR("/api/user")
+  const { data: user, mutate: mutateUser } = useSWR<
+    BackendDTO.UserDTO & { isLoggedIn: boolean }
+  >("/api/user")
 
   useEffect(() => {
     // if no redirect needed, just return (example: already on /dashboard)
