@@ -2,6 +2,7 @@
 import { Col, Row } from "react-bootstrap"
 import { PlantasiaCard } from "@styled/Shared"
 import { ComponentProps } from "@utils/types"
+import Image from "next/image"
 import { TopicLink, UserLink, TopicLinkProps } from "@components/Links"
 export interface CategoryProps {
   id: string
@@ -15,6 +16,9 @@ export interface CategoryProps {
     id: string
     title: string
   }
+  image: {
+    src: string
+  }
 }
 
 export function ListCategoryItem({
@@ -25,28 +29,35 @@ export function ListCategoryItem({
   name,
   repliesCount,
   topicsCount,
+  image,
 }: CategoryProps) {
   return (
-    <PlantasiaCard className="mt-4 py-4">
-      <Col xs="3" className="d-flex justify-content-center">
-        <img
-          src="/assets/hortalicas.jpg"
-          style={{
-            width: "75%",
-            aspectRatio: "1/1",
-          }}
+    <PlantasiaCard>
+      <Col xs="12" md="3" lg="2" className="d-flex justify-content-center">
+        <Image
+          loader={({ src, width, quality }) => `https://picsum.photos/${width}`}
+          src={image?.src || "/picsum/150"}
+          width={150}
+          height={150}
+          className="rounded"
         />
       </Col>
       <Col
+        xs="12"
         md="4"
         lg="5"
-        className="d-flex flex-column justify-content-between "
+        className="d-flex flex-column justify-content-betwee"
       >
         <h3>{name}</h3>
         <p>{description}</p>
       </Col>
-      <Col md="5" lg="4" className="d-flex flex-column justify-content-between">
-        <div className="d-flex justify-content-between">
+      <Col
+        xs="12"
+        md="5"
+        lg="5"
+        className="d-flex flex-column justify-content-between"
+      >
+        <div className="d-flex flex-wrap justify-content-between">
           <div className="">
             <h6>Tópicos</h6>
             <p>{topicsCount}</p>
@@ -63,7 +74,7 @@ export function ListCategoryItem({
           </div>
         </div>
 
-        <div className="d-flex flex-column">
+        <div className="d-flex flex-column w-100">
           <h6 style={{ fontWeight: 300 }} className="mb-2">
             último tópico -{" "}
             <UserLink id={lastTopic.author.id} name={lastTopic.author.name} />
@@ -74,9 +85,9 @@ export function ListCategoryItem({
               src="https://picsum.photos/seed/picsum/50"
               style={{ borderRadius: "50%" }}
             />
-            <h5 className="ml-3">
+            <h6 className="ml-3">
               <TopicLink id={lastTopic.id} title={lastTopic.title} />
-            </h5>
+            </h6>
           </div>
         </div>
       </Col>
