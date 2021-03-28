@@ -44,6 +44,7 @@ export const GetCategories = async (): Promise<CategoryProps[]> => {
           author: {
             name: "teste",
             id: "testeee",
+            bio: "teste",
           },
           title: (lastTopic && lastTopic.name) || "teste",
         },

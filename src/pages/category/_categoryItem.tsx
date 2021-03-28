@@ -65,8 +65,8 @@ export function ListCategoryItem({
 
         <div className="d-flex flex-column">
           <h6 style={{ fontWeight: 300 }} className="mb-2">
-            {/* API INCOMPATIBILITY */}
-            {/* último tópico - <UserLink id={authorId} name={author} /> */}
+            último tópico -{" "}
+            <UserLink id={lastTopic.author.id} name={lastTopic.author.name} />
           </h6>
 
           <div className="d-flex align-items-center">
@@ -75,8 +75,7 @@ export function ListCategoryItem({
               style={{ borderRadius: "50%" }}
             />
             <h5 className="ml-3">
-              {/* API INCOMPATIBILITY */}
-              {/* <TopicLink id={lastTopicId} title={title} /> */}
+              <TopicLink id={lastTopic.id} title={lastTopic.title} />
             </h5>
           </div>
         </div>

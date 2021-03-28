@@ -33,7 +33,6 @@ export namespace BackendDTO {
       created_at: string
     }
   }
-
   export interface CategoryTopicByIdRouteDTO {
     name: string
     id: string
