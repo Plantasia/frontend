@@ -1,6 +1,4 @@
-import { useContext } from "react"
 import { GetServerSideProps } from "next"
-import { UserContext } from "@contexts/User"
 import { Header } from "@components"
 import { InlineGap } from "@styled/Shared"
 import { ListCategoryItem, CategoryProps } from "./_categoryItem"
@@ -12,7 +10,6 @@ export interface ListCategoriesProps {
 }
 
 export default function ListCategories({ categories }: ListCategoriesProps) {
-  const { dispatch } = useContext(UserContext)
   const router = useRouter()
   return (
     <>
@@ -25,7 +22,7 @@ export default function ListCategories({ categories }: ListCategoriesProps) {
         }}
       />
       <Row>
-        <Col xs="2">
+        <Col xs="2" className="mb-4">
           <h2>Categorias</h2>
         </Col>
         <Col xs="10" className="d-flex justify-content-end">

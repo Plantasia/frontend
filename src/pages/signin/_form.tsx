@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react"
-import { Button } from "react-bootstrap"
+import { Alert, Button } from "react-bootstrap"
 
 import {
   Title,
@@ -21,6 +21,10 @@ interface ISignInForm {
   setEmail: Dispatch<SetStateAction<string>>
   password: string
   email: string
+  alert: {
+    message: string
+    variant: string
+  }
 }
 
 export default function SignInForm({
@@ -31,6 +35,7 @@ export default function SignInForm({
   setPassword,
   handleFacebookAuth,
   handleGoogleAuth,
+  alert,
 }: ISignInForm) {
   return (
     <FormWrapper>
@@ -39,6 +44,7 @@ export default function SignInForm({
         <span>Entre na comunidade.</span>
       </Title>
       <Form>
+        {alert && <Alert variant={alert.variant}>{alert.message}</Alert>}
         <Form.Group>
           <Label>Email</Label>
           <Form.Control

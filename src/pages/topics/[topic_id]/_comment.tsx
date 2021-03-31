@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from "react"
 import { Button, Row, Col, Image } from "react-bootstrap"
 import { FaSeedling } from "react-icons/fa"
 import { PlantasiaCard, InlineGap } from "@styled/Shared"
-import { UserProps } from "@utils/types"
+import { ComponentProps } from "@utils/types"
 import { CommentDropdown } from "@components/CommentDropdown"
 
 export interface CommentProps {
-  user: UserProps
+  user: ComponentProps.UserProps
   content: string
   likes: number
   createdAt: string
@@ -18,18 +18,18 @@ type EditorRefType = {
 }
 
 type ProfileCommentProps = {
-  user: UserProps
+  user: ComponentProps.UserProps
 }
 
 const ProfileComment: React.FC<ProfileCommentProps> = ({
-  user: { name, createdAt, bio },
+  user: { name, created_at, bio },
 }) => {
   return (
     <Col xs="2" className="d-flex flex-column align-items-center text-center">
       <Image src="https://picsum.photos/100" roundedCircle className="mb-3" />
       <div className="mb-3" style={{ borderBottom: "1px solid black" }}>
         <h5>{name}</h5>
-        <p>Membro desde {createdAt}</p>
+        <p>Membro desde {created_at}</p>
       </div>
       <div>
         <p className="font-weight-normal">{bio}</p>

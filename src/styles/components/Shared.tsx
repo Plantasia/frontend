@@ -8,7 +8,7 @@ export const InlineGap = styled.div`
 `
 export const PlantasiaCard = styled(Row).attrs(
   (): RowProps => ({
-    className: "pt-3 pb-4 px-1 mb-3",
+    className: "py-3 px-1 mb-4",
   })
 )`
   filter: drop-shadow(0px 2px 10px rgba(125, 72, 163, 0.13));

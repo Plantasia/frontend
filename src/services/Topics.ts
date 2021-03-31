@@ -1,11 +1,13 @@
 /* eslint-disable camelcase */
-import { TopicDTO } from "./protocols"
-import { Api } from "./Api"
-import { TopicItemProps } from "@utils/types"
+import { BackendDTO } from "./protocols"
+import { ServerSideApi } from "./Api"
+import { ComponentProps } from "@utils/types"
 
-export const GetTopics = async (): Promise<TopicItemProps[]> => {
-  const { data } = await Api.get<{
-    data: TopicDTO[]
+export const GetTopics = async (
+  page: number
+): Promise<ComponentProps.TopicItemProps[]> => {
+  const { data } = await ServerSideApi.get<{
+    data: BackendDTO.TopicDTO[]
     prevPage: number
     nextPage: number
     perPage: number
@@ -14,15 +16,43 @@ export const GetTopics = async (): Promise<TopicItemProps[]> => {
   // @TO-DO tratar exceções
   console.log(data)
 
+  const comments = data.data
+
+  for (const comment of comments) {
+    console.log("****COMMENNTS")
+    console.log(comment.comments)
+  }
+
   return data.data.map(
-    ({ id, user, name, textBody, imageStorage, created_at, updated_at }) => ({
+    ({
+      id,
+      user,
+      name,
+      textBody,
+      comments,
+      imageStorage,
+      created_at,
+      updated_at,
+    }) => ({
       id,
       name,
-      user,
+      topicOwner: user,
+      lastComment: comments[0],
+      countComments: comments.length,
       textBody,
       imageStorage: imageStorage || "",
       created_at,
       updated_at,
     })
   )
+}
+
+export const GetTopicById = async (
+  id: number
+): Promise<BackendDTO.TopicByIdDTO> => {
+  const { data } = await ServerSideApi.get<{
+    data: BackendDTO.TopicByIdDTO
+  }>(`topics/${id}`)
+
+  return data.data
 }

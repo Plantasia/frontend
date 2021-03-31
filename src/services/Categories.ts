@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
 import { CategoryProps } from "@src/pages/category/_categoryItem"
-import { CategoryDTO } from "./protocols"
-import { Api } from "./Api"
+import { BackendDTO } from "./protocols"
+import { ServerSideApi } from "./Api"
 
 export const GetCategories = async (): Promise<CategoryProps[]> => {
-  const { data } = await Api.get<{
-    categories: CategoryDTO[]
+  const { data } = await ServerSideApi.get<{
+    data: BackendDTO.CategoryDTO[]
     prevPage: number
     nextPage: number
     perPage: number
@@ -44,6 +44,7 @@ export const GetCategories = async (): Promise<CategoryProps[]> => {
           author: {
             name: "teste",
             id: "testeee",
+            bio: "teste",
           },
           title: (lastTopic && lastTopic.name) || "teste",
         },

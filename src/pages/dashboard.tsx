@@ -6,11 +6,7 @@ import { Button, Container, Row, Col, ListGroup } from "react-bootstrap"
 export default function ListCategories() {
   return (
     <>
-      <Header>
-        {{
-          right: <Button>Registre-se aqui </Button>,
-        }}
-      </Header>
+      <Header callToAction={{ label: "teste", onClick: () => {} }} />
 
       <Row className="container">
         <Col xs="8">
