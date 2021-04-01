@@ -10,13 +10,14 @@ export const GetCategories = async (): Promise<CategoryProps[]> => {
     nextPage: number
     perPage: number
     totalRegisters: number
-  }>("/forum/categories/")
+  }>("/forum/categories/page/1")
   // @TO-DO tratar exceções
   console.log(data)
-  return data.data.map(
+  return data.categories.map(
     // API keys
     ({
       authorId,
+      topics,
       description,
       id,
       lastComment,
@@ -28,8 +29,9 @@ export const GetCategories = async (): Promise<CategoryProps[]> => {
       // Component props
       ({
         id,
-        repliesCount: countComments || 0,
-        topicsCount: countTopics || 0,
+        topics,
+        repliesCount: 0,
+        topicsCount: topics.length,
         name,
         description,
         lastActivity:

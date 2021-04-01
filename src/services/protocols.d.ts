@@ -14,24 +14,39 @@ export namespace BackendDTO {
     avatar?: string
   }
 
+  export type CommentCategoryInfo = {
+    id: string
+    updated_at: string
+  }
+
+  export type TopicCategoryByIdInfo = {
+    id: string
+    name: string
+    textBody: string
+    imageStore: string
+    comments: CommentCategoryInfo[]
+  }
   export interface CategoryDTO {
     name: string
     id: string
     description: string
     authorId: string
-    lastComment: {
+
+    lastComment?: {
       created_at: string
     }
     countComments?: number
-    countTopics: number
-    lastTopic: {
+    countTopics?: number
+    lastTopic?: {
       id?: string
       name?: string
       textBody?: string
-      imageStore: string
-      isActive: boolean
-      created_at: string
+      imageStore?: string
+      isActive?: boolean
+      created_at?: string
+      updatedt_at?: string
     }
+    topics: TopicCategoryByIdInfo[]
   }
   export interface CategoryTopicByIdRouteDTO {
     name: string
