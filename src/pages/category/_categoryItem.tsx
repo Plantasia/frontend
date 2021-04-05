@@ -5,42 +5,22 @@ import { ComponentProps } from "@utils/types"
 import Image from "next/image"
 import { TopicLink, UserLink, TopicLinkProps } from "@components/Links"
 
-export interface CategoriesProps {
-  id: string
-  name: string
-  description: string
-  imageStorage: string
-  lastTopicId: string
-  lastTopicName: string
-  lastActivity: string
-  countTopics: string
-  countComments: string
-}
-export interface CategoryProps {
-  categories: CategoriesProps[]
-  currentPage: number | null
-  prevPage: number | null
-  nextPage: number | null
-  perPage: number | null
-}
-
 export function ListCategoryItem({
-  id,
-  name,
   description,
-  imageStorage,
-  lastTopicId,
-  lastTopicName,
+  id,
   lastActivity,
-  countTopics,
-  countComments,
-}: CategoryProps) {
+  lastTopic,
+  name,
+  repliesCount,
+  topicsCount,
+  image,
+}: ComponentProps.CategoryProps) {
   return (
     <PlantasiaCard>
       <Col xs="12" md="3" lg="2" className="d-flex justify-content-center">
         <Image
           loader={({ src, width, quality }) => `https://picsum.photos/${width}`}
-          src={imageStorage || "/picsum/150"}
+          src={image?.src || "/picsum/150"}
           width={150}
           height={150}
           className="rounded"
@@ -64,7 +44,7 @@ export function ListCategoryItem({
         <div className="d-flex flex-wrap justify-content-between">
           <div className="">
             <h6>Tópicos</h6>
-            <p>{countTopics}</p>
+            <p>{topicsCount}</p>
           </div>
 
           <div className="" style={{ minWidth: 150 }}>
@@ -73,14 +53,15 @@ export function ListCategoryItem({
           </div>
 
           <div className="">
-            <h6>Comentários</h6>
-            <p>{countComments}</p>
+            <h6>Comentário</h6>
+            <p>{repliesCount}</p>
           </div>
         </div>
 
         <div className="d-flex flex-column w-100">
           <h6 style={{ fontWeight: 300 }} className="mb-2">
-            último tópico - {/* <UserLink name={"df"} /> */}
+            último tópico -{" "}
+            {/* <UserLink id={lastTopic.author.id} name={lastTopic.author.name} /> */}
           </h6>
 
           <div className="d-flex align-items-center">
@@ -89,7 +70,7 @@ export function ListCategoryItem({
               style={{ borderRadius: "50%" }}
             />
             <h6 className="ml-3">
-              <TopicLink id={lastTopicId} title={lastTopicName} />
+              <TopicLink id={lastTopic.id} title={lastTopic.title} />
             </h6>
           </div>
         </div>

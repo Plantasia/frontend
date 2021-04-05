@@ -1,17 +1,15 @@
 /* eslint-disable camelcase */
-import { CategoryProps } from "@src/pages/category/_categoryItem"
+import { ComponentProps } from "@utils/types"
 import { BackendDTO } from "./protocols"
 import { ServerSideApi } from "./Api"
 import { count } from "console"
 
-export const GetCategories = async (): Promise<CategoryProps[]> => {
-  const { data } = await ServerSideApi.get<{
-    data: BackendDTO.CategoriesDTO[]
-    prevPage: number
-    nextPage: number
-    perPage: number
-    totalRegisters: number
-  }>("/forum/categories/page/1")
+export const GetCategories = async (): Promise<
+  ComponentProps.CategoryProps[]
+> => {
+  const { data } = await ServerSideApi.get<BackendDTO.CategoriesDTO>(
+    "/forum/categories/page/1"
+  )
   // @TO-DO tratar exceções
   console.log(data)
   return data.categories.map(
@@ -19,27 +17,23 @@ export const GetCategories = async (): Promise<CategoryProps[]> => {
     ({
       id,
       name,
+      lastTopicId,
+      lastActivity,
+      countComments,
+      countTopics,
       description,
       imageStorage,
-      lastTopicId,
       lastTopicName,
-      lastActivity,
-      countTopics,
-      countComments,
     }) => ({
       id,
-      name,
-      imageStorage,
-      countComments,
-      countTopics,
+      name
+      image: imageStorage,
       description,
-      lastActivity:
-        lastActivity === null
-          ? ""
-          : new Date(lastActivity).toLocaleString("pt-BR").split(",")[0],
+      lastTopic: { id: lastTopicId, title: lastTopicName },
+      lastActivity,
+      repliesCount:countComments,
+      topicsCount:countTopics
 
-      lastTopicId,
-      lastTopicName,
     })
   )
 }
