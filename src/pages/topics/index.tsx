@@ -1,4 +1,4 @@
-import { Button, Pagination } from "react-bootstrap"
+import { Pagination } from "react-bootstrap"
 import { Header } from "@components"
 import { GetServerSideProps } from "next"
 import ListTopics from "./_ListTopics"
@@ -10,7 +10,6 @@ import { GetTopics } from "@src/services/Topics"
 export interface ListTopicsProps {
   topics: ComponentProps.TopicItemProps[]
 }
-
 export default function listTopics({ topics }: ListTopicsProps) {
   const [currentPage, setCurrentPage] = useState(0)
   const pages = new Array(10).fill(1).map((x, index) => index)

@@ -14,14 +14,14 @@ export const GetTopics = async (
     totalRegisters: number
   }>("/topics")
   // @TO-DO tratar exceções
-  console.log(data)
+  // console.log(data)
 
-  const comments = data.data
+  // const comments = data.data
 
-  for (const comment of comments) {
-    console.log("****COMMENNTS")
-    console.log(comment.comments)
-  }
+  // for (const comment of comments) {
+  //   console.log("****COMMENNTS")
+  //   console.log(comment.comments)
+  // }
 
   return data.data.map(
     ({

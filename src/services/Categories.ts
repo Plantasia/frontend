@@ -12,7 +12,7 @@ export const GetCategories = async (): Promise<CategoryProps[]> => {
     totalRegisters: number
   }>("/forum/categories/")
   // @TO-DO tratar exceções
-  console.log(data)
+  // console.log(data)
   return data.data.map(
     // API keys
     ({

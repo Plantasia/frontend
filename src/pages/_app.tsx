@@ -6,6 +6,8 @@ import { axiosFetcher } from "@src/lib/fetchJson"
 import Head from "next/head"
 
 function MyApp({ Component, pageProps }) {
+  console.log(Component)
+  console.log(pageProps)
   return (
     <SWRConfig
       value={{
