@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap"
 import { PlantasiaCard } from "@styled/Shared"
 import { ComponentProps } from "@utils/types"
 import Image from "next/image"
-import { TopicLink, UserLink, TopicLinkProps } from "@components/Links"
+import { TopicLink } from "@components/Links"
 
 export function ListCategoryItem({
   description,
@@ -60,7 +60,7 @@ export function ListCategoryItem({
 
         <div className="d-flex flex-column w-100">
           <h6 style={{ fontWeight: 300 }} className="mb-2">
-            último tópico -{" "}
+            último tópico
             {/* <UserLink id={lastTopic.author.id} name={lastTopic.author.name} /> */}
           </h6>
 

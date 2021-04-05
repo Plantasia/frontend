@@ -2,13 +2,12 @@
 import { ComponentProps } from "@utils/types"
 import { BackendDTO } from "./protocols"
 import { ServerSideApi } from "./Api"
-import { count } from "console"
 
-export const GetCategories = async (): Promise<
-  ComponentProps.CategoryProps[]
-> => {
+export const GetCategories = async (
+  pageNumber: number
+): Promise<ComponentProps.CategoryProps[]> => {
   const { data } = await ServerSideApi.get<BackendDTO.CategoriesDTO>(
-    "/forum/categories/page/1"
+    `/forum/categories/page/${pageNumber}`
   )
   // @TO-DO tratar exceções
   console.log(data)
@@ -26,14 +25,13 @@ export const GetCategories = async (): Promise<
       lastTopicName,
     }) => ({
       id,
-      name
-      image: imageStorage,
+      name,
+      image: { src: imageStorage },
       description,
       lastTopic: { id: lastTopicId, title: lastTopicName },
       lastActivity,
-      repliesCount:countComments,
-      topicsCount:countTopics
-
+      repliesCount: countComments,
+      topicsCount: countTopics,
     })
   )
 }

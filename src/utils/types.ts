@@ -5,8 +5,8 @@ export namespace ComponentProps {
     id: string
     name: string
     description: string
-    topicsCount: number
-    repliesCount: number
+    topicsCount: string
+    repliesCount: string
     lastActivity: string
     lastTopic: {
       author?: ComponentProps.UserProps
