@@ -4,39 +4,43 @@ import { PlantasiaCard } from "@styled/Shared"
 import { ComponentProps } from "@utils/types"
 import Image from "next/image"
 import { TopicLink, UserLink, TopicLinkProps } from "@components/Links"
-export interface CategoryProps {
+
+export interface CategoriesProps {
   id: string
   name: string
   description: string
-  topicsCount: number
-  repliesCount: number
+  imageStorage: string
+  lastTopicId: string
+  lastTopicName: string
   lastActivity: string
-  lastTopic: {
-    author: ComponentProps.UserProps
-    id: string
-    title: string
-  }
-  image: {
-    src: string
-  }
+  countTopics: string
+  countComments: string
+}
+export interface CategoryProps {
+  categories: CategoriesProps[]
+  currentPage: number | null
+  prevPage: number | null
+  nextPage: number | null
+  perPage: number | null
 }
 
 export function ListCategoryItem({
-  description,
   id,
-  lastActivity,
-  lastTopic,
   name,
-  repliesCount,
-  topicsCount,
-  image,
+  description,
+  imageStorage,
+  lastTopicId,
+  lastTopicName,
+  lastActivity,
+  countTopics,
+  countComments,
 }: CategoryProps) {
   return (
     <PlantasiaCard>
       <Col xs="12" md="3" lg="2" className="d-flex justify-content-center">
         <Image
           loader={({ src, width, quality }) => `https://picsum.photos/${width}`}
-          src={image?.src || "/picsum/150"}
+          src={imageStorage || "/picsum/150"}
           width={150}
           height={150}
           className="rounded"
@@ -60,7 +64,7 @@ export function ListCategoryItem({
         <div className="d-flex flex-wrap justify-content-between">
           <div className="">
             <h6>Tópicos</h6>
-            <p>{topicsCount}</p>
+            <p>{countTopics}</p>
           </div>
 
           <div className="" style={{ minWidth: 150 }}>
@@ -69,15 +73,14 @@ export function ListCategoryItem({
           </div>
 
           <div className="">
-            <h6>Comentário</h6>
-            <p>{repliesCount}</p>
+            <h6>Comentários</h6>
+            <p>{countComments}</p>
           </div>
         </div>
 
         <div className="d-flex flex-column w-100">
           <h6 style={{ fontWeight: 300 }} className="mb-2">
-            último tópico -{" "}
-            <UserLink id={lastTopic.author.id} name={lastTopic.author.name} />
+            último tópico - {/* <UserLink name={"df"} /> */}
           </h6>
 
           <div className="d-flex align-items-center">
@@ -86,7 +89,7 @@ export function ListCategoryItem({
               style={{ borderRadius: "50%" }}
             />
             <h6 className="ml-3">
-              <TopicLink id={lastTopic.id} title={lastTopic.title} />
+              <TopicLink id={lastTopicId} title={lastTopicName} />
             </h6>
           </div>
         </div>

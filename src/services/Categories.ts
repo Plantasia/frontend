@@ -2,10 +2,11 @@
 import { CategoryProps } from "@src/pages/category/_categoryItem"
 import { BackendDTO } from "./protocols"
 import { ServerSideApi } from "./Api"
+import { count } from "console"
 
 export const GetCategories = async (): Promise<CategoryProps[]> => {
   const { data } = await ServerSideApi.get<{
-    data: BackendDTO.CategoryDTO[]
+    data: BackendDTO.CategoriesDTO[]
     prevPage: number
     nextPage: number
     perPage: number
@@ -16,40 +17,29 @@ export const GetCategories = async (): Promise<CategoryProps[]> => {
   return data.categories.map(
     // API keys
     ({
-      authorId,
-      topics,
-      description,
       id,
-      lastComment,
-      lastTopic,
       name,
+      description,
+      imageStorage,
+      lastTopicId,
+      lastTopicName,
+      lastActivity,
       countTopics,
       countComments,
-    }) =>
-      // Component props
-      ({
-        id,
-        topics,
-        repliesCount: 0,
-        topicsCount: topics.length,
-        name,
-        description,
-        lastActivity:
-          lastComment === undefined
-            ? ""
-            : new Date(lastComment.created_at)
-                .toLocaleString("pt-BR")
-                .split(",")[0],
-        // FAILURE API COMPATIBILITY
-        lastTopic: {
-          id: (lastTopic && lastTopic.id) || "12389",
-          author: {
-            name: "teste",
-            id: "testeee",
-            bio: "teste",
-          },
-          title: (lastTopic && lastTopic.name) || "teste",
-        },
-      })
+    }) => ({
+      id,
+      name,
+      imageStorage,
+      countComments,
+      countTopics,
+      description,
+      lastActivity:
+        lastActivity === null
+          ? ""
+          : new Date(lastActivity).toLocaleString("pt-BR").split(",")[0],
+
+      lastTopicId,
+      lastTopicName,
+    })
   )
 }
