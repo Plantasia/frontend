@@ -37,7 +37,7 @@ const Footer = styled(Row)`
 
 const NavLink = styled(Nav.Link)`
   color: white !important;
-  font-size: 1.4em;
+  font-size: 1.3vw;
   font-weight: 300;
   :hover {
     font-weight: 500;
@@ -58,7 +58,14 @@ const NavLink = styled(Nav.Link)`
   }
 `
 const Brand = styled.h1`
-  font-size: 6em;
+  /* @media (min-width: 992px) {
+    font-size: 6em;
+  } */
+  font-size: 5vw;
+`
+const Slogan = styled.h2`
+  font-size: 2vw;
+  font-weight: 300;
 `
 
 const FAQTitle = styled(Button)`
@@ -75,7 +82,7 @@ const FAQDescription = styled.p`
   padding-left: 12px;
 `
 
-export default function HomePage(props): React.FC {
+const HomePage: React.FC = ({ children }) => {
   return (
     <LandingContainer fluid>
       <Navbar expand="md" className="w-100 right" variant="dark">
@@ -90,19 +97,31 @@ export default function HomePage(props): React.FC {
       </Navbar>
 
       <SectionOne className="mt-4 d-flex align-items-center">
-        <Col xs="6" className="d-flex justify-content-center w-100">
-          <div className="ml-5 d-flex flex-column">
-            <Brand>Plantasia</Brand>
-            <h2 style={{ fontWeight: 300 }}>
+        <Col
+          xs={{ span: 12, order: 2 }}
+          md={{ span: 6, order: 1 }}
+          className="d-flex justify-content-center w-100"
+        >
+          <div className="ml-md-5 d-flex flex-column">
+            <Brand>plantasia</Brand>
+            <Slogan>
               Regue informações, <br />
               cultive conhecimento
-            </h2>
-            <Button size="lg" className="mt-3" style={{ fontWeight: 500 }}>
+            </Slogan>
+            <Button
+              size="lg"
+              className="my-3"
+              style={{ fontWeight: 500, fontSize: "1.5vw" }}
+            >
               Visitar fórum
             </Button>
           </div>
         </Col>
-        <Col xs="6" className="mb-0">
+        <Col
+          xs={{ span: 12, order: 1 }}
+          md={{ span: 6, order: 2 }}
+          className="mb-0"
+        >
           <object
             className="w-100"
             type="image/svg+xml"
@@ -120,16 +139,18 @@ export default function HomePage(props): React.FC {
       </Row>
 
       <SectionTwo className="d-flex align-items-center">
-        <Col xs="6" className="mb-0 p-0">
+        <Col xs={{ span: 12 }} md={{ span: 6 }} className="mb-0 p-0">
           <object
-            className="w-100 ml-5"
+            className="w-100 ml-md-5"
             type="image/svg+xml"
             data="/assets/img/landing-02.svg"
           ></object>
         </Col>
-        <Col xs={{ offset: 1, span: 5 }}>
+        <Col xs={{ span: 12 }} md={{ span: 5, offset: 1 }}>
           <div className=" d-flex flex-column">
-            <h1>Cuide de suas plantas e compartilhe o seu conhecimento</h1>
+            <h1 className="mb-3">
+              Cuide de suas plantas e compartilhe o seu conhecimento
+            </h1>
             <h2 style={{ fontWeight: 300 }}>
               <ul className="list-unstyled">
                 <li>Aprenda sobre plantas</li>
@@ -151,7 +172,7 @@ export default function HomePage(props): React.FC {
 
       <SectionThree className="d-flex align-items-start justify-content-center my-5">
         <Col xs="6" className="">
-          <h1 className="my-5">Perguntas frequentes</h1>
+          <h2 className="my-lg-5 h1">Perguntas frequentes</h2>
           <Accordion
             style={{
               width: "500px",
@@ -163,12 +184,13 @@ export default function HomePage(props): React.FC {
                   as={FAQTitle}
                   variant="link"
                   eventKey={index.toString()}
+                  key={index}
                 >
-                  <h5>{title}</h5>
+                  <h5 key={index}>{title}</h5>
                 </Accordion.Toggle>
 
                 <Accordion.Collapse eventKey={index.toString()}>
-                  <FAQDescription>{description}</FAQDescription>
+                  <FAQDescription key={index}>{description}</FAQDescription>
                 </Accordion.Collapse>
               </>
             ))}
@@ -187,7 +209,7 @@ export default function HomePage(props): React.FC {
           xs="12"
           className="d-flex justify-content-between align-items-center"
         >
-          <h1>PLANTASIA</h1>
+          <h1>Plantasia</h1>
           <h2>2021 ©</h2>
           <div
             style={{ width: 250 }}
@@ -203,3 +225,4 @@ export default function HomePage(props): React.FC {
     </LandingContainer>
   )
 }
+export default HomePage
