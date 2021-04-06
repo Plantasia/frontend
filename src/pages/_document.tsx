@@ -48,10 +48,8 @@ export default class MyDocument extends Document {
           />
         </Head>
         <body>
-          <Container>
-            <Main />
-            <NextScript />
-          </Container>
+          <Main />
+          <NextScript />
         </body>
       </Html>
     )
