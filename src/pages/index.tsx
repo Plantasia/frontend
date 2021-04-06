@@ -1,3 +1,4 @@
+import React from "react"
 import {
   Row,
   Col,
@@ -7,23 +8,25 @@ import {
   Navbar,
   Nav,
 } from "react-bootstrap"
-import { HeaderLanding, SEO, FooterLanding } from "@components"
-import React, { useState } from "react"
-import { Layout } from "@src/components/Layout"
 import styled from "styled-components"
 import { QuestionsFAQ } from "@src/utils/constants"
 import { FaFacebook, FaGithub, FaInstagram, FaWhatsapp } from "react-icons/fa"
 
 const LandingContainer = styled(Container)`
   background-image: linear-gradient(225deg, #89a986, #b6d0b4);
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  display: block;
+  height: 100vh;
 `
-const SectionOne = styled(Row)`
+const SectionOne = styled(Row).attrs({ id: "home" })`
   color: white;
 `
 const SectionTwo = styled(Row)`
   background-color: white;
+  color: #624378;
 `
-const SectionThree = styled(Row)`
+const SectionThree = styled(Row).attrs({ id: "faq" })`
   color: white;
 `
 const Footer = styled(Row)`
@@ -61,10 +64,18 @@ const Brand = styled.h1`
 const FAQTitle = styled(Button)`
   :focus {
     box-shadow: none;
+    text-decoration: none;
+  }
+  :hover {
+    text-decoration: none;
   }
 `
 
-export default function HomePage(props) {
+const FAQDescription = styled.p`
+  padding-left: 12px;
+`
+
+export default function HomePage(props): React.FC {
   return (
     <LandingContainer fluid>
       <Navbar expand="md" className="w-100 right" variant="dark">
@@ -77,12 +88,13 @@ export default function HomePage(props) {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+
       <SectionOne className="mt-4 d-flex align-items-center">
         <Col xs="6" className="d-flex justify-content-center w-100">
           <div className="ml-5 d-flex flex-column">
-            <Brand className="">Plantasia</Brand>
+            <Brand>Plantasia</Brand>
             <h2 style={{ fontWeight: 300 }}>
-              Regue informações <br />
+              Regue informações, <br />
               cultive conhecimento
             </h2>
             <Button size="lg" className="mt-3" style={{ fontWeight: 500 }}>
@@ -97,13 +109,16 @@ export default function HomePage(props) {
             data="/assets/img/landing-01.svg"
           ></object>
         </Col>
+      </SectionOne>
 
+      <Row id="about">
         <object
           className="w-100"
           type="image/svg+xml"
           data="/assets/img/wave.svg"
         ></object>
-      </SectionOne>
+      </Row>
+
       <SectionTwo className="d-flex align-items-center">
         <Col xs="6" className="mb-0 p-0">
           <object
@@ -125,6 +140,7 @@ export default function HomePage(props) {
           </div>
         </Col>
       </SectionTwo>
+
       <Row>
         <object
           className="w-100"
@@ -132,6 +148,7 @@ export default function HomePage(props) {
           data="/assets/img/wave-02.svg"
         ></object>
       </Row>
+
       <SectionThree className="d-flex align-items-start justify-content-center my-5">
         <Col xs="6" className="">
           <h1 className="my-5">Perguntas frequentes</h1>
@@ -151,7 +168,7 @@ export default function HomePage(props) {
                 </Accordion.Toggle>
 
                 <Accordion.Collapse eventKey={index.toString()}>
-                  <p>{description}</p>
+                  <FAQDescription>{description}</FAQDescription>
                 </Accordion.Collapse>
               </>
             ))}
@@ -171,7 +188,7 @@ export default function HomePage(props) {
           className="d-flex justify-content-between align-items-center"
         >
           <h1>PLANTASIA</h1>
-          <h2>2021</h2>
+          <h2>2021 ©</h2>
           <div
             style={{ width: 250 }}
             className="d-flex justify-content-between"
