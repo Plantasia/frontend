@@ -1,5 +1,5 @@
 import { Header } from "@components"
-import DashboardListingItem from "../components/DashboardListingItem"
+
 // import CategoryBeforeItems from "@components/CategoryBeforeItems"
 import { Button, Container, Row, Col, ListGroup } from "react-bootstrap"
 
@@ -15,9 +15,6 @@ export default function ListCategories() {
               <h3>Em alta</h3>
             </Col>
           </Row>
-          <DashboardListingItem />
-          <DashboardListingItem />
-          <DashboardListingItem />
         </Col>
         <Col xs="4">
           <Row>
