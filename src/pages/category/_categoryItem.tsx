@@ -3,23 +3,7 @@ import { Col, Row } from "react-bootstrap"
 import { PlantasiaCard } from "@styled/Shared"
 import { ComponentProps } from "@utils/types"
 import Image from "next/image"
-import { TopicLink, UserLink, TopicLinkProps } from "@components/Links"
-export interface CategoryProps {
-  id: string
-  name: string
-  description: string
-  topicsCount: number
-  repliesCount: number
-  lastActivity: string
-  lastTopic: {
-    author: ComponentProps.UserProps
-    id: string
-    title: string
-  }
-  image: {
-    src: string
-  }
-}
+import { TopicLink } from "@components/Links"
 
 export function ListCategoryItem({
   description,
@@ -30,7 +14,7 @@ export function ListCategoryItem({
   repliesCount,
   topicsCount,
   image,
-}: CategoryProps) {
+}: ComponentProps.CategoryProps) {
   return (
     <PlantasiaCard>
       <Col xs="12" md="3" lg="2" className="d-flex justify-content-center">
@@ -76,8 +60,8 @@ export function ListCategoryItem({
 
         <div className="d-flex flex-column w-100">
           <h6 style={{ fontWeight: 300 }} className="mb-2">
-            último tópico -{" "}
-            <UserLink id={lastTopic.author.id} name={lastTopic.author.name} />
+            último tópico
+            {/* <UserLink id={lastTopic.author.id} name={lastTopic.author.name} /> */}
           </h6>
 
           <div className="d-flex align-items-center">

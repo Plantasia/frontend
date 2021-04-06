@@ -1,6 +1,23 @@
 /* eslint-disable camelcase */
 
 export namespace ComponentProps {
+  export interface CategoryProps {
+    id: string
+    name: string
+    description: string
+    topicsCount: string
+    repliesCount: string
+    lastActivity: string
+    lastTopic: {
+      author?: ComponentProps.UserProps
+      id: string
+      title: string
+    }
+    image: {
+      src: string
+    }
+  }
+
   export interface UserProps {
     id: string
     name?: string

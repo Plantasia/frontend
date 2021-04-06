@@ -1,53 +1,39 @@
 /* eslint-disable camelcase */
-import { CategoryProps } from "@src/pages/category/_categoryItem"
+import { ComponentProps } from "@utils/types"
 import { BackendDTO } from "./protocols"
 import { ServerSideApi } from "./Api"
 
-export const GetCategories = async (): Promise<CategoryProps[]> => {
-  const { data } = await ServerSideApi.get<{
-    data: BackendDTO.CategoryDTO[]
-    prevPage: number
-    nextPage: number
-    perPage: number
-    totalRegisters: number
-  }>("/forum/categories/")
+export const GetCategories = async (
+  pageNumber?: number
+): Promise<ComponentProps.CategoryProps[]> => {
+  const { data } = await ServerSideApi.get<BackendDTO.CategoriesDTO>(
+    `/forum/categories/page/${pageNumber}`
+  )
   // @TO-DO tratar exceções
-  // console.log(data)
-  return data.data.map(
+  console.log(data)
+  return data.categories.map(
     // API keys
     ({
-      authorId,
-      description,
       id,
-      lastComment,
-      lastTopic,
       name,
-      countTopics,
+      lastTopicId,
+      lastActivity,
       countComments,
-    }) =>
-      // Component props
-      ({
-        id,
-        repliesCount: countComments || 0,
-        topicsCount: countTopics || 0,
-        name,
-        description,
-        lastActivity:
-          lastComment === undefined
-            ? ""
-            : new Date(lastComment.created_at)
-                .toLocaleString("pt-BR")
-                .split(",")[0],
-        // FAILURE API COMPATIBILITY
-        lastTopic: {
-          id: (lastTopic && lastTopic.id) || "12389",
-          author: {
-            name: "teste",
-            id: "testeee",
-            bio: "teste",
-          },
-          title: (lastTopic && lastTopic.name) || "teste",
-        },
-      })
+      countTopics,
+      description,
+      imageStorage,
+      lastTopicName,
+    }) => ({
+      id,
+      name,
+      image: { src: imageStorage },
+      description,
+      lastTopic: { id: lastTopicId, title: lastTopicName },
+      lastActivity: new Date(lastActivity)
+        .toLocaleDateString("pt-br")
+        .split(",")[0],
+      repliesCount: countComments,
+      topicsCount: countTopics,
+    })
   )
 }
