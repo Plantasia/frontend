@@ -4,7 +4,7 @@ import { BackendDTO } from "./protocols"
 import { ServerSideApi } from "./Api"
 
 export const GetCategories = async (
-  pageNumber: number
+  pageNumber?: number
 ): Promise<ComponentProps.CategoryProps[]> => {
   const { data } = await ServerSideApi.get<BackendDTO.CategoriesDTO>(
     `/forum/categories/page/${pageNumber}`
@@ -29,7 +29,9 @@ export const GetCategories = async (
       image: { src: imageStorage },
       description,
       lastTopic: { id: lastTopicId, title: lastTopicName },
-      lastActivity,
+      lastActivity: new Date(lastActivity)
+        .toLocaleDateString("pt-br")
+        .split(",")[0],
       repliesCount: countComments,
       topicsCount: countTopics,
     })
