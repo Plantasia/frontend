@@ -1,223 +1,228 @@
-import { Row, Col, Button, Image, Accordion } from "react-bootstrap"
-import { HeaderLanding, SEO, FooterLanding } from "@components"
-import { useState } from "react"
-import ContactForm from "./_contactForm"
+import React from "react"
 import {
-  LadingGlobalStyle,
-  ColColeredText,
-  RowPeople,
-  ListGroupPeople,
-  ListGroupPeopleItem,
-  Pcontent,
-  CardQuestion,
-  CardHeaderQuestion,
-  AccordionCollapseQuestion,
-  CardBodyQuestion,
-} from "../styles/components/LandingPage"
+  Row,
+  Col,
+  Button,
+  Accordion,
+  Container,
+  Navbar,
+  Nav,
+} from "react-bootstrap"
+import styled from "styled-components"
+import { QuestionsFAQ } from "@src/utils/constants"
+import { FaFacebook, FaGithub, FaInstagram, FaWhatsapp } from "react-icons/fa"
 
-export default function HomePage(props) {
-  const [email, setEmail] = useState("")
-  const [name, setName] = useState("")
-  const [subject, setSubject] = useState("")
-  const [message, setMessage] = useState("")
+const LandingContainer = styled(Container)`
+  background-image: linear-gradient(225deg, #89a986, #b6d0b4);
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  display: block;
+  height: 100vh;
+`
+const SectionOne = styled(Row).attrs({ id: "home" })`
+  color: white;
+`
+const SectionTwo = styled(Row)`
+  background-color: white;
+  color: #624378;
+`
+const SectionThree = styled(Row).attrs({ id: "faq" })`
+  color: white;
+`
+const Footer = styled(Row)`
+  color: white;
+  border-top: 1px solid white;
+  height: 100px;
+`
 
-  async function handleLoginSubmit(): Promise<void> {}
+const NavLink = styled(Nav.Link)`
+  color: white !important;
+  font-size: 1.3vw;
+  font-weight: 300;
+  :hover {
+    font-weight: 500;
+    ::after {
+      content: "";
+      width: 100%;
+    }
+    transition: 300ms;
+  }
+  ::after {
+    content: "";
+    border-bottom: 1px solid white;
+    display: block;
+    width: 10px;
+    left: 5px;
+    position: relative;
+    transition: 300ms;
+  }
+`
+const Brand = styled.h1`
+  /* @media (min-width: 992px) {
+    font-size: 6em;
+  } */
+  font-size: 5vw;
+`
+const Slogan = styled.h2`
+  font-size: 2vw;
+  font-weight: 300;
+`
 
+const FAQTitle = styled(Button)`
+  :focus {
+    box-shadow: none;
+    text-decoration: none;
+  }
+  :hover {
+    text-decoration: none;
+  }
+`
+
+const FAQDescription = styled.p`
+  padding-left: 12px;
+`
+
+const HomePage: React.FC = ({ children }) => {
   return (
-    <>
-      <LadingGlobalStyle />
-      <SEO title="Landing Page" />
-      <HeaderLanding />
-      <Row className="mb-5">
-        <Col xs="6">
-          <Image
-            width="500"
-            src="/assets/LandinPageImage1.png"
-            className="mr-2"
-          />
-        </Col>
+    <LandingContainer fluid>
+      <Navbar expand="md" className="w-100 right" variant="dark">
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="w-100 d-flex justify-content-end">
+            <NavLink href="#home">Home</NavLink>
+            <NavLink href="#about">Sobre</NavLink>
+            <NavLink href="#faq">F.A.Q</NavLink>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
 
-        <ColColeredText xs="6" className="pt-5">
-          <h2>Comunidade de compartilhamento de conhecimento</h2>
-          <h5>
-            Compartilhe seu conhecimento, engaje com a comunidade, ajude outras
-            pessoas a cultivarem o interesse por plantas e com tudo relacionado
-            a elas
-          </h5>
-        </ColColeredText>
-      </Row>
-      <RowPeople className="justify-content-md-center mb-5">
-        <Col md="auto">
-          <ListGroupPeople horizontal>
-            <ListGroupPeopleItem>
-              <Image
-                width="80"
-                src="/assets/user_example.png"
-                className="mr-2"
-              />
-              <Pcontent>Marcos Vinicius</Pcontent>
-              <Pcontent>C.E.O</Pcontent>
-            </ListGroupPeopleItem>
-            <ListGroupPeopleItem>
-              <Image
-                width="80"
-                src="/assets/user_example.png"
-                className="mr-2"
-              />
-              <Pcontent>Juan Latorre</Pcontent>
-              <Pcontent>C.E.O</Pcontent>
-            </ListGroupPeopleItem>
-            <ListGroupPeopleItem>
-              <Image
-                width="80"
-                src="/assets/user_example.png"
-                className="mr-2"
-              />
-              <Pcontent>Gabriel Reis</Pcontent>
-              <Pcontent>C.E.O</Pcontent>
-            </ListGroupPeopleItem>
-            <ListGroupPeopleItem>
-              <Image
-                width="80"
-                src="/assets/user_example.png"
-                className="mr-2"
-              />
-              <Pcontent>Matheus Faggi</Pcontent>
-              <Pcontent>C.E.O</Pcontent>
-            </ListGroupPeopleItem>
-            <ListGroupPeopleItem>
-              <Image
-                width="80"
-                src="/assets/user_example.png"
-                className="mr-2"
-              />
-              <Pcontent>Ícaro de Morais</Pcontent>
-              <Pcontent>C.E.O</Pcontent>
-            </ListGroupPeopleItem>
-          </ListGroupPeople>
+      <SectionOne className="mt-4 d-flex align-items-center">
+        <Col
+          xs={{ span: 12, order: 2 }}
+          md={{ span: 6, order: 1 }}
+          className="d-flex justify-content-center w-100"
+        >
+          <div className="ml-md-5 d-flex flex-column">
+            <Brand>plantasia</Brand>
+            <Slogan>
+              Regue informações, <br />
+              cultive conhecimento
+            </Slogan>
+            <Button
+              size="lg"
+              className="my-3"
+              style={{ fontWeight: 500, fontSize: "1.5vw" }}
+            >
+              Visitar fórum
+            </Button>
+          </div>
         </Col>
-      </RowPeople>
-      <Row className="mb-5">
-        <ColColeredText xs="6" className="pt-5">
-          <h3>Perguntas Frequentes</h3>
-          <Accordion defaultActiveKey="0">
-            {/* primeira pergunta */}
-            <CardQuestion>
-              <CardHeaderQuestion>
-                <Accordion.Toggle
-                  as={Button}
-                  variant="link"
-                  eventKey="0"
-                  style={{ color: "#56537f", boxShadow: "none" }}
-                >
-                  1. Para usar o site é necessário pagar?
-                </Accordion.Toggle>
-              </CardHeaderQuestion>
-              <AccordionCollapseQuestion eventKey="0">
-                <CardBodyQuestion>
-                  Não! Nosso fórum tem o objetivo de viabilizar o
-                  compartilhamento de conhecimento, e por conta disso nós nos
-                  compromemos com ele ser Forever Free!
-                </CardBodyQuestion>
-              </AccordionCollapseQuestion>
-            </CardQuestion>
-            {/* Segunda Pergunta */}
-            <CardQuestion>
-              <CardHeaderQuestion>
-                <Accordion.Toggle
-                  as={Button}
-                  variant="link"
-                  eventKey="1"
-                  styled={{ color: "#56537f" }}
-                >
-                  2. Segunda Pergunta
-                </Accordion.Toggle>
-              </CardHeaderQuestion>
-              <AccordionCollapseQuestion eventKey="1">
-                <CardBodyQuestion>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non
-                  amet commodi illo tenetur in architecto! Quaerat odio possimus
-                  quibusdam, ipsum aperiam officiis vel laborum. Enim voluptas
-                  accusantium incidunt? Nam, optio.
-                </CardBodyQuestion>
-              </AccordionCollapseQuestion>
-            </CardQuestion>
-            {/* Terceira Pergunta */}
-            <CardQuestion>
-              <CardHeaderQuestion>
-                <Accordion.Toggle
-                  as={Button}
-                  variant="link"
-                  eventKey="2"
-                  styled={{ color: "#56537f" }}
-                >
-                  3. Terceira Pergunta
-                </Accordion.Toggle>
-              </CardHeaderQuestion>
-              <AccordionCollapseQuestion eventKey="2">
-                <CardBodyQuestion>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non
-                  amet commodi illo tenetur in architecto! Quaerat odio possimus
-                  quibusdam, ipsum aperiam officiis vel laborum. Enim voluptas
-                  accusantium incidunt? Nam, optio.
-                </CardBodyQuestion>
-              </AccordionCollapseQuestion>
-            </CardQuestion>
-            {/* Quarta Pergunta */}
-            <CardQuestion>
-              <CardHeaderQuestion>
-                <Accordion.Toggle
-                  as={Button}
-                  variant="link"
-                  eventKey="3"
-                  styled={{ color: "#56537f" }}
-                >
-                  3. Terceira Pergunta
-                </Accordion.Toggle>
-              </CardHeaderQuestion>
-              <AccordionCollapseQuestion eventKey="3">
-                <CardBodyQuestion>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non
-                  amet commodi illo tenetur in architecto! Quaerat odio possimus
-                  quibusdam, ipsum aperiam officiis vel laborum. Enim voluptas
-                  accusantium incidunt? Nam, optio.
-                </CardBodyQuestion>
-              </AccordionCollapseQuestion>
-            </CardQuestion>
-          </Accordion>
-        </ColColeredText>
-        <Col xs="6">
-          <Image
-            width="500"
-            src="/assets/LandinPageImage2.png"
-            className="mr-2"
-          />
+        <Col
+          xs={{ span: 12, order: 1 }}
+          md={{ span: 6, order: 2 }}
+          className="mb-0"
+        >
+          <object
+            className="w-100"
+            type="image/svg+xml"
+            data="/assets/img/landing-01.svg"
+          ></object>
         </Col>
+      </SectionOne>
+
+      <Row id="about">
+        <object
+          className="w-100"
+          type="image/svg+xml"
+          data="/assets/img/wave.svg"
+        ></object>
       </Row>
+
+      <SectionTwo className="d-flex align-items-center">
+        <Col xs={{ span: 12 }} md={{ span: 6 }} className="mb-0 p-0">
+          <object
+            className="w-100 ml-md-5"
+            type="image/svg+xml"
+            data="/assets/img/landing-02.svg"
+          ></object>
+        </Col>
+        <Col xs={{ span: 12 }} md={{ span: 5, offset: 1 }}>
+          <div className=" d-flex flex-column">
+            <h1 className="mb-3">
+              Cuide de suas plantas e compartilhe o seu conhecimento
+            </h1>
+            <h2 style={{ fontWeight: 300 }}>
+              <ul className="list-unstyled">
+                <li>Aprenda sobre plantas</li>
+                <li>Ensine o que você já sabe</li>
+                <li>Fortacela nossa comunidade</li>
+              </ul>
+            </h2>
+          </div>
+        </Col>
+      </SectionTwo>
+
       <Row>
-        <Col xs="6">
-          <Image
-            width="500"
-            src="/assets/LandinPageImage3.png"
-            className="mr-2"
-          />
-        </Col>
-
-        <Col xs="6">
-          <ContactForm
-            handleSubmitLogin={handleLoginSubmit}
-            email={email}
-            setEmail={setEmail}
-            name={name}
-            setName={setName}
-            subject={subject}
-            setSubject={setSubject}
-            message={message}
-            setMessage={setMessage}
-          />
-        </Col>
+        <object
+          className="w-100"
+          type="image/svg+xml"
+          data="/assets/img/wave-02.svg"
+        ></object>
       </Row>
-      <FooterLanding />
-    </>
+
+      <SectionThree className="d-flex align-items-start justify-content-center my-5">
+        <Col xs="6" className="">
+          <h2 className="my-lg-5 h1">Perguntas frequentes</h2>
+          <Accordion
+            style={{
+              width: "500px",
+            }}
+          >
+            {QuestionsFAQ.map(({ description, title }, index) => (
+              <>
+                <Accordion.Toggle
+                  as={FAQTitle}
+                  variant="link"
+                  eventKey={index.toString()}
+                  key={index}
+                >
+                  <h5 key={index}>{title}</h5>
+                </Accordion.Toggle>
+
+                <Accordion.Collapse eventKey={index.toString()}>
+                  <FAQDescription key={index}>{description}</FAQDescription>
+                </Accordion.Collapse>
+              </>
+            ))}
+          </Accordion>
+        </Col>
+        <Col xs={{ span: 4 }}>
+          <object
+            className="w-100"
+            type="image/svg+xml"
+            data="/assets/img/landing-03.svg"
+          ></object>
+        </Col>
+      </SectionThree>
+      <Footer>
+        <Col
+          xs="12"
+          className="d-flex justify-content-between align-items-center"
+        >
+          <h1>Plantasia</h1>
+          <h2>2021 ©</h2>
+          <div
+            style={{ width: 250 }}
+            className="d-flex justify-content-between"
+          >
+            <FaGithub size={50} style={{ cursor: "pointer" }} />
+            <FaWhatsapp size={50} style={{ cursor: "pointer" }} />
+            <FaInstagram size={50} style={{ cursor: "pointer" }} />
+            <FaFacebook size={50} style={{ cursor: "pointer" }} />
+          </div>
+        </Col>
+      </Footer>
+    </LandingContainer>
   )
 }
+export default HomePage
