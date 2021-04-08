@@ -18,4 +18,8 @@ export namespace BackendDTO {
     prevPage: number | null
     perPage: number | null
   }
+  export interface UserSignInDTO {
+    email: string
+    password: string
+  }
 }
