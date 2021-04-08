@@ -27,7 +27,6 @@ interface Props {
 
 export default function Header({
   callToAction: { onClick, label, variant },
-  title,
 }: Props) {
   const router = useRouter()
   const { user, mutateUser } = useUser()
@@ -38,8 +37,7 @@ export default function Header({
   return (
     <HeaderWrapper>
       <Col onClick={() => router.push("/")} style={{ cursor: "pointer" }}>
-        {/* Inserir logo aqui */}
-        {!title ? <h3>Plantasia</h3> : { title }}
+        <h3>Plantasia</h3>
       </Col>
       {user?.isLoggedIn && <MenuDropdown logout={logout} />}
       {!user?.isLoggedIn && (

@@ -1,32 +1,21 @@
 import { Col, Row } from "react-bootstrap"
-import { Header, SEO } from "@components"
+import { SEO, Layout } from "@components"
 import SignUpForm from "./_form"
 import { useState } from "react"
 import AuthImage from "@src/assets/AuthImage"
-import { useRouter } from "next/router"
 
 export default function SignUp() {
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
-  const router = useRouter()
 
   async function handleSubmitLogin(): Promise<void> {}
   async function handleFacebookAuth(): Promise<void> {}
   async function handleGoogleAuth(): Promise<void> {}
 
   return (
-    <>
+    <Layout buttonLabel="entrar" route="/signin">
       <SEO title="Login" />
-      <Header
-        callToAction={{
-          label: "Entrar",
-          onClick: () => {
-            router.push("/signin")
-          },
-        }}
-      />
-
       <Row className="">
         <Col xs="7">
           <AuthImage />
@@ -46,6 +35,6 @@ export default function SignUp() {
           />
         </Col>
       </Row>
-    </>
+    </Layout>
   )
 }

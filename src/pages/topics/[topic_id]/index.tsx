@@ -1,6 +1,6 @@
 import { Button, Row, Col } from "react-bootstrap"
 import { GetServerSideProps } from "next"
-import { Header } from "@components"
+import { Header, Layout } from "@components"
 import { InlineGap } from "@styled/Shared"
 import { CommentProps, Comment } from "./_comment"
 import { ComponentProps } from "@utils/types"
@@ -24,13 +24,7 @@ export default function showTopicsByCategory({
   comments,
 }: TopicProps) {
   return (
-    <>
-      <Header
-        callToAction={{
-          label: "cadastre-se",
-          onClick: () => {},
-        }}
-      />
+    <Layout>
       <Row>
         <Col xs="12" className="mb-4">
           <h1>{title}</h1>
@@ -56,7 +50,7 @@ export default function showTopicsByCategory({
           ))}
         </Col>
       </Row>
-    </>
+    </Layout>
   )
 }
 

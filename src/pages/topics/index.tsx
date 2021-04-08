@@ -1,5 +1,5 @@
 import { Pagination } from "react-bootstrap"
-import { Header } from "@components"
+import { Header, Layout } from "@components"
 import { GetServerSideProps } from "next"
 import ListTopics from "./_ListTopics"
 import { useEffect, useState } from "react"
@@ -21,13 +21,7 @@ export default function listTopics({ topics }: ListTopicsProps) {
     router.push("/category")
   }
   return (
-    <>
-      <Header
-        callToAction={{
-          label: "cadastre-se",
-          onClick: () => {},
-        }}
-      />
+    <Layout>
       <ListTopics handleNewTopic={handleNewTopic} data={topics} />
       <Pagination className="d-flex justify-content-center">
         {pages.map(page => (
@@ -42,7 +36,7 @@ export default function listTopics({ topics }: ListTopicsProps) {
           </Pagination.Item>
         ))}
       </Pagination>
-    </>
+    </Layout>
   )
 }
 

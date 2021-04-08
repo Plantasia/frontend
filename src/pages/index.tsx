@@ -1,88 +1,26 @@
 import React from "react"
-import {
-  Row,
-  Col,
-  Button,
-  Accordion,
-  Container,
-  Navbar,
-  Nav,
-} from "react-bootstrap"
-import styled from "styled-components"
+import { Row, Col, Button, Accordion, Navbar, Nav } from "react-bootstrap"
 import { QuestionsFAQ } from "@src/utils/constants"
 import { FaFacebook, FaGithub, FaInstagram, FaWhatsapp } from "react-icons/fa"
-
-const LandingContainer = styled(Container)`
-  background-image: linear-gradient(225deg, #89a986, #b6d0b4);
-  scroll-behavior: smooth;
-  overflow-y: scroll;
-  display: block;
-  height: 100vh;
-`
-const SectionOne = styled(Row).attrs({ id: "home" })`
-  color: white;
-`
-const SectionTwo = styled(Row)`
-  background-color: white;
-  color: #624378;
-`
-const SectionThree = styled(Row).attrs({ id: "faq" })`
-  color: white;
-`
-const Footer = styled(Row)`
-  color: white;
-  border-top: 1px solid white;
-  height: 100px;
-`
-
-const NavLink = styled(Nav.Link)`
-  color: white !important;
-  font-size: 1.3vw;
-  font-weight: 300;
-  :hover {
-    font-weight: 500;
-    ::after {
-      content: "";
-      width: 100%;
-    }
-    transition: 300ms;
-  }
-  ::after {
-    content: "";
-    border-bottom: 1px solid white;
-    display: block;
-    width: 10px;
-    left: 5px;
-    position: relative;
-    transition: 300ms;
-  }
-`
-const Brand = styled.h1`
-  /* @media (min-width: 992px) {
-    font-size: 6em;
-  } */
-  font-size: 5vw;
-`
-const Slogan = styled.h2`
-  font-size: 2vw;
-  font-weight: 300;
-`
-
-const FAQTitle = styled(Button)`
-  :focus {
-    box-shadow: none;
-    text-decoration: none;
-  }
-  :hover {
-    text-decoration: none;
-  }
-`
-
-const FAQDescription = styled.p`
-  padding-left: 12px;
-`
+import { useRouter } from "next/router"
+import {
+  Brand,
+  FAQDescription,
+  FAQTitle,
+  Footer,
+  LandingContainer,
+  NavLink,
+  SectionOne,
+  SectionThree,
+  SectionTwo,
+  Slogan,
+} from "@styled/LandingPage"
 
 const HomePage: React.FC = ({ children }) => {
+  const router = useRouter()
+  const handleCallToAction = () => {
+    router.push("/category")
+  }
   return (
     <LandingContainer fluid>
       <Navbar expand="md" className="w-100 right" variant="dark">
@@ -112,6 +50,7 @@ const HomePage: React.FC = ({ children }) => {
               size="lg"
               className="my-3"
               style={{ fontWeight: 500, fontSize: "1.5vw" }}
+              onClick={handleCallToAction}
             >
               Visitar fórum
             </Button>

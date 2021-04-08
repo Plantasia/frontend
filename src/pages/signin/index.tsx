@@ -1,15 +1,12 @@
 import { Col, Row } from "react-bootstrap"
-import { Header, SEO } from "@components"
+import { Header, SEO, Layout } from "@components"
 import SignInForm from "./_form"
 import { useState } from "react"
 import AuthImage from "@src/assets/AuthImage"
 import { useRouter } from "next/router"
-
 import useUser from "@src/lib/useUser"
-
 import axios from "axios"
 import { BackendDTO } from "@src/services/protocols"
-import { stringify } from "querystring"
 
 export default function SignIn() {
   const [password, setPassword] = useState("")
@@ -23,7 +20,7 @@ export default function SignIn() {
 
   async function handleLoginSubmit(): Promise<void> {
     try {
-      const { data: user, status } = await axios.post<BackendDTO.UserDTO>(
+      const { data: user, status } = await axios.post<BackendDTO.UserSignInDTO>(
         "/api/login",
         {
           email,
@@ -45,18 +42,8 @@ export default function SignIn() {
   async function handleGoogleAuth(): Promise<void> {}
 
   return (
-    <>
+    <Layout>
       <SEO title="Login" />
-
-      <Header
-        callToAction={{
-          label: "Cadastar",
-          onClick: () => {
-            router.push("/signup")
-          },
-          variant: "outline-primary",
-        }}
-      />
       <Row>
         <Col xs="7">
           <AuthImage />
@@ -74,6 +61,6 @@ export default function SignIn() {
           />
         </Col>
       </Row>
-    </>
+    </Layout>
   )
 }

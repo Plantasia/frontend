@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next"
-import { Header } from "@components"
+import { Header, Layout } from "@components"
 import { InlineGap } from "@styled/Shared"
 import { ListCategoryItem } from "./_categoryItem"
 import { ComponentProps } from "@utils/types"
@@ -13,15 +13,7 @@ export interface ListCategoriesProps {
 export default function ListCategories({ categories }: ListCategoriesProps) {
   const router = useRouter()
   return (
-    <>
-      <Header
-        callToAction={{
-          label: "cadastre-se",
-          onClick: () => {
-            router.push("/signup")
-          },
-        }}
-      />
+    <Layout>
       <Row>
         <Col xs="2" className="mb-4">
           <h2>Categorias</h2>
@@ -36,7 +28,7 @@ export default function ListCategories({ categories }: ListCategoriesProps) {
         categories.map((category, key) => (
           <ListCategoryItem {...category} key={key} />
         ))}
-    </>
+    </Layout>
   )
 }
 
