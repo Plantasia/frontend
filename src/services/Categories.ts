@@ -7,7 +7,10 @@ export const GetCategories = async (
   pageNumber?: number
 ): Promise<ComponentProps.CategoryProps[]> => {
   const { data } = await ServerSideApi.get<BackendDTO.CategoriesDTO>(
-    `/forum/categories/page/${pageNumber}`
+    `/forum/categories/`,
+    {
+      params: { page: pageNumber },
+    }
   )
   // @TO-DO tratar exceções
   console.log(data)
