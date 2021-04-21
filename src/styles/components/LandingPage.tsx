@@ -46,6 +46,9 @@ export const NavLink = styled(Nav.Link)`
     transition: 300ms;
   }
 `
+
+export const NavButton = styled(Nav.Item)``
+
 export const Brand = styled.h1`
   font-size: 5vw;
 `

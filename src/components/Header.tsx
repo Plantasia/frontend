@@ -9,7 +9,7 @@ import MenuDropdown from "./MenuDropdown"
 // Jogar para pasta de styles dps
 const HeaderWrapper = styled(Row).attrs(
   (): RowProps => ({
-    className: "py-3 mb-4",
+    className: "py-3 mb-4 d-flex align-items-center",
   })
 )`
   border-bottom: 1px black solid;
@@ -30,10 +30,12 @@ export default function Header({
 }: Props) {
   const router = useRouter()
   const { user, mutateUser } = useUser()
+  // console.log({ user })
   const logout = async () => {
     // eslint-disable-next-line no-undef
     mutateUser(await (await axios.post("/api/logout")).data, false)
   }
+
   return (
     <HeaderWrapper>
       <Col onClick={() => router.push("/")} style={{ cursor: "pointer" }}>
