@@ -5,6 +5,6 @@ WORKDIR /usr/src/app
 COPY package.json ./
 COPY . .
 
-RUN yarn 
+RUN yarn install
 
 CMD [ "yarn", "dev" ]

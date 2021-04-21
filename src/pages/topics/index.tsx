@@ -12,7 +12,6 @@ export interface ListTopicsProps {
 }
 export default function listTopics({ topics }: ListTopicsProps) {
   const [currentPage, setCurrentPage] = useState(0)
-
   const pages = new Array(10).fill(1).map((x, index) => index)
   const router = useRouter()
 
@@ -42,10 +41,9 @@ export default function listTopics({ topics }: ListTopicsProps) {
 }
 
 export const getServerSideProps: GetServerSideProps<ListTopicsProps> = async context => {
-  const { query } = context
-  console.log("$$$$$$$$$$$")
-  console.log(query)
-
   return {
-    props: await GetTopics(query.page)
+    props: {
+      topics: await GetTopics(1),
+    },
+  }
 }

@@ -4,7 +4,7 @@ import { ServerSideApi } from "./Api"
 import { ComponentProps } from "@utils/types"
 
 export const GetTopics = async (
-  page: string | number
+  page: number
 ): Promise<ComponentProps.TopicItemProps[]> => {
   const { data } = await ServerSideApi.get<{
     data: BackendDTO.TopicDTO[]
@@ -23,7 +23,7 @@ export const GetTopics = async (
   //   console.log(comment.comments)
   // }
 
-  return data.topics.map(
+  return data.data.map(
     ({
       id,
       user,
