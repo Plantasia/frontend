@@ -1,11 +1,10 @@
 import { Dispatch, SetStateAction } from "react"
-import { Button } from "react-bootstrap"
+import { Button, Alert } from "react-bootstrap"
 import {
   Title,
   Form,
   Label,
   FormWrapper,
-  AuxLink,
   SocialAuths,
   SocialAuthsIcons,
   TermsCheck,
@@ -14,7 +13,7 @@ import {
 } from "@src/styles/components/Auth"
 
 interface ISignUpForm {
-  handleSubmitLogin(): void
+  handleSubmitSignUp(): void
   handleFacebookAuth(): void
   handleGoogleAuth(): void
   setPassword: Dispatch<SetStateAction<string>>
@@ -26,7 +25,7 @@ interface ISignUpForm {
 }
 
 export default function SignUpForm({
-  handleSubmitLogin,
+  handleSubmitSignUp,
   handleFacebookAuth,
   handleGoogleAuth,
   email,
@@ -82,13 +81,20 @@ export default function SignUpForm({
             </TermsCheck.Label>
           </TermsCheck>
         </Form.Group>
-
-        <Button variant="primary" size="lg" onClick={handleSubmitLogin}>
-          Registrar-se
-        </Button>
-
-        <Form.Group>
-          <AuxLink href="/signin">Já possui conta?</AuxLink>
+        <Form.Group className="d-flex justify-content-between">
+          <Button variant="outline-primary" size="lg" as="a" href="/signin">
+            Já possuo conta
+          </Button>
+          <Button
+            variant="primary"
+            size="lg"
+            onClick={e => {
+              e.preventDefault()
+              handleSubmitSignUp()
+            }}
+          >
+            Registrar-se
+          </Button>
         </Form.Group>
       </Form>
       <SocialAuths>
