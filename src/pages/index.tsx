@@ -10,6 +10,7 @@ import {
   Footer,
   LandingContainer,
   NavLink,
+  NavButton,
   SectionOne,
   SectionThree,
   SectionTwo,
@@ -26,10 +27,21 @@ const HomePage: React.FC = ({ children }) => {
       <Navbar expand="md" className="w-100 right" variant="dark">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="w-100 d-flex justify-content-end">
-            <NavLink href="#home">Home</NavLink>
-            <NavLink href="#about">Sobre</NavLink>
-            <NavLink href="#faq">F.A.Q</NavLink>
+          <Nav className="w-100 d-flex justify-content-end align-items-center">
+            <Nav.Item>
+              <NavLink href="#home">Home</NavLink>
+            </Nav.Item>
+            <Nav.Item>
+              <NavLink href="#about">Sobre</NavLink>
+            </Nav.Item>
+            <Nav.Item>
+              <NavLink href="#faq">F.A.Q</NavLink>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/signin">
+                <Button>Entrar</Button>
+              </Nav.Link>
+            </Nav.Item>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

@@ -18,8 +18,28 @@ export namespace BackendDTO {
     prevPage: number | null
     perPage: number | null
   }
-  export interface UserSignInDTO {
-    email: string
-    password: string
+  export namespace UserSignIn {
+    export type Response = {
+      access_token?: string
+      error?: string
+    }
+
+    export interface Params {
+      email: string
+      password: string
+    }
+  }
+  export namespace UserSignUp {
+    export type Response = {
+      name: string
+      email: string
+      error?: string
+    }
+
+    export interface Params {
+      email: string
+      password: string
+      name: string
+    }
   }
 }

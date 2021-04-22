@@ -1,54 +1,61 @@
 import { Col, Row } from "react-bootstrap"
-import { Header, SEO, Layout } from "@components"
+import { SEO, AuthLayout } from "@components"
 import SignInForm from "./_form"
 import { useState } from "react"
-import AuthImage from "@src/assets/AuthImage"
 import { useRouter } from "next/router"
 import useUser from "@src/lib/useUser"
-import axios from "axios"
-import { BackendDTO } from "@src/services/protocols"
+import { SelfApiDTO } from "@utils/types"
+import { SelfApi } from "@src/services/Api"
 
 export default function SignIn() {
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
-  const [alert, setAlert] = useState<{ message: string; variant: string }>(null)
   const router = useRouter()
   const { mutateUser } = useUser({
-    redirectTo: "/",
+    redirectTo: "/category",
     redirectIfFound: true,
   })
 
   async function handleLoginSubmit(): Promise<void> {
-    try {
-      const { data: user, status } = await axios.post<BackendDTO.UserSignInDTO>(
-        "/api/login",
-        {
-          email,
-          password,
-        }
-      )
-
-      if (status === 200) await mutateUser({ ...user, isLoggedIn: true }, true)
-    } catch (error) {
-      setAlert({ message: error.message, variant: "danger" })
-      setInterval(() => {
-        setAlert(null)
-      }, 3000)
-      console.error("An unexpected error happened:", error)
-    }
+    const { status, data } = await SelfApi.post<SelfApiDTO.FlashMessage>(
+      "/api/login",
+      {
+        email,
+        password,
+      }
+    )
+    if (status === 200) mutateUser(await SelfApi.get("/api/user"))
+    window.flash(data.message, data.type)
   }
 
   async function handleFacebookAuth(): Promise<void> {}
   async function handleGoogleAuth(): Promise<void> {}
 
   return (
-    <Layout>
+    <AuthLayout>
       <SEO title="Login" />
-      <Row>
-        <Col xs="7">
-          <AuthImage />
+
+      <Row className="d-flex align-items-center h-100">
+        <Col
+          xs="8"
+          className="d-flex flex-column align-items-center justify-content-arround mt-3 "
+        >
+          <object
+            className="w-100"
+            type="image/svg+xml"
+            data="/assets/img/authentication.svg"
+          ></object>
         </Col>
-        <Col xs="5">
+        <Col xs="4" className="d-flex flex-column align-items-center">
+          <h1
+            className="py-3"
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              router.push("/")
+            }}
+          >
+            Plantasia
+          </h1>
           <SignInForm
             handleSubmitLogin={handleLoginSubmit}
             handleFacebookAuth={handleFacebookAuth}
@@ -57,10 +64,9 @@ export default function SignIn() {
             setPassword={setPassword}
             email={email}
             setEmail={setEmail}
-            alert={alert}
           />
         </Col>
       </Row>
-    </Layout>
+    </AuthLayout>
   )
 }
