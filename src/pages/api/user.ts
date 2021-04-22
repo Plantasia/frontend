@@ -6,9 +6,10 @@ const handler: Handler = async (req, res) => {
   const jwt = await req.session.get("jwt")
 
   if (jwt) {
-    const { data: user } = await ServerSideApi.get(`/users/findme?token=${jwt}`)
-    // in a real world application you might read the user id from the session and then do a database request
-    // to get more information on the user if needed
+    const headers = {
+      Authorization: `Bearer ${jwt}`,
+    }
+    const { data: user } = await ServerSideApi.get(`/users/findme`, { headers })
     res.json({
       isLoggedIn: true,
       user,
