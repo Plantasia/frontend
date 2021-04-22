@@ -33,9 +33,12 @@ export default function ListCategories({ categories }: ListCategoriesProps) {
 }
 
 export const getServerSideProps: GetServerSideProps<ListCategoriesProps> = async context => {
+  const {
+    query: { page },
+  } = context
   return {
     props: {
-      categories: await GetCategories(),
+      categories: await GetCategories(page),
     },
   }
 }
