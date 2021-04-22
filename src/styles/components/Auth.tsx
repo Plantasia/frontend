@@ -49,10 +49,14 @@ export const Form = styled(BootstrapForm).attrs(
   flex-direction: column;
   justify-content: flex-start;
 
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
 `
 
-export const FormWrapper = styled(Col).attrs((): ColProps => ({}))`
+export const FormWrapper = styled(Col).attrs(
+  (): ColProps => ({
+    className: "py-5 px-4",
+  })
+)`
   background-color: white;
   box-shadow: 0 0 15px #c4c4c4;
   border-radius: 10px;
@@ -60,7 +64,6 @@ export const FormWrapper = styled(Col).attrs((): ColProps => ({}))`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 0 30px;
 `
 
 export const Label = styled(BootstrapForm.Label)`
@@ -93,31 +96,7 @@ const pointer = css`
 
 export const FacebookIcon = styled(FaFacebook).attrs(
   (): IconBaseProps => ({
-    size: "3em",
-  })
-)`
-  ${pointer}
-`
-
-export const WhatsappIcon = styled(FaWhatsapp).attrs(
-  (): IconBaseProps => ({
-    size: "3em",
-  })
-)`
-  ${pointer}
-`
-
-export const InstagramIcon = styled(FaInstagram).attrs(
-  (): IconBaseProps => ({
-    size: "3em",
-  })
-)`
-  ${pointer}
-`
-
-export const GithubIcon = styled(FaGithub).attrs(
-  (): IconBaseProps => ({
-    size: "3em",
+    size: "2em",
   })
 )`
   ${pointer}
@@ -125,7 +104,7 @@ export const GithubIcon = styled(FaGithub).attrs(
 
 export const GoogleIcon = styled(FaGoogle).attrs(
   (): IconBaseProps => ({
-    size: "3em",
+    size: "2em",
   })
 )`
   ${pointer}

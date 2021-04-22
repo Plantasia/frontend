@@ -1,14 +1,14 @@
 import { useEffect } from "react"
 import Router from "next/router"
 import useSWR from "swr"
-import { BackendDTO } from "@src/services/protocols"
+import { ComponentProps } from "@utils/types"
 
 export default function useUser({
   redirectTo = null,
   redirectIfFound = false,
 } = {}) {
   const { data: user, mutate: mutateUser } = useSWR<
-    BackendDTO.UserDTO & { isLoggedIn: boolean }
+    ComponentProps.UserProps & { isLoggedIn: boolean }
   >("/api/user")
 
   useEffect(() => {

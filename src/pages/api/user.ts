@@ -1,15 +1,18 @@
+import { ServerSideApi } from "@src/services/Api"
 import { Handler, withIronSession } from "next-iron-session"
 import { sessionOptions } from "./_iron-session/helpers"
 
-const handler: Handler = (req, res) => {
-  const user = req.session.get("user")
+const handler: Handler = async (req, res) => {
+  const jwt = await req.session.get("jwt")
 
-  if (user) {
-    // in a real world application you might read the user id from the session and then do a database request
-    // to get more information on the user if needed
+  if (jwt) {
+    const headers = {
+      Authorization: `Bearer ${jwt}`,
+    }
+    const { data: user } = await ServerSideApi.get(`/users/findme`, { headers })
     res.json({
       isLoggedIn: true,
-      ...user,
+      user,
     })
   } else {
     res.json({

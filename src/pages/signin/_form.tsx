@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import { Alert, Button } from "react-bootstrap"
 
 import {
@@ -12,6 +12,8 @@ import {
   GoogleIcon,
   FacebookIcon,
 } from "@src/styles/components/Auth"
+import ModalForgotPassword from "./_modal-forgot-password"
+import { ErrorAlert } from "@components"
 
 interface ISignInForm {
   handleSubmitLogin(): void
@@ -21,10 +23,6 @@ interface ISignInForm {
   setEmail: Dispatch<SetStateAction<string>>
   password: string
   email: string
-  alert: {
-    message: string
-    variant: string
-  }
 }
 
 export default function SignInForm({
@@ -35,16 +33,22 @@ export default function SignInForm({
   setPassword,
   handleFacebookAuth,
   handleGoogleAuth,
-  alert,
 }: ISignInForm) {
+  const [modalVisible, setModalVisible] = useState(false)
+
   return (
     <FormWrapper>
+      <ModalForgotPassword
+        show={modalVisible}
+        onHide={() => {
+          setModalVisible(false)
+        }}
+      />
       <Title>
         Bem-vindo! <br />
         <span>Entre na comunidade.</span>
       </Title>
       <Form>
-        {alert && <Alert variant={alert.variant}>{alert.message}</Alert>}
         <Form.Group>
           <Label>Email</Label>
           <Form.Control
@@ -54,38 +58,42 @@ export default function SignInForm({
             placeholder="digite o seu email"
           ></Form.Control>
         </Form.Group>
-
         <Form.Group>
           <Label>Senha</Label>
           <Form.Control
+            className="mb-2"
             placeholder="digite a sua senha"
             type="password"
             value={password}
             onChange={({ target: { value } }) => setPassword(value)}
           ></Form.Control>
-          <Form.Check type="checkbox" label="Manter logado" />
+          <AuxLink
+            onClick={() => {
+              setModalVisible(true)
+            }}
+          >
+            Esqueceu sua senha?
+          </AuxLink>
         </Form.Group>
-
-        <Button
-          variant="primary"
-          size="lg"
-          onClick={e => {
-            e.preventDefault()
-            handleSubmitLogin()
-          }}
-          type="submit"
-        >
-          Logar
-        </Button>
-
-        <Form.Group>
-          <AuxLink href="/forgot-password">Esqueceu sua senha?</AuxLink>
+        <Form.Group className="d-flex justify-content-between">
+          <Button variant="outline-primary" size="lg" as="a" href="/signup">
+            Cadastrar-se
+          </Button>
+          <Button
+            variant="primary"
+            size="lg"
+            onClick={e => {
+              e.preventDefault()
+              handleSubmitLogin()
+            }}
+            type="submit"
+          >
+            Entrar
+          </Button>
         </Form.Group>
       </Form>
-
       <SocialAuths>
-        <h5>Entre com</h5>
-
+        <h5 className="mb-3">Entre com</h5>
         <SocialAuthsIcons>
           <GoogleIcon onClick={handleGoogleAuth} />
           <FacebookIcon onClick={handleFacebookAuth} />
