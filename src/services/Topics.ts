@@ -12,7 +12,7 @@ export const GetTopics = async (
     nextPage: number
     perPage: number
     totalRegisters: number
-  }>("/topics")
+  }>("/forum/topics")
   // @TO-DO tratar exceções
   // console.log(data)
 
@@ -23,7 +23,7 @@ export const GetTopics = async (
   //   console.log(comment.comments)
   // }
 
-  return data.data.map(
+  return data.topics.map(
     ({
       id,
       user,
