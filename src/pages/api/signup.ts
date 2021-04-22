@@ -5,20 +5,20 @@ import { sessionOptions } from "./_iron-session/helpers"
 import { BackendDTO } from "@src/services/protocols"
 
 const handler: Handler = async (req, res) => {
-  const { email, password } = await req.body
+  const { name, email, password } = await req.body
 
-  const params: BackendDTO.UserSignIn.Params = {
+  const params: BackendDTO.UserSignUp.Params = {
+    name,
     email,
     password,
   }
   try {
-    const { data } = await ServerSideApi.post<BackendDTO.UserSignIn.Response>(
-      "/signin",
+    const { data } = await ServerSideApi.post<BackendDTO.UserSignUp.Response>(
+      "/users",
       params
     )
-    req.session.set("jwt", data.access_token)
-    await req.session.save()
-    res.json({ message: "Login efetuado com sucesso", type: "success" })
+
+    res.json({ message: "Usuário criado com sucesso", type: "success" })
   } catch ({ response }) {
     const {
       data: { error: message },
