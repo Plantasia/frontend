@@ -24,7 +24,7 @@ export namespace ComponentProps {
     avatar?: string
     email?: string
     created_at?: string
-    bio: string
+    bio?: string
   }
 
   export type CommentsProps = {
