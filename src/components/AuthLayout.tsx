@@ -1,7 +1,5 @@
 import React from "react"
 import { Container } from "react-bootstrap"
-import { Header } from "@components"
-import { useRouter } from "next/router"
 
 type Props = {
   route?: string
