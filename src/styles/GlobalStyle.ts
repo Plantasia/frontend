@@ -61,7 +61,9 @@ export default createGlobalStyle`
   h6 {
     margin: 0;
   }
-
+  a{
+    cursor: pointer;
+  }
   .ck-editor__editable_inline {
     min-height: 200px;
   }
