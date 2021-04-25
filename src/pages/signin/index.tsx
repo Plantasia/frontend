@@ -8,9 +8,9 @@ import { SelfApiDTO } from "@utils/types"
 import { SelfApi } from "@src/services/Api"
 
 export default function SignIn() {
-  const [password, setPassword] = useState("")
-  const [email, setEmail] = useState("")
   const router = useRouter()
+  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState(router.query.email as string)
   const { mutateUser } = useUser({
     redirectTo: "/category",
     redirectIfFound: true,

@@ -15,15 +15,20 @@ export default function SignUp() {
   const router = useRouter()
 
   async function handleSubmitSignUp(): Promise<void> {
-    const { status, data } = await SelfApi.post<SelfApiDTO.FlashMessage>(
-      "/api/signup",
-      {
-        name,
-        email,
-        password,
-      }
-    )
-    window.flash(data.message, data.type)
+    try {
+      const { data } = await SelfApi.post<SelfApiDTO.FlashMessage>(
+        "/api/signup",
+        {
+          name,
+          email,
+          password,
+        }
+      )
+      window.flash(data.message, data.type)
+      router.push(`/signin?email=${email}`)
+    } catch (error) {
+      window.flash(error.response.data.message, "danger")
+    }
   }
   async function handleFacebookAuth(): Promise<void> {}
   async function handleGoogleAuth(): Promise<void> {}

@@ -3,8 +3,9 @@ import { Handler, withIronSession } from "next-iron-session"
 import { ServerSideApi } from "@src/services/Api"
 import { sessionOptions } from "./_iron-session/helpers"
 import { BackendDTO } from "@src/services/protocols"
+import { NextApiRequest, NextApiResponse } from "next"
 
-const handler: Handler = async (req, res) => {
+const handler: Handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { name, email, password } = await req.body
 
   const params: BackendDTO.UserSignUp.Params = {
@@ -13,17 +14,26 @@ const handler: Handler = async (req, res) => {
     password,
   }
   try {
-    const { data } = await ServerSideApi.post<BackendDTO.UserSignUp.Response>(
+    const {
+      data: { name },
+      status,
+    } = await ServerSideApi.post<BackendDTO.UserSignUp.Response>(
       "/users",
       params
     )
 
-    res.json({ message: "Usuário criado com sucesso", type: "success" })
+    if (status === 200)
+      res.status(200).json({
+        message: `Bem vindo ${name}, usuário criado com sucesso`,
+        type: "success",
+      })
   } catch ({ response }) {
     const {
       data: { error: message },
+      status,
     } = response
-    res.json({ message, type: "danger" })
+
+    res.status(status).json({ message, type: "danger" })
   }
 }
 
