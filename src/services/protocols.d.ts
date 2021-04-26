@@ -16,7 +16,9 @@ export namespace BackendDTO {
     categories: CategoryObject[]
     currentPage: number | null
     prevPage: number | null
+    nextPage: number | null
     perPage: number | null
+    totalRegisters: number | null
   }
   export namespace UserSignIn {
     export type Response = {

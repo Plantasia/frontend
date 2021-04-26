@@ -4,6 +4,7 @@ import { PlantasiaCard } from "@styled/Shared"
 import { ComponentProps } from "@utils/types"
 import Image from "next/image"
 import { TopicLink } from "@components/Links"
+import { useRouter } from "next/router"
 
 export function ListCategoryItem({
   description,
@@ -15,6 +16,7 @@ export function ListCategoryItem({
   topicsCount,
   image,
 }: ComponentProps.CategoryProps) {
+  const router = useRouter()
   return (
     <PlantasiaCard>
       <Col xs="12" md="3" lg="2" className="d-flex justify-content-center">
@@ -30,9 +32,16 @@ export function ListCategoryItem({
         xs="12"
         md="4"
         lg="5"
-        className="d-flex flex-column justify-content-betwee"
+        className="d-flex flex-column justify-content-between"
       >
-        <h3>{name}</h3>
+        <h3
+          onClick={() => {
+            router.push(`/topics?category=${id}`)
+          }}
+          style={{ cursor: "pointer" }}
+        >
+          {name}
+        </h3>
         <p>{description}</p>
       </Col>
       <Col

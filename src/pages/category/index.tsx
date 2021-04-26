@@ -3,15 +3,29 @@ import { Header, Layout } from "@components"
 import { InlineGap } from "@styled/Shared"
 import { ListCategoryItem } from "./_categoryItem"
 import { ComponentProps } from "@utils/types"
-import { Button, Row, Col } from "react-bootstrap"
+import { Button, Row, Col, Pagination } from "react-bootstrap"
 import { GetCategories } from "@src/services/Categories"
 import { useRouter } from "next/router"
+import { useState } from "react"
 export interface ListCategoriesProps {
   categories: ComponentProps.CategoryProps[]
+  pages?: number | string
+  currentPage?: number | string
+  nextPage?: number | null
+  prevPage?: number | null
 }
 
-export default function ListCategories({ categories }: ListCategoriesProps) {
+export default function ListCategories({
+  categories,
+  pages,
+}: ListCategoriesProps) {
   const router = useRouter()
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(router.query.page as string) || 1
+  )
+  console.log(pages)
+  const paginationItems = new Array(pages).fill(1).map((x, index) => index + 1)
+
   return (
     <Layout>
       <Row>
@@ -28,6 +42,20 @@ export default function ListCategories({ categories }: ListCategoriesProps) {
         categories.map((category, key) => (
           <ListCategoryItem {...category} key={key} />
         ))}
+      <Pagination className="d-flex justify-content-center">
+        {paginationItems.map(page => (
+          <Pagination.Item
+            key={page}
+            active={page === currentPage}
+            onClick={() => {
+              setCurrentPage(page)
+              router.push(`/category?page=${page}`)
+            }}
+          >
+            {page}
+          </Pagination.Item>
+        ))}
+      </Pagination>
     </Layout>
   )
 }
@@ -37,8 +65,6 @@ export const getServerSideProps: GetServerSideProps<ListCategoriesProps> = async
     query: { page },
   } = context
   return {
-    props: {
-      categories: await GetCategories(page),
-    },
+    props: await GetCategories(page),
   }
 }
