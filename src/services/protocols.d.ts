@@ -42,4 +42,14 @@ export namespace BackendDTO {
       name: string
     }
   }
+  export interface TopicObject {
+    id: string
+    textBody: string
+  }
+  export interface TopicsDTO {
+    topics: TopicObject[]
+    currentPage: number | null
+    prevPage: number | null
+    perPage: number | null
+  }
 }

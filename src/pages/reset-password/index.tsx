@@ -59,6 +59,7 @@ export default function ResetPassword() {
               <Form.Control
                 placeholder="Digite sua nova senha"
                 value={password}
+                type="password"
                 onChange={({ target: { value } }) => setPassword(value)}
               ></Form.Control>
             </Form.Group>
@@ -66,6 +67,7 @@ export default function ResetPassword() {
               <Form.Control
                 placeholder="Confirme sua nova senha"
                 value={confirmationPassword}
+                type="password"
                 onChange={({ target: { value } }) =>
                   setConfirmationPassword(value)
                 }

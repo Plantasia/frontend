@@ -4,10 +4,14 @@ import { BackendDTO } from "./protocols"
 import { ServerSideApi } from "./Api"
 
 export const GetCategories = async (
-  pageNumber?: number
+  page?: any
 ): Promise<ComponentProps.CategoryProps[]> => {
+  const params = {
+    page,
+  }
   const { data } = await ServerSideApi.get<BackendDTO.CategoriesDTO>(
-    `/forum/categories/page/${pageNumber}`
+    `/forum/categories`,
+    { params }
   )
   // @TO-DO tratar exceções
   console.log(data)
@@ -25,15 +29,13 @@ export const GetCategories = async (
       lastTopicName,
     }) => ({
       id,
-      name,
-      image: { src: imageStorage },
       description,
+      image: { src: imageStorage },
+      lastActivity: lastActivity,
       lastTopic: { id: lastTopicId, title: lastTopicName },
-      lastActivity: new Date(lastActivity)
-        .toLocaleDateString("pt-br")
-        .split(",")[0],
-      repliesCount: countComments,
       topicsCount: countTopics,
+      repliesCount: countComments,
+      name,
     })
   )
 }
