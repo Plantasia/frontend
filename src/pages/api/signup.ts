@@ -22,11 +22,10 @@ const handler: Handler = async (req: NextApiRequest, res: NextApiResponse) => {
       params
     )
 
-    if (status === 200)
-      res.status(200).json({
-        message: `Bem vindo ${name}, usuário criado com sucesso`,
-        type: "success",
-      })
+    res.status(200).json({
+      message: `Bem vindo ${name}, usuário criado com sucesso`,
+      type: "success",
+    })
   } catch ({ response }) {
     const {
       data: { error: message },
