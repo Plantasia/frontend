@@ -31,7 +31,7 @@ export const GetCategories = async (
       id,
       description,
       image: { src: imageStorage },
-      lastActivity: lastActivity,
+      lastActivity: new Date(lastActivity).toLocaleDateString("pt-br"),
       lastTopic: { id: lastTopicId, title: lastTopicName },
       topicsCount: countTopics,
       repliesCount: countComments,

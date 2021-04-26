@@ -41,7 +41,7 @@ export const GetTopics = async (
       countComments: comments.length,
       textBody,
       imageStorage: imageStorage || "",
-      created_at,
+      created_at: new Date(created_at).toLocaleDateString("pt-br"),
       updated_at,
     })
   )
