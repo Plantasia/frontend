@@ -23,7 +23,14 @@ export function ListItem({
   return (
     <PlantasiaCard className="d-flex align-items-end">
       <TopicContent>
-        <div className="mb-2">
+        <div className="mb-2 d-flex align-items-center">
+          <Image
+            height="50"
+            width="50"
+            src={imageStorage}
+            className="mr-3"
+            roundedCircle
+          />
           <h4
             style={{
               cursor: "pointer",
@@ -31,20 +38,17 @@ export function ListItem({
             onClick={() => {
               router.push(`/topics/${id}`)
             }}
+            className="mb-1"
           >
-            <Image
-              height="50"
-              width="50"
-              src={imageStorage}
-              className="mr-2"
-              roundedCircle
-            />
-
             {name}
           </h4>
+        </div>
+
+        <div>
           <a href={`/users/${topicOwner.id}`}>{topicOwner.name}</a>
           <span> - {created_at}</span>
         </div>
+
         <TopicDescription>{textBody}</TopicDescription>
       </TopicContent>
       <TopicStats>
@@ -53,7 +57,7 @@ export function ListItem({
           <p>replies: &nbsp;&nbsp;&nbsp; {countComments}</p>
         </div>
         <div className="d-flex">
-          {/* <Image
+          <Image
             height="50"
             width="50"
             src={lastComment.user.avatar}
@@ -63,8 +67,10 @@ export function ListItem({
           <div className="d-flex-column justify-content-center">
             <p style={{ margin: 0 }}>último reply</p>
 
-            <a href={""}>{lastComment.user.name}</a>
-          </div> */}
+            <a href={`/profile/${lastComment.user.id}`}>
+              {lastComment.user.name}
+            </a>
+          </div>
         </div>
       </TopicStats>
     </PlantasiaCard>
