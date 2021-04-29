@@ -31,6 +31,7 @@ export default function ResetPassword() {
         `/reset-password/${token}`,
         { password, passwordConfirmation: confirmationPassword }
       )
+      router.push("/signin")
       window.flash(data.message, "success")
     } catch (error) {
       window.flash(error.message, "danger")
