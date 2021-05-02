@@ -1,9 +1,10 @@
 import { Button, Row, Col } from "react-bootstrap"
 import { GetServerSideProps } from "next"
-import { Layout } from "@components"
-import { InlineGap } from "@styled/Shared"
+import { Editor, Layout } from "@components"
+import { InlineGap, PlantasiaCard } from "@styled/Shared"
 import { CommentProps, Comment } from "./_comment"
 import { ComponentProps } from "@utils/types"
+import { useState } from "react"
 export interface BadgeCategoryProps {
   id: string
   name: string
@@ -22,6 +23,7 @@ export default function showTopicsByCategory({
   categories,
   comments,
 }: TopicProps) {
+  const [newComment, setNewComment] = useState("")
   return (
     <Layout>
       <Row>
@@ -57,6 +59,16 @@ export default function showTopicsByCategory({
           ))}
         </Col>
       </Row>
+
+      <PlantasiaCard>
+        <Col xs="12" className="mb-3">
+          <h3>Deixe um comentário</h3>
+          <Editor content={newComment} onChange={setNewComment} />
+        </Col>
+        <Col xs="12" className="d-flex justify-content-end">
+          <Button>comentar</Button>
+        </Col>
+      </PlantasiaCard>
     </Layout>
   )
 }

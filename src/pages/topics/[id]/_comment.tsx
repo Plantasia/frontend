@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Button, Row, Col, Image } from "react-bootstrap"
 import { FaSeedling } from "react-icons/fa"
 import { PlantasiaCard, InlineGap } from "@styled/Shared"
 import { ComponentProps } from "@utils/types"
 import { CommentDropdown } from "@components/CommentDropdown"
 import { Editor } from "@components"
-import dynamic from "next/dynamic"
 
 export interface CommentProps {
   user: ComponentProps.UserProps
@@ -13,10 +12,6 @@ export interface CommentProps {
   likes: number
   createdAt: string
   owner: boolean
-}
-type EditorRefType = {
-  CKEditor: any
-  ClassicEditor: any
 }
 
 type ProfileCommentProps = {
