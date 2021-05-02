@@ -4,6 +4,8 @@ import { FaSeedling } from "react-icons/fa"
 import { PlantasiaCard, InlineGap } from "@styled/Shared"
 import { ComponentProps } from "@utils/types"
 import { CommentDropdown } from "@components/CommentDropdown"
+import { Editor } from "@components"
+import dynamic from "next/dynamic"
 
 export interface CommentProps {
   user: ComponentProps.UserProps
@@ -22,14 +24,14 @@ type ProfileCommentProps = {
 }
 
 const ProfileComment: React.FC<ProfileCommentProps> = ({
-  user: { name, created_at, bio },
+  user: { name, createdAt, bio },
 }) => {
   return (
     <Col xs="2" className="d-flex flex-column align-items-center text-center">
       <Image src="https://picsum.photos/100" roundedCircle className="mb-3" />
       <div className="mb-3" style={{ borderBottom: "1px solid black" }}>
         <h5>{name}</h5>
-        <p>Membro desde {created_at}</p>
+        <p>Membro desde {createdAt}</p>
       </div>
       <div>
         <p className="font-weight-normal">{bio}</p>
@@ -45,9 +47,7 @@ export function Comment({
   createdAt,
   owner,
 }: CommentProps) {
-  const editorRef = useRef<EditorRefType>()
   const [currentContent, setCurrentContent] = useState(content)
-  const { CKEditor, ClassicEditor } = editorRef.current || {}
   const handleEdit = () => {
     setEditMode(true)
   }
@@ -59,12 +59,7 @@ export function Comment({
 
   const [editMode, setEditMode] = useState(false)
 
-  useEffect(() => {
-    editorRef.current = {
-      CKEditor: require("@ckeditor/ckeditor5-react").CKEditor,
-      ClassicEditor: require("@ckeditor/ckeditor5-build-classic"),
-    }
-  }, [])
+  useEffect(() => {}, [])
 
   return (
     <PlantasiaCard className="mt-2">
@@ -92,15 +87,7 @@ export function Comment({
           <Col xs="12" className="d-flex flex-column justify-content-between ">
             {editMode ? (
               <>
-                <CKEditor
-                  editor={ClassicEditor}
-                  data={currentContent}
-                  onChange={(event, editor) => {
-                    const data = editor.getData()
-                    // console.log({ event, editor, data })
-                    setCurrentContent(data)
-                  }}
-                />
+                <Editor content={currentContent} onChange={setCurrentContent} />
                 <div className="d-flex justify-content-between w-100 flex-row-reverse align-items-end">
                   <InlineGap className="mt-3">
                     <Button
