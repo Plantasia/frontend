@@ -24,13 +24,6 @@ export function ListItem({
     <PlantasiaCard className="d-flex align-items-end">
       <TopicContent>
         <div className="mb-2 d-flex align-items-center">
-          <Image
-            height="50"
-            width="50"
-            src={imageStorage}
-            className="mr-3"
-            roundedCircle
-          />
           <h4
             style={{
               cursor: "pointer",
