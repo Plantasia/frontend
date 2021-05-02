@@ -67,9 +67,11 @@ export namespace BackendDTO {
   }
   export interface TopicsDTO {
     topics: TopicObject[]
-    currentPage: number | null
-    prevPage: number | null
-    perPage: number | null
+    currentPage: number | string | null
+    perPage: number
+    prevPage: number | string | null
+    nextPage: number | string | null
+    totalRegisters: number
   }
   export interface TopicDTO {
     topic: TopicObject

@@ -11,9 +11,9 @@ import { ListItem } from "./_ListTopicItem"
 export interface ListTopicsProps {
   topics: ComponentProps.TopicItemProps[]
   pages?: number | string
-  currentPage?: number | string
-  nextPage?: number | null
-  prevPage?: number | null
+  currentPage?: number | string | null
+  nextPage?: number | string | null
+  prevPage?: number | string | null
 }
 export default function listTopics({ topics, pages }: ListTopicsProps) {
   const router = useRouter()
@@ -21,7 +21,7 @@ export default function listTopics({ topics, pages }: ListTopicsProps) {
     parseInt(router.query.page as string) || 1
   )
 
-  const paginationItems = new Array(pages).fill(1).map((x, index) => index++)
+  const paginationItems = new Array(pages).fill(1).map((x, index) => index + 1)
 
   useEffect(() => {}, [])
 
@@ -54,6 +54,7 @@ export default function listTopics({ topics, pages }: ListTopicsProps) {
             active={page === currentPage}
             onClick={() => {
               setCurrentPage(page)
+              router.push(`/topics?page=${page}`)
             }}
           >
             {page}

@@ -3,6 +3,9 @@ import { BackendDTO } from "./protocols"
 import { ServerSideApi } from "./Api"
 import { ListTopicsProps } from "@src/pages/topics"
 import { ComponentProps } from "@src/utils/types"
+import TimeAgo from "javascript-time-ago"
+
+const timeAgo = new TimeAgo("pt")
 
 export const GetTopics = async (
   page: number | string
@@ -39,12 +42,14 @@ export const GetTopics = async (
           avatar: comments[0].user.avatar,
           name: comments[0].user.name,
         },
-        when: comments[0].created_at,
+        when: timeAgo.format(new Date(created_at)),
       },
       ranking: "calculando",
       countComments: comments.length,
       created_at: new Date(created_at).toLocaleDateString("pt-br"),
     })
   )
-  return { topics }
+
+  const { totalRegisters, perPage, nextPage, prevPage } = data
+  return { topics, pages: totalRegisters / perPage, prevPage, nextPage }
 }

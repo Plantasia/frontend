@@ -58,7 +58,7 @@ export function ListItem({
             roundedCircle
           />
           <div className="d-flex-column justify-content-center">
-            <p style={{ margin: 0 }}>último reply</p>
+            <p style={{ margin: 0 }}>último reply, {lastComment.when}</p>
 
             <a href={`/profile/${lastComment.user.id}`}>
               {lastComment.user.name}
