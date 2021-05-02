@@ -1,58 +1,50 @@
 /* eslint-disable camelcase */
 import { BackendDTO } from "./protocols"
 import { ServerSideApi } from "./Api"
-import { ComponentProps } from "@utils/types"
+import { ListTopicsProps } from "@src/pages/topics"
+import { ComponentProps } from "@src/utils/types"
 
 export const GetTopics = async (
-  page: number
-): Promise<ComponentProps.TopicItemProps[]> => {
-  const { data } = await ServerSideApi.get<{
-    data: BackendDTO.TopicDTO[]
-    prevPage: number
-    nextPage: number
-    perPage: number
-    totalRegisters: number
-  }>("/forum/topics")
-  // @TO-DO tratar exceções
-  // console.log(data)
+  page: number | string
+): Promise<ListTopicsProps> => {
+  const { data } = await ServerSideApi.get<BackendDTO.TopicsDTO>(
+    "/forum/topics",
+    { params: { page } }
+  )
 
-  // const comments = data.data
-
-  // for (const comment of comments) {
-  //   console.log("****COMMENNTS")
-  //   console.log(comment.comments)
-  // }
-
-  return data.topics.map(
+  const topics: ComponentProps.TopicItemProps[] = data.topics.map(
     ({
       id,
-      user,
+      created_at,
+      imageStorage,
       name,
       textBody,
-      comments,
-      imageStorage,
-      created_at,
       updated_at,
+      comments,
+      user,
     }) => ({
       id,
+      imageStorage,
       name,
-      topicOwner: user,
-      lastComment: comments[0],
-      countComments: comments.length,
       textBody,
-      imageStorage: imageStorage || "",
-      created_at: new Date(created_at).toLocaleDateString("pt-br"),
+      topicOwner: {
+        id: user.id,
+        avatar: user.avatar,
+        name: user.name,
+      },
       updated_at,
+      lastComment: {
+        user: {
+          id: comments[0].user.id,
+          avatar: comments[0].user.avatar,
+          name: comments[0].user.name,
+        },
+        when: comments[0].created_at,
+      },
+      ranking: "calculando",
+      countComments: comments.length,
+      created_at: new Date(created_at).toLocaleDateString("pt-br"),
     })
   )
-}
-
-export const GetTopicById = async (
-  id: number
-): Promise<BackendDTO.TopicByIdDTO> => {
-  const { data } = await ServerSideApi.get<{
-    data: BackendDTO.TopicByIdDTO
-  }>(`topics/${id}`)
-
-  return data.data
+  return { topics }
 }

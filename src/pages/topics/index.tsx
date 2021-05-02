@@ -10,11 +10,18 @@ import { ListItem } from "./_ListTopicItem"
 
 export interface ListTopicsProps {
   topics: ComponentProps.TopicItemProps[]
+  pages?: number | string
+  currentPage?: number | string
+  nextPage?: number | null
+  prevPage?: number | null
 }
-export default function listTopics({ topics }: ListTopicsProps) {
-  const [currentPage, setCurrentPage] = useState(0)
-  const pages = new Array(10).fill(1).map((x, index) => index)
+export default function listTopics({ topics, pages }: ListTopicsProps) {
   const router = useRouter()
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(router.query.page as string) || 1
+  )
+
+  const paginationItems = new Array(pages).fill(1).map((x, index) => index++)
 
   useEffect(() => {}, [])
 
@@ -41,7 +48,7 @@ export default function listTopics({ topics }: ListTopicsProps) {
       </Row>
 
       <Pagination className="d-flex justify-content-center">
-        {pages.map(page => (
+        {paginationItems.map(page => (
           <Pagination.Item
             key={page}
             active={page === currentPage}
@@ -58,9 +65,10 @@ export default function listTopics({ topics }: ListTopicsProps) {
 }
 
 export const getServerSideProps: GetServerSideProps<ListTopicsProps> = async context => {
+  const {
+    query: { page },
+  } = context
   return {
-    props: {
-      topics: await GetTopics(1),
-    },
+    props: await GetTopics(page as string),
   }
 }
