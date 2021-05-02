@@ -1,11 +1,12 @@
-import { Pagination } from "react-bootstrap"
-import { Header, Layout } from "@components"
+import { Pagination, Row, Button, Col } from "react-bootstrap"
+import { Layout, SEO } from "@components"
 import { GetServerSideProps } from "next"
-import ListTopics from "./_ListTopics"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { ComponentProps } from "@utils/types"
+import { TopicHeader } from "@styled/Topics"
 import { GetTopics } from "@src/services/Topics"
+import { ListItem } from "./_ListTopicItem"
 
 export interface ListTopicsProps {
   topics: ComponentProps.TopicItemProps[]
@@ -20,9 +21,25 @@ export default function listTopics({ topics }: ListTopicsProps) {
   function handleNewTopic() {
     router.push("/category")
   }
+
   return (
     <Layout>
-      <ListTopics handleNewTopic={handleNewTopic} data={topics} />
+      <SEO title="Categorias" />
+
+      <Row>
+        <TopicHeader>
+          <h2>Tópicos</h2>
+          <Button variant="primary" onClick={handleNewTopic}>
+            novo tópico
+          </Button>
+        </TopicHeader>
+        <Col xs="12">
+          {topics.map((item, index) => (
+            <ListItem {...item} key={index} />
+          ))}
+        </Col>
+      </Row>
+
       <Pagination className="d-flex justify-content-center">
         {pages.map(page => (
           <Pagination.Item
