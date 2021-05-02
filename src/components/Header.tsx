@@ -39,7 +39,7 @@ export default function Header({
   return (
     <HeaderWrapper>
       <Col onClick={() => router.push("/")} style={{ cursor: "pointer" }}>
-        <h3>Plantasia</h3>
+        <h1>Plantasia</h1>
       </Col>
       {user?.isLoggedIn && <MenuDropdown logout={logout} />}
       {!user?.isLoggedIn && (
