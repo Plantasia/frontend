@@ -48,7 +48,7 @@ export default function ResetPassword() {
             router.push("/")
           }}
         >
-          Plantasia
+          plantasia
         </h1>
         <Col xs="5">
           <FormWrapper className="d-flex flex-column justify-content-between h-75">

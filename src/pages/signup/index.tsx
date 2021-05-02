@@ -53,7 +53,7 @@ export default function SignUp() {
               router.push("/")
             }}
           >
-            Plantasia
+            plantasia
           </h1>
           <SignUpForm
             handleSubmitSignUp={handleSubmitSignUp}
