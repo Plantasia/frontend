@@ -20,36 +20,21 @@ export function ListCategoryItem({
   return (
     <PlantasiaCard>
       <Col xs="12" md="3" lg="2" className="d-flex justify-content-center">
-        <Image
-          loader={({ src, width, quality }) => `https://picsum.photos/${width}`}
-          src={image?.src || "/picsum/150"}
-          width={150}
-          height={150}
-          className="rounded"
-        />
+        <img src={image?.src} width={150} height={150} className="rounded" />
       </Col>
-      <Col
-        xs="12"
-        md="4"
-        lg="5"
-        className="d-flex flex-column justify-content-between"
-      >
+      <Col xs="12" md="4" lg="5" className="d-flex flex-column ">
         <h3
           onClick={() => {
             router.push(`/topics?category=${id}`)
           }}
           style={{ cursor: "pointer" }}
+          className="mb-2 mb-md-4"
         >
           {name}
         </h3>
-        <p>{description}</p>
+        <span style={{ fontSize: "1.1rem" }}>{description}</span>
       </Col>
-      <Col
-        xs="12"
-        md="5"
-        lg="5"
-        className="d-flex flex-column justify-content-between"
-      >
+      <Col xs="12" md="5" lg="5" className="d-flex flex-column">
         <div className="d-flex flex-wrap justify-content-between">
           <div className="">
             <h6>Tópicos</h6>
@@ -70,15 +55,10 @@ export function ListCategoryItem({
         <div className="d-flex flex-column w-100">
           <h6 style={{ fontWeight: 300 }} className="mb-2">
             último tópico
-            {/* <UserLink id={lastTopic.author.id} name={lastTopic.author.name} /> */}
           </h6>
 
           <div className="d-flex align-items-center">
-            <img
-              src="https://picsum.photos/seed/picsum/50"
-              style={{ borderRadius: "50%" }}
-            />
-            <h6 className="ml-3">
+            <h6 className="">
               <TopicLink id={lastTopic.id} title={lastTopic.title} />
             </h6>
           </div>

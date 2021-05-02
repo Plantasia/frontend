@@ -23,19 +23,14 @@ export default function ListCategories({
   const [currentPage, setCurrentPage] = useState(
     parseInt(router.query.page as string) || 1
   )
-  console.log(pages)
+
   const paginationItems = new Array(pages).fill(1).map((x, index) => index + 1)
 
   return (
     <Layout>
       <Row>
-        <Col xs="2" className="mb-4">
+        <Col xs="12" className="mb-4">
           <h2>Categorias</h2>
-        </Col>
-        <Col xs="10" className="d-flex justify-content-end">
-          <InlineGap>
-            <Button variant="outline-primary">novo tópico</Button>
-          </InlineGap>
         </Col>
       </Row>
       {categories &&
