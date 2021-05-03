@@ -5,13 +5,13 @@ import { PlantasiaCard, InlineGap } from "@styled/Shared"
 import { ComponentProps } from "@utils/types"
 import { CommentDropdown } from "@components/CommentDropdown"
 import { Editor } from "@components"
+import useUser from "@src/lib/useUser"
 
 export interface CommentProps {
-  user: ComponentProps.UserProps
+  ownerUser: ComponentProps.UserProps
   content: string
-  likes: number
+  likes?: number
   createdAt: string
-  owner: boolean
 }
 
 type ProfileCommentProps = {
@@ -38,11 +38,13 @@ const ProfileComment: React.FC<ProfileCommentProps> = ({
 export function Comment({
   content,
   likes,
-  user,
+  ownerUser,
   createdAt,
-  owner,
 }: CommentProps) {
   const [currentContent, setCurrentContent] = useState(content)
+  const { user, mutateUser } = useUser()
+  console.log(user)
+
   const handleEdit = () => {
     setEditMode(true)
   }
@@ -58,7 +60,7 @@ export function Comment({
 
   return (
     <PlantasiaCard className="mt-2">
-      <ProfileComment user={{ ...user }} />
+      <ProfileComment user={{ ...ownerUser }} />
       <Col xs="10" className={`d-flex flex-column`}>
         <Row>
           {editMode ? null : (
@@ -67,7 +69,7 @@ export function Comment({
                 <InlineGap className="mb-3">
                   <span>{createdAt}</span>
                   <CommentDropdown
-                    owner={owner}
+                    owner={user?.id === ownerUser.id}
                     handleDelete={handleDelete}
                     handleEdit={handleEdit}
                     handleReport={handleReport}
@@ -115,7 +117,7 @@ export function Comment({
                     <Button variant="outline-primary">
                       semear <FaSeedling />
                     </Button>
-                    <Button variant="primary">responder</Button>
+                    <Button variant="primary">mencionar</Button>
                   </InlineGap>
                   <div>
                     <a href="#">{likes} sementes</a>
