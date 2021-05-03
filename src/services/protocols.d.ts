@@ -6,11 +6,11 @@ export namespace BackendDTO {
     name: string
     imageStorage: string
     description: string
-    lastTopicId: string
-    lastTopicName: string
-    lastActivity: string
-    countComments: string
-    countTopics: string
+    lastTopicId?: string
+    lastTopicName?: string
+    lastActivity?: string
+    countComments?: string
+    countTopics?: string
   }
   export interface CategoriesDTO {
     categories: CategoryObject[]
@@ -24,6 +24,8 @@ export namespace BackendDTO {
     id: string
     name: string
     avatar: string
+    created_at: string
+    bio: string
   }
   export namespace UserSignIn {
     export type Response = {
@@ -54,6 +56,7 @@ export namespace BackendDTO {
     updated_at: string
     created_at: string
     user: UserObject
+    textBody: string
   }
   export interface TopicObject {
     id: string
@@ -64,6 +67,7 @@ export namespace BackendDTO {
     updated_at: string
     comments: CommentObject[]
     user: UserObject
+    category: CategoryObject
   }
   export interface TopicsDTO {
     topics: TopicObject[]
@@ -73,9 +77,7 @@ export namespace BackendDTO {
     nextPage: number | string | null
     totalRegisters: number
   }
-  export interface TopicDTO {
-    topic: TopicObject
+  export type TopicDTO = TopicObject & {
     comments: CommentObject[]
-    user: UserObject
   }
 }

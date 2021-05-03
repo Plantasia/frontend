@@ -12,7 +12,7 @@ const handler: Handler = async (req, res) => {
     const { data: user } = await ServerSideApi.get(`/users/findme`, { headers })
     res.json({
       isLoggedIn: true,
-      user,
+      ...user,
     })
   } else {
     res.json({

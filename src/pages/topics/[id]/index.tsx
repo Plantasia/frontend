@@ -5,6 +5,8 @@ import { InlineGap, PlantasiaCard } from "@styled/Shared"
 import { CommentProps, Comment } from "./_comment"
 import { ComponentProps } from "@utils/types"
 import { useState } from "react"
+import { GetTopic } from "@src/services/Topics"
+import { SelfApi } from "@src/services/Api"
 export interface BadgeCategoryProps {
   id: string
   name: string
@@ -22,21 +24,16 @@ export default function showTopicsByCategory({
   title,
   categories,
   comments,
+  description,
 }: TopicProps) {
   const [newComment, setNewComment] = useState("")
+
   return (
     <Layout>
       <Row>
         <Col xs="12" className="mb-4">
           <h2 className="mb-3">{title}</h2>
-          <p>
-            Sit voluptate sit excepteur ex ex. Deserunt consectetur aute
-            consectetur exercitation labore nostrud in deserunt sint laborum
-            exercitation est sint. Ipsum mollit eu dolor enim ut enim aute.
-            Laborum proident eiusmod nostrud proident nulla officia pariatur ad
-            sint ullamco. Ut irure pariatur excepteur minim et ad. Consequat
-            minim occaecat eiusmod laborum et labore sint.
-          </p>
+          <p>{description}</p>
         </Col>
         <Col xs="12" className="d-flex justify-content-between mb-3">
           <InlineGap>
@@ -76,64 +73,11 @@ export default function showTopicsByCategory({
 export const getServerSideProps: GetServerSideProps<TopicProps> = async ({
   query,
 }) => {
+  const { data: currentUser } = await SelfApi.get("/api/user")
+  console.log(currentUser)
+
+  const { id } = query
   return {
-    props: {
-      title: "Árvores de fruto em vasos",
-      categories: [
-        { color: "secondary", id: "022913282", name: "suculentas" },
-        { color: "danger", id: "022913282", name: "solos" },
-      ],
-      comments: [
-        {
-          content:
-            "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia hic modi provident veniam mollitia. Velit vitae quidem perferendis corrupti dolore saepe neque earum. Eaque quos nobis at quibusdam unde laudantium!</p>",
-          likes: 20,
-          user: {
-            id: "200",
-            name: "Matheus Faggi",
-            createdAt: "10/01/2020",
-            bio:
-              "Duis dolor nisi consequat in pariatur. Quis cillum ad ad exercitation cillum occaecat.",
-          },
-          createdAt: "05/01/2020",
-          owner: true,
-        },
-        {
-          content:
-            "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia hic modi provident veniam mollitia. Velit vitae quidem perferendis corrupti dolore saepe neque earum. Eaque quos nobis at quibusdam unde laudantium!</p>",
-          likes: 20,
-          user: {
-            id: "1928309182",
-            name: "Matheus Faggi",
-            createdAt: "10/01/2020",
-            bio:
-              "Duis dolor nisi consequat in pariatur. Quis cillum ad ad exercitation cillum occaecat.",
-          },
-          createdAt: "05/01/2020",
-          owner: false,
-        },
-        {
-          content:
-            "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia hic modi provident veniam mollitia. Velit vitae quidem perferendis corrupti dolore saepe neque earum. Eaque quos nobis at quibusdam unde laudantium!</p>",
-          likes: 20,
-          user: {
-            id: "1928309182",
-            name: "Matheus Faggi",
-            createdAt: "10/01/2020",
-            bio:
-              "Duis dolor nisi consequat in pariatur. Quis cillum ad ad exercitation cillum occaecat.",
-          },
-          createdAt: "05/01/2020",
-          owner: false,
-        },
-      ],
-      author: {
-        id: "1928309182",
-        name: "Matheus Faggi",
-        createdAt: "10/01/2020",
-        bio:
-          "Duis dolor nisi consequat in pariatur. Quis cillum ad ad exercitation cillum occaecat. In est magna reprehenderit dolore duis qui id dolore culpa labore ex commodo. Eiusmod ipsum adipisicing commodo dolore ullamco aliquip.",
-      },
-    },
+    props: await GetTopic(id as string),
   }
 }

@@ -19,11 +19,17 @@ type ProfileCommentProps = {
 }
 
 const ProfileComment: React.FC<ProfileCommentProps> = ({
-  user: { name, createdAt, bio },
+  user: { name, createdAt, bio, avatar },
 }) => {
   return (
     <Col xs="2" className="d-flex flex-column align-items-center text-center">
-      <Image src="https://picsum.photos/100" roundedCircle className="mb-3" />
+      <Image
+        src={avatar}
+        roundedCircle
+        className="mb-3"
+        height="150"
+        width="150"
+      />
       <div className="mb-3" style={{ borderBottom: "1px solid black" }}>
         <h5>{name}</h5>
         <p>Membro desde {createdAt}</p>
