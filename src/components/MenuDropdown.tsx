@@ -11,10 +11,13 @@ import {
 import { InlineGap } from "@styled/Shared"
 interface ToggleProps {
   onClick?(event): void
+  avatar: string
 }
 const Avatar = styled.img`
   border-radius: 50%;
   cursor: pointer;
+  width: 50px;
+  height: 50px;
 `
 const DropdownMenuWrapper = styled(InlineGap)`
   cursor: pointer;
@@ -28,7 +31,7 @@ const CustomDropdownItem = styled(Dropdown.Item)`
 
 // eslint-disable-next-line no-undef
 const Toggle = React.forwardRef<HTMLDivElement, ToggleProps>(
-  ({ onClick }, ref) => (
+  ({ onClick, avatar }, ref) => (
     <DropdownMenuWrapper
       ref={ref}
       onClick={e => {
@@ -36,7 +39,7 @@ const Toggle = React.forwardRef<HTMLDivElement, ToggleProps>(
         onClick(e)
       }}
     >
-      <Avatar src="https://picsum.photos/50" />
+      <Avatar src={avatar} />
       <FaRegCaretSquareDown />
     </DropdownMenuWrapper>
   )
@@ -48,13 +51,15 @@ Toggle.propTypes = {
 
 type Props = {
   logout(): void
+  userAvatar: string
 }
-export default function MenuDropdown({ logout }: Props) {
+export default function MenuDropdown({ logout, userAvatar }: Props) {
   return (
     <Dropdown>
       <Dropdown.Toggle
         as={Toggle}
         id="dropdown-custom-components"
+        avatar={userAvatar}
       ></Dropdown.Toggle>
       <Dropdown.Menu align={{ sm: "right" }}>
         <CustomDropdownItem>

@@ -6,10 +6,11 @@ import styled from "styled-components"
 import useUser from "@src/lib/useUser"
 import axios from "axios"
 import MenuDropdown from "./MenuDropdown"
+import { InlineGap } from "@src/styles/components/Shared"
 // Jogar para pasta de styles dps
 const HeaderWrapper = styled(Row).attrs(
   (): RowProps => ({
-    className: "py-3 mb-4 d-flex align-items-center",
+    className: "py-3 mb-3 d-flex align-items-center",
   })
 )`
   border-bottom: 1px black solid;
@@ -41,17 +42,29 @@ export default function Header({
       <Col onClick={() => router.push("/")} style={{ cursor: "pointer" }}>
         <h1>plantasia</h1>
       </Col>
-      {user?.isLoggedIn && <MenuDropdown logout={logout} />}
+      {user?.isLoggedIn && (
+        <MenuDropdown logout={logout} userAvatar={user.avatar} />
+      )}
       {!user?.isLoggedIn && (
-        <Col className="d-flex justify-content-end">
-          <Button
-            variant={variant || "outline-primary"}
-            onClick={() => {
-              onClick()
-            }}
-          >
-            {label}
-          </Button>
+        <Col xs="3" className="d-flex justify-content-end">
+          <InlineGap>
+            <Button
+              className="mr-2"
+              variant={variant || "outline-primary"}
+              onClick={() => {
+                onClick()
+              }}
+            >
+              {label}
+            </Button>
+            <Button
+              onClick={() => {
+                router.push("/signin")
+              }}
+            >
+              entrar
+            </Button>
+          </InlineGap>
         </Col>
       )}
     </HeaderWrapper>
