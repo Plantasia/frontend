@@ -32,13 +32,11 @@ type CommentDropdownProps = {
   handleEdit?(): void
   handleDelete?(): void
   handleReport?(): void
-  handleQuote?(): void
 }
 const CommentDropdown: React.FC<CommentDropdownProps> = ({
   owner,
   handleDelete,
   handleEdit,
-  handleQuote,
   handleReport,
 }) => {
   return (
@@ -55,7 +53,6 @@ const CommentDropdown: React.FC<CommentDropdownProps> = ({
           </>
         ) : (
           <>
-            <Dropdown.Item onClick={handleQuote}>citar</Dropdown.Item>
             <Dropdown.Item onClick={handleReport}>reportar</Dropdown.Item>
           </>
         )}

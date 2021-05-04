@@ -44,8 +44,9 @@ export default function showTopicsByCategory({
             ))}
           </InlineGap>
           <InlineGap>
-            <Button variant="outline-primary">acompanhar</Button>
-            <Button variant="primary">novo comentário</Button>
+            <Button variant="primary" href="#new-comment">
+              novo comentário
+            </Button>
           </InlineGap>
         </Col>
       </Row>
@@ -57,7 +58,7 @@ export default function showTopicsByCategory({
         </Col>
       </Row>
 
-      <PlantasiaCard>
+      <PlantasiaCard id="new-comment">
         <Col xs="12" className="mb-3">
           <h3>Deixe um comentário</h3>
           <Editor content={newComment} onChange={setNewComment} />

@@ -8,6 +8,7 @@ import { Editor } from "@components"
 import useUser from "@src/lib/useUser"
 
 export interface CommentProps {
+  id: string
   ownerUser: ComponentProps.UserProps
   content: string
   likes?: number
@@ -58,7 +59,6 @@ export function Comment({
   const handleDelete = () => {
     alert("Você tem certeza disso?")
   }
-  const handleQuote = () => {}
 
   const [editMode, setEditMode] = useState(false)
 
@@ -79,7 +79,6 @@ export function Comment({
                     handleDelete={handleDelete}
                     handleEdit={handleEdit}
                     handleReport={handleReport}
-                    handleQuote={handleQuote}
                   />
                 </InlineGap>
               </div>
