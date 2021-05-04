@@ -6,7 +6,7 @@ import { useRouter } from "next/router"
 import { ComponentProps } from "@utils/types"
 import { TopicHeader } from "@styled/Topics"
 import { GetTopics } from "@src/services/Topics"
-import { ListItem } from "./_ListTopicItem"
+import { ListItem } from "./_topic-item"
 
 export interface ListTopicsProps {
   topics: ComponentProps.TopicItemProps[]
