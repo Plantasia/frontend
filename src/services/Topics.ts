@@ -5,12 +5,14 @@ import { ListTopicsProps } from "@src/pages/topics"
 import { ComponentProps } from "@src/utils/types"
 import TimeAgo from "javascript-time-ago"
 import { TopicProps } from "@src/pages/topics/[id]"
-
-const timeAgo = new TimeAgo("pt")
+import pt from "javascript-time-ago/locale/pt"
 
 export const GetTopics = async (
   page: number | string
 ): Promise<ListTopicsProps> => {
+  TimeAgo.addLocale(pt)
+  const timeAgo = new TimeAgo("pt")
+
   const { data } = await ServerSideApi.get<BackendDTO.TopicsDTO>(
     "/forum/topics",
     { params: { page } }
@@ -56,6 +58,9 @@ export const GetTopics = async (
 }
 
 export const GetTopic = async (id: string): Promise<TopicProps> => {
+  TimeAgo.addLocale(pt)
+  const timeAgo = new TimeAgo("pt")
+
   const { data } = await ServerSideApi.get<BackendDTO.TopicDTO>(
     `/forum/topics/${id}`
   )
@@ -72,6 +77,7 @@ export const GetTopic = async (id: string): Promise<TopicProps> => {
     categories: [{ name: category.name, color: "secondary", id: "teste" }],
     description: textBody,
     comments: comments.map(({ textBody, user, id, created_at }) => ({
+      id,
       content: textBody,
       ownerUser: {
         id: user.id,
