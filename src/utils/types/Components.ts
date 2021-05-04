@@ -23,7 +23,7 @@ export namespace ComponentProps {
     name?: string
     avatar?: string
     email?: string
-    created_at?: string
+    createdAt?: string
     bio?: string
   }
 
@@ -38,7 +38,7 @@ export namespace ComponentProps {
     name: string | ""
     textBody: string
     imageStorage: string
-    ranking?: number
+    ranking?: number | string
     replies?: number
     created_at: string
     updated_at: string

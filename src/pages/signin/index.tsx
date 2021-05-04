@@ -54,7 +54,7 @@ export default function SignIn() {
               router.push("/")
             }}
           >
-            Plantasia
+            plantasia
           </h1>
           <SignInForm
             handleSubmitLogin={handleLoginSubmit}

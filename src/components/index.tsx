@@ -6,6 +6,7 @@ import MenuDropdown from "./MenuDropdown"
 import { TopicLink, UserLink } from "./Links"
 import { LoadingIndicator } from "./LoadingIndicator"
 import { FlashAlert } from "./FlashAlert"
+import { Editor } from "./Editor"
 
 export {
   Header,
@@ -17,4 +18,5 @@ export {
   Layout,
   AuthLayout,
   FlashAlert,
+  Editor,
 }

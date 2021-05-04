@@ -1,58 +1,93 @@
 /* eslint-disable camelcase */
 import { BackendDTO } from "./protocols"
 import { ServerSideApi } from "./Api"
-import { ComponentProps } from "@utils/types"
+import { ListTopicsProps } from "@src/pages/topics"
+import { ComponentProps } from "@src/utils/types"
+import TimeAgo from "javascript-time-ago"
+import { TopicProps } from "@src/pages/topics/[id]"
+import pt from "javascript-time-ago/locale/pt"
 
 export const GetTopics = async (
-  page: number
-): Promise<ComponentProps.TopicItemProps[]> => {
-  const { data } = await ServerSideApi.get<{
-    data: BackendDTO.TopicDTO[]
-    prevPage: number
-    nextPage: number
-    perPage: number
-    totalRegisters: number
-  }>("/forum/topics")
-  // @TO-DO tratar exceções
-  // console.log(data)
+  page: number | string
+): Promise<ListTopicsProps> => {
+  TimeAgo.addLocale(pt)
+  const timeAgo = new TimeAgo("pt")
 
-  // const comments = data.data
+  const { data } = await ServerSideApi.get<BackendDTO.TopicsDTO>(
+    "/forum/topics",
+    { params: { page } }
+  )
 
-  // for (const comment of comments) {
-  //   console.log("****COMMENNTS")
-  //   console.log(comment.comments)
-  // }
-
-  return data.topics.map(
+  const topics: ComponentProps.TopicItemProps[] = data.topics.map(
     ({
       id,
-      user,
+      created_at,
+      imageStorage,
       name,
       textBody,
-      comments,
-      imageStorage,
-      created_at,
       updated_at,
+      comments,
+      user,
     }) => ({
       id,
+      imageStorage,
       name,
-      topicOwner: user,
-      lastComment: comments[0],
-      countComments: comments.length,
       textBody,
-      imageStorage: imageStorage || "",
-      created_at,
+      topicOwner: {
+        id: user.id,
+        avatar: user.avatar,
+        name: user.name,
+      },
       updated_at,
+      lastComment: {
+        user: {
+          id: comments[0].user.id,
+          avatar: comments[0].user.avatar,
+          name: comments[0].user.name,
+        },
+        when: timeAgo.format(new Date(created_at)),
+      },
+      ranking: "calculando",
+      countComments: comments.length,
+      created_at: new Date(created_at).toLocaleDateString("pt-br"),
     })
   )
+
+  const { totalRegisters, perPage, nextPage, prevPage } = data
+  return { topics, pages: totalRegisters / perPage, prevPage, nextPage }
 }
 
-export const GetTopicById = async (
-  id: number
-): Promise<BackendDTO.TopicByIdDTO> => {
-  const { data } = await ServerSideApi.get<{
-    data: BackendDTO.TopicByIdDTO
-  }>(`topics/${id}`)
+export const GetTopic = async (id: string): Promise<TopicProps> => {
+  TimeAgo.addLocale(pt)
+  const timeAgo = new TimeAgo("pt")
 
-  return data.data
+  const { data } = await ServerSideApi.get<BackendDTO.TopicDTO>(
+    `/forum/topics/${id}`
+  )
+
+  const { comments, name, textBody, user, category } = data
+
+  return {
+    title: name,
+    author: {
+      id: user.id,
+      avatar: user.avatar,
+      name: user.name,
+    },
+    categories: [{ name: category.name, color: "secondary", id: "teste" }],
+    description: textBody,
+    comments: comments.map(({ textBody, user, id, created_at }) => ({
+      id,
+      content: textBody,
+      ownerUser: {
+        id: user.id,
+        avatar: user.avatar,
+        name: user.name,
+        bio: user.bio,
+        createdAt: timeAgo.format(new Date(user.created_at)),
+      },
+      createdAt: new Date(created_at).toLocaleString("pt"),
+      owner: { id: user.id },
+    })),
+  }
 }

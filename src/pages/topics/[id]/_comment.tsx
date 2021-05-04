@@ -1,20 +1,18 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Button, Row, Col, Image } from "react-bootstrap"
 import { FaSeedling } from "react-icons/fa"
 import { PlantasiaCard, InlineGap } from "@styled/Shared"
 import { ComponentProps } from "@utils/types"
 import { CommentDropdown } from "@components/CommentDropdown"
+import { Editor } from "@components"
+import useUser from "@src/lib/useUser"
 
 export interface CommentProps {
-  user: ComponentProps.UserProps
+  id: string
+  ownerUser: ComponentProps.UserProps
   content: string
-  likes: number
+  likes?: number
   createdAt: string
-  owner: boolean
-}
-type EditorRefType = {
-  CKEditor: any
-  ClassicEditor: any
 }
 
 type ProfileCommentProps = {
@@ -22,14 +20,20 @@ type ProfileCommentProps = {
 }
 
 const ProfileComment: React.FC<ProfileCommentProps> = ({
-  user: { name, created_at, bio },
+  user: { name, createdAt, bio, avatar },
 }) => {
   return (
     <Col xs="2" className="d-flex flex-column align-items-center text-center">
-      <Image src="https://picsum.photos/100" roundedCircle className="mb-3" />
+      <Image
+        src={avatar}
+        roundedCircle
+        className="mb-3"
+        height="150"
+        width="150"
+      />
       <div className="mb-3" style={{ borderBottom: "1px solid black" }}>
         <h5>{name}</h5>
-        <p>Membro desde {created_at}</p>
+        <p>Membro desde {createdAt}</p>
       </div>
       <div>
         <p className="font-weight-normal">{bio}</p>
@@ -41,13 +45,13 @@ const ProfileComment: React.FC<ProfileCommentProps> = ({
 export function Comment({
   content,
   likes,
-  user,
+  ownerUser,
   createdAt,
-  owner,
 }: CommentProps) {
-  const editorRef = useRef<EditorRefType>()
   const [currentContent, setCurrentContent] = useState(content)
-  const { CKEditor, ClassicEditor } = editorRef.current || {}
+  const { user, mutateUser } = useUser()
+  console.log(user)
+
   const handleEdit = () => {
     setEditMode(true)
   }
@@ -55,20 +59,14 @@ export function Comment({
   const handleDelete = () => {
     alert("Você tem certeza disso?")
   }
-  const handleQuote = () => {}
 
   const [editMode, setEditMode] = useState(false)
 
-  useEffect(() => {
-    editorRef.current = {
-      CKEditor: require("@ckeditor/ckeditor5-react").CKEditor,
-      ClassicEditor: require("@ckeditor/ckeditor5-build-classic"),
-    }
-  }, [])
+  useEffect(() => {}, [])
 
   return (
     <PlantasiaCard className="mt-2">
-      <ProfileComment user={{ ...user }} />
+      <ProfileComment user={{ ...ownerUser }} />
       <Col xs="10" className={`d-flex flex-column`}>
         <Row>
           {editMode ? null : (
@@ -77,11 +75,10 @@ export function Comment({
                 <InlineGap className="mb-3">
                   <span>{createdAt}</span>
                   <CommentDropdown
-                    owner={owner}
+                    owner={user?.id === ownerUser.id}
                     handleDelete={handleDelete}
                     handleEdit={handleEdit}
                     handleReport={handleReport}
-                    handleQuote={handleQuote}
                   />
                 </InlineGap>
               </div>
@@ -92,15 +89,7 @@ export function Comment({
           <Col xs="12" className="d-flex flex-column justify-content-between ">
             {editMode ? (
               <>
-                <CKEditor
-                  editor={ClassicEditor}
-                  data={currentContent}
-                  onChange={(event, editor) => {
-                    const data = editor.getData()
-                    // console.log({ event, editor, data })
-                    setCurrentContent(data)
-                  }}
-                />
+                <Editor content={currentContent} onChange={setCurrentContent} />
                 <div className="d-flex justify-content-between w-100 flex-row-reverse align-items-end">
                   <InlineGap className="mt-3">
                     <Button
@@ -133,7 +122,7 @@ export function Comment({
                     <Button variant="outline-primary">
                       semear <FaSeedling />
                     </Button>
-                    <Button variant="primary">responder</Button>
+                    <Button variant="primary">mencionar</Button>
                   </InlineGap>
                   <div>
                     <a href="#">{likes} sementes</a>

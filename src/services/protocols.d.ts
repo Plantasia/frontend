@@ -6,17 +6,26 @@ export namespace BackendDTO {
     name: string
     imageStorage: string
     description: string
-    lastTopicId: string
-    lastTopicName: string
-    lastActivity: string
-    countComments: string
-    countTopics: string
+    lastTopicId?: string
+    lastTopicName?: string
+    lastActivity?: string
+    countComments?: string
+    countTopics?: string
   }
   export interface CategoriesDTO {
     categories: CategoryObject[]
     currentPage: number | null
     prevPage: number | null
+    nextPage: number | null
     perPage: number | null
+    totalRegisters: number | null
+  }
+  export interface UserObject {
+    id: string
+    name: string
+    avatar: string
+    created_at: string
+    bio: string
   }
   export namespace UserSignIn {
     export type Response = {
@@ -42,14 +51,33 @@ export namespace BackendDTO {
       name: string
     }
   }
+  export interface CommentObject {
+    id: string
+    updated_at: string
+    created_at: string
+    user: UserObject
+    textBody: string
+  }
   export interface TopicObject {
     id: string
+    name: string
     textBody: string
+    imageStorage: string
+    created_at: string
+    updated_at: string
+    comments: CommentObject[]
+    user: UserObject
+    category: CategoryObject
   }
   export interface TopicsDTO {
     topics: TopicObject[]
-    currentPage: number | null
-    prevPage: number | null
-    perPage: number | null
+    currentPage: number | string | null
+    perPage: number
+    prevPage: number | string | null
+    nextPage: number | string | null
+    totalRegisters: number
+  }
+  export type TopicDTO = TopicObject & {
+    comments: CommentObject[]
   }
 }

@@ -160,7 +160,7 @@ const HomePage: React.FC = ({ children }) => {
           xs="12"
           className="d-flex justify-content-between align-items-center"
         >
-          <h1>Plantasia</h1>
+          <h1>plantasia</h1>
           <h2>2021 ©</h2>
           <div
             style={{ width: 250 }}

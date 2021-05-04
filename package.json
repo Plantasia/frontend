@@ -8,16 +8,18 @@
     "start": "next start"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^26.0.0",
     "@ckeditor/ckeditor5-react": "^3.0.1",
     "@lottiefiles/lottie-player": "^0.5.1",
     "@lottiefiles/react-lottie-player": "^3.0.4",
     "@types/axios": "^0.14.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
+    "ckeditor5-custom-build": "file:./ckeditor5",
     "fetch": "^1.1.0",
+    "javascript-time-ago": "^2.3.4",
     "next": "^10.0.5",
     "next-auth": "^3.13.1",
+    "next-iron-session": "4.1.7",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
     "react-dom": "^17.0.1",
@@ -25,10 +27,10 @@
     "react-markdown": "^4.3.1",
     "sass": "^1.32.5",
     "styled-components": "^5.2.0",
-    "swr": "^0.5.4",
-    "next-iron-session": "4.1.7"
+    "swr": "^0.5.4"
   },
   "devDependencies": {
+    "@types/javascript-time-ago": "^2.0.2",
     "@types/jest": "^26.0.15",
     "@types/next-auth": "^3.7.2",
     "@types/node": "^14.14.6",

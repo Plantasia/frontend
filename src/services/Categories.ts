@@ -2,10 +2,11 @@
 import { ComponentProps } from "@utils/types"
 import { BackendDTO } from "./protocols"
 import { ServerSideApi } from "./Api"
+import { ListCategoriesProps } from "@src/pages/category"
 
 export const GetCategories = async (
   page?: any
-): Promise<ComponentProps.CategoryProps[]> => {
+): Promise<ListCategoriesProps> => {
   const params = {
     page,
   }
@@ -13,9 +14,7 @@ export const GetCategories = async (
     `/forum/categories`,
     { params }
   )
-  // @TO-DO tratar exceções
-  console.log(data)
-  return data.categories.map(
+  const categories: ComponentProps.CategoryProps[] = data.categories.map(
     // API keys
     ({
       id,
@@ -31,11 +30,19 @@ export const GetCategories = async (
       id,
       description,
       image: { src: imageStorage },
-      lastActivity: lastActivity,
+      lastActivity: new Date(lastActivity).toLocaleDateString("pt-br"),
       lastTopic: { id: lastTopicId, title: lastTopicName },
       topicsCount: countTopics,
       repliesCount: countComments,
       name,
     })
   )
+
+  const { totalRegisters, perPage, prevPage, nextPage } = data
+  return {
+    categories,
+    pages: Math.ceil(totalRegisters / perPage),
+    prevPage,
+    nextPage,
+  }
 }

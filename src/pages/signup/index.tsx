@@ -10,7 +10,6 @@ export default function SignUp() {
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
-  const [alert, setAlert] = useState<{ message: string; variant: string }>(null)
 
   const router = useRouter()
 
@@ -24,6 +23,7 @@ export default function SignUp() {
           password,
         }
       )
+      console.log(data)
       window.flash(data.message, data.type)
       router.push(`/signin?email=${email}`)
     } catch (error) {
@@ -53,7 +53,7 @@ export default function SignUp() {
               router.push("/")
             }}
           >
-            Plantasia
+            plantasia
           </h1>
           <SignUpForm
             handleSubmitSignUp={handleSubmitSignUp}
