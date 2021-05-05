@@ -7,7 +7,11 @@ type Props = {
   route?: string
   buttonLabel?: string
 }
-const Layout: React.FC<Props> = ({ children, route, buttonLabel }) => {
+export const AppLayout: React.FC<Props> = ({
+  children,
+  route,
+  buttonLabel,
+}) => {
   const router = useRouter()
 
   const handleCallToAction = () => {
@@ -25,4 +29,3 @@ const Layout: React.FC<Props> = ({ children, route, buttonLabel }) => {
     </Container>
   )
 }
-export default Layout

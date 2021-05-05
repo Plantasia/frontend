@@ -8,7 +8,7 @@ interface SEOProps {
   shouldIndexPage?: boolean
 }
 
-export default function SEO({
+export function SEO({
   title,
   description,
   image,

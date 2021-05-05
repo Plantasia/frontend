@@ -1,12 +1,13 @@
 import { Button, Row, Col } from "react-bootstrap"
 import { GetServerSideProps } from "next"
-import { Editor, Layout } from "@components"
+import { Editor, AppLayout } from "@components"
 import { InlineGap, PlantasiaCard } from "@styled/Shared"
 import { CommentProps, Comment } from "./_comment"
 import { ComponentProps } from "@utils/types"
 import { useState } from "react"
 import { GetTopic } from "@src/services/Topics"
 import { SelfApi } from "@src/services/Api"
+import useUser from "@src/lib/useUser"
 export interface BadgeCategoryProps {
   id: string
   name: string
@@ -27,9 +28,9 @@ export default function showTopicsByCategory({
   description,
 }: TopicProps) {
   const [newComment, setNewComment] = useState("")
-
+  const { user, mutateUser } = useUser()
   return (
-    <Layout>
+    <AppLayout>
       <Row>
         <Col xs="12" className="mb-4">
           <h2 className="mb-3">{title}</h2>
@@ -67,7 +68,7 @@ export default function showTopicsByCategory({
           <Button>comentar</Button>
         </Col>
       </PlantasiaCard>
-    </Layout>
+    </AppLayout>
   )
 }
 
@@ -75,7 +76,6 @@ export const getServerSideProps: GetServerSideProps<TopicProps> = async ({
   query,
 }) => {
   const { data: currentUser } = await SelfApi.get("/api/user")
-  console.log(currentUser)
 
   const { id } = query
   return {

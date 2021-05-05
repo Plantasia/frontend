@@ -1,5 +1,5 @@
 import { Pagination, Row, Button, Col } from "react-bootstrap"
-import { Layout, SEO } from "@components"
+import { AppLayout, SEO } from "@components"
 import { GetServerSideProps } from "next"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
@@ -30,7 +30,7 @@ export default function listTopics({ topics, pages }: ListTopicsProps) {
   }
 
   return (
-    <Layout>
+    <AppLayout>
       <SEO title="Categorias" />
 
       <Row>
@@ -61,7 +61,7 @@ export default function listTopics({ topics, pages }: ListTopicsProps) {
           </Pagination.Item>
         ))}
       </Pagination>
-    </Layout>
+    </AppLayout>
   )
 }
 

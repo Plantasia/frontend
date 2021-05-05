@@ -5,7 +5,7 @@ import { useRouter } from "next/router"
 import styled from "styled-components"
 import useUser from "@src/lib/useUser"
 import axios from "axios"
-import MenuDropdown from "./MenuDropdown"
+import { MenuDropdown } from "@components"
 import { InlineGap } from "@src/styles/components/Shared"
 // Jogar para pasta de styles dps
 const HeaderWrapper = styled(Row).attrs(
@@ -26,9 +26,7 @@ interface Props {
   title?: ReactNode
 }
 
-export default function Header({
-  callToAction: { onClick, label, variant },
-}: Props) {
+export function Header({ callToAction: { onClick, label, variant } }: Props) {
   const router = useRouter()
   const { user, mutateUser } = useUser()
   // console.log({ user })

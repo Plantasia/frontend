@@ -6,7 +6,7 @@ type Props = {
   buttonLabel?: string
   className?: string
 }
-const Layout: React.FC<Props> = ({
+export const AuthLayout: React.FC<Props> = ({
   children,
   route,
   buttonLabel,
@@ -18,4 +18,3 @@ const Layout: React.FC<Props> = ({
     </Container>
   )
 }
-export default Layout

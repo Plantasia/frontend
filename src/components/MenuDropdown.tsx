@@ -53,7 +53,7 @@ type Props = {
   logout(): void
   userAvatar: string
 }
-export default function MenuDropdown({ logout, userAvatar }: Props) {
+export function MenuDropdown({ logout, userAvatar }: Props) {
   return (
     <Dropdown>
       <Dropdown.Toggle
