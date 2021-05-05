@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next"
-import { Header, Layout } from "@components"
+import { Header, AppLayout } from "@components"
 import { InlineGap } from "@styled/Shared"
 import { ListCategoryItem } from "./_categoryItem"
 import { ComponentProps } from "@utils/types"
@@ -27,7 +27,7 @@ export default function ListCategories({
   const paginationItems = new Array(pages).fill(1).map((x, index) => index + 1)
 
   return (
-    <Layout>
+    <AppLayout>
       <Row>
         <Col xs="12" className="mb-4">
           <h2>Categorias</h2>
@@ -51,7 +51,7 @@ export default function ListCategories({
           </Pagination.Item>
         ))}
       </Pagination>
-    </Layout>
+    </AppLayout>
   )
 }
 

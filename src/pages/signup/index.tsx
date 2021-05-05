@@ -1,5 +1,5 @@
 import { Col, Row } from "react-bootstrap"
-import { SEO, Layout, AuthLayout } from "@components"
+import { SEO, AuthLayout } from "@components"
 import SignUpForm from "./_form"
 import { useState } from "react"
 import { useRouter } from "next/router"
