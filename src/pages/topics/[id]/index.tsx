@@ -1,6 +1,6 @@
 import { Button, Row, Col } from "react-bootstrap"
 import { GetServerSideProps } from "next"
-import { Editor, AppLayout } from "@components"
+import { Editor, AppLayout, RequestAuthModal } from "@components"
 import { InlineGap, PlantasiaCard } from "@styled/Shared"
 import { CommentProps, Comment } from "./_comment"
 import { ComponentProps } from "@utils/types"
@@ -8,6 +8,7 @@ import { useState } from "react"
 import { GetTopic } from "@src/services/Topics"
 import { SelfApi } from "@src/services/Api"
 import useUser from "@src/lib/useUser"
+import { useRouter } from "next/router"
 export interface BadgeCategoryProps {
   id: string
   name: string
@@ -28,9 +29,22 @@ export default function showTopicsByCategory({
   description,
 }: TopicProps) {
   const [newComment, setNewComment] = useState("")
+  const [modalVisible, setModalVisible] = useState(false)
+
   const { user, mutateUser } = useUser()
+
+  const submitNewComment = () => {
+    if (user.isLoggedIn) {
+    } else {
+      setModalVisible(true)
+    }
+  }
   return (
     <AppLayout>
+      <RequestAuthModal
+        visible={modalVisible}
+        onHide={() => setModalVisible(false)}
+      />
       <Row>
         <Col xs="12" className="mb-4">
           <h2 className="mb-3">{title}</h2>
@@ -65,7 +79,7 @@ export default function showTopicsByCategory({
           <Editor content={newComment} onChange={setNewComment} />
         </Col>
         <Col xs="12" className="d-flex justify-content-end">
-          <Button>comentar</Button>
+          <Button onClick={submitNewComment}>comentar</Button>
         </Col>
       </PlantasiaCard>
     </AppLayout>
