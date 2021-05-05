@@ -11,7 +11,7 @@ export const RequestAuthModal = ({ visible, onHide }) => {
         É necessário realizar o login para realizar esta ação
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary-outline" onClick={onHide}>
+        <Button variant="outline-primary" onClick={onHide}>
           cancelar
         </Button>
         <Button
