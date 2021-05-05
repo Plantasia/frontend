@@ -1,5 +1,5 @@
 import { Pagination, Row, Button, Col } from "react-bootstrap"
-import { AppLayout, SEO } from "@components"
+import { AppLayout, SEO, RequestAuthModal } from "@components"
 import { GetServerSideProps } from "next"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
@@ -7,6 +7,7 @@ import { ComponentProps } from "@utils/types"
 import { TopicHeader } from "@styled/Topics"
 import { GetTopics } from "@src/services/Topics"
 import { ListItem } from "./_topic-item"
+import useUser from "@src/lib/useUser"
 
 export interface ListTopicsProps {
   topics: ComponentProps.TopicItemProps[]
@@ -17,22 +18,28 @@ export interface ListTopicsProps {
 }
 export default function listTopics({ topics, pages }: ListTopicsProps) {
   const router = useRouter()
+  const [modalVisible, setModalVisible] = useState(false)
   const [currentPage, setCurrentPage] = useState(
     parseInt(router.query.page as string) || 1
   )
+  const { user, mutateUser } = useUser()
 
   const paginationItems = new Array(pages).fill(1).map((x, index) => index + 1)
 
-  useEffect(() => {}, [])
-
   function handleNewTopic() {
-    router.push("/category")
+    if (user.isLoggedIn) {
+    } else {
+      setModalVisible(true)
+    }
   }
 
   return (
     <AppLayout>
       <SEO title="Categorias" />
-
+      <RequestAuthModal
+        visible={modalVisible}
+        onHide={() => setModalVisible(false)}
+      />
       <Row>
         <TopicHeader>
           <h2>Tópicos</h2>
