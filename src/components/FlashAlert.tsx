@@ -14,6 +14,7 @@ const FixedAlert = styled(Alert)`
   right: 15px;
   top: 15px;
   left: auto;
+  z-index: 99;
 `
 
 export const FlashAlert: React.FC = props => {
