@@ -28,9 +28,8 @@ export default function showTopicsByCategory({
   comments,
   description,
 }: TopicProps) {
-  const [newComment, setNewComment] = useState("")
   const [modalVisible, setModalVisible] = useState(false)
-
+  const [newComment, setNewComment] = useState("")
   const { user, mutateUser } = useUser()
 
   const submitNewComment = () => {
@@ -68,7 +67,15 @@ export default function showTopicsByCategory({
       <Row>
         <Col xs="12">
           {comments.map((item, index) => (
-            <Comment {...item} key={index} />
+            <Comment
+              {...item}
+              onQuote={text => {
+                setNewComment(
+                  `${newComment} <blockquote> ${text} </blockquote> `
+                )
+              }}
+              key={index}
+            />
           ))}
         </Col>
       </Row>
@@ -76,7 +83,10 @@ export default function showTopicsByCategory({
       <PlantasiaCard id="new-comment">
         <Col xs="12" className="mb-3">
           <h3>Deixe um comentário</h3>
-          <Editor content={newComment} onChange={setNewComment} />
+          <Editor
+            content={newComment}
+            onChange={value => setNewComment(value)}
+          />
         </Col>
         <Col xs="12" className="d-flex justify-content-end">
           <Button onClick={submitNewComment}>comentar</Button>

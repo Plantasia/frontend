@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Button, Row, Col, Image } from "react-bootstrap"
 import { FaSeedling } from "react-icons/fa"
 import { PlantasiaCard, InlineGap } from "@styled/Shared"
@@ -12,6 +12,7 @@ export interface CommentProps {
   ownerUser: ComponentProps.UserProps
   content: string
   likes?: number
+  onQuote?(data: string): void
   createdAt: string
 }
 
@@ -28,10 +29,14 @@ const ProfileComment: React.FC<ProfileCommentProps> = ({
         src={avatar}
         roundedCircle
         className="mb-3"
-        height="150"
-        width="150"
+        style={{ aspectRatio: "1", width: "100%", height: "100%" }}
       />
-      <div className="mb-3" style={{ borderBottom: "1px solid black" }}>
+      <div
+        className="mb-3"
+        style={{
+          borderBottom: "1px solid black",
+        }}
+      >
         <h5>{name}</h5>
         <p>Membro desde {createdAt}</p>
       </div>
@@ -47,10 +52,12 @@ export function Comment({
   likes,
   ownerUser,
   createdAt,
+  onQuote,
 }: CommentProps) {
   const [currentContent, setCurrentContent] = useState(content)
   const { user, mutateUser } = useUser()
-  console.log(user)
+
+  // console.log(user)
 
   const handleEdit = () => {
     setEditMode(true)
@@ -58,6 +65,10 @@ export function Comment({
   const handleReport = () => {}
   const handleDelete = () => {
     alert("Você tem certeza disso?")
+  }
+
+  const handleQuote = () => {
+    onQuote && onQuote(content)
   }
 
   const [editMode, setEditMode] = useState(false)
@@ -94,10 +105,7 @@ export function Comment({
                   <InlineGap className="mt-3">
                     <Button
                       variant="outline-primary"
-                      onClick={() => {
-                        setCurrentContent(content)
-                        setEditMode(false)
-                      }}
+                      onClick={() => setEditMode(false)}
                     >
                       cancelar
                     </Button>
@@ -122,7 +130,9 @@ export function Comment({
                     <Button variant="outline-primary">
                       semear <FaSeedling />
                     </Button>
-                    <Button variant="primary">mencionar</Button>
+                    <Button variant="primary" onClick={handleQuote}>
+                      mencionar
+                    </Button>
                   </InlineGap>
                   <div>
                     <a href="#">{likes} sementes</a>
