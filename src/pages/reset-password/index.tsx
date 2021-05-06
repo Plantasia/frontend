@@ -36,7 +36,6 @@ export default function ResetPassword() {
       window.flash(error.message, "danger")
     }
   }
-  console.log(router.query.token)
   return (
     <AuthLayout>
       <SEO title="Login" />

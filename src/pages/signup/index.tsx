@@ -23,7 +23,6 @@ export default function SignUp() {
           password,
         }
       )
-      console.log(data)
       window.flash(data.message, data.type)
       router.push(`/signin?email=${email}`)
     } catch (error) {
