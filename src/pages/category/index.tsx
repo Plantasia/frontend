@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next"
 import { Header, AppLayout } from "@components"
 import { InlineGap } from "@styled/Shared"
-import { ListCategoryItem } from "./_categoryItem"
+import { ListCategoryItem } from "./_category-item"
 import { ComponentProps } from "@utils/types"
 import { Button, Row, Col, Pagination } from "react-bootstrap"
 import { GetCategories } from "@src/services/Categories"
