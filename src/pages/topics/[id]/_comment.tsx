@@ -29,7 +29,7 @@ const ProfileComment: React.FC<ProfileCommentProps> = ({
         src={avatar}
         roundedCircle
         className="mb-3"
-        style={{ aspectRatio: "1", width: "100%", height: "100%" }}
+        style={{ aspectRatio: "1", width: "100%" }}
       />
       <div
         className="mb-3"
