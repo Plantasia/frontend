@@ -1,3 +1,3 @@
 import axios from "axios"
 
-export const axiosFetcher = async url => await (await axios.get(url)).data
+export const axiosFetcher = url => axios.get(url).then(res => res.data)
