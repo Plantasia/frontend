@@ -27,6 +27,38 @@ export namespace BackendDTO {
     created_at: string
     bio: string
   }
+  export interface CommentObject {
+    id: string
+    updated_at: string
+    created_at: string
+    user: UserObject
+    textBody: string
+  }
+  export interface TopicObject {
+    id: string
+    name: string
+    textBody: string
+    imageStorage: string
+    created_at: string
+    updated_at: string
+    comments: CommentObject[]
+    user: UserObject
+    category: CategoryObject
+  }
+
+  export interface TopicsDTO {
+    topics: TopicObject[]
+    currentPage: number | string | null
+    perPage: number
+    prevPage: number | string | null
+    nextPage: number | string | null
+    totalRegisters: number
+  }
+  export interface TopicDTO extends TopicObject {
+    comments: CommentObject[]
+  }
+
+  // USE CASES
   export namespace UserSignIn {
     export type Response = {
       access_token?: string
@@ -51,33 +83,19 @@ export namespace BackendDTO {
       name: string
     }
   }
-  export interface CommentObject {
-    id: string
-    updated_at: string
-    created_at: string
-    user: UserObject
-    textBody: string
+  export namespace CreateComment {
+    export type Response = {}
+
+    export interface Params {
+      textBody: string
+      topic_id: string
+    }
   }
-  export interface TopicObject {
-    id: string
-    name: string
-    textBody: string
-    imageStorage: string
-    created_at: string
-    updated_at: string
-    comments: CommentObject[]
-    user: UserObject
-    category: CategoryObject
-  }
-  export interface TopicsDTO {
-    topics: TopicObject[]
-    currentPage: number | string | null
-    perPage: number
-    prevPage: number | string | null
-    nextPage: number | string | null
-    totalRegisters: number
-  }
-  export type TopicDTO = TopicObject & {
-    comments: CommentObject[]
+  export namespace ShowTopic {
+    export type Response = {}
+
+    export interface Params {
+      id: string
+    }
   }
 }
