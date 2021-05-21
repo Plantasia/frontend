@@ -32,6 +32,7 @@ const Editor: React.FC<{ content: string; onChange(data: string): void }> = ({
               "|",
               "bold",
               "italic",
+              "link",
               "bulletedList",
               "numberedList",
               "|",
@@ -56,7 +57,6 @@ const Editor: React.FC<{ content: string; onChange(data: string): void }> = ({
           const data = editor.getData()
           // console.log({ event, editor, data })
           onChange(data)
-          // setCurrentContent(data)
         }}
       />
     )

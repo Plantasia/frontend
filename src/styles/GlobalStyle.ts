@@ -60,4 +60,9 @@ export default createGlobalStyle`
     min-height: 200px;
   }
 
+  .ck-editor__editable{
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+
 `

@@ -1,5 +1,5 @@
 import { Col, Row } from "react-bootstrap"
-import { SEO, Layout, AuthLayout } from "@components"
+import { SEO, AuthLayout } from "@components"
 import SignUpForm from "./_form"
 import { useState } from "react"
 import { useRouter } from "next/router"
@@ -23,7 +23,6 @@ export default function SignUp() {
           password,
         }
       )
-      console.log(data)
       window.flash(data.message, data.type)
       router.push(`/signin?email=${email}`)
     } catch (error) {

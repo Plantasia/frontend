@@ -1,10 +1,9 @@
 import { Button, Col, Row, Form, FormProps } from "react-bootstrap"
 import styled from "styled-components"
-import { SEO } from "@components"
+import { SEO, AuthLayout } from "@components"
 import { useState } from "react"
 import { useRouter } from "next/router"
 import { ClientSideApi } from "@src/services/Api"
-import Layout from "@src/components/AuthLayout"
 
 export const FormWrapper = styled(Form).attrs(
   (): FormProps => ({
@@ -37,9 +36,8 @@ export default function ResetPassword() {
       window.flash(error.message, "danger")
     }
   }
-  console.log(router.query.token)
   return (
-    <Layout>
+    <AuthLayout>
       <SEO title="Login" />
       <Row className="d-flex flex-column align-items-center justify-content-center vh-100">
         <h1
@@ -82,6 +80,6 @@ export default function ResetPassword() {
           </FormWrapper>
         </Col>
       </Row>
-    </Layout>
+    </AuthLayout>
   )
 }
