@@ -43,10 +43,7 @@ export namespace ComponentProps {
     created_at: string
     updated_at: string
     countComments: number
-    lastComment?: {
-      user: UserProps
-      when?: string
-    }
+    lastComment?: CommentsProps
     topicOwner: UserProps
   }
 

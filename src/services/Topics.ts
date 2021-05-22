@@ -28,29 +28,37 @@ export const GetTopics = async (
       updated_at,
       comments,
       user,
-    }) => ({
-      id,
-      imageStorage,
-      name,
-      textBody,
-      topicOwner: {
-        id: user.id,
-        avatar: user.avatar,
-        name: user.name,
-      },
-      updated_at,
-      lastComment: {
-        user: {
-          id: comments[0].user.id,
-          avatar: comments[0].user.avatar,
-          name: comments[0].user.name,
+    }) => {
+      const hasComments = comments.length > 0
+      const lastComment: ComponentProps.CommentsProps = hasComments
+        ? {
+            id: comments[0].id,
+            user: {
+              id: comments[0].user.id,
+              avatar: comments[0].user.avatar,
+              name: comments[0].user.name,
+            },
+            updated_at: timeAgo.format(new Date(created_at)),
+          }
+        : null
+
+      return {
+        id,
+        imageStorage,
+        name,
+        textBody,
+        topicOwner: {
+          id: user.id,
+          avatar: user.avatar,
+          name: user.name,
         },
-        when: timeAgo.format(new Date(created_at)),
-      },
-      ranking: "calculando",
-      countComments: comments.length,
-      created_at: new Date(created_at).toLocaleDateString("pt-br"),
-    })
+        updated_at,
+        lastComment,
+        ranking: "calculando",
+        countComments: comments.length,
+        created_at: new Date(created_at).toLocaleDateString("pt-br"),
+      }
+    }
   )
 
   const { totalRegisters, perPage, nextPage, prevPage } = data
@@ -64,8 +72,25 @@ export const GetTopic = async (id: string): Promise<TopicProps> => {
   const { data } = await ServerSideApi.get<BackendDTO.TopicDTO>(
     `/forum/topics/${id}`
   )
+  console.log(`/forum/topics/${id}`)
 
-  const { comments, name, textBody, user, category } = data
+  const { comments: commentsData, name, textBody, user, category } = data
+  const hasComments = commentsData.length > 0
+  const comments = hasComments
+    ? commentsData.map(({ textBody, user, id, created_at }) => ({
+        id,
+        content: textBody,
+        ownerUser: {
+          id: user?.id,
+          avatar: user?.avatar,
+          name: user?.name,
+          bio: user?.bio,
+          createdAt: timeAgo.format(new Date(user.created_at)),
+        },
+        createdAt: new Date(created_at).toLocaleString("pt"),
+        owner: { id: user.id },
+      }))
+    : null
 
   return {
     title: name,
@@ -74,20 +99,10 @@ export const GetTopic = async (id: string): Promise<TopicProps> => {
       avatar: user.avatar,
       name: user.name,
     },
-    categories: [{ name: category.name, color: "secondary", id: "teste" }],
+    categories: [
+      category && { name: category.name, color: "secondary", id: "teste" },
+    ],
     description: textBody,
-    comments: comments.map(({ textBody, user, id, created_at }) => ({
-      id,
-      content: textBody,
-      ownerUser: {
-        id: user.id,
-        avatar: user.avatar,
-        name: user.name,
-        bio: user.bio,
-        createdAt: timeAgo.format(new Date(user.created_at)),
-      },
-      createdAt: new Date(created_at).toLocaleString("pt"),
-      owner: { id: user.id },
-    })),
+    comments,
   }
 }

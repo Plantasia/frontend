@@ -49,7 +49,14 @@ export default function ShowTopic(props) {
         },
       }
       mutateTopic(data => {
-        return { ...data, comments: [...data.comments, previewComment] }
+        const comments = data.comments
+          ? [...data.comments, previewComment]
+          : [previewComment]
+
+        return {
+          ...data,
+          comments,
+        }
       }, false)
 
       const commentPayload = {
@@ -82,11 +89,13 @@ export default function ShowTopic(props) {
             </Col>
             <Col xs="12" className="d-flex justify-content-between mb-3">
               <InlineGap>
-                {topic.categories.map(({ name, color }, i) => (
-                  <Button variant={`outline-${color}`} key={i} size="sm">
-                    {name}
-                  </Button>
-                ))}
+                {topic
+                  ? topic.categories.map(({ name, color }, i) => (
+                      <Button variant={`outline-${color}`} key={i} size="sm">
+                        {name}
+                      </Button>
+                    ))
+                  : null}
               </InlineGap>
               <InlineGap>
                 <Button variant="primary" href="#new-comment">
@@ -97,7 +106,7 @@ export default function ShowTopic(props) {
           </Row>
           <Row>
             <Col xs="12">
-              {topic.comments.map((item, index) => (
+              {topic.comments?.map((item, index) => (
                 <Comment
                   {...item}
                   onQuote={text => {
@@ -107,7 +116,7 @@ export default function ShowTopic(props) {
                   }}
                   key={index}
                 />
-              ))}
+              )) || null}
             </Col>
           </Row>
 

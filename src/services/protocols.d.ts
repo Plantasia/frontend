@@ -41,7 +41,7 @@ export namespace BackendDTO {
     imageStorage: string
     created_at: string
     updated_at: string
-    comments: CommentObject[]
+    comments?: CommentObject[]
     user: UserObject
     category: CategoryObject
   }
@@ -54,9 +54,7 @@ export namespace BackendDTO {
     nextPage: number | string | null
     totalRegisters: number
   }
-  export interface TopicDTO extends TopicObject {
-    comments: CommentObject[]
-  }
+  export interface TopicDTO extends TopicObject
 
   // USE CASES
   export namespace UserSignIn {
