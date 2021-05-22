@@ -13,7 +13,6 @@ const handler: Handler = async (
   const { query, body } = req
   const { page } = query
   const { textBody, topic_id } = body
-  console.log()
 
   try {
     const { data, status } = await ServerSideApi.post(
