@@ -47,13 +47,13 @@ export default createGlobalStyle`
 
   body {
     background-color: #f2f2f2;
-    -webkit-font-smoothing:antialiased;
+    -webkit-font-smoothing: antialiased;
     & ::-webkit-scrollbar{
      display:none;
     }
   }
 
-  a{
+  a {
     cursor: pointer;
   }
   .ck-editor__editable_inline {
@@ -63,6 +63,18 @@ export default createGlobalStyle`
   .ck-editor__editable{
     padding-left: 32px !important;
     padding-right: 32px !important;
+  }
+
+  blockquote {
+    border-left: 5px solid #624378;
+    padding-left: 13px;
+    padding-right: 13px;
+    background-color: rgba(98, 67, 120 ,0.04);
+    border-radius: 8px;
+  }
+
+  .seed-owner {
+    font-weight: bold;
   }
 
 `

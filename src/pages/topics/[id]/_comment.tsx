@@ -12,7 +12,7 @@ export interface CommentProps {
   ownerUser: ComponentProps.UserProps
   content: string
   likes?: number
-  onQuote?(data: string): void
+  onQuote?(data: { text: string; commentId?: string }): void
   createdAt: string
 }
 
@@ -68,7 +68,7 @@ export function Comment({
   }
 
   const handleQuote = () => {
-    onQuote && onQuote(content)
+    onQuote && onQuote({ text: content })
   }
 
   const [editMode, setEditMode] = useState(false)
@@ -127,16 +127,10 @@ export function Comment({
                 <div dangerouslySetInnerHTML={{ __html: currentContent }}></div>
                 <div className="d-flex justify-content-between w-100 flex-row-reverse align-items-end">
                   <InlineGap>
-                    <Button variant="outline-primary">
+                    <Button variant="outline-primary" onClick={handleQuote}>
                       semear <FaSeedling />
                     </Button>
-                    <Button variant="primary" onClick={handleQuote}>
-                      mencionar
-                    </Button>
                   </InlineGap>
-                  <div>
-                    <a href="#">{likes} sementes</a>
-                  </div>
                 </div>
               </>
             )}

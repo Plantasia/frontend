@@ -109,9 +109,10 @@ export default function ShowTopic(props) {
               {topic.comments?.map((item, index) => (
                 <Comment
                   {...item}
-                  onQuote={text => {
+                  onQuote={({ text }) => {
                     setNewComment(
-                      `${newComment} <blockquote> ${text} </blockquote> &nbsp;`
+                      `${newComment} <blockquote> ${text} </blockquote> 
+                      <b>semente do ${user.name}</b>&nbsp;`
                     )
                   }}
                   key={index}
