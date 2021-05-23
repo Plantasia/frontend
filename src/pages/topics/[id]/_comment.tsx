@@ -5,7 +5,7 @@ import { PlantasiaCard, InlineGap } from "@styled/Shared"
 import { ComponentProps } from "@utils/types"
 import { CommentDropdown } from "@components/CommentDropdown"
 import { Editor } from "@components"
-import useUser from "@src/lib/useUser"
+import { useUser } from "@src/lib"
 
 export interface CommentProps {
   id: string

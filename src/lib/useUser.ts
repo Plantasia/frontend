@@ -3,10 +3,7 @@ import Router from "next/router"
 import useSWR from "swr"
 import { ComponentProps } from "@utils/types"
 
-export default function useUser({
-  redirectTo = null,
-  redirectIfFound = false,
-} = {}) {
+export function useUser({ redirectTo = null, redirectIfFound = false } = {}) {
   const { data: user, mutate: mutateUser } = useSWR<
     ComponentProps.UserProps & { isLoggedIn: boolean; error?: string }
   >("/api/user")

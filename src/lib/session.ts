@@ -3,7 +3,7 @@
 import { AxiosRequestConfig, AxiosResponse } from "axios"
 import { withIronSession, Handler } from "next-iron-session"
 
-export default function withSession(handler: Handler) {
+export function withSession(handler: Handler) {
   return withIronSession(handler, {
     password: process.env.SECRET_COOKIE_PASSWORD,
     cookieName: "next.js/examples/with-iron-session",

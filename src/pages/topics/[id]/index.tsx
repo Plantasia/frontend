@@ -6,10 +6,11 @@ import { ComponentProps } from "@utils/types"
 import { useEffect, useState } from "react"
 import { GetTopic } from "@src/services/Topics"
 import { SelfApi } from "@src/services/Api"
-import useUser from "@src/lib/useUser"
+import { useUser } from "@src/lib"
 import { useRouter } from "next/router"
 import useSWR, { mutate } from "swr"
 import { axiosFetcher } from "@src/lib/fetchJson"
+import { FaComment } from "react-icons/fa"
 export interface BadgeCategoryProps {
   id: string
   name: string
@@ -98,8 +99,13 @@ export default function ShowTopic(props) {
                   : null}
               </InlineGap>
               <InlineGap>
-                <Button variant="primary" href="#new-comment">
+                <Button
+                  variant="primary"
+                  href="#new-comment"
+                  className="d-flex align-items-center"
+                >
                   novo comentário
+                  <FaComment className="ml-2" />
                 </Button>
               </InlineGap>
             </Col>

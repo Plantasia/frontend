@@ -3,7 +3,7 @@ import { SEO, AuthLayout } from "@components"
 import SignInForm from "./_form"
 import { useState } from "react"
 import { useRouter } from "next/router"
-import useUser from "@src/lib/useUser"
+import { useUser } from "@src/lib"
 import { SelfApiDTO } from "@utils/types"
 import { SelfApi } from "@src/services/Api"
 
