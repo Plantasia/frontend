@@ -128,7 +128,7 @@ export function Comment({
                 <div className="d-flex justify-content-between w-100 flex-row-reverse align-items-end">
                   <InlineGap>
                     <Button variant="outline-primary" onClick={handleQuote}>
-                      semear <FaSeedling />
+                      mencionar <FaSeedling />
                     </Button>
                   </InlineGap>
                 </div>
