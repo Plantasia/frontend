@@ -8,6 +8,7 @@ export namespace BackendDTO {
     description: string
     lastTopicId?: string
     lastTopicName?: string
+    lastTopicActivity?: string
     lastActivity?: string
     countComments?: string
     countTopics?: string
