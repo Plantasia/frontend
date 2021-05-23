@@ -52,6 +52,7 @@ export default function SignInForm({
         <Form.Group>
           <Label>Email</Label>
           <Form.Control
+            key="email"
             type="email"
             value={email}
             onChange={({ target: { value } }) => setEmail(value)}
@@ -61,6 +62,7 @@ export default function SignInForm({
         <Form.Group>
           <Label>Senha</Label>
           <Form.Control
+            key="password"
             className="mb-2"
             placeholder="digite a sua senha"
             type="password"

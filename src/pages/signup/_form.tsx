@@ -45,6 +45,7 @@ export default function SignUpForm({
         <Form.Group>
           <Label>Nome</Label>
           <Form.Control
+            key="name"
             type="text"
             value={name}
             onChange={({ target: { value } }) => setName(value)}
@@ -55,6 +56,7 @@ export default function SignUpForm({
         <Form.Group>
           <Label>Email</Label>
           <Form.Control
+            key="email"
             type="email"
             value={email}
             placeholder="digite o seu email"
@@ -65,6 +67,7 @@ export default function SignUpForm({
         <Form.Group>
           <Label>Senha</Label>
           <Form.Control
+            key="password"
             placeholder="digite uma senha"
             type="password"
             value={password}
