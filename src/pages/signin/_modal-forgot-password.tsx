@@ -6,18 +6,28 @@ const ModalForgotPassword: React.FC<
   ModalProps & { show: boolean; onHide: any }
 > = ({ show, onHide }) => {
   const [email, setEmail] = useState("")
+
   const handleSubmitPasswordRecover = async () => {
     try {
-      const { data } = await ClientSideApi.post<{ message: string }>(
-        "send-recover-email",
-        {
-          email,
-        }
-      )
-      window.flash(data.message, "success")
       onHide()
-    } catch (error) {}
+      const {
+        data: { message },
+      } = await ClientSideApi.post<{ message: string }>("send-recover-email", {
+        email,
+      })
+
+      window.flash(message, "success")
+    } catch ({ response }) {
+      onHide()
+      const {
+        data: { message },
+      } = response
+
+      window.flash(message, "danger")
+    }
+    setEmail("")
   }
+
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header>
