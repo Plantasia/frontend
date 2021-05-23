@@ -9,6 +9,9 @@ import {
   FaUser,
 } from "react-icons/fa"
 import { InlineGap } from "@styled/Shared"
+import { useRouter } from "next/router"
+import axios from "axios"
+import { useUser } from "@src/lib"
 interface ToggleProps {
   onClick?(event): void
   avatar: string
@@ -53,22 +56,30 @@ type Props = {
   logout(): void
   userAvatar: string
 }
-export function MenuDropdown({ logout, userAvatar }: Props) {
+export function MenuDropdown() {
+  const router = useRouter()
+  const { user, mutateUser } = useUser()
+  // console.log({ user })
+  const logout = async () => {
+    // eslint-disable-next-line no-undef
+    mutateUser(await (await axios.post("/api/logout")).data, false)
+  }
+
   return (
     <Dropdown>
       <Dropdown.Toggle
         as={Toggle}
         id="dropdown-custom-components"
-        avatar={userAvatar}
+        avatar={user.avatar}
       ></Dropdown.Toggle>
       <Dropdown.Menu align={{ sm: "right" }}>
-        <CustomDropdownItem>
-          Meu perfil <FaUser />
-        </CustomDropdownItem>
-        <CustomDropdownItem>
+        <CustomDropdownItem
+          onClick={() => {
+            router.push("/settings")
+          }}
+        >
           Configurações <FaCog />
         </CustomDropdownItem>
-        <Dropdown.Divider />
         <CustomDropdownItem
           onClick={() => {
             logout()

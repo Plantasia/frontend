@@ -10,20 +10,9 @@ const Container = styled(BootstrapContainer)`
   display: block;
   height: 100vh;
 `
-type Props = {
-  route?: string
-  buttonLabel?: string
-}
-export const AppLayout: React.FC<Props> = ({
-  children,
-  route,
-  buttonLabel,
-}) => {
-  const router = useRouter()
 
-  const handleCallToAction = () => {
-    router.push(route || "/signup")
-  }
+interface Props {}
+export const AppLayout: React.FC<Props> = ({ children }) => {
   return (
     <Container className="vh-100">
       <Header />
