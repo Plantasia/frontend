@@ -36,7 +36,7 @@ export default function SignUp() {
     <AuthLayout>
       <SEO title="Login" />
       <Row className="d-flex align-items-center vh-100 justify-content-between">
-        <Col xs="8">
+        <Col className="d-none d-md-block" md="8">
           <object
             className="w-100"
             type="image/svg+xml"
@@ -44,7 +44,11 @@ export default function SignUp() {
           ></object>
         </Col>
 
-        <Col xs="4" className="d-flex flex-column align-items-center">
+        <Col
+          xs={{ span: 12, order: 2 }}
+          md="4"
+          className="d-flex flex-column align-items-center mb-5"
+        >
           <h1
             className="py-3"
             style={{ cursor: "pointer" }}

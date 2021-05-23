@@ -76,12 +76,11 @@ export default function SignInForm({
           </AuxLink>
         </Form.Group>
         <Form.Group className="d-flex justify-content-between">
-          <Button variant="outline-primary" size="lg" as="a" href="/signup">
+          <Button variant="outline-primary" as="a" href="/signup">
             Cadastrar-se
           </Button>
           <Button
             variant="primary"
-            size="lg"
             onClick={e => {
               e.preventDefault()
               handleSubmitLogin()
@@ -92,13 +91,6 @@ export default function SignInForm({
           </Button>
         </Form.Group>
       </Form>
-      <SocialAuths>
-        <h5 className="mb-3">Entre com</h5>
-        <SocialAuthsIcons>
-          <GoogleIcon onClick={handleGoogleAuth} />
-          <FacebookIcon onClick={handleFacebookAuth} />
-        </SocialAuthsIcons>
-      </SocialAuths>
     </FormWrapper>
   )
 }

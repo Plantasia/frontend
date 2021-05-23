@@ -37,8 +37,10 @@ export default function SignIn() {
 
       <Row className="d-flex align-items-center h-100">
         <Col
-          xs="8"
-          className="d-flex flex-column align-items-center justify-content-arround mt-3 "
+          md="8"
+          xs="12"
+          className="d-none d-md-block"
+          // className="d-flex flex-column align-items-center justify-content-arround mt-3 "
         >
           <object
             className="w-100"
@@ -46,7 +48,11 @@ export default function SignIn() {
             data="/assets/img/authentication.svg"
           ></object>
         </Col>
-        <Col xs="4" className="d-flex flex-column align-items-center">
+        <Col
+          md="4"
+          xs="12"
+          className="d-flex flex-column align-items-center mb-5"
+        >
           <h1
             className="py-3"
             style={{ cursor: "pointer" }}
