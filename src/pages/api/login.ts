@@ -2,7 +2,7 @@
 import { Handler, withIronSession } from "next-iron-session"
 import { ServerSideApi } from "@src/services/Api"
 import { sessionOptions } from "./_iron-session/helpers"
-import { BackendDTO } from "@src/services/protocols"
+import { BackendDTO } from "@src/utils/types/protocols"
 
 const handler: Handler = async (req, res) => {
   const { email, password } = await req.body
