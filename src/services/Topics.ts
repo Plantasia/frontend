@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { BackendDTO } from "./protocols"
+import { BackendDTO } from "../utils/types/protocols"
 import { ServerSideApi } from "./Api"
 import { ListTopicsProps } from "@src/pages/topics"
 import { ComponentProps } from "@src/utils/types"
@@ -8,14 +8,15 @@ import { TopicProps } from "@src/pages/topics/[id]"
 import pt from "javascript-time-ago/locale/pt"
 
 export const GetTopics = async (
-  page: number | string
+  page: number | string,
+  category: string | null
 ): Promise<ListTopicsProps> => {
   TimeAgo.addLocale(pt)
   const timeAgo = new TimeAgo("pt")
 
   const { data } = await ServerSideApi.get<BackendDTO.TopicsDTO>(
     "/forum/topics",
-    { params: { page } }
+    { params: { page, category } }
   )
 
   const topics: ComponentProps.TopicItemProps[] = data.topics.map(
@@ -62,7 +63,9 @@ export const GetTopics = async (
   )
 
   const { totalRegisters, perPage, nextPage, prevPage } = data
-  return { topics, pages: totalRegisters / perPage, prevPage, nextPage }
+  const pages = totalRegisters / perPage < 1 ? 1 : totalRegisters / perPage
+
+  return { topics, pages, prevPage, nextPage }
 }
 
 export const GetTopic = async (id: string): Promise<TopicProps> => {
