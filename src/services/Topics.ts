@@ -75,7 +75,6 @@ export const GetTopic = async (id: string): Promise<TopicProps> => {
   const { data } = await ServerSideApi.get<BackendDTO.TopicDTO>(
     `/forum/topics/${id}`
   )
-  console.log(`/forum/topics/${id}`)
 
   const { comments: commentsData, name, textBody, user, category } = data
   const hasComments = commentsData.length > 0
@@ -103,7 +102,9 @@ export const GetTopic = async (id: string): Promise<TopicProps> => {
       name: user.name,
     },
     categories: [
-      category && { name: category.name, color: "secondary", id: "teste" },
+      category
+        ? { name: category.name, color: "secondary", id: category.id }
+        : { name: "outros", color: "secondary", id: "" },
     ],
     description: textBody,
     comments,
