@@ -76,7 +76,14 @@ export const GetTopic = async (id: string): Promise<TopicProps> => {
     `/forum/topics/${id}`
   )
 
-  const { comments: commentsData, name, textBody, user, category } = data
+  const {
+    comments: commentsData,
+    name,
+    textBody,
+    user,
+    category,
+    imageStorage,
+  } = data
   const hasComments = commentsData.length > 0
   const comments = hasComments
     ? commentsData.map(({ textBody, user, id, created_at }) => ({
@@ -108,5 +115,6 @@ export const GetTopic = async (id: string): Promise<TopicProps> => {
     ],
     description: textBody,
     comments,
+    image: imageStorage,
   }
 }

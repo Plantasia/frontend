@@ -62,6 +62,7 @@ export function MenuDropdown() {
   // console.log({ user })
   const logout = async () => {
     // eslint-disable-next-line no-undef
+    router.push("/")
     mutateUser(await (await axios.post("/api/logout")).data, false)
   }
 

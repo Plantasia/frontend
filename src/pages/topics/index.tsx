@@ -26,14 +26,14 @@ export default function listTopics({ topics, pages }: ListTopicsProps) {
   const paginationItems = new Array(pages).fill(1).map((x, index) => index + 1)
   return (
     <AppLayout>
-      <SEO title="Topics - Nome da categoria" />
+      <SEO title="Tópicos" />
       <RequestAuthModal
         visible={modalVisible}
         onHide={() => setModalVisible(false)}
       />
       <Row>
         <TopicHeader>
-          <h2>Topics - Nome da categoria</h2>
+          <h2>Topicos</h2>
         </TopicHeader>
         <Col xs="12">
           {topics.map((item, index) => (

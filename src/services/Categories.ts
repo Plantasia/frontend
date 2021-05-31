@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { ComponentProps } from "@utils/types"
-import { BackendDTO } from "./protocols"
+import { BackendDTO } from "../utils/types/protocols"
 import { ServerSideApi } from "./Api"
 import { ListCategoriesProps } from "@src/pages/category"
 

@@ -1,9 +1,8 @@
 import { GetServerSideProps } from "next"
-import { Header, AppLayout } from "@components"
-import { InlineGap } from "@styled/Shared"
+import { AppLayout, SEO } from "@components"
 import { ListCategoryItem } from "./_category-item"
 import { ComponentProps } from "@utils/types"
-import { Button, Row, Col, Pagination } from "react-bootstrap"
+import { Row, Col, Pagination } from "react-bootstrap"
 import { GetCategories } from "@src/services/Categories"
 import { useRouter } from "next/router"
 import { useState } from "react"
@@ -28,6 +27,7 @@ export default function ListCategories({
 
   return (
     <AppLayout>
+      <SEO title="categorias" />
       <Row>
         <Col xs="12" className="mb-4">
           <h2>Categorias</h2>
