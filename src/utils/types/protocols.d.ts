@@ -46,6 +46,7 @@ export namespace BackendDTO {
     user: UserObject
     category: CategoryObject
   }
+  export interface TopicDTO extends TopicObject {}
 
   export interface TopicsDTO {
     topics: TopicObject[]
@@ -55,7 +56,6 @@ export namespace BackendDTO {
     nextPage: number | string | null
     totalRegisters: number
   }
-  export interface TopicDTO extends TopicObject
 
   // USE CASES
   export namespace UserSignIn {

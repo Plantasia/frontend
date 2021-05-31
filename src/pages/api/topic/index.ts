@@ -2,7 +2,7 @@
 import { Handler, withIronSession, Session } from "next-iron-session"
 import { ServerSideApi } from "@src/services/Api"
 import { sessionOptions } from "../_iron-session/helpers"
-import { BackendDTO } from "@src/services/protocols"
+import { BackendDTO } from "@src/utils/types/protocols"
 import { NextApiRequest, NextApiResponse } from "next"
 import { GetTopic, GetTopics } from "@src/services/Topics"
 
@@ -11,13 +11,12 @@ const handler: Handler = async (
   res: NextApiResponse
 ) => {
   const { headers, cookies, query } = req
-  const { page } = query
+  const { page, category } = query
   // console.log(id)
   // console.log(headers)
   // console.log(cookies)
-
   try {
-    res.json(await GetTopics(page as string))
+    res.json(await GetTopics(page as string, category as string))
   } catch ({ response }) {
     const {
       data: { error: message },
