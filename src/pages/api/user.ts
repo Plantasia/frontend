@@ -21,9 +21,10 @@ const handler: Handler = async (
         isLoggedIn: true,
         ...user,
       })
-    } catch {
+    } catch (error) {
       req.session.destroy()
       req.session.save()
+      res.json({ error: "Sua sessão caiu, por favor logue novamente" })
     }
   } else {
     res.json({

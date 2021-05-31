@@ -1,30 +1,21 @@
 import React from "react"
-import { Container } from "react-bootstrap"
+import { Container as BootstrapContainer } from "react-bootstrap"
 import { Header } from "@components"
 import { useRouter } from "next/router"
+import styled from "styled-components"
 
-type Props = {
-  route?: string
-  buttonLabel?: string
-}
-export const AppLayout: React.FC<Props> = ({
-  children,
-  route,
-  buttonLabel,
-}) => {
-  const router = useRouter()
+const Container = styled(BootstrapContainer)`
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  display: block;
+  height: 100vh;
+`
 
-  const handleCallToAction = () => {
-    router.push(route || "/signup")
-  }
+interface Props {}
+export const AppLayout: React.FC<Props> = ({ children }) => {
   return (
-    <Container>
-      <Header
-        callToAction={{
-          onClick: handleCallToAction,
-          label: buttonLabel || "cadastre-se",
-        }}
-      />
+    <Container className="vh-100">
+      <Header />
       {children}
     </Container>
   )

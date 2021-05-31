@@ -6,10 +6,11 @@ import { ComponentProps } from "@utils/types"
 import { useEffect, useState } from "react"
 import { GetTopic } from "@src/services/Topics"
 import { SelfApi } from "@src/services/Api"
-import useUser from "@src/lib/useUser"
+import { useUser } from "@src/lib"
 import { useRouter } from "next/router"
 import useSWR, { mutate } from "swr"
 import { axiosFetcher } from "@src/lib/fetchJson"
+import { FaComment } from "react-icons/fa"
 export interface BadgeCategoryProps {
   id: string
   name: string
@@ -49,7 +50,14 @@ export default function ShowTopic(props) {
         },
       }
       mutateTopic(data => {
-        return { ...data, comments: [...data.comments, previewComment] }
+        const comments = data.comments
+          ? [...data.comments, previewComment]
+          : [previewComment]
+
+        return {
+          ...data,
+          comments,
+        }
       }, false)
 
       const commentPayload = {
@@ -82,32 +90,40 @@ export default function ShowTopic(props) {
             </Col>
             <Col xs="12" className="d-flex justify-content-between mb-3">
               <InlineGap>
-                {topic.categories.map(({ name, color }, i) => (
-                  <Button variant={`outline-${color}`} key={i} size="sm">
-                    {name}
-                  </Button>
-                ))}
+                {topic
+                  ? topic.categories.map(({ name, color }, i) => (
+                      <Button variant={`outline-${color}`} key={i} size="sm">
+                        {name}
+                      </Button>
+                    ))
+                  : null}
               </InlineGap>
               <InlineGap>
-                <Button variant="primary" href="#new-comment">
+                <Button
+                  variant="primary"
+                  href="#new-comment"
+                  className="d-flex align-items-center"
+                >
                   novo comentário
+                  <FaComment className="ml-2" />
                 </Button>
               </InlineGap>
             </Col>
           </Row>
           <Row>
             <Col xs="12">
-              {topic.comments.map((item, index) => (
+              {topic.comments?.map((item, index) => (
                 <Comment
                   {...item}
-                  onQuote={text => {
+                  onQuote={({ text }) => {
                     setNewComment(
-                      `${newComment} <blockquote> ${text} </blockquote> &nbsp;`
+                      `${newComment} <blockquote> ${text} </blockquote> 
+                      <b>semente do ${user.name}</b>&nbsp;`
                     )
                   }}
                   key={index}
                 />
-              ))}
+              )) || null}
             </Col>
           </Row>
 

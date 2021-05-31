@@ -7,7 +7,7 @@ import { ComponentProps } from "@utils/types"
 import { TopicHeader } from "@styled/Topics"
 import { GetTopics } from "@src/services/Topics"
 import { ListItem } from "./_topic-item"
-import useUser from "@src/lib/useUser"
+import { useUser } from "@src/lib"
 
 export interface ListTopicsProps {
   topics: ComponentProps.TopicItemProps[]
@@ -22,30 +22,18 @@ export default function listTopics({ topics, pages }: ListTopicsProps) {
   const [currentPage, setCurrentPage] = useState(
     parseInt(router.query.page as string) || 1
   )
-  const { user, mutateUser } = useUser()
 
   const paginationItems = new Array(pages).fill(1).map((x, index) => index + 1)
-
-  function handleNewTopic() {
-    if (user.isLoggedIn) {
-    } else {
-      setModalVisible(true)
-    }
-  }
-
   return (
     <AppLayout>
-      <SEO title="Categorias" />
+      <SEO title="Topics - Nome da categoria" />
       <RequestAuthModal
         visible={modalVisible}
         onHide={() => setModalVisible(false)}
       />
       <Row>
         <TopicHeader>
-          <h2>Tópicos</h2>
-          <Button variant="primary" onClick={handleNewTopic}>
-            novo tópico
-          </Button>
+          <h2>Topics - Nome da categoria</h2>
         </TopicHeader>
         <Col xs="12">
           {topics.map((item, index) => (
@@ -74,9 +62,9 @@ export default function listTopics({ topics, pages }: ListTopicsProps) {
 
 export const getServerSideProps: GetServerSideProps<ListTopicsProps> = async context => {
   const {
-    query: { page },
+    query: { page, category },
   } = context
   return {
-    props: await GetTopics(page as string),
+    props: await GetTopics(page as string, category as string),
   }
 }

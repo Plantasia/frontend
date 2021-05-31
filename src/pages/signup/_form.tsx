@@ -45,6 +45,7 @@ export default function SignUpForm({
         <Form.Group>
           <Label>Nome</Label>
           <Form.Control
+            key="name"
             type="text"
             value={name}
             onChange={({ target: { value } }) => setName(value)}
@@ -55,6 +56,7 @@ export default function SignUpForm({
         <Form.Group>
           <Label>Email</Label>
           <Form.Control
+            key="email"
             type="email"
             value={email}
             placeholder="digite o seu email"
@@ -65,6 +67,7 @@ export default function SignUpForm({
         <Form.Group>
           <Label>Senha</Label>
           <Form.Control
+            key="password"
             placeholder="digite uma senha"
             type="password"
             value={password}
@@ -82,12 +85,11 @@ export default function SignUpForm({
           </TermsCheck>
         </Form.Group>
         <Form.Group className="d-flex justify-content-between">
-          <Button variant="outline-primary" size="lg" as="a" href="/signin">
+          <Button variant="outline-primary" as="a" href="/signin">
             Já possuo conta
           </Button>
           <Button
             variant="primary"
-            size="lg"
             onClick={e => {
               e.preventDefault()
               handleSubmitSignUp()
@@ -97,13 +99,6 @@ export default function SignUpForm({
           </Button>
         </Form.Group>
       </Form>
-      <SocialAuths>
-        <h5>Cadastre-se com</h5>
-        <SocialAuthsIcons>
-          <GoogleIcon onClick={handleGoogleAuth} />
-          <FacebookIcon onClick={handleFacebookAuth} />
-        </SocialAuthsIcons>
-      </SocialAuths>
     </FormWrapper>
   )
 }

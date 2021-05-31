@@ -42,28 +42,18 @@ export const LostPassword = styled.a`
 
 export const Form = styled(BootstrapForm).attrs(
   (): FormProps => ({
-    className: "mt-1 mb-4",
+    className: "py-2 d-flex flex-column",
   })
-)`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-
-  border-bottom: 2px solid black;
-`
+)``
 
 export const FormWrapper = styled(Col).attrs(
   (): ColProps => ({
-    className: "py-5 px-4",
+    className: "py-4 px-4 d-flex flex-column",
   })
 )`
   background-color: white;
   box-shadow: 0 0 15px #c4c4c4;
   border-radius: 10px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
 `
 
 export const Label = styled(BootstrapForm.Label)`

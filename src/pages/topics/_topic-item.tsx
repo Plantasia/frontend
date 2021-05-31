@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
-import { Row, Image } from "react-bootstrap"
+import { Row, Image, Col } from "react-bootstrap"
 import { TopicDescription, TopicStats, TopicContent } from "@styled/Topics"
 import { useRouter } from "next/router"
 import { PlantasiaCard } from "@styled/Shared"
@@ -21,7 +21,7 @@ export function ListItem({
   const router = useRouter()
 
   return (
-    <PlantasiaCard className="d-flex align-items-end">
+    <PlantasiaCard className="d-flex align-items-start">
       <TopicContent>
         <div className="mb-2 d-flex align-items-center">
           <h4
@@ -44,28 +44,35 @@ export function ListItem({
 
         <TopicDescription>{textBody}</TopicDescription>
       </TopicContent>
-      <TopicStats>
-        <div className="d-flex-column">
-          <b>ranking: &nbsp;#{""}</b>
-          <p>replies: &nbsp;&nbsp;&nbsp; {countComments}</p>
-        </div>
-        <div className="d-flex">
-          <Image
-            height="50"
-            width="50"
-            src={lastComment.user.avatar}
-            className="mr-2"
-            roundedCircle
-          />
-          <div className="d-flex-column justify-content-center">
-            <p style={{ margin: 0 }}>último reply, {lastComment.when}</p>
-
-            <a href={`/profile/${lastComment.user.id}`}>
-              {lastComment.user.name}
-            </a>
+      {lastComment ? (
+        <TopicStats>
+          <div className="d-flex-column">
+            <p>replies: &nbsp;&nbsp;&nbsp; {countComments}</p>
           </div>
-        </div>
-      </TopicStats>
+          <div className="d-flex">
+            <Image
+              height="50"
+              width="50"
+              src={lastComment.user.avatar}
+              className="mr-2"
+              roundedCircle
+            />
+            <div className="d-flex-column justify-content-center">
+              <p style={{ margin: 0 }}>
+                último reply, {lastComment.updated_at}
+              </p>
+
+              <a href={`/profile/${lastComment.user.id}`}>
+                {lastComment.user.name}
+              </a>
+            </div>
+          </div>
+        </TopicStats>
+      ) : (
+        <Col className="h-100 d-flex justify-content-end ">
+          <p> Sem comentários</p>
+        </Col>
+      )}
     </PlantasiaCard>
   )
 }

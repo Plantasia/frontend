@@ -13,8 +13,6 @@ const handler: Handler = async (
   const { query, body } = req
   const { page } = query
   const { textBody, topic_id } = body
-  console.log()
-
   try {
     const { data, status } = await ServerSideApi.post(
       "/forum/comments",
@@ -29,11 +27,11 @@ const handler: Handler = async (
     res.json({ message: "comentário criado", type: "success" })
   } catch ({ response }) {
     const {
-      data: { error: message },
+      data: { message },
       status,
     } = response
 
-    res.status(status).json({ message, type: "danger" })
+    res.json({ message, type: "danger" })
   }
 }
 

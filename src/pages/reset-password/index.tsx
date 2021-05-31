@@ -21,36 +21,31 @@ export const FormWrapper = styled(Form).attrs(
 
 export default function ResetPassword() {
   const [password, setPassword] = useState("")
-  const [confirmationPassword, setConfirmationPassword] = useState("")
+  const [passwordConfirmation, setPasswordConfirmation] = useState("")
   const router = useRouter()
   const { token } = router.query
   async function handleResetPassword(): Promise<void> {
     try {
       const { data } = await ClientSideApi.patch<{ message: string }>(
         `/reset-password/${token}`,
-        { password, passwordConfirmation: confirmationPassword }
+        { password, passwordConfirmation }
       )
       router.push("/signin")
       window.flash(data.message, "success")
-    } catch (error) {
-      window.flash(error.message, "danger")
+    } catch ({ response }) {
+      const {
+        data: { message },
+      } = response
+      window.flash(message, "danger")
     }
   }
+
   return (
     <AuthLayout>
       <SEO title="Login" />
       <Row className="d-flex flex-column align-items-center justify-content-center vh-100">
-        <h1
-          className="py-3"
-          style={{ cursor: "pointer" }}
-          onClick={() => {
-            router.push("/")
-          }}
-        >
-          plantasia
-        </h1>
-        <Col xs="5">
-          <FormWrapper className="d-flex flex-column justify-content-between h-75">
+        <Col xs="4">
+          <FormWrapper className="d-flex flex-column justify-content-between">
             <Form.Label className="d-flex mb-3">
               <h2>Redefinição de senha</h2>
             </Form.Label>
@@ -65,18 +60,16 @@ export default function ResetPassword() {
             <Form.Group>
               <Form.Control
                 placeholder="Confirme sua nova senha"
-                value={confirmationPassword}
+                value={passwordConfirmation}
                 type="password"
                 onChange={({ target: { value } }) =>
-                  setConfirmationPassword(value)
+                  setPasswordConfirmation(value)
                 }
               ></Form.Control>
             </Form.Group>
-            <Form.Group>
-              <Button variant="primary" onClick={handleResetPassword}>
-                Trocar senha
-              </Button>
-            </Form.Group>
+            <Button variant="primary" onClick={handleResetPassword}>
+              Trocar senha
+            </Button>
           </FormWrapper>
         </Col>
       </Row>
