@@ -5,11 +5,14 @@ import { useState } from "react"
 import { useRouter } from "next/router"
 import { SelfApi } from "@src/services/Api"
 import { SelfApiDTO } from "@utils/types"
+import { TermsOfUseModal } from "@src/components/TermsOfUseModal"
 
 export default function SignUp() {
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
+  const [modalVisibility, setModalVisibility] = useState<boolean>(false)
+  const [termsOfUse, setTermsOfUse] = useState<boolean>(false)
 
   const router = useRouter()
 
@@ -34,6 +37,17 @@ export default function SignUp() {
 
   return (
     <AuthLayout>
+      <TermsOfUseModal
+        visible={modalVisibility}
+        onHide={() => {
+          setTermsOfUse(false)
+          setModalVisibility(false)
+        }}
+        acceptTerms={() => {
+          setTermsOfUse(true)
+          setModalVisibility(false)
+        }}
+      />
       <SEO title="Login" />
       <Row className="d-flex align-items-center vh-100 justify-content-between">
         <Col className="d-none d-md-block" md="8">
@@ -59,6 +73,9 @@ export default function SignUp() {
             plantasia
           </h1>
           <SignUpForm
+            showModal={() => {
+              setModalVisibility(true)
+            }}
             handleSubmitSignUp={handleSubmitSignUp}
             handleFacebookAuth={handleFacebookAuth}
             handleGoogleAuth={handleGoogleAuth}
@@ -68,6 +85,8 @@ export default function SignUp() {
             setEmail={setEmail}
             name={name}
             setName={setName}
+            setAcceptedTerms={setTermsOfUse}
+            acceptedTerms={termsOfUse}
           />
         </Col>
       </Row>

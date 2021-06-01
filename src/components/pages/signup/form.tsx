@@ -16,12 +16,15 @@ interface ISignUpForm {
   handleSubmitSignUp(): void
   handleFacebookAuth(): void
   handleGoogleAuth(): void
+  showModal(): void
   setPassword: Dispatch<SetStateAction<string>>
   setEmail: Dispatch<SetStateAction<string>>
   setName: Dispatch<SetStateAction<string>>
+  setAcceptedTerms: Dispatch<SetStateAction<boolean>>
   password: string
   email: string
   name: string
+  acceptedTerms: boolean
 }
 
 export default function SignUpForm({
@@ -34,6 +37,9 @@ export default function SignUpForm({
   setPassword,
   name,
   setName,
+  showModal,
+  setAcceptedTerms,
+  acceptedTerms,
 }: ISignUpForm) {
   return (
     <FormWrapper>
@@ -77,10 +83,24 @@ export default function SignUpForm({
 
         <Form.Group>
           <TermsCheck>
-            <TermsCheck.Input type="checkbox" name="termsCheck" />
+            <TermsCheck.Input
+              type="checkbox"
+              name="termsCheck"
+              checked={acceptedTerms}
+              onClick={() => {
+                showModal()
+              }}
+            />
             <TermsCheck.Label>
               Declaro que li e concordo com os{" "}
-              <a href="/terms">termos de uso</a>
+              <a
+                href="#"
+                onClick={() => {
+                  showModal()
+                }}
+              >
+                termos de uso
+              </a>
             </TermsCheck.Label>
           </TermsCheck>
         </Form.Group>
