@@ -8,11 +8,25 @@ const handler: Handler = async (
   res: NextApiResponse
 ) => {
   const jwt = await req.session.get("jwt")
+  const headers = jwt
+    ? {
+        Authorization: `Bearer ${jwt}`,
+      }
+    : null
 
-  if (jwt) {
-    const headers = {
-      Authorization: `Bearer ${jwt}`,
+  if (req.method === "PATCH") {
+    if (!headers)
+      res.status(401).json({ message: "Não autorizado", type: "danger" })
+
+    try {
+      const { data } = await ServerSideApi.patch("/user", req.body)
+      console.log(data)
+    } catch ({ response }) {
+      console.log(response)
     }
+  }
+  if (req.method === "GET") {
+    if (!headers) return res.json({ isLoggedIn: false })
     try {
       const { data: user } = await ServerSideApi.get(`/users/findme`, {
         headers,
@@ -26,10 +40,6 @@ const handler: Handler = async (
       req.session.save()
       res.json({ error: "Sua sessão caiu, por favor logue novamente" })
     }
-  } else {
-    res.json({
-      isLoggedIn: false,
-    })
   }
 }
 

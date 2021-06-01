@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next"
 import { AppLayout, SEO } from "@components"
-import { ListCategoryItem } from "./_category-item"
+import { ListCategoryItem } from "@components/pages/category/category-item"
 import { ComponentProps } from "@utils/types"
 import { Row, Col, Pagination } from "react-bootstrap"
 import { GetCategories } from "@src/services/Categories"

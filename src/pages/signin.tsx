@@ -1,6 +1,6 @@
 import { Col, Row } from "react-bootstrap"
 import { SEO, AuthLayout } from "@components"
-import SignInForm from "./_form"
+import SignInForm from "../components/pages/signin/form"
 import { useState } from "react"
 import { useRouter } from "next/router"
 import { useUser } from "@src/lib"

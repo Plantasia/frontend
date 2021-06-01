@@ -1,7 +1,7 @@
 import { Button, Row, Col, Image } from "react-bootstrap"
 import { Editor, AppLayout, RequestAuthModal, SEO } from "@components"
 import { InlineGap, PlantasiaCard } from "@styled/Shared"
-import { CommentProps, Comment } from "./_comment"
+import { CommentProps, Comment } from "../../components/pages/topics/comment"
 import { ComponentProps } from "@utils/types"
 import { useState } from "react"
 import { SelfApi } from "@src/services/Api"

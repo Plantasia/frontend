@@ -7,13 +7,8 @@ import {
   Label,
   FormWrapper,
   AuxLink,
-  SocialAuths,
-  SocialAuthsIcons,
-  GoogleIcon,
-  FacebookIcon,
 } from "@src/styles/components/Auth"
-import ModalForgotPassword from "./_modal-forgot-password"
-import { ErrorAlert } from "@components"
+import ModalForgotPassword from "./modal-forgot-password"
 
 interface ISignInForm {
   handleSubmitLogin(): void
