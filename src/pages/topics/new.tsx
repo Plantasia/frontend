@@ -14,8 +14,9 @@ interface Props {
 }
 export default function NewTopic(props: Props) {
   const router = useRouter()
+  const [media, setMedia] = useState<File>(null as File)
   const [content, setContent] = useState("")
-  const { user } = useUser()
+  const [category, setCategory] = useState("")
   const { categories } = props
 
   return (
@@ -49,6 +50,10 @@ export default function NewTopic(props: Props) {
                           label=""
                           data-browse="Carregar foto"
                           custom
+                          accept="image/jpeg, image/png, image/jpg"
+                          onChange={({ target: { files } }) => {
+                            setMedia(files[0])
+                          }}
                         />
                       </Form.Group>
                       <Form.Group
@@ -59,7 +64,7 @@ export default function NewTopic(props: Props) {
                         <Form.Control
                           as="select"
                           onChange={({ target: { value } }) =>
-                            console.log(value)
+                            setCategory(value)
                           }
                         >
                           {categories.map(item => (
