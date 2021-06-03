@@ -1,15 +1,22 @@
 import React, { useState } from "react"
-import { Header, AppLayout, Editor } from "@components"
+import { AppLayout, Editor } from "@components"
 import { InlineGap, PlantasiaCard } from "@styled/Shared"
-import { ComponentProps } from "@utils/types"
-import { Button, Row, Col, Image, Form, FormGroup } from "react-bootstrap"
+import { Button, Row, Col, Form } from "react-bootstrap"
 import { useRouter } from "next/router"
 import { useUser } from "@src/lib"
+import { GetServerSidePropsResult } from "next"
+import { ServerSideApi } from "@src/services/Api"
+import { withIronSession } from "next-iron-session"
+import { sessionOptions } from "../api/_iron-session/helpers"
 
-export default function NewTopic(props: ComponentProps.TopicItemProps) {
+interface Props {
+  categories?: { id: string; name: string }[]
+}
+export default function NewTopic(props: Props) {
   const router = useRouter()
   const [content, setContent] = useState("")
   const { user } = useUser()
+  const { categories } = props
 
   return (
     <AppLayout>
@@ -49,18 +56,31 @@ export default function NewTopic(props: ComponentProps.TopicItemProps) {
                         controlId="topicForm.categories"
                       >
                         <Form.Label>Categoria</Form.Label>
-                        <Form.Control as="select">
-                          <option>Suculentas</option>
-                          <option>Hortaliças</option>
-                          <option>Sansevieras</option>
-                          <option>Angiospermas</option>
+                        <Form.Control
+                          as="select"
+                          onChange={({ target: { value } }) =>
+                            console.log(value)
+                          }
+                        >
+                          {categories.map(item => (
+                            <option key={item.id} value={item.id}>
+                              {item.name}
+                            </option>
+                          ))}
                         </Form.Control>
                       </Form.Group>
                     </Form.Row>
                     <Form.Group className="d-flex justify-content-end">
                       <InlineGap>
-                        <Button variant="outline-primary">Cancelar</Button>
-                        <Button>Salvar</Button>
+                        <Button
+                          variant="outline-primary"
+                          onClick={() => {
+                            router.push("/category")
+                          }}
+                        >
+                          Cancelar
+                        </Button>
+                        <Button>Criar</Button>
                       </InlineGap>
                     </Form.Group>
                   </Form>
@@ -74,12 +94,28 @@ export default function NewTopic(props: ComponentProps.TopicItemProps) {
   )
 }
 
-// export const getStaticProps: GetStaticProps<ComponentProps.UserProps> = async context => {
-//   console.log(context)
-
-//   return {
-//     props: {
-//       id: "2add7cd9-ffd8-43fe-a20c-9a2b9d4e8c5f",
-//     },
-//   }
-// }
+export const getServerSideProps = withIronSession(async ({ req, res }): Promise<
+  GetServerSidePropsResult<Props>
+> => {
+  const jwt: string = req.session.get("jwt")
+  const headers = jwt ? { authorization: `Bearer ${jwt}` } : null
+  try {
+    const { data } = await ServerSideApi.get<{ id: string; name: string }[]>(
+      "forum/categories/combobox",
+      {
+        headers,
+      }
+    )
+    return {
+      props: { categories: data },
+    }
+  } catch (error) {
+    return {
+      redirect: {
+        destination: "/signin",
+        permanent: true,
+        statusCode: 301,
+      },
+    }
+  }
+}, sessionOptions)
