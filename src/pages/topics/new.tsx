@@ -5,7 +5,7 @@ import { Button, Row, Col, Form } from "react-bootstrap"
 import { useRouter } from "next/router"
 import { useUser } from "@src/lib"
 import { GetServerSidePropsResult } from "next"
-import { ServerSideApi } from "@src/services/Api"
+import { SelfApi, ServerSideApi } from "@src/services/Api"
 import { withIronSession } from "next-iron-session"
 import { sessionOptions } from "../api/_iron-session/helpers"
 
@@ -16,8 +16,24 @@ export default function NewTopic(props: Props) {
   const router = useRouter()
   const [media, setMedia] = useState<File>(null as File)
   const [content, setContent] = useState("")
+  const [title, setTitle] = useState("")
   const [category, setCategory] = useState("")
   const { categories } = props
+
+  const handleNewTopic = async () => {
+    const formData = new FormData()
+    formData.append("file", media, media.name)
+    formData.append("category_id", category)
+    formData.append("textBody", content)
+    formData.append("name", title)
+
+    const { data } = await SelfApi.post("/api/topic", formData, {
+      headers: {
+        "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
+      },
+    })
+    // console.log(data)
+  }
 
   return (
     <AppLayout>
@@ -33,6 +49,8 @@ export default function NewTopic(props: Props) {
                       <Form.Control
                         placeholder="Título do tópico"
                         type="text"
+                        value={title}
+                        onChange={({ target: { value } }) => setTitle(value)}
                       />
                     </Form.Group>
                     <Form.Group controlId="topicForm.textBody">
@@ -47,11 +65,12 @@ export default function NewTopic(props: Props) {
                         <Form.Label>Envie uma foto</Form.Label>
                         <Form.File
                           id="topicForm.avatar"
-                          label=""
+                          label={media?.name || ""}
                           data-browse="Carregar foto"
                           custom
                           accept="image/jpeg, image/png, image/jpg"
                           onChange={({ target: { files } }) => {
+                            console.log(files)
                             setMedia(files[0])
                           }}
                         />
@@ -85,7 +104,7 @@ export default function NewTopic(props: Props) {
                         >
                           Cancelar
                         </Button>
-                        <Button>Criar</Button>
+                        <Button onClick={handleNewTopic}>Criar</Button>
                       </InlineGap>
                     </Form.Group>
                   </Form>
@@ -117,8 +136,7 @@ export const getServerSideProps = withIronSession(async ({ req, res }): Promise<
   } catch (error) {
     return {
       redirect: {
-        destination: "/signin",
-        permanent: true,
+        destination: "/category",
         statusCode: 301,
       },
     }
