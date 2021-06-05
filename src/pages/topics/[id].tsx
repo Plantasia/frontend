@@ -102,7 +102,10 @@ export default function ShowTopic(props) {
                     ))
                   : null}
               </InlineGap>
-              <p>{topic.description}</p>
+              <div
+                dangerouslySetInnerHTML={{ __html: topic.description }}
+              ></div>
+
               {topic.image && (
                 <Image src={topic.image} className="mb-3 " fluid />
               )}
