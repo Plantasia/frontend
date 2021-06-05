@@ -36,13 +36,21 @@ export function ListItem({
             {name}
           </h4>
         </div>
-
         <div>
           <a href={`/users/${topicOwner.id}`}>{topicOwner.name}</a>
           <span> - {created_at}</span>
         </div>
-
-        <TopicDescription>{textBody}</TopicDescription>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: textBody,
+          }}
+          style={{
+            overflow: "hidden",
+            display: "-webkit-box",
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: "vertical",
+          }}
+        ></div>
       </TopicContent>
       {lastComment ? (
         <TopicStats>
