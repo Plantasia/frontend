@@ -17,7 +17,8 @@
     "sourceType": "module"
   },
   "globals": {
-    "File": "readonly"
+    "File": "readonly",
+    "FormData": "writable"
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
