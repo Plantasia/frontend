@@ -32,7 +32,7 @@ export default function NewTopic(props: Props) {
         "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
       },
     })
-    // console.log(data)
+    router.push(`/topics/${data.id}`)
   }
 
   return (
