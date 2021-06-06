@@ -22,6 +22,7 @@ export default function NewTopic(props: Props) {
 
   const handleNewTopic = async () => {
     const formData = new FormData()
+
     formData.append("file", media, media.name)
     formData.append("category_id", category)
     formData.append("textBody", content)
@@ -31,8 +32,15 @@ export default function NewTopic(props: Props) {
       headers: {
         "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
       },
+      onUploadProgress: event => {
+        console.log(
+          `Current progress:`,
+          Math.round((event.loaded * 100) / event.total)
+        )
+      },
+      timeout: 10000,
     })
-    router.push(`/topics/${data.id}`)
+    data.id && router.push(`/topics/${data.id}`)
   }
 
   return (
@@ -68,9 +76,10 @@ export default function NewTopic(props: Props) {
                           label={media?.name || ""}
                           data-browse="Carregar foto"
                           custom
+                          formEncType="multipart/form-data"
                           accept="image/jpeg, image/png, image/jpg"
                           onChange={({ target: { files } }) => {
-                            console.log(files)
+                            console.log(files[0])
                             setMedia(files[0])
                           }}
                         />
@@ -123,6 +132,7 @@ export const getServerSideProps = withIronSession(async ({ req, res }): Promise<
 > => {
   const jwt: string = req.session.get("jwt")
   const headers = jwt ? { authorization: `Bearer ${jwt}` } : null
+
   try {
     const { data } = await ServerSideApi.get<{ id: string; name: string }[]>(
       "forum/categories/combobox",
@@ -134,10 +144,11 @@ export const getServerSideProps = withIronSession(async ({ req, res }): Promise<
       props: { categories: data },
     }
   } catch (error) {
+    console.log(error)
     return {
       redirect: {
-        destination: "/category",
-        statusCode: 301,
+        destination: "/signin",
+        permanent: false,
       },
     }
   }

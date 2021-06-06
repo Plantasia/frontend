@@ -5,14 +5,30 @@ import { sessionOptions } from "../_iron-session/helpers"
 import { BackendDTO } from "@src/utils/types/protocols"
 import { NextApiRequest, NextApiResponse } from "next"
 import { GetTopic, GetTopics } from "@src/services/Topics"
-import FileServer from "fs"
+import Formidable from "formidable"
+import ExpressFormidable from "express-formidable"
+import NextConnect from "next-connect"
+import multer, { Field } from "multer"
+import FormData from "form-data"
+import BodyParser from "body-parser"
 
-const handler: Handler = async (
-  req: NextApiRequest & { session: Session },
-  res: NextApiResponse
-) => {
-  const { query } = req
-  if (req.method === "GET") {
+const upload = multer({
+  storage: multer.memoryStorage(),
+  preservePath: false,
+  dest: "/tmp",
+})
+const urlencoderParser = BodyParser.urlencoded({ extended: false })
+const nc = NextConnect<
+  NextApiRequest & {
+    session: Session
+    file: File
+  },
+  NextApiResponse
+>()
+  .use(upload.single("file"))
+  // .use(ExpressFormidable())
+  .get(async (req, res) => {
+    const { query } = req
     const { page, category } = query
 
     try {
@@ -25,31 +41,43 @@ const handler: Handler = async (
 
       res.status(status).json({ message, type: "danger" })
     }
-  }
-
-  if (req.method === "POST") {
+  })
+  .post(async (req, res) => {
     const jwt = req.session.get("jwt")
-    const { headers } = req
-    console.log(req.body)
+    const { headers, body, file } = req
     try {
+      const formData = new FormData()
+
+      formData.append("name", body.name)
+      formData.append("textBody", body.textBody)
+      formData.append("category_id", body.category_id)
+      formData.append("file", file, file.originalname)
+      console.log(formData)
       const { data, status } = await ServerSideApi.post(
         "/forum/topics",
-        req.body,
-        { headers: { ...headers, Authorization: `Bearer ${jwt}` } }
+        formData,
+        {
+          headers: {
+            "Content-Type": headers["content-type"],
+            accept: headers.accept,
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
       )
-      return res.status(status).json(data)
-    } catch ({ response }) {
-      return res.status(response.status).json(response)
+      return res.json(data)
+    } catch (error) {
+      console.log(error)
+      return res.status(500).json({ message: error })
     }
-  }
-  return res.status(400)
-}
+  })
+
 export const config = {
   api: {
-    bodyParser: {
-      sizeLimit: "5mb",
-    },
+    bodyParser: false,
+    // bodyParser: {
+    //   sizeLimit: "5mb",
+    // },
   },
 }
 
-export default withIronSession(handler, sessionOptions)
+export default withIronSession(nc, sessionOptions)
