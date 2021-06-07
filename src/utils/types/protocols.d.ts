@@ -40,6 +40,7 @@ export namespace BackendDTO {
     name: string
     textBody: string
     imageStorage: string
+    imageStorageUrl: string
     created_at: string
     updated_at: string
     comments?: CommentObject[]
