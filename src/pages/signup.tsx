@@ -17,6 +17,8 @@ export default function SignUp() {
   const router = useRouter()
 
   async function handleSubmitSignUp(): Promise<void> {
+    if (!termsOfUse)
+      return window.flash("É preciso aceitar os termos de uso", "danger")
     try {
       const { data } = await SelfApi.post<SelfApiDTO.FlashMessage>(
         "/api/signup",
