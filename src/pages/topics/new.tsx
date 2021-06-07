@@ -21,26 +21,42 @@ export default function NewTopic(props: Props) {
   const { categories } = props
 
   const handleNewTopic = async () => {
+    if (!title) return window.flash("Seu tópico precisa de um título", "danger")
+    if (!content)
+      return window.flash("Seu tópico precisa de um conteúdo", "danger")
+
     const formData = new FormData()
 
     formData.append("file", media, media.name)
     formData.append("category_id", category)
     formData.append("textBody", content)
     formData.append("name", title)
+    try {
+      const { data } = await SelfApi.post("/api/topic", formData, {
+        headers: {
+          "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
+        },
+        onUploadProgress: event => {
+          console.log(
+            `Current progress:`,
+            Math.round((event.loaded * 100) / event.total)
+          )
+        },
+        timeout: 1000,
+        timeoutErrorMessage:
+          "Ops, acho que estamos com algum problema no servidor. Volte mais tarde",
+      })
+      data.id && router.push(`/topics/${data.id}`)
+    } catch (error) {
+      if (error.response) {
+        const {
+          data: { error: message },
+        } = error.response
+        window.flash(message, "danger")
+      }
 
-    const { data } = await SelfApi.post("/api/topic", formData, {
-      headers: {
-        "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
-      },
-      onUploadProgress: event => {
-        console.log(
-          `Current progress:`,
-          Math.round((event.loaded * 100) / event.total)
-        )
-      },
-      timeout: 10000,
-    })
-    data.id && router.push(`/topics/${data.id}`)
+      window.flash(error.message, "danger")
+    }
   }
 
   return (
