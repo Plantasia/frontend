@@ -42,7 +42,7 @@ export default function NewTopic(props: Props) {
             Math.round((event.loaded * 100) / event.total)
           )
         },
-        timeout: 1000,
+        timeout: 30000,
         timeoutErrorMessage:
           "Ops, acho que estamos com algum problema no servidor. Volte mais tarde",
       })
