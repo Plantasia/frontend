@@ -71,7 +71,7 @@ export function MenuDropdown() {
       <Dropdown.Toggle
         as={Toggle}
         id="dropdown-custom-components"
-        avatar={user.avatar}
+        avatar={user.avatarUrl}
       ></Dropdown.Toggle>
       <Dropdown.Menu align={{ sm: "right" }}>
         <CustomDropdownItem
