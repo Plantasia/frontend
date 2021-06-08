@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { AppLayout, ChangePasswordModal } from "@components"
 import { InlineGap, PlantasiaCard } from "@styled/Shared"
-import { ComponentProps } from "@utils/types"
 import { Button, Row, Col, Image, Form } from "react-bootstrap"
 import { useRouter } from "next/router"
 import { SelfApi, ServerSideApi } from "@src/services/Api"
@@ -10,15 +9,34 @@ import { withIronSession } from "next-iron-session"
 import { sessionOptions } from "./api/_iron-session/helpers"
 
 export default function Settings(user) {
+  console.log(user)
   const router = useRouter()
   const [modalVisibility, setModalvisibility] = useState(false)
   const [name, setName] = useState(user.name)
+  const [media, setMedia] = useState<File>({ name: user.avatar } as File)
   const [bio, setBio] = useState(user.bio)
+  const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl)
 
   const handleSaveUser = async () => {
-    SelfApi.patch("/api/user", { name, bio })
+    const formData = new FormData()
+    media.size && formData.append("file", media, media.name)
+    formData.append("name", name)
+    formData.append("bio", bio)
+    try {
+      const { data } = await SelfApi.post("/api/user", formData, {
+        headers: {
+          "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
+        },
+      })
+      console.log(data)
+      setAvatarUrl(data.avatarUrl)
+      setBio(data.bio)
+      setName(data.name)
+      window.flash("Perfil alterado com sucesso", data.type)
+    } catch ({ response }) {
+      window.flash(response.data.message, response.data.type)
+    }
   }
-  console.log(user)
 
   return (
     <AppLayout>
@@ -32,7 +50,7 @@ export default function Settings(user) {
             <Col>
               <Row>
                 <Col xs={{ span: 6, offset: 3 }}>
-                  <Image src={user?.avatar} roundedCircle fluid />
+                  <Image src={avatarUrl} roundedCircle fluid />
                 </Col>
               </Row>
               <Row>
@@ -62,10 +80,15 @@ export default function Settings(user) {
                     </Form.Group>
                     <Form.Group>
                       <Form.File
-                        id="userForm.avatar"
-                        label="foto-perfil.jpg"
-                        data-browse="Selecionar foto"
+                        id="topicForm.avatar"
+                        label={media?.name || ""}
+                        data-browse="Carregar foto"
                         custom
+                        formEncType="multipart/form-data"
+                        accept="image/jpeg, image/png, image/jpg"
+                        onChange={({ target: { files } }) => {
+                          setMedia(files[0])
+                        }}
                       />
                       <Form.Group>
                         <AuxLink
