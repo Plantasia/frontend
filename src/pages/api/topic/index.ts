@@ -21,7 +21,6 @@ const nc = NextConnect<
   },
   NextApiResponse
 >()
-  .use(upload.single("file"))
   .get(async (req, res) => {
     const { query } = req
     const { page, category } = query
@@ -37,7 +36,7 @@ const nc = NextConnect<
       res.status(status).json({ message, type: "danger" })
     }
   })
-  .post(async (req, res) => {
+  .post(upload.single("file"), async (req, res) => {
     const jwt = req.session.get("jwt")
     const { file, body } = req
     try {
