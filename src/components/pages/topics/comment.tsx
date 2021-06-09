@@ -86,12 +86,13 @@ export function Comment({
               <div className="d-flex flex-column align-items-end">
                 <InlineGap className="mb-3">
                   <span>{createdAt}</span>
-                  <CommentDropdown
-                    owner={user?.id === ownerUser.id}
-                    handleDelete={handleDelete}
-                    handleEdit={handleEdit}
-                    handleReport={handleReport}
-                  />
+                  {user?.id === ownerUser.id && (
+                    <CommentDropdown
+                      handleDelete={handleDelete}
+                      handleEdit={handleEdit}
+                      handleReport={handleReport}
+                    />
+                  )}
                 </InlineGap>
               </div>
             </Col>

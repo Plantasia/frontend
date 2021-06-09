@@ -28,13 +28,11 @@ Toggle.propTypes = {
 }
 
 type CommentDropdownProps = {
-  owner: boolean
   handleEdit?(): void
   handleDelete?(): void
   handleReport?(): void
 }
 const CommentDropdown: React.FC<CommentDropdownProps> = ({
-  owner,
   handleDelete,
   handleEdit,
   handleReport,
@@ -46,16 +44,8 @@ const CommentDropdown: React.FC<CommentDropdownProps> = ({
         id="dropdown-custom-components"
       ></Dropdown.Toggle>
       <Dropdown.Menu align={{ sm: "right" }} style={{ textAlign: "right" }}>
-        {owner ? (
-          <>
-            <Dropdown.Item onClick={handleEdit}>editar</Dropdown.Item>
-            <Dropdown.Item onClick={handleDelete}>excluir</Dropdown.Item>
-          </>
-        ) : (
-          <>
-            <Dropdown.Item onClick={handleReport}>reportar</Dropdown.Item>
-          </>
-        )}
+        <Dropdown.Item onClick={handleEdit}>editar</Dropdown.Item>
+        <Dropdown.Item onClick={handleDelete}>excluir</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   )
