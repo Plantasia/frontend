@@ -44,7 +44,7 @@ export default function ShowTopic(props) {
       content: newComment,
       ownerUser: {
         id: user.id,
-        avatar: user.avatar,
+        avatarUrl: user.avatarUrl,
         bio: user.bio,
         name: user.name,
         createdAt: user.createdAt,
