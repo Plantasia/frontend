@@ -12,7 +12,7 @@ export interface CommentProps {
   ownerUser: ComponentProps.UserProps
   content: string
   likes?: number
-  onQuote?(data: { text: string; commentId?: string }): void
+  onQuote?(data: { text: string; username: string }): void
   createdAt: string
 }
 
@@ -21,12 +21,13 @@ type ProfileCommentProps = {
 }
 
 const ProfileComment: React.FC<ProfileCommentProps> = ({
-  user: { name, createdAt, bio, avatar },
+  user: { name, createdAt, bio, avatarUrl },
 }) => {
+  console.log(avatarUrl)
   return (
     <Col xs="2" className="d-flex flex-column align-items-center text-center">
       <Image
-        src={avatar}
+        src={avatarUrl}
         roundedCircle
         className="mb-3"
         style={{ aspectRatio: "1", width: "100%" }}
@@ -68,7 +69,7 @@ export function Comment({
   }
 
   const handleQuote = () => {
-    onQuote && onQuote({ text: content })
+    onQuote && onQuote({ text: content, username: ownerUser.name })
   }
 
   const [editMode, setEditMode] = useState(false)
