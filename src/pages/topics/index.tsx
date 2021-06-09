@@ -49,7 +49,13 @@ export default function listTopics({ topics, pages }: ListTopicsProps) {
             active={page === currentPage}
             onClick={() => {
               setCurrentPage(page)
-              router.push(`/topics?page=${page}`)
+              const query = router.query.category
+                ? { category: router.query.category, page }
+                : { page }
+              router.push({
+                pathname: "/topics",
+                query,
+              })
             }}
           >
             {page}

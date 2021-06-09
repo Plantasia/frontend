@@ -42,12 +42,12 @@ export const GetTopics = async (
             updated_at: timeAgo.format(new Date(created_at)),
           }
         : null
-      var textBodyRegex = /(<([^>]+)>)/gi
+      var textBodyRegex = /(<.[^>]+>)/gi
       return {
         id,
         imageStorage,
         name,
-        textBody: textBody.replace(textBodyRegex, ""),
+        textBody,
         topicOwner: {
           id: user.id,
           avatar: user.avatar,
@@ -63,8 +63,9 @@ export const GetTopics = async (
   )
 
   const { totalRegisters, perPage, nextPage, prevPage } = data
+
   const pages =
-    totalRegisters / perPage < 1 ? 1 : Math.round(totalRegisters / perPage)
+    totalRegisters / perPage < 1 ? 1 : Math.ceil(totalRegisters / perPage)
   return { topics, pages, prevPage, nextPage }
 }
 
@@ -83,6 +84,7 @@ export const GetTopic = async (id: string): Promise<TopicProps> => {
     user,
     category,
     imageStorage,
+    imageStorageUrl,
   } = data
   const hasComments = commentsData.length > 0
   const comments = hasComments
@@ -115,6 +117,6 @@ export const GetTopic = async (id: string): Promise<TopicProps> => {
     ],
     description: textBody,
     comments,
-    image: imageStorage,
+    image: imageStorageUrl,
   }
 }
