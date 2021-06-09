@@ -20,7 +20,6 @@ export const SectionThree = styled(Row).attrs({ id: "faq" })`
 `
 export const Footer = styled(Row)`
   color: white;
-  border-top: 1px solid white;
   height: 100px;
 `
 
@@ -45,6 +44,22 @@ export const NavLink = styled(Nav.Link)`
     position: relative;
     transition: 300ms;
   }
+`
+
+export const FirstWave = styled.path.attrs(() => ({
+  d:
+    "M0.28,97.20 C236.17,154.44 238.99,-15.28 504.79,118.91 L500.00,150.00 L0.00,150.00 Z",
+}))`
+  stroke: none;
+  fill: white;
+`
+
+export const SecondWave = styled.path.attrs(() => ({
+  d:
+    "M0.00,49.98 C149.99,150.00 271.49,-49.98 500.00,49.98 L500.00,0.00 L0.00,0.00 Z",
+}))`
+  stroke: none;
+  fill: white;
 `
 
 export const NavButton = styled(Nav.Item)``

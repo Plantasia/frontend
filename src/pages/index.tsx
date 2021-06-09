@@ -15,9 +15,15 @@ import {
   SectionThree,
   SectionTwo,
   Slogan,
+  FirstWave,
+  SecondWave,
 } from "@styled/LandingPage"
+import { GetStaticProps } from "next"
+import useWindowDimensions from "@src/hooks/useWindowDimensions"
 
 const HomePage: React.FC = ({ children }) => {
+  const { height, width } = useWindowDimensions()
+
   const router = useRouter()
   const handleCallToAction = () => {
     router.push("/category")
@@ -80,13 +86,17 @@ const HomePage: React.FC = ({ children }) => {
           ></object>
         </Col>
       </SectionOne>
-
       <Row id="about">
-        <object
-          className="w-100"
-          type="image/svg+xml"
-          data="/assets/img/wave.svg"
-        ></object>
+        <div className="w-100">
+          <svg
+            viewBox="0 0 500 150"
+            preserveAspectRatio="none"
+            className="w-100"
+            height={`${width / 5}px`}
+          >
+            <FirstWave></FirstWave>
+          </svg>
+        </div>
       </Row>
 
       <SectionTwo className="d-flex align-items-center">
@@ -114,66 +124,36 @@ const HomePage: React.FC = ({ children }) => {
       </SectionTwo>
 
       <Row>
-        <object
-          className="w-100"
-          type="image/svg+xml"
-          data="/assets/img/wave-02.svg"
-        ></object>
+        <div className="w-100">
+          <svg
+            viewBox="0 0 500 100"
+            preserveAspectRatio="none"
+            className="w-100"
+            height={`${width / 5}px`}
+          >
+            <SecondWave></SecondWave>
+          </svg>
+        </div>
       </Row>
 
-      <SectionThree className="d-flex align-items-start justify-content-center my-5">
-        <Col xs="6" className="">
-          <h2 className="my-lg-5 h1">Perguntas frequentes</h2>
-          <Accordion
-            style={{
-              width: "500px",
-            }}
-          >
-            {QuestionsFAQ.map(({ description, title }, index) => (
-              <>
-                <Accordion.Toggle
-                  as={FAQTitle}
-                  variant="link"
-                  eventKey={index.toString()}
-                  key={index}
-                >
-                  <h5 key={index}>{title}</h5>
-                </Accordion.Toggle>
-
-                <Accordion.Collapse eventKey={index.toString()}>
-                  <FAQDescription key={index}>{description}</FAQDescription>
-                </Accordion.Collapse>
-              </>
-            ))}
-          </Accordion>
-        </Col>
-        <Col xs={{ span: 4 }}>
-          <object
-            className="w-100"
-            type="image/svg+xml"
-            data="/assets/img/landing-03.svg"
-          ></object>
-        </Col>
-      </SectionThree>
       <Footer>
         <Col
           xs="12"
-          className="d-flex justify-content-between align-items-center"
+          className="d-flex justify-content-center align-items-center"
         >
-          <h1>plantasia</h1>
-          <h2>2021 ©</h2>
-          <div
-            style={{ width: 250 }}
-            className="d-flex justify-content-between"
-          >
-            <FaGithub size={50} style={{ cursor: "pointer" }} />
-            <FaWhatsapp size={50} style={{ cursor: "pointer" }} />
-            <FaInstagram size={50} style={{ cursor: "pointer" }} />
-            <FaFacebook size={50} style={{ cursor: "pointer" }} />
+          <div className="d-flex flex-column align-items-center">
+            <h2>plantasia</h2>
+            <h6>2021 ©</h6>
           </div>
         </Col>
       </Footer>
     </LandingContainer>
   )
+}
+
+export const getStaticProps: GetStaticProps<{}, {}> = async context => {
+  return {
+    props: {},
+  }
 }
 export default HomePage
