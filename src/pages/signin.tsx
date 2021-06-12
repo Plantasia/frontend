@@ -35,13 +35,11 @@ export default function SignIn() {
     <AuthLayout>
       <SEO title="Login" />
 
-      <Row className="d-flex align-items-center h-100">
-        <Col
-          md="8"
-          xs="12"
-          className="d-none d-md-block"
-          // className="d-flex flex-column align-items-center justify-content-arround mt-3 "
-        >
+      <Row
+        className="d-flex align-items-center h-100"
+        // style={{ border: "1px solid red" }}
+      >
+        <Col md="8" xs="12" className="d-none d-md-block">
           <object
             className="w-100"
             type="image/svg+xml"

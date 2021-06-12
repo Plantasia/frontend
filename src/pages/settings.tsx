@@ -50,7 +50,12 @@ export default function Settings(user) {
             <Col>
               <Row>
                 <Col xs={{ span: 6, offset: 3 }}>
-                  <Image src={avatarUrl} roundedCircle fluid />
+                  <Image
+                    src={avatarUrl}
+                    roundedCircle
+                    width="100%"
+                    style={{ aspectRatio: "1/1" }}
+                  />
                 </Col>
               </Row>
               <Row>

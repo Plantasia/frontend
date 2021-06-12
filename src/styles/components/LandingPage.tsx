@@ -25,10 +25,9 @@ export const Footer = styled(Row)`
 
 export const NavLink = styled(Nav.Link)`
   color: white !important;
-  font-size: 1.3vw;
+  font-size: 22px;
   font-weight: 300;
   :hover {
-    font-weight: 500;
     ::after {
       content: "";
       width: 100%;
@@ -65,10 +64,9 @@ export const SecondWave = styled.path.attrs(() => ({
 export const NavButton = styled(Nav.Item)``
 
 export const Brand = styled.h1`
-  font-size: 5vw;
+  font-size: 64px;
 `
-export const Slogan = styled.h2`
-  font-size: 2vw;
+export const Slogan = styled.h3`
   font-weight: 300;
 `
 

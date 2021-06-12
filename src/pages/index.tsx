@@ -1,29 +1,21 @@
 import React from "react"
-import { Row, Col, Button, Accordion, Navbar, Nav } from "react-bootstrap"
-import { QuestionsFAQ } from "@src/utils/constants"
-import { FaFacebook, FaGithub, FaInstagram, FaWhatsapp } from "react-icons/fa"
+import { Row, Col, Button, Navbar, Nav } from "react-bootstrap"
+
 import { useRouter } from "next/router"
 import {
   Brand,
-  FAQDescription,
-  FAQTitle,
   Footer,
   LandingContainer,
   NavLink,
-  NavButton,
   SectionOne,
-  SectionThree,
   SectionTwo,
   Slogan,
   FirstWave,
   SecondWave,
 } from "@styled/LandingPage"
 import { GetStaticProps } from "next"
-import useWindowDimensions from "@src/hooks/useWindowDimensions"
 
 const HomePage: React.FC = ({ children }) => {
-  const { height, width } = useWindowDimensions()
-
   const router = useRouter()
   const handleCallToAction = () => {
     router.push("/category")
@@ -33,7 +25,7 @@ const HomePage: React.FC = ({ children }) => {
       <Navbar expand="md" className="w-100 right" variant="dark">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="w-100 d-flex justify-content-end align-items-center">
+          <Nav className="w-100 d-flex justify-content-end">
             <Nav.Item>
               <NavLink href="#home">Home</NavLink>
             </Nav.Item>
@@ -55,7 +47,7 @@ const HomePage: React.FC = ({ children }) => {
       <SectionOne className="mt-4 d-flex align-items-center">
         <Col
           xs={{ span: 12, order: 2 }}
-          md={{ span: 6, order: 1 }}
+          md={{ span: 5, order: 1 }}
           className="d-flex justify-content-center w-100"
         >
           <div className="ml-md-5 d-flex flex-column">
@@ -67,7 +59,7 @@ const HomePage: React.FC = ({ children }) => {
             <Button
               size="lg"
               className="my-3"
-              style={{ fontWeight: 500, fontSize: "1.5vw" }}
+              style={{ fontWeight: 500 }}
               onClick={handleCallToAction}
             >
               Visitar fórum
@@ -76,7 +68,7 @@ const HomePage: React.FC = ({ children }) => {
         </Col>
         <Col
           xs={{ span: 12, order: 1 }}
-          md={{ span: 6, order: 2 }}
+          md={{ span: 7, order: 2 }}
           className="mb-0"
         >
           <object
@@ -92,9 +84,9 @@ const HomePage: React.FC = ({ children }) => {
             viewBox="0 0 500 150"
             preserveAspectRatio="none"
             className="w-100"
-            height={`${width / 5}px`}
+            height="15vw"
           >
-            <FirstWave></FirstWave>
+            <FirstWave />
           </svg>
         </div>
       </Row>
@@ -126,12 +118,12 @@ const HomePage: React.FC = ({ children }) => {
       <Row>
         <div className="w-100">
           <svg
-            viewBox="0 0 500 100"
+            viewBox="0 0 500 150"
             preserveAspectRatio="none"
             className="w-100"
-            height={`${width / 5}px`}
+            height="15vw"
           >
-            <SecondWave></SecondWave>
+            <SecondWave />
           </svg>
         </div>
       </Row>
