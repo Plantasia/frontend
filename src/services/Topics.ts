@@ -42,12 +42,13 @@ export const GetTopics = async (
             updated_at: timeAgo.format(new Date(created_at)),
           }
         : null
-      var textBodyRegex = /(<.[^>]+>)/gi
+      var textBodyRegex = /(<([^>]+)>)/gi
+
       return {
         id,
         imageStorage,
         name,
-        textBody,
+        textBody: textBody.replace(textBodyRegex, ""),
         topicOwner: {
           id: user.id,
           avatar: user.avatar,
@@ -93,7 +94,7 @@ export const GetTopic = async (id: string): Promise<TopicProps> => {
         content: textBody,
         ownerUser: {
           id: user?.id,
-          avatar: user?.avatar,
+          avatarUrl: user?.avatarUrl,
           name: user?.name,
           bio: user?.bio,
           createdAt: timeAgo.format(new Date(user.created_at)),
@@ -107,8 +108,9 @@ export const GetTopic = async (id: string): Promise<TopicProps> => {
     title: name,
     author: {
       id: user.id,
-      avatar: user.avatar,
+      avatar: user.avatarUrl,
       name: user.name,
+      bio: user.bio,
     },
     categories: [
       category
