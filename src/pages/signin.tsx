@@ -5,16 +5,15 @@ import { useState } from "react"
 import { useRouter } from "next/router"
 import { useUser } from "@src/lib"
 import { SelfApiDTO } from "@utils/types"
-import { SelfApi } from "@src/services/Api"
+import { SelfApi, ServerSideApi } from "@src/services/Api"
+import { withIronSession } from "next-iron-session"
+import { sessionOptions } from "./api/_iron-session/helpers"
 
 export default function SignIn() {
   const router = useRouter()
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState(router.query.email as string)
-  const { mutateUser } = useUser({
-    redirectTo: "/category",
-    redirectIfFound: true,
-  })
+  const { mutateUser } = useUser()
 
   async function handleLoginSubmit(): Promise<void> {
     const { status, data } = await SelfApi.post<SelfApiDTO.FlashMessage>(
@@ -74,3 +73,22 @@ export default function SignIn() {
     </AuthLayout>
   )
 }
+
+export const getServerSideProps = withIronSession(async ({ req, res }) => {
+  const jwt: string = req.session.get("jwt")
+  const headers = jwt ? { authorization: `Bearer ${jwt}` } : null
+  console.log(headers)
+
+  try {
+    await ServerSideApi.get(`/users/findme`, {
+      headers,
+    })
+    return {
+      redirect: { destination: "/category" },
+    }
+  } catch (error) {
+    return {
+      props: {},
+    }
+  }
+}, sessionOptions)
