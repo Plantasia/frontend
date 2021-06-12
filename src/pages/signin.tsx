@@ -13,7 +13,10 @@ export default function SignIn() {
   const router = useRouter()
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState(router.query.email as string)
-  const { mutateUser } = useUser()
+  const { mutateUser } = useUser({
+    redirectTo: "/category",
+    redirectIfFound: true,
+  })
 
   async function handleLoginSubmit(): Promise<void> {
     const { status, data } = await SelfApi.post<SelfApiDTO.FlashMessage>(
