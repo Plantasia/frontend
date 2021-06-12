@@ -44,8 +44,12 @@ export default createGlobalStyle`
     font-family: "Roboto Slab";
     font-weight: 300;
   }
-
+  html{
+    height: 100%;
+    overflow: auto
+  }
   body {
+    height: 100%;
     background-color: #f2f2f2;
     -webkit-font-smoothing: antialiased;
     & ::-webkit-scrollbar{
@@ -78,7 +82,8 @@ export default createGlobalStyle`
   }
 
   #__next{
-    height: 100vh;
+    height: 100%;
+    overflow: auto
   }
 
 `
