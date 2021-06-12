@@ -42,7 +42,6 @@ const nc = NextConnect<
     const jwt = await req.session.get("jwt")
 
     const { body, file } = req
-    console.log(req)
 
     if (!jwt)
       return res.status(401).json({ message: "Não autorizado", type: "danger" })
@@ -50,11 +49,14 @@ const nc = NextConnect<
 
     formData.append("name", body.name)
     formData.append("bio", body.bio)
-    formData.append("file", file.buffer, {
-      filename: file.originalname,
-      contentType: file.mimetype,
-      knownLength: file.size,
-    })
+    if (file) {
+      formData.append("file", file.buffer, {
+        filename: file.originalname,
+        contentType: file.mimetype,
+        knownLength: file.size,
+      })
+    }
+
     try {
       const { data, status } = await ServerSideApi.post(
         "/users/update",
@@ -66,12 +68,14 @@ const nc = NextConnect<
           },
         }
       )
+      console.log(data)
       res.status(status).json(data)
     } catch ({ response }) {
-      res.json({ message: response.data.message.join(", "), type: "danger" })
       console.log(response)
+      res.json({ message: response.data.message.join(", "), type: "danger" })
     }
   })
+  .patch((req, res) => {})
 export const config = {
   api: {
     bodyParser: false,

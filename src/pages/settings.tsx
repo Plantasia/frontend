@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react"
-import { AppLayout, ChangePasswordModal } from "@components"
+import React, { useState } from "react"
+import { AppLayout, ChangePasswordModal, SEO } from "@components"
 import { InlineGap, PlantasiaCard } from "@styled/Shared"
 import { Button, Row, Col, Image, Form } from "react-bootstrap"
-import { useRouter } from "next/router"
 import { SelfApi, ServerSideApi } from "@src/services/Api"
 import { AuxLink } from "@src/styles/components/Auth"
 import { withIronSession } from "next-iron-session"
 import { sessionOptions } from "./api/_iron-session/helpers"
+import { ComponentProps } from "@src/utils/types"
 
-export default function Settings(user) {
-  console.log(user)
-  const router = useRouter()
+interface Props {
+  user: ComponentProps.UserProps
+}
+
+const Settings: React.FC<Props> = ({ user }) => {
   const [modalVisibility, setModalvisibility] = useState(false)
   const [name, setName] = useState(user.name)
   const [media, setMedia] = useState<File>({ name: user.avatar } as File)
@@ -28,7 +30,6 @@ export default function Settings(user) {
           "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
         },
       })
-      console.log(data)
       setAvatarUrl(data.avatarUrl)
       setBio(data.bio)
       setName(data.name)
@@ -40,6 +41,7 @@ export default function Settings(user) {
 
   return (
     <AppLayout>
+      <SEO title="configurações" />
       <ChangePasswordModal
         show={modalVisibility}
         onHide={() => setModalvisibility(false)}
@@ -121,6 +123,7 @@ export default function Settings(user) {
     </AppLayout>
   )
 }
+export default Settings
 
 export const getServerSideProps = withIronSession(async ({ req, res }) => {
   const jwt: string = req.session.get("jwt")
@@ -133,7 +136,7 @@ export const getServerSideProps = withIronSession(async ({ req, res }) => {
     })
     console.log(status)
     return {
-      props: user,
+      props: { user },
     }
   } catch (error) {
     return {
