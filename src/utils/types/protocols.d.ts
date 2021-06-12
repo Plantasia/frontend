@@ -27,6 +27,7 @@ export namespace BackendDTO {
     avatar: string
     created_at: string
     bio: string
+    avatarUrl?: string
   }
   export interface CommentObject {
     id: string
