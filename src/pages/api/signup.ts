@@ -22,7 +22,7 @@ const handler: Handler = async (req: NextApiRequest, res: NextApiResponse) => {
       params
     )
 
-    res.status(200).json({
+    res.status(status).json({
       message: `Bem vindo ${name}, usuário criado com sucesso`,
       type: "success",
     })
