@@ -1,13 +1,12 @@
-import { Pagination, Row, Button, Col } from "react-bootstrap"
+import { Pagination, Row, Col } from "react-bootstrap"
 import { AppLayout, SEO, RequestAuthModal } from "@components"
 import { GetServerSideProps } from "next"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useRouter } from "next/router"
 import { ComponentProps } from "@utils/types"
 import { TopicHeader } from "@styled/Topics"
 import { GetTopics } from "@src/services/Topics"
 import { ListItem } from "../../components/pages/topics/topic-item"
-import { useUser } from "@src/lib"
 
 export interface ListTopicsProps {
   topics: ComponentProps.TopicItemProps[]
@@ -18,12 +17,12 @@ export interface ListTopicsProps {
 }
 export default function listTopics({ topics, pages }: ListTopicsProps) {
   const router = useRouter()
-  const [modalVisible, setModalVisible] = useState(false)
-  const [currentPage, setCurrentPage] = useState(
-    parseInt(router.query.page as string) || 1
+  const [modalVisible, setModalVisible] = useState<boolean>(false)
+  const [currentPage, setCurrentPage] = useState<number>(
+    +router.query.page || 1
   )
-
   const paginationItems = new Array(pages).fill(1).map((x, index) => index + 1)
+
   return (
     <AppLayout>
       <SEO title="Tópicos" />
