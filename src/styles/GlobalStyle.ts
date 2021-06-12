@@ -77,4 +77,8 @@ export default createGlobalStyle`
     font-weight: bold;
   }
 
+  #__next{
+    height: 100vh;
+  }
+
 `
