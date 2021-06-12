@@ -27,7 +27,7 @@ export interface TopicProps {
 export default function ShowTopic(props) {
   const [modalVisible, setModalVisible] = useState(false)
   const [newComment, setNewComment] = useState("")
-  const { user, mutateUser } = useUser()
+  const { user } = useUser()
   const router = useRouter()
   const { mutate: mutateTopic, data: topic } = useSWR<TopicProps>(
     router.query.id ? `/api/topic/${router.query.id as string}` : null,
