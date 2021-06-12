@@ -28,11 +28,8 @@ const Editor: React.FC<{ content: string; onChange(data: string): void }> = ({
         config={{
           toolbar: {
             items: [
-              "heading",
-              "|",
               "bold",
               "italic",
-              "link",
               "bulletedList",
               "numberedList",
               "|",
