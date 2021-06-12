@@ -7,14 +7,7 @@ import { CommentDropdown } from "@components/CommentDropdown"
 import { Editor } from "@components"
 import { useUser } from "@src/lib"
 
-export interface CommentProps {
-  id: string
-  ownerUser: ComponentProps.UserProps
-  content: string
-  likes?: number
-  onQuote?(data: { text: string; username: string }): void
-  createdAt: string
-}
+
 
 type ProfileCommentProps = {
   user: ComponentProps.UserProps
@@ -23,7 +16,6 @@ type ProfileCommentProps = {
 const ProfileComment: React.FC<ProfileCommentProps> = ({
   user: { name, createdAt, bio, avatarUrl },
 }) => {
-  console.log(avatarUrl)
   return (
     <Col xs="2" className="d-flex flex-column align-items-center text-center">
       <Image
@@ -47,21 +39,32 @@ const ProfileComment: React.FC<ProfileCommentProps> = ({
     </Col>
   )
 }
+export interface CommentProps {
+  id: string
+  ownerUser: ComponentProps.UserProps
+  content: string
+  onQuote?(data: { text: string; username: string }): void
+  createdAt: string
+  topicId?: string
+}
 
 export function Comment({
   content,
-  likes,
   ownerUser,
   createdAt,
   onQuote,
+  topicId
 }: CommentProps) {
   const [currentContent, setCurrentContent] = useState(content)
   const { user, mutateUser } = useUser()
 
-  // console.log(user)
-
   const handleEdit = () => {
+    console.log(topicId)
     setEditMode(true)
+  }
+  const handleSaveComment = () => {
+    console.log(topicId)
+    setEditMode(false)
   }
   const handleReport = () => {}
   const handleDelete = () => {
@@ -113,11 +116,7 @@ export function Comment({
                     </Button>
                     <Button
                       variant="primary"
-                      onClick={() => {
-                        // @TO-DO
-                        // request para salvar no banco de dados
-                        setEditMode(false)
-                      }}
+                      onClick={handleSaveComment}
                     >
                       salvar
                     </Button>
