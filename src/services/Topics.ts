@@ -36,7 +36,7 @@ export const GetTopics = async (
             id: comments[0].id,
             user: {
               id: comments[0].user.id,
-              avatar: comments[0].user.avatar,
+              avatar: comments[0].user.avatarUrl,
               name: comments[0].user.name,
             },
             updated_at: timeAgo.format(new Date(created_at)),
@@ -51,7 +51,7 @@ export const GetTopics = async (
         textBody: textBody.replace(textBodyRegex, ""),
         topicOwner: {
           id: user.id,
-          avatar: user.avatar,
+          avatar: user.avatarUrl,
           name: user.name,
         },
         updated_at,
