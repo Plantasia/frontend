@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
-import { Row, Image, Col } from "react-bootstrap"
-import { TopicDescription, TopicStats, TopicContent } from "@styled/Topics"
+import React from "react"
+import { Image, Col } from "react-bootstrap"
+import { TopicStats, TopicContent } from "@styled/Topics"
 import { useRouter } from "next/router"
 import { PlantasiaCard } from "@styled/Shared"
 import { ComponentProps } from "@utils/types"
@@ -65,7 +66,7 @@ export function ListItem({
               />
               <div className="d-flex-column justify-content-center">
                 <p style={{ margin: 0 }}>
-                  último reply, {lastComment.updated_at}
+                  último comentário, {lastComment.updated_at}
                 </p>
 
                 <a href={`/profile/${lastComment.user.id}`}>
