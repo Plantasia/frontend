@@ -27,7 +27,7 @@ export default function NewTopic(props: Props) {
 
     const formData = new FormData()
 
-    formData.append("file", media, media.name)
+    media && formData.append("file", media, media.name)
     formData.append("category_id", category)
     formData.append("textBody", content)
     formData.append("name", title)

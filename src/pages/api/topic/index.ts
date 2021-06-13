@@ -45,11 +45,12 @@ const nc = NextConnect<
       formData.append("name", body.name)
       formData.append("textBody", body.textBody)
       formData.append("category_id", body.category_id)
-      formData.append("file", file.buffer, {
-        filename: file.originalname,
-        contentType: file.mimetype,
-        knownLength: file.size,
-      })
+      file  &&
+        formData.append("file", file.buffer, {
+          filename: file.originalname,
+          contentType: file.mimetype,
+          knownLength: file.size,
+        })
 
       const { data, status } = await ServerSideApi.post(
         "/forum/topics",
