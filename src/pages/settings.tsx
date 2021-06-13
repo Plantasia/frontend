@@ -5,7 +5,7 @@ import { Button, Row, Col, Image, Form } from "react-bootstrap"
 import { SelfApi, ServerSideApi } from "@src/services/Api"
 import { AuxLink } from "@src/styles/components/Auth"
 import { withIronSession } from "next-iron-session"
-import { sessionOptions } from "./api/_iron-session/helpers"
+import { sessionOptions } from "../lib/iron-session/helpers"
 import { ComponentProps } from "@src/utils/types"
 
 interface Props {

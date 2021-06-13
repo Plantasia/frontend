@@ -1,7 +1,7 @@
 import { ServerSideApi } from "@src/services/Api"
 import { Handler, withIronSession, Session } from "next-iron-session"
 import { NextApiRequest, NextApiResponse } from "next"
-import { sessionOptions } from "./_iron-session/helpers"
+import { sessionOptions } from "../../lib/iron-session/helpers"
 import NextConnect from "next-connect"
 import multer from "multer"
 import FormData from "form-data"

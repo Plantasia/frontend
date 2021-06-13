@@ -7,7 +7,7 @@ import { useUser } from "@src/lib"
 import { GetServerSidePropsResult } from "next"
 import { SelfApi, ServerSideApi } from "@src/services/Api"
 import { withIronSession } from "next-iron-session"
-import { sessionOptions } from "../api/_iron-session/helpers"
+import { sessionOptions } from "../../lib/iron-session/helpers"
 
 interface Props {
   categories?: { id: string; name: string }[]
@@ -143,29 +143,30 @@ export default function NewTopic(props: Props) {
   )
 }
 
-export const getServerSideProps = withIronSession(async ({ req, res }): Promise<
-  GetServerSidePropsResult<Props>
-> => {
-  const jwt: string = req.session.get("jwt")
-  const headers = jwt ? { authorization: `Bearer ${jwt}` } : null
+export const getServerSideProps = withIronSession(
+  async ({ req, res }): Promise<GetServerSidePropsResult<Props>> => {
+    const jwt: string = req.session.get("jwt")
+    const headers = jwt ? { authorization: `Bearer ${jwt}` } : null
 
-  try {
-    const { data } = await ServerSideApi.get<{ id: string; name: string }[]>(
-      "forum/categories/combobox",
-      {
-        headers,
+    try {
+      const { data } = await ServerSideApi.get<{ id: string; name: string }[]>(
+        "forum/categories/combobox",
+        {
+          headers,
+        }
+      )
+      return {
+        props: { categories: data },
       }
-    )
-    return {
-      props: { categories: data },
+    } catch (error) {
+      console.log(error)
+      return {
+        redirect: {
+          destination: "/signin",
+          permanent: false,
+        },
+      }
     }
-  } catch (error) {
-    console.log(error)
-    return {
-      redirect: {
-        destination: "/signin",
-        permanent: false,
-      },
-    }
-  }
-}, sessionOptions)
+  },
+  sessionOptions
+)

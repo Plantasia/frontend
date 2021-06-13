@@ -7,7 +7,7 @@ import { useUser } from "@src/lib"
 import { SelfApiDTO } from "@utils/types"
 import { SelfApi, ServerSideApi } from "@src/services/Api"
 import { withIronSession } from "next-iron-session"
-import { sessionOptions } from "./api/_iron-session/helpers"
+import { sessionOptions } from "../lib/iron-session/helpers"
 
 export default function SignIn() {
   const router = useRouter()

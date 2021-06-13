@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { withIronSession, Session } from "next-iron-session"
 import { ServerSideApi } from "@src/services/Api"
-import { sessionOptions } from "../_iron-session/helpers"
+import { sessionOptions } from "../../../lib/iron-session/helpers"
 import { NextApiRequest, NextApiResponse } from "next"
 import { GetTopics } from "@src/services/Topics"
 import NextConnect from "next-connect"
@@ -45,7 +45,7 @@ const nc = NextConnect<
       formData.append("name", body.name)
       formData.append("textBody", body.textBody)
       formData.append("category_id", body.category_id)
-      file  &&
+      file &&
         formData.append("file", file.buffer, {
           filename: file.originalname,
           contentType: file.mimetype,

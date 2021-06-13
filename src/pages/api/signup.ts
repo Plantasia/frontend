@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { Handler, withIronSession } from "next-iron-session"
 import { ServerSideApi } from "@src/services/Api"
-import { sessionOptions } from "./_iron-session/helpers"
+import { sessionOptions } from "../../lib/iron-session/helpers"
 import { BackendDTO } from "@src/utils/types/protocols"
 import { NextApiRequest, NextApiResponse } from "next"
 
