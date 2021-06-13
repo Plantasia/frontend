@@ -1,13 +1,30 @@
 import React, { useState } from "react"
+import { SelfApi } from "@src/services/Api"
 import { Form, Modal, ModalProps, Button } from "react-bootstrap"
 
 const ChangePasswordModal: React.FC<
   ModalProps & { show: boolean; onHide(): void }
 > = ({ show, onHide }) => {
-  const [password, setPassowrd] = useState("")
-  const [newPassword, setNewPassowrd] = useState("")
+  const [oldPassword, setOldPassword] = useState("")
+  const [newPassword, setNewPassword] = useState("")
+  const [unmatch, setUnmatch] = useState<boolean>(false)
+  const [confirmationPassword, setConfirmationPassword] = useState("")
 
-  const handleChangePassword = async () => {}
+  const handleChangePassword = async () => {
+    if (newPassword !== confirmationPassword) return setUnmatch(true)
+    onHide()
+    try {
+      const {
+        data: { message },
+      } = await SelfApi.patch("/api/user", {
+        oldPassword,
+        newPassword,
+      })
+      window.flash(message, "success")
+    } catch ({ response }) {
+      window.flash(response.data.message, "danger")
+    }
+  }
 
   return (
     <Modal show={show} onHide={onHide}>
@@ -20,8 +37,8 @@ const ChangePasswordModal: React.FC<
             <Form.Label>Digite sua senha atual</Form.Label>
             <Form.Control
               type="password"
-              value={password}
-              onChange={({ target: { value } }) => setPassowrd(value)}
+              value={oldPassword}
+              onChange={({ target: { value } }) => setOldPassword(value)}
             ></Form.Control>
           </Form.Group>
           <Form.Group>
@@ -29,7 +46,19 @@ const ChangePasswordModal: React.FC<
             <Form.Control
               type="password"
               value={newPassword}
-              onChange={({ target: { value } }) => setNewPassowrd(value)}
+              onChange={({ target: { value } }) => setNewPassword(value)}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Confirme a sua nova senha</Form.Label>
+            <Form.Control
+              type="password"
+              value={confirmationPassword}
+              onChange={({ target: { value } }) => {
+                setUnmatch(false)
+                setConfirmationPassword(value)
+              }}
+              isInvalid={unmatch}
             ></Form.Control>
           </Form.Group>
         </Form>

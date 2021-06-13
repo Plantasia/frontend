@@ -1,10 +1,11 @@
 import { ServerSideApi } from "@src/services/Api"
-import { Handler, withIronSession, Session } from "next-iron-session"
+import { withIronSession, Session } from "next-iron-session"
 import { NextApiRequest, NextApiResponse } from "next"
 import { sessionOptions } from "../../lib/iron-session/helpers"
 import NextConnect from "next-connect"
 import multer from "multer"
 import FormData from "form-data"
+import bodyParser from "body-parser"
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -68,14 +69,35 @@ const nc = NextConnect<
           },
         }
       )
-      console.log(data)
       res.status(status).json(data)
     } catch ({ response }) {
-      console.log(response)
       res.json({ message: response.data.message.join(", "), type: "danger" })
     }
   })
-  .patch((req, res) => {})
+  .patch(bodyParser.json(), async (req, res) => {
+    const jwt = req.session.get("jwt")
+    const headers = jwt && { Authorization: `Bearer ${jwt}` }
+    const { newPassword, oldPassword } = req.body
+    try {
+      const {
+        data: { message },
+        status,
+      } = await ServerSideApi.patch(
+        "/users/changePassword",
+        {
+          newPassword,
+          oldPassword,
+        },
+        { headers }
+      )
+      res.status(status).json({ message, type: "success" })
+    } catch ({ response }) {
+      res
+        .status(response.data.statusCode)
+        .json({ message: response.data.message })
+    }
+  })
+
 export const config = {
   api: {
     bodyParser: false,
