@@ -33,9 +33,6 @@ const HomePage: React.FC = ({ children }) => {
               <NavLink href="#about">Sobre</NavLink>
             </Nav.Item>
             <Nav.Item>
-              <NavLink href="#faq">F.A.Q</NavLink>
-            </Nav.Item>
-            <Nav.Item>
               <Nav.Link href="/signin">
                 <Button>Entrar</Button>
               </Nav.Link>
@@ -43,7 +40,7 @@ const HomePage: React.FC = ({ children }) => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-
+    
       <SectionOne className="mt-4 d-flex align-items-center">
         <Col
           xs={{ span: 12, order: 2 }}

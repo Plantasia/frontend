@@ -10,12 +10,14 @@ import { useRouter } from "next/router"
 import useSWR from "swr"
 import { axiosFetcher } from "@src/lib/fetchJson"
 import { FaComment } from "react-icons/fa"
+import { TIME_REFRESH_SWR } from "@src/utils/constants"
 export interface BadgeCategoryProps {
   id: string
   name: string
   color: "primary" | "secondary" | "danger"
 }
 export interface TopicProps {
+  id: string
   title: string
   description: string
   categories: BadgeCategoryProps[]
@@ -32,7 +34,6 @@ export default function ShowTopic(props) {
   const { mutate: mutateTopic, data: topic } = useSWR<TopicProps>(
     router.query.id ? `/api/topic/${router.query.id as string}` : null,
     axiosFetcher,
-    { refreshInterval: 5000 }
   )
 
   const submitNewComment = async () => {
@@ -107,7 +108,7 @@ export default function ShowTopic(props) {
               ></div>
 
               {topic.image && (
-                <Image src={topic.image} className="mb-3 " fluid />
+                <Image src={topic.image} className="mb-3" fluid style={{maxHeight: 600}}/>
               )}
             </Col>
             <Col xs="12" className="d-flex justify-content-end mb-3">
@@ -126,6 +127,7 @@ export default function ShowTopic(props) {
               {topic.comments?.map((item, index) => (
                 <Comment
                   {...item}
+                  topicId={router.query.id as string}
                   onQuote={({ text, username }) => {
                     setNewComment(
                       `${newComment} <blockquote> ${text} </blockquote> 

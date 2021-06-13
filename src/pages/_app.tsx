@@ -7,6 +7,7 @@ import Head from "next/head"
 import Bus from "@utils/Bus"
 import { useEffect } from "react"
 import { FlashAlert } from "@src/components"
+import { TIME_REFRESH_SWR } from "@src/utils/constants"
 declare global {
   interface Window {
     flash(message: string, type?: string): void
@@ -23,6 +24,7 @@ function MyApp({ Component, pageProps }) {
     <SWRConfig
       value={{
         fetcher: axiosFetcher,
+        refreshInterval: TIME_REFRESH_SWR
       }}
     >
       <Head>
