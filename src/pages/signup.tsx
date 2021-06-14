@@ -1,7 +1,8 @@
+import React, { useState } from "react"
 import { Col, Row } from "react-bootstrap"
 import { SEO, AuthLayout } from "@components"
 import SignUpForm from "../components/pages/signup/form"
-import { useState } from "react"
+
 import { useRouter } from "next/router"
 import { SelfApi } from "@src/services/Api"
 import { SelfApiDTO } from "@utils/types"

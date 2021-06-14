@@ -3,17 +3,11 @@ import { Container } from "react-bootstrap"
 
 type Props = {
   route?: string
-  buttonLabel?: string
-  className?: string
 }
-export const AuthLayout: React.FC<Props> = ({
-  children,
-  route,
-  buttonLabel,
-  className,
-}) => {
+
+export const AuthLayout: React.FC<Props> = ({ children, route }) => {
   return (
-    <Container fluid className={className}>
+    <Container fluid className="vh-100">
       {children}
     </Container>
   )

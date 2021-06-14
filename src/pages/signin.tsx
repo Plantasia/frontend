@@ -1,7 +1,7 @@
+import React, { useState } from "react"
 import { Col, Row } from "react-bootstrap"
 import { SEO, AuthLayout } from "@components"
 import SignInForm from "../components/pages/signin/form"
-import { useState } from "react"
 import { useRouter } from "next/router"
 import { useUser } from "@src/lib"
 import { SelfApiDTO } from "@utils/types"
@@ -37,10 +37,7 @@ export default function SignIn() {
     <AuthLayout>
       <SEO title="Login" />
 
-      <Row
-        className="d-flex align-items-center h-100"
-        // style={{ border: "1px solid red" }}
-      >
+      <Row className="d-flex align-items-center h-100">
         <Col md="8" xs="12" className="d-none d-md-block">
           <object
             className="w-100"
