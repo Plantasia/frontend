@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { Handler, withIronSession, Session } from "next-iron-session"
+import { withIronSession, Session } from "next-iron-session"
 import { ServerSideApi } from "@src/services/Api"
 import { sessionOptions } from "../../lib/iron-session/helpers"
 import { NextApiRequest, NextApiResponse } from "next"
@@ -13,8 +13,7 @@ const nc = NextConnect<
   NextApiResponse
 >()
   .post(async (req, res) => {
-    const { body } = req
-    const { textBody, topic_id } = body
+    const { textBody, topic_id } = req.body
     try {
       const { status } = await ServerSideApi.post(
         "/forum/comments",
@@ -35,6 +34,44 @@ const nc = NextConnect<
       res.json({ message, type: "danger" })
     }
   })
-  .patch(async (req, res) => {})
+  .patch(async (req, res) => {
+    const { textBody, id } = req.body
+    try {
+      const { status } = await ServerSideApi.patch(
+        `/forum/comments/${id}`,
+        {
+          textBody,
+        },
+        {
+          headers: { Authorization: `Bearer ${req.session.get("jwt")}` },
+        }
+      )
+      res
+        .status(status)
+        .json({ message: "Comentário editado", type: "success" })
+    } catch ({ response }) {
+      const {
+        data: { message },
+      } = response
+      res.json({ message, type: "danger" })
+    }
+  })
+  .delete(async (req, res) => {
+    const { id } = req.query
+
+    try {
+      const { status } = await ServerSideApi.delete(`/forum/comments/${id}`, {
+        headers: { Authorization: `Bearer ${req.session.get("jwt")}` },
+      })
+      res
+        .status(status)
+        .json({ message: "Comentário excluído", type: "success" })
+    } catch ({ response }) {
+      const {
+        data: { message },
+      } = response
+      res.json({ message, type: "danger" })
+    }
+  })
 
 export default withIronSession(nc, sessionOptions)

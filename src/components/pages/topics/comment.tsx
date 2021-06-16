@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Button, Row, Col, Image } from "react-bootstrap"
+import { Button, Row, Col, Image, Alert } from "react-bootstrap"
 import { FaSeedling } from "react-icons/fa"
 import { PlantasiaCard, InlineGap } from "@styled/Shared"
 import { ComponentProps } from "@utils/types"
 import { CommentDropdown } from "@components/CommentDropdown"
 import { Editor } from "@components"
+import { CommentDeleteModal } from "./CommentDeleteModal"
 import { useUser } from "@src/lib"
-
-
+import { SelfApi } from "@src/services/Api"
+import { useRouter } from "next/router"
 
 type ProfileCommentProps = {
   user: ComponentProps.UserProps
@@ -53,35 +54,52 @@ export function Comment({
   ownerUser,
   createdAt,
   onQuote,
-  topicId
+  id,
+  topicId,
 }: CommentProps) {
-  const [currentContent, setCurrentContent] = useState(content)
-  const { user, mutateUser } = useUser()
+  const [editMode, setEditMode] = useState(false)
+  const [currentContent, setCurrentContent] = useState<string>(content)
+  const [visible, setVisible] = useState<boolean>(false)
+  const { user } = useUser()
+  const router = useRouter()
 
-  const handleEdit = () => {
-    console.log(topicId)
+  const handleEdit = async () => {
     setEditMode(true)
   }
-  const handleSaveComment = () => {
-    console.log(topicId)
+
+  const handleSaveComment = async () => {
+    try {
+      const { data } = await SelfApi.patch("/api/comment", {
+        textBody: currentContent,
+        id,
+      })
+      window.flash(data.message, "success")
+    } catch ({ response }) {
+      window.flash(response.data.message, "danger")
+    }
     setEditMode(false)
   }
   const handleReport = () => {}
-  const handleDelete = () => {
-    alert("Você tem certeza disso?")
+  const handleDelete = async () => {
+    try {
+      const { data } = await SelfApi.delete(`/api/comment?id=${id}`)
+    } catch (error) {
+      window.flash(error.data.message, error.data.type)
+    }
   }
 
   const handleQuote = () => {
     onQuote && onQuote({ text: content, username: ownerUser.name })
   }
 
-  const [editMode, setEditMode] = useState(false)
-
-  useEffect(() => {}, [])
-
   return (
     <PlantasiaCard className="mt-2">
       <ProfileComment user={{ ...ownerUser }} />
+      <CommentDeleteModal
+        visible={visible}
+        onHide={() => setVisible(false)}
+        action={handleDelete}
+      />
       <Col xs="10" className={`d-flex flex-column`}>
         <Row>
           {editMode ? null : (
@@ -114,10 +132,7 @@ export function Comment({
                     >
                       cancelar
                     </Button>
-                    <Button
-                      variant="primary"
-                      onClick={handleSaveComment}
-                    >
+                    <Button variant="primary" onClick={handleSaveComment}>
                       salvar
                     </Button>
                   </InlineGap>

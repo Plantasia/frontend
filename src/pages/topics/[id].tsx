@@ -1,16 +1,15 @@
+import React, { useState } from "react"
 import { Button, Row, Col, Image } from "react-bootstrap"
 import { Editor, AppLayout, RequestAuthModal, SEO } from "@components"
 import { InlineGap, PlantasiaCard } from "@styled/Shared"
 import { CommentProps, Comment } from "../../components/pages/topics/comment"
 import { ComponentProps } from "@utils/types"
-import { useState } from "react"
 import { SelfApi } from "@src/services/Api"
 import { useUser } from "@src/lib"
 import { useRouter } from "next/router"
 import useSWR from "swr"
 import { axiosFetcher } from "@src/lib/fetchJson"
 import { FaComment } from "react-icons/fa"
-import { TIME_REFRESH_SWR } from "@src/utils/constants"
 export interface BadgeCategoryProps {
   id: string
   name: string
@@ -33,18 +32,18 @@ export default function ShowTopic(props) {
   const router = useRouter()
   const { mutate: mutateTopic, data: topic } = useSWR<TopicProps>(
     router.query.id ? `/api/topic/${router.query.id as string}` : null,
-    axiosFetcher,
+    axiosFetcher
   )
 
   const submitNewComment = async () => {
     if (!user?.isLoggedIn) return setModalVisible(true)
 
     const previewComment: CommentProps = {
-      id: "teste",
+      id: "fake_id",
       createdAt: "agora mesmo",
       content: newComment,
       ownerUser: {
-        id: user.id,
+        id: null,
         avatarUrl: user.avatarUrl,
         bio: user.bio,
         name: user.name,
@@ -108,7 +107,12 @@ export default function ShowTopic(props) {
               ></div>
 
               {topic.image && (
-                <Image src={topic.image} className="mb-3" fluid style={{maxHeight: 600}}/>
+                <Image
+                  src={topic.image}
+                  className="mb-3"
+                  fluid
+                  style={{ maxHeight: 600 }}
+                />
               )}
             </Col>
             <Col xs="12" className="d-flex justify-content-end mb-3">
@@ -127,7 +131,6 @@ export default function ShowTopic(props) {
               {topic.comments?.map((item, index) => (
                 <Comment
                   {...item}
-                  topicId={router.query.id as string}
                   onQuote={({ text, username }) => {
                     setNewComment(
                       `${newComment} <blockquote> ${text} </blockquote> 
