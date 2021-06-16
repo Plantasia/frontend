@@ -45,7 +45,7 @@ export default createGlobalStyle`
     font-weight: 300;
   }
   html{
-    height: 100%;
+    height: auto;
     overflow: auto
   }
   body {
