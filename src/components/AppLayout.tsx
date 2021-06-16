@@ -7,7 +7,7 @@ const Container = styled(BootstrapContainer)`
   scroll-behavior: smooth;
   overflow-y: scroll;
   display: block;
-  height: 100vh;
+  height: 100%;
 `
 interface Props {}
 export const AppLayout: React.FC<Props> = ({ children }) => {
