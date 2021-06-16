@@ -40,7 +40,7 @@ const HomePage: React.FC = ({ children }) => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-    
+
       <SectionOne className="mt-4 d-flex align-items-center">
         <Col
           xs={{ span: 12, order: 2 }}
