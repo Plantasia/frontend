@@ -3,11 +3,11 @@ import { AppLayout, Editor } from "@components"
 import { InlineGap, PlantasiaCard } from "@styled/Shared"
 import { Button, Row, Col, Form } from "react-bootstrap"
 import { useRouter } from "next/router"
-import { useUser } from "@src/lib"
 import { GetServerSidePropsResult } from "next"
 import { SelfApi, ServerSideApi } from "@src/services/Api"
 import { withIronSession } from "next-iron-session"
 import { sessionOptions } from "../../lib/iron-session/helpers"
+import { UPDATE_TIMEOUT } from "@src/utils/constants"
 
 interface Props {
   categories?: { id: string; name: string }[]
@@ -36,13 +36,7 @@ export default function NewTopic(props: Props) {
         headers: {
           "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
         },
-        onUploadProgress: event => {
-          console.log(
-            `Current progress:`,
-            Math.round((event.loaded * 100) / event.total)
-          )
-        },
-        timeout: 30000,
+        timeout: UPDATE_TIMEOUT,
         timeoutErrorMessage:
           "Ops, acho que estamos com algum problema no servidor. Volte mais tarde",
       })
