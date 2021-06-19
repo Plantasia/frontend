@@ -10,13 +10,17 @@ import { useRouter } from "next/router"
 import useSWR from "swr"
 import { axiosFetcher } from "@src/lib/fetchJson"
 import { FaComment } from "react-icons/fa"
+import TimeAgo from "javascript-time-ago"
+import pt from "javascript-time-ago/locale/pt"
+
+TimeAgo.addLocale(pt)
 export interface BadgeCategoryProps {
   id: string
   name: string
   color: "primary" | "secondary" | "danger"
 }
 export interface TopicProps {
-  id: string
+  id?: string
   title: string
   description: string
   categories: BadgeCategoryProps[]
@@ -26,6 +30,7 @@ export interface TopicProps {
 }
 
 export default function ShowTopic(props) {
+  const timeAgo = new TimeAgo("pt")
   const [modalVisible, setModalVisible] = useState(false)
   const [newComment, setNewComment] = useState("")
   const { user } = useUser()
@@ -47,7 +52,7 @@ export default function ShowTopic(props) {
         avatarUrl: user.avatarUrl,
         bio: user.bio,
         name: user.name,
-        createdAt: user.createdAt,
+        createdAt: timeAgo.format(new Date(user.created_at)),
       },
     }
 
