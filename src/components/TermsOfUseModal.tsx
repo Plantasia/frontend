@@ -5,14 +5,14 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
   const router = useRouter()
   return (
     <Modal show={visible} onHide={onHide} size="lg">
-      <Modal.Header>Realize o login</Modal.Header>
+      <Modal.Header>Termos de uso do fórum plantasia</Modal.Header>
       <Modal.Body>
         <section>
           <h1>Termos de Uso Plantasia</h1>
-          <h2>
+          <h6>
             A partir de 25 de março de 2021. Última revisão em 23 de março de
             2021.
-          </h2>
+          </h6>
         </section>
 
         <section>
@@ -32,7 +32,7 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
         </section>
         <section>
           <section>
-            <h2>1. Seu acesso aos serviços</h2>
+            <h4>1. Seu acesso aos serviços</h4>
 
             <p>
               Pessoas de qualquer idade têm permissão para criar uma conta ou
@@ -46,7 +46,7 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
             </p>
           </section>
           <section>
-            <h2>2. Seu uso dos serviços</h2>
+            <h4>2. Seu uso dos serviços</h4>
 
             <p>
               O Plantasia concede a você uma licença pessoal, intransferível,
@@ -81,7 +81,7 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
           </section>
 
           <section>
-            <h2>3. Sua conta do Plantasia e segurança da conta</h2>
+            <h4>3. Sua conta do Plantasia e segurança da conta</h4>
 
             <p>
               Para usar certos recursos de nossos serviços, pode ser necessário
@@ -99,7 +99,7 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
             </p>
           </section>
           <section>
-            <h2>4. Seu conteúdo</h2>
+            <h4>4. Seu conteúdo</h4>
 
             <p>
               Os serviços podem conter informações, texto, links, gráficos,
@@ -151,7 +151,7 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
           </section>
 
           <section>
-            <h2>5. Coisas que você não pode fazer</h2>
+            <h4>5. Coisas que você não pode fazer</h4>
 
             <p>
               Ao usar ou acessar o Plantasia, você deve cumprir estes Termos e
@@ -159,7 +159,7 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
               fazer o seguinte:
             </p>
             <section>
-              <h3>Regra 1</h3>
+              <h5>Regra 1</h5>
               <p>
                 Lembre-se somos todos humanos. Plantasia é um lugar para criar
                 comunidade e pertencer, não para atacar grupos de pessoas
@@ -170,7 +170,7 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
               </p>
             </section>
             <section>
-              <h3>Regra 2</h3>
+              <h5>Regra 2</h5>
               <p>
                 Respeite as regras da comunidade. Publique conteúdo autêntico em
                 comunidades onde você tem um interesse pessoal, e não trapaceie
@@ -181,7 +181,7 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
               </p>
             </section>
             <section>
-              <h3>Regra 3</h3>
+              <h5>Regra 3</h5>
               <p>
                 Respeite a privacidade dos outros. Instigar assédio, por
                 exemplo, revelando informações pessoais ou confidenciais de
@@ -190,7 +190,7 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
               </p>
             </section>
             <section>
-              <h3>Regra 4</h3>
+              <h5>Regra 4</h5>
               <p>
                 Não poste nem incentive a postagem de conteúdo sexual ou
                 sugestivo. Lembre-se o Plantasia se trata de uma comunidade com
@@ -199,7 +199,7 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
               </p>
             </section>
             <section>
-              <h3>Regra 5</h3>
+              <h5>Regra 5</h5>
               <p>
                 Você não precisa usar seu nome verdadeiro para usar o Plantasia,
                 mas não se faça passar por um indivíduo ou entidade de maneira
@@ -207,28 +207,28 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
               </p>
             </section>
             <section>
-              <h3>Regra 6</h3>
+              <h5>Regra 6</h5>
               <p>
                 Garanta que as pessoas tenham experiências previsíveis no
                 Plantasia rotulando adequadamente o conteúdo e as comunidades.
               </p>
             </section>
             <section>
-              <h3>Regra 7</h3>
+              <h5>Regra 7</h5>
               <p>
                 Seja legal e não poste conteúdo ilegal ou solicitar ou facilitar
                 transações ilegais ou proibidas.
               </p>
             </section>
             <section>
-              <h3>Regra 8</h3>
+              <h5>Regra 8</h5>
               <p>
                 Não interrompa o site ou faça qualquer coisa que interfira com o
                 uso normal do Plantasia.
               </p>
             </section>
             <section>
-              <h3>Regra 9</h3>
+              <h5>Regra 9</h5>
               <p>
                 É proibido obter acesso (ou tentar obter acesso a) a Conta de
                 outro usuário ou quaisquer partes não públicas dos Serviços,
@@ -237,7 +237,7 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
               </p>
             </section>
             <section>
-              <h3>Regra 10</h3>
+              <h5>Regra 10</h5>
               <p>
                 Não faça upload, transmita ou distribua para ou através dos
                 serviços qualquer vírus, worms, código malicioso ou outro
@@ -246,7 +246,7 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
               </p>
             </section>
             <section>
-              <h3>Regra 11</h3>
+              <h5>Regra 11</h5>
               <p>
                 Respeite o direito de propriedade e não se utilize dos serviços
                 para violar a lei aplicável ou infringir os direitos de
@@ -255,7 +255,7 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
               </p>
             </section>
             <section>
-              <h3>Regra 12</h3>
+              <h5>Regra 12</h5>
               <p>
                 Respeite o direito de propriedade e não se utilize dos serviços
                 para violar a lei aplicável ou infringir os direitos de
@@ -264,11 +264,11 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
               </p>
             </section>
           </section>
+          {/* <section>
+            <h4>6. Alterações a estes Termos</h4>
+          </section> */}
           <section>
-            <h2>6. Alterações a estes Termos</h2>
-          </section>
-          <section>
-            <h2>7. Rescisão</h2>
+            <h4>7. Rescisão</h4>
 
             <p>
               Você pode rescindir estes Termos a qualquer momento e por qualquer
@@ -284,7 +284,7 @@ export const TermsOfUseModal = ({ visible, onHide, acceptTerms }) => {
             </p>
           </section>
           <section>
-            <h2>8. Diversos</h2>
+            <h4>8. Diversos</h4>
             <p>
               Estes Termos constituem o acordo integral entre você e nós em
               relação ao seu acesso e uso dos Serviços. Nossa falha em exercer

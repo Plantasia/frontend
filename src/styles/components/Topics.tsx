@@ -19,14 +19,14 @@ export const TopicDescription = styled.p.attrs({
 export const TopicContent = styled(Col).attrs(
   (): ColProps => ({
     xs: "12",
-    lg: "7",
+    lg: "8",
   })
 )``
 
 export const TopicStats = styled(Col).attrs(
   (): ColProps => ({
     xs: "12",
-    lg: "5",
+    lg: "4",
     className: "d-flex justify-content-end",
   })
 )``

@@ -26,20 +26,12 @@ export function ListItem({
     <PlantasiaCard className="d-flex align-items-start">
       <TopicContent>
         <div className="mb-2 d-flex align-items-center">
-          <h4
-            style={{
-              cursor: "pointer",
-            }}
-            onClick={() => {
-              router.push(`/topics/${id}`)
-            }}
-            className="mb-1"
-          >
+          <a onClick={() => router.push(`/topics/${id}`)} className="mb-1 h4">
             {name}
-          </h4>
+          </a>
         </div>
         <div>
-          <a href={`/users/${topicOwner.id}`}>{topicOwner.name}</a>
+          <b>{topicOwner.name}</b>
           <span> - {created_at}</span>
         </div>
         <p
@@ -55,28 +47,27 @@ export function ListItem({
       </TopicContent>
       {lastComment ? (
         <TopicStats>
-          <div className="d-flex flex-column align-items-start">
-            <div className="d-flex mb-2">
-              <Image
-                height="50"
-                width="50"
-                src={lastComment.user.avatar}
-                className="mr-2"
-                roundedCircle
-              />
-              <div className="d-flex-column justify-content-center">
-                <p style={{ margin: 0 }}>
-                  último comentário, {lastComment.updated_at}
-                </p>
-
-                <a href={`/profile/${lastComment.user.id}`}>
-                  {lastComment.user.name}
+          <div className="d-flex align-items-center">
+            <div>
+              <p>
+                <a onClick={() => router.push(`/topics/${id}`)} className="a">
+                  {countComments} comentário{countComments > 1 ? "s" : null}{" "}
                 </a>
+              </p>
+              <div className="d-flex align-items-center">
+                <Image
+                  height="50"
+                  width="50"
+                  src={lastComment.user.avatar}
+                  className="mr-2"
+                  roundedCircle
+                />
+                <span>
+                  <b>{lastComment.user.name}</b> comentou{" "}
+                  {lastComment.updated_at}
+                </span>
               </div>
             </div>
-            <p>
-              {countComments} comentário{countComments > 1 ? "s" : null}{" "}
-            </p>
           </div>
         </TopicStats>
       ) : (
