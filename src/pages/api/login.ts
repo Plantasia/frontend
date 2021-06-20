@@ -18,12 +18,14 @@ const handler: Handler = async (req, res) => {
     )
     req.session.set("jwt", data.access_token)
     await req.session.save()
-    res.json({ message: "Login efetuado com sucesso", type: "success" })
+    res
+      .status(200)
+      .json({ message: "Login efetuado com sucesso", type: "success" })
   } catch ({ response }) {
     const {
-      data: { error: message },
+      data: { error: message, status },
     } = response
-    res.json({ message, type: "danger" })
+    res.status(status).json({ message, type: "danger" })
   }
 }
 

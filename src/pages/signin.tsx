@@ -9,7 +9,7 @@ import { SelfApi, ServerSideApi } from "@src/services/Api"
 import { withIronSession } from "next-iron-session"
 import { sessionOptions } from "../lib/iron-session/helpers"
 
-export default function SignIn() {
+const SignIn: React.FC<{ backRoute: string }> = props => {
   const router = useRouter()
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState(router.query.email as string)
@@ -19,15 +19,20 @@ export default function SignIn() {
   })
 
   async function handleLoginSubmit(): Promise<void> {
-    const { status, data } = await SelfApi.post<SelfApiDTO.FlashMessage>(
-      "/api/login",
-      {
-        email,
-        password,
-      }
-    )
-    if (status === 200) mutateUser(await SelfApi.get("/api/user"))
-    window.flash(data.message, data.type)
+    try {
+      const { status, data } = await SelfApi.post<SelfApiDTO.FlashMessage>(
+        "/api/login",
+        {
+          email,
+          password,
+        }
+      )
+      router.push(props.backRoute)
+      mutateUser(await SelfApi.get("/api/user"))
+      window.flash(data.message, data.type)
+    } catch ({ response: data }) {
+      window.flash(data.message, data.type)
+    }
   }
 
   async function handleFacebookAuth(): Promise<void> {}
@@ -73,12 +78,13 @@ export default function SignIn() {
     </AuthLayout>
   )
 }
+export default SignIn
 
 export const getServerSideProps = withIronSession(async ({ req, res }) => {
   const jwt: string = req.session.get("jwt")
   const headers = jwt ? { authorization: `Bearer ${jwt}` } : null
   console.log(headers)
-
+  console.log(req.headers)
   try {
     await ServerSideApi.get(`/users/findme`, {
       headers,
@@ -88,7 +94,9 @@ export const getServerSideProps = withIronSession(async ({ req, res }) => {
     }
   } catch (error) {
     return {
-      props: {},
+      props: {
+        backRoute: req.headers.referer,
+      },
     }
   }
 }, sessionOptions)
