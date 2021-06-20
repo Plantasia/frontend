@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import React from "react"
 import { Col, Row } from "react-bootstrap"
 import { PlantasiaCard } from "@styled/Shared"
 import { ComponentProps } from "@utils/types"
