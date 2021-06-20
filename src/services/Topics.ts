@@ -42,7 +42,7 @@ export const GetTopics = async (
             updated_at: timeAgo.format(new Date(created_at)),
           }
         : null
-      var textBodyRegex = /(<([^>]+)>)/gi
+      var textBodyRegex = /(<([^>]+)>)|(&nbsp;)/gi
 
       return {
         id,
