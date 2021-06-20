@@ -7,6 +7,7 @@ import { AuxLink } from "@src/styles/components/Auth"
 import { withIronSession } from "next-iron-session"
 import { sessionOptions } from "../lib/iron-session/helpers"
 import { ComponentProps } from "@src/utils/types"
+import { useUser } from "@src/lib"
 
 interface Props {
   user: ComponentProps.UserProps
@@ -18,6 +19,7 @@ const Settings: React.FC<Props> = ({ user }) => {
   const [media, setMedia] = useState<File>({ name: user.avatar } as File)
   const [bio, setBio] = useState(user.bio)
   const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl)
+  const { mutateUser } = useUser()
 
   const handleSaveUser = async () => {
     const formData = new FormData()
@@ -30,6 +32,7 @@ const Settings: React.FC<Props> = ({ user }) => {
           "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
         },
       })
+      mutateUser(data)
       setAvatarUrl(data.avatarUrl)
       setBio(data.bio)
       setName(data.name)
