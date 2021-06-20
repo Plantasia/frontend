@@ -89,6 +89,7 @@ export const GetTopic = async (id: string): Promise<TopicProps> => {
     imageStorage,
     imageStorageUrl,
   } = data
+
   const hasComments = commentsData.length > 0
   const comments = hasComments
     ? commentsData.map(({ textBody, user, id, created_at }) => ({
