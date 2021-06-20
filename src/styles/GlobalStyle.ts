@@ -59,6 +59,9 @@ export default createGlobalStyle`
 
   a {
     cursor: pointer;
+    :hover{
+      text-decoration: none;
+    }
   }
   .ck-editor__editable_inline {
     min-height: 200px;
