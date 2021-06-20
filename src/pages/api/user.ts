@@ -2,6 +2,7 @@ import { ServerSideApi } from "@src/services/Api"
 import { withIronSession, Session } from "next-iron-session"
 import { NextApiRequest, NextApiResponse } from "next"
 import { sessionOptions } from "../../lib/iron-session/helpers"
+import { ApiHandler } from "../../lib/helpers"
 import NextConnect from "next-connect"
 import multer from "multer"
 import FormData from "form-data"
@@ -13,32 +14,25 @@ const upload = multer({
   dest: "/tmp",
 })
 
-const nc = NextConnect<
-  NextApiRequest & {
-    session: Session
-    file: any
-  },
-  NextApiResponse
->()
-  .get(async (req, res) => {
-    const jwt = await req.session.get("jwt")
-    const headers = jwt && { Authorization: `Bearer ${jwt}` }
+const nc = ApiHandler.get(async (req, res) => {
+  const jwt = await req.session.get("jwt")
+  const headers = jwt && { Authorization: `Bearer ${jwt}` }
 
-    if (!headers) return res.json({ isLoggedIn: false })
-    try {
-      const { data: user } = await ServerSideApi.get(`/users/findme`, {
-        headers,
-      })
-      res.json({
-        isLoggedIn: true,
-        ...user,
-      })
-    } catch (error) {
-      req.session.destroy()
-      req.session.save()
-      res.json({ error: "Sua sessão caiu, por favor logue novamente" })
-    }
-  })
+  if (!headers) return res.json({ isLoggedIn: false })
+  try {
+    const { data: user } = await ServerSideApi.get(`/users/findme`, {
+      headers,
+    })
+    res.json({
+      isLoggedIn: true,
+      ...user,
+    })
+  } catch (error) {
+    req.session.destroy()
+    req.session.save()
+    res.json({ error: "Sua sessão caiu, por favor logue novamente" })
+  }
+})
   .post(upload.single("file"), async (req, res) => {
     const jwt = await req.session.get("jwt")
 
