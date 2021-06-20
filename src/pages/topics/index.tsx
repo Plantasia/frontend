@@ -1,3 +1,4 @@
+import React from "react"
 import { Pagination, Row, Col } from "react-bootstrap"
 import { AppLayout, SEO, RequestAuthModal } from "@components"
 import { GetServerSideProps } from "next"
@@ -65,11 +66,12 @@ export default function listTopics({ topics, pages }: ListTopicsProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps<ListTopicsProps> = async context => {
-  const {
-    query: { page, category },
-  } = context
-  return {
-    props: await GetTopics(page as string, category as string),
+export const getServerSideProps: GetServerSideProps<ListTopicsProps> =
+  async context => {
+    const {
+      query: { page, category },
+    } = context
+    return {
+      props: await GetTopics(page as string, category as string),
+    }
   }
-}
