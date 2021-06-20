@@ -25,6 +25,7 @@ export namespace ComponentProps {
     avatarUrl?: string
     email?: string
     createdAt?: string
+    created_at?: string
     bio?: string
   }
 
