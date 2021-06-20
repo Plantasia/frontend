@@ -14,7 +14,7 @@ const SignIn: React.FC<{ backRoute: string }> = props => {
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState(router.query.email as string)
   const { mutateUser } = useUser({
-    redirectTo: "/category",
+    redirectTo: props.backRoute,
     redirectIfFound: true,
   })
 
@@ -27,7 +27,6 @@ const SignIn: React.FC<{ backRoute: string }> = props => {
           password,
         }
       )
-      router.push(props.backRoute)
       mutateUser(await SelfApi.get("/api/user"))
       window.flash(data.message, data.type)
     } catch ({ response: data }) {
@@ -95,7 +94,7 @@ export const getServerSideProps = withIronSession(async ({ req, res }) => {
   } catch (error) {
     return {
       props: {
-        backRoute: req.headers.referer,
+        backRoute: req.headers.referer || "/category",
       },
     }
   }

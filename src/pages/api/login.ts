@@ -3,10 +3,9 @@ import { Handler, withIronSession } from "next-iron-session"
 import { ServerSideApi } from "@src/services/Api"
 import { sessionOptions } from "../../lib/iron-session/helpers"
 import { BackendDTO } from "@src/utils/types/protocols"
-import { ApiHandler } from "@src/lib/helpers"
 
-const handler = ApiHandler.post(async (req, res) => {
-  const { email, password } = await req.body
+const handler: Handler = async (req, res) => {
+  const { email, password } = req.body
 
   const params: BackendDTO.UserSignIn.Params = {
     email,
@@ -28,6 +27,6 @@ const handler = ApiHandler.post(async (req, res) => {
     } = response
     res.status(status).json({ message, type: "danger" })
   }
-})
+}
 
 export default withIronSession(handler, sessionOptions)
