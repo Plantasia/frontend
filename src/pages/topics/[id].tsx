@@ -45,9 +45,8 @@ export default function ShowTopic(props) {
   const { user } = useUser()
   const router = useRouter()
   const { mutate: mutateTopic, data: topic } = useSWR<TopicProps>(
-    `/api/topic/${router.query.id as string}`,
-    axiosFetcher,
-    { initialData: props }
+    `/api/topic/${props.id}`,
+    { initialData: props, fetcher: axiosFetcher }
   )
 
   const submitNewComment = async () => {
@@ -90,9 +89,10 @@ export default function ShowTopic(props) {
   }
   const handleDelete = async () => {
     try {
-      const { data } = await SelfApi.delete(`/api/comment?id=${topic.id}`)
+      const { data } = await SelfApi.delete(`/api/topic/${topic.id}`)
 
       window.flash(data.message, data.type)
+      router.push("/topics")
     } catch ({ response: data }) {
       window.flash(data.message, data.type)
     }
@@ -110,7 +110,7 @@ export default function ShowTopic(props) {
             <Col xs="12" className="mb-4">
               <div className="d-flex justify-content-between align-items-baseline">
                 <h2 className="mb-3">{topic.title}</h2>
-                {user?.id === topic.author.id && (
+                {user?.id === topic?.author?.id && (
                   <TopicDropdown handleDelete={handleDelete} />
                 )}
               </div>
