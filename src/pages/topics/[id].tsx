@@ -18,6 +18,9 @@ import { axiosFetcher } from "@src/lib/fetchJson"
 import { FaComment } from "react-icons/fa"
 import TimeAgo from "javascript-time-ago"
 import pt from "javascript-time-ago/locale/pt"
+import { getStaticProps } from ".."
+import { GetServerSideProps, GetStaticProps } from "next"
+import { GetTopic } from "@src/services/Topics"
 
 TimeAgo.addLocale(pt)
 export interface BadgeCategoryProps {
@@ -42,8 +45,9 @@ export default function ShowTopic(props) {
   const { user } = useUser()
   const router = useRouter()
   const { mutate: mutateTopic, data: topic } = useSWR<TopicProps>(
-    router.query.id ? `/api/topic/${router.query.id as string}` : null,
-    axiosFetcher
+    `/api/topic/${router.query.id as string}`,
+    axiosFetcher,
+    { initialData: props }
   )
 
   const submitNewComment = async () => {
@@ -84,8 +88,14 @@ export default function ShowTopic(props) {
     window.flash(message, type)
     setNewComment("")
   }
-  const handleDelete = () => {
-    console.log(topic.id)
+  const handleDelete = async () => {
+    try {
+      const { data } = await SelfApi.delete(`/api/comment?id=${topic.id}`)
+
+      window.flash(data.message, data.type)
+    } catch ({ response: data }) {
+      window.flash(data.message, data.type)
+    }
   }
   return (
     <AppLayout>
@@ -100,7 +110,7 @@ export default function ShowTopic(props) {
             <Col xs="12" className="mb-4">
               <div className="d-flex justify-content-between align-items-baseline">
                 <h2 className="mb-3">{topic.title}</h2>
-                {user.id === topic.author.id && (
+                {user?.id === topic.author.id && (
                   <TopicDropdown handleDelete={handleDelete} />
                 )}
               </div>
@@ -179,3 +189,13 @@ export default function ShowTopic(props) {
     </AppLayout>
   )
 }
+
+export const getServerSideProps: GetServerSideProps<TopicProps> =
+  async context => {
+    const {
+      query: { id },
+    } = context
+    return {
+      props: await GetTopic(id as string),
+    }
+  }
