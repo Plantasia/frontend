@@ -107,6 +107,7 @@ export const GetTopic = async (id: string): Promise<TopicProps> => {
     : null
 
   return {
+    id,
     title: name,
     author: {
       id: user.id,

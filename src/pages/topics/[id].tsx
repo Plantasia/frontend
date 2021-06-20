@@ -1,6 +1,12 @@
 import React, { useState } from "react"
 import { Button, Row, Col, Image } from "react-bootstrap"
-import { Editor, AppLayout, RequestAuthModal, SEO } from "@components"
+import {
+  Editor,
+  AppLayout,
+  RequestAuthModal,
+  SEO,
+  TopicDropdown,
+} from "@components"
 import { InlineGap, PlantasiaCard } from "@styled/Shared"
 import { CommentProps, Comment } from "../../components/pages/topics/comment"
 import { ComponentProps } from "@utils/types"
@@ -78,6 +84,9 @@ export default function ShowTopic(props) {
     window.flash(message, type)
     setNewComment("")
   }
+  const handleDelete = () => {
+    console.log(topic.id)
+  }
   return (
     <AppLayout>
       {topic && (
@@ -89,7 +98,12 @@ export default function ShowTopic(props) {
           />
           <Row>
             <Col xs="12" className="mb-4">
-              <h2 className="mb-3">{topic.title}</h2>
+              <div className="d-flex justify-content-between align-items-baseline">
+                <h2 className="mb-3">{topic.title}</h2>
+                {user.id === topic.author.id && (
+                  <TopicDropdown handleDelete={handleDelete} />
+                )}
+              </div>
               <InlineGap>
                 {topic
                   ? topic.categories.map(({ name, color, id }, i) => (
