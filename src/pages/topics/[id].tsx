@@ -21,6 +21,7 @@ import pt from "javascript-time-ago/locale/pt"
 import { getStaticProps } from ".."
 import { GetServerSideProps, GetStaticProps } from "next"
 import { GetTopic } from "@src/services/Topics"
+import { TopicDeleteModal } from "@src/components/pages/topics/TopicDeleteModal"
 
 TimeAgo.addLocale(pt)
 export interface BadgeCategoryProps {
@@ -40,7 +41,8 @@ export interface TopicProps {
 
 export default function ShowTopic(props) {
   const timeAgo = new TimeAgo("pt")
-  const [modalVisible, setModalVisible] = useState(false)
+  const [authModalVisible, setAuthModalVisible] = useState(false)
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
   const [newComment, setNewComment] = useState("")
   const { user } = useUser()
   const router = useRouter()
@@ -50,7 +52,7 @@ export default function ShowTopic(props) {
   )
 
   const submitNewComment = async () => {
-    if (!user?.isLoggedIn) return setModalVisible(true)
+    if (!user?.isLoggedIn) return setAuthModalVisible(true)
 
     const previewComment: CommentProps = {
       id: "fake_id",
@@ -99,93 +101,98 @@ export default function ShowTopic(props) {
   }
   return (
     <AppLayout>
-      {topic && (
-        <>
-          <SEO title={topic.title} />
-          <RequestAuthModal
-            visible={modalVisible}
-            onHide={() => setModalVisible(false)}
-          />
-          <Row>
-            <Col xs="12" className="mb-4">
-              <div className="d-flex justify-content-between align-items-baseline">
-                <h2 className="mb-3">{topic.title}</h2>
-                {user?.id === topic?.author?.id && (
-                  <TopicDropdown handleDelete={handleDelete} />
-                )}
-              </div>
-              <InlineGap>
-                {topic
-                  ? topic.categories.map(({ name, color, id }, i) => (
-                      <Button
-                        variant={`outline-${color}`}
-                        key={i}
-                        size="sm"
-                        onClick={() => {
-                          router.push(`/topics?category=${id}`)
-                        }}
-                        className="mb-2"
-                      >
-                        {name}
-                      </Button>
-                    ))
-                  : null}
-              </InlineGap>
-              <div
-                dangerouslySetInnerHTML={{ __html: topic.description }}
-              ></div>
-
-              {topic.image && (
-                <Image
-                  src={topic.image}
-                  className="mb-3"
-                  fluid
-                  style={{ maxHeight: 600 }}
-                />
-              )}
-            </Col>
-            <Col xs="12" className="d-flex justify-content-end mb-3">
-              <Button
-                variant="primary"
-                href="#new-comment"
-                className="d-flex align-items-center"
-              >
-                novo comentário
-                <FaComment className="ml-2" />
-              </Button>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs="12">
-              {topic.comments?.map((item, index) => (
-                <Comment
-                  {...item}
-                  onQuote={({ text, username }) => {
-                    setNewComment(
-                      `${newComment} <blockquote> ${text} </blockquote> 
-                      <b>semente do ${username}</b>&nbsp;`
-                    )
-                  }}
-                  key={index}
-                />
-              )) || null}
-            </Col>
-          </Row>
-
-          <PlantasiaCard id="new-comment">
-            <Col xs="12" className="mb-3">
-              <h3>Deixe um comentário</h3>
-              <Editor
-                content={newComment}
-                onChange={value => setNewComment(value)}
+      <TopicDeleteModal
+        visible={deleteModalVisible}
+        onHide={() => {
+          setDeleteModalVisible(false)
+        }}
+        action={handleDelete}
+      />
+      <SEO title={topic.title} />
+      <RequestAuthModal
+        visible={authModalVisible}
+        onHide={() => setAuthModalVisible(false)}
+      />
+      <Row>
+        <Col xs="12" className="mb-4">
+          <div className="d-flex justify-content-between align-items-baseline">
+            <h2 className="mb-3">{topic.title}</h2>
+            {user?.id === topic?.author?.id && (
+              <TopicDropdown
+                handleDelete={() => {
+                  setDeleteModalVisible(true)
+                }}
               />
-            </Col>
-            <Col xs="12" className="d-flex justify-content-end">
-              <Button onClick={submitNewComment}>comentar</Button>
-            </Col>
-          </PlantasiaCard>
-        </>
-      )}
+            )}
+          </div>
+          <InlineGap>
+            {topic
+              ? topic.categories.map(({ name, color, id }, i) => (
+                  <Button
+                    variant={`outline-${color}`}
+                    key={i}
+                    size="sm"
+                    onClick={() => {
+                      router.push(`/topics?category=${id}`)
+                    }}
+                    className="mb-2"
+                  >
+                    {name}
+                  </Button>
+                ))
+              : null}
+          </InlineGap>
+          <div dangerouslySetInnerHTML={{ __html: topic.description }}></div>
+
+          {topic.image && (
+            <Image
+              src={topic.image}
+              className="mb-3"
+              fluid
+              style={{ maxHeight: 600 }}
+            />
+          )}
+        </Col>
+        <Col xs="12" className="d-flex justify-content-end mb-3">
+          <Button
+            variant="primary"
+            href="#new-comment"
+            className="d-flex align-items-center"
+          >
+            novo comentário
+            <FaComment className="ml-2" />
+          </Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs="12">
+          {topic.comments?.map((item, index) => (
+            <Comment
+              {...item}
+              onQuote={({ text, username }) => {
+                setNewComment(
+                  `${newComment} <blockquote> ${text} </blockquote> 
+                      <b>semente do ${username}</b>&nbsp;`
+                )
+              }}
+              key={index}
+            />
+          )) || null}
+        </Col>
+      </Row>
+
+      <PlantasiaCard id="new-comment">
+        <Col xs="12" className="mb-3">
+          <h3>Deixe um comentário</h3>
+          <Editor
+            content={newComment}
+            onChange={value => setNewComment(value)}
+          />
+        </Col>
+        <Col xs="12" className="d-flex justify-content-end">
+          <Button onClick={submitNewComment}>comentar</Button>
+        </Col>
+      </PlantasiaCard>
     </AppLayout>
   )
 }

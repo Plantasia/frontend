@@ -116,7 +116,7 @@ export function Comment({
                   <span>{createdAt}</span>
                   {user?.id === ownerUser.id && (
                     <CommentDropdown
-                      handleDelete={handleDelete}
+                      handleDelete={() => setVisible(true)}
                       handleEdit={handleEdit}
                       handleReport={handleReport}
                     />
