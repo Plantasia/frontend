@@ -14,6 +14,7 @@ import {
   SecondWave,
 } from "@styled/LandingPage"
 import { GetStaticProps } from "next"
+import { SEO } from "@src/components"
 
 const HomePage: React.FC = ({ children }) => {
   const router = useRouter()
@@ -22,6 +23,7 @@ const HomePage: React.FC = ({ children }) => {
   }
   return (
     <LandingContainer fluid>
+      <SEO title="plantasia" shouldExcludeTitleSuffix />
       <Navbar expand="md" className="w-100 right" variant="dark">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
