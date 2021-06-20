@@ -60,6 +60,7 @@ export function Comment({
   const [editMode, setEditMode] = useState(false)
   const [currentContent, setCurrentContent] = useState<string>(content)
   const [visible, setVisible] = useState<boolean>(false)
+  const [deleted, setDeleted] = useState<boolean>(false)
   const { user } = useUser()
   const router = useRouter()
 
@@ -75,7 +76,7 @@ export function Comment({
       })
       window.flash(data.message, "success")
     } catch ({ response }) {
-      window.flash(response.data.message, "danger")
+      window.flash(response.data.message, response.data.type)
     }
     setEditMode(false)
   }
@@ -83,6 +84,8 @@ export function Comment({
   const handleDelete = async () => {
     try {
       const { data } = await SelfApi.delete(`/api/comment?id=${id}`)
+      window.flash(data.message, "success")
+      setDeleted(true)
     } catch (error) {
       window.flash(error.data.message, error.data.type)
     }
@@ -90,6 +93,10 @@ export function Comment({
 
   const handleQuote = () => {
     onQuote && onQuote({ text: content, username: ownerUser.name })
+  }
+
+  if (deleted) {
+    return <></>
   }
 
   return (
