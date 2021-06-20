@@ -39,9 +39,11 @@ export const GetTopics = async (
               avatar: comments[0].user.avatarUrl,
               name: comments[0].user.name,
             },
-            updated_at: timeAgo.format(new Date(created_at)),
+            updated_at: timeAgo.format(new Date(comments[0].created_at)),
           }
         : null
+
+      console.log(lastComment)
       var textBodyRegex = /(<([^>]+)>)|(&nbsp;)/gi
 
       return {
