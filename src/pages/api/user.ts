@@ -14,25 +14,26 @@ const upload = multer({
   dest: "/tmp",
 })
 
-const nc = ApiHandler.get(async (req, res) => {
-  const jwt = await req.session.get("jwt")
-  const headers = jwt && { Authorization: `Bearer ${jwt}` }
+const nc = ApiHandler()
+  .get(async (req, res) => {
+    const jwt = await req.session.get("jwt")
+    const headers = jwt && { Authorization: `Bearer ${jwt}` }
 
-  if (!headers) return res.json({ isLoggedIn: false })
-  try {
-    const { data: user } = await ServerSideApi.get(`/users/findme`, {
-      headers,
-    })
-    res.json({
-      isLoggedIn: true,
-      ...user,
-    })
-  } catch (error) {
-    req.session.destroy()
-    req.session.save()
-    res.json({ error: "Sua sessão caiu, por favor logue novamente" })
-  }
-})
+    if (!headers) return res.json({ isLoggedIn: false })
+    try {
+      const { data: user } = await ServerSideApi.get(`/users/findme`, {
+        headers,
+      })
+      res.json({
+        isLoggedIn: true,
+        ...user,
+      })
+    } catch (error) {
+      req.session.destroy()
+      req.session.save()
+      res.json({ error: "Sua sessão caiu, por favor logue novamente" })
+    }
+  })
   .post(upload.single("file"), async (req, res) => {
     const jwt = await req.session.get("jwt")
 

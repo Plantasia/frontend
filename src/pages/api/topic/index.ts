@@ -15,53 +15,55 @@ const upload = multer({
   dest: "/tmp",
 })
 
-const nc = ApiHandler.get(async (req, res) => {
-  const { query } = req
-  const { page, category } = query
+const nc = ApiHandler()
+  .get(async (req, res) => {
+    const { query } = req
+    const { page, category } = query
 
-  try {
-    res.json(await GetTopics(page as string, category as string))
-  } catch ({ response }) {
-    const {
-      data: { error: message },
-      status,
-    } = response
+    try {
+      res.json(await GetTopics(page as string, category as string))
+    } catch ({ response }) {
+      const {
+        data: { error: message },
+        status,
+      } = response
 
-    res.status(status).json({ message, type: "danger" })
-  }
-}).post(upload.single("file"), async (req, res) => {
-  const jwt = req.session.get("jwt")
-  const { file, body } = req
-  try {
-    const formData = new FormData()
+      res.status(status).json({ message, type: "danger" })
+    }
+  })
+  .post(upload.single("file"), async (req, res) => {
+    const jwt = req.session.get("jwt")
+    const { file, body } = req
+    try {
+      const formData = new FormData()
 
-    formData.append("name", body.name)
-    formData.append("textBody", body.textBody)
-    formData.append("category_id", body.category_id)
-    file &&
-      formData.append("file", file.buffer, {
-        filename: file.originalname,
-        contentType: file.mimetype,
-        knownLength: file.size,
-      })
+      formData.append("name", body.name)
+      formData.append("textBody", body.textBody)
+      formData.append("category_id", body.category_id)
+      file &&
+        formData.append("file", file.buffer, {
+          filename: file.originalname,
+          contentType: file.mimetype,
+          knownLength: file.size,
+        })
 
-    const { data, status } = await ServerSideApi.post(
-      "/forum/topics",
-      formData,
-      {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-          ...formData.getHeaders(),
-        },
-      }
-    )
+      const { data, status } = await ServerSideApi.post(
+        "/forum/topics",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+            ...formData.getHeaders(),
+          },
+        }
+      )
 
-    return res.status(status).json(data)
-  } catch (error) {
-    console.log(error)
-    return res.status(500).json({ message: error })
-  }
-})
+      return res.status(status).json(data)
+    } catch (error) {
+      console.log(error)
+      return res.status(500).json({ message: error })
+    }
+  })
 
 export const config = {
   api: {
