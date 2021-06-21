@@ -92,9 +92,17 @@ export const getServerSideProps = withIronSession(async ({ req, res }) => {
       redirect: { destination: "/category" },
     }
   } catch (error) {
+    let backRoute = req.headers.referer
+
+    if (
+      req.headers.referer === "http://localhost/signup" ||
+      !req.headers.referer
+    )
+      backRoute = "/category"
+
     return {
       props: {
-        backRoute: req.headers.referer || "/category",
+        backRoute,
       },
     }
   }
