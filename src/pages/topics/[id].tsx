@@ -81,7 +81,11 @@ export default function ShowTopic(props) {
     try {
       const {
         data: { message, type },
-      } = await SelfApi.post("/api/comment", commentPayload)
+      } = await SelfApi.post("/api/comment", commentPayload, {
+        headers: {
+          "Content-type": "application/json",
+        },
+      })
       window.flash(message, type)
     } catch ({ response }) {
       console.log(response)
