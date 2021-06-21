@@ -61,34 +61,34 @@ export default function ShowTopic(props) {
       ownerUser: {
         id: null,
         avatarUrl: user.avatarUrl,
-        bio: user.bio,
-        name: user.name,
+        bio: user?.bio,
+        name: user?.name,
         createdAt: timeAgo.format(new Date(user.created_at)),
       },
     }
 
-    mutateTopic(data => {
-      const comments = data.comments
-        ? [...data.comments, previewComment]
-        : [previewComment]
+    const previewComments = topic.comments
+      ? [...topic.comments, previewComment]
+      : [previewComment]
 
-      return {
-        ...data,
-        comments,
-      }
-    }, false)
+    mutateTopic({ ...topic, comments: previewComments }, false)
 
     const commentPayload = {
       textBody: newComment,
-      topic_id: router.query.id,
+      topic_id: props.id,
     }
 
-    const {
-      data: { message, type },
-    } = await SelfApi.post("/api/comment", commentPayload)
-    window.flash(message, type)
+    try {
+      const {
+        data: { message, type },
+      } = await SelfApi.post("/api/comment", commentPayload)
+      window.flash(message, type)
+    } catch ({ response }) {
+      console.log(response)
+    }
     setNewComment("")
   }
+
   const handleDelete = async () => {
     try {
       const { data } = await SelfApi.delete(`/api/topic/${topic.id}`)
