@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { AppLayout, Editor } from "@components"
+import { AppLayout, Editor, SEO } from "@components"
 import { InlineGap, PlantasiaCard } from "@styled/Shared"
 import { Button, Row, Col, Form } from "react-bootstrap"
 import { useRouter } from "next/router"
@@ -55,6 +55,7 @@ export default function NewTopic(props: Props) {
 
   return (
     <AppLayout>
+      <SEO title="novo tópico"/>
       <Row>
         <Col xs="12" md={{ span: 12, offset: 0 }}>
           <PlantasiaCard>
