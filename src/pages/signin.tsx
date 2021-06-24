@@ -29,7 +29,7 @@ const SignIn: React.FC<{ backRoute: string }> = props => {
       )
       mutateUser(await SelfApi.get("/api/user"))
       window.flash(data.message, data.type)
-    } catch ({ response: data }) {
+    } catch ({ response: { data } }) {
       window.flash(data.message, data.type)
     }
   }

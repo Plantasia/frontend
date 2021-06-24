@@ -1,3 +1,4 @@
+import React from "react"
 import { GetServerSideProps } from "next"
 import { AppLayout, SEO } from "@components"
 import { ListCategoryItem } from "@components/pages/category/category-item"
@@ -55,11 +56,12 @@ export default function ListCategories({
   )
 }
 
-export const getServerSideProps: GetServerSideProps<ListCategoriesProps> = async context => {
-  const {
-    query: { page },
-  } = context
-  return {
-    props: await GetCategories(page),
+export const getServerSideProps: GetServerSideProps<ListCategoriesProps> =
+  async context => {
+    const {
+      query: { page },
+    } = context
+    return {
+      props: await GetCategories(page),
+    }
   }
-}
