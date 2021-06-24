@@ -23,9 +23,10 @@ const handler: Handler = async (req, res) => {
       .json({ message: "Login efetuado com sucesso", type: "success" })
   } catch ({ response }) {
     const {
-      data: { error: message, status },
+      data: { error },
     } = response
-    res.status(status).json({ message, type: "danger" })
+    console.log(error)
+    res.status(401).json({ message: error, type: "danger" })
   }
 }
 
